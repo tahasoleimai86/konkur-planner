@@ -216,7 +216,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   .ph .who{margin-inline-start:auto;text-align:left;font-size:12px}
   .pt{width:100%;border-collapse:collapse;table-layout:fixed}
   .pt th{background:#1b2540;color:#fff;font-size:13.5px;padding:5px;border:1px solid #1b2540;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .pt td{vertical-align:top;border:1px solid #c9ced6;padding:5px;font-size:11.5px;line-height:1.5;height:128mm}
+  .pt td{vertical-align:top;border:1px solid #c9ced6;padding:5px;font-size:11.5px;line-height:1.45;height:112mm}
   .pe{border-right:4px solid #1b2540;padding:3px 6px;margin-bottom:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
   .pe.pe-t{border-right-color:#e07a1f}
   .pe.pe-x{border-right-color:#8a6a3a}
@@ -266,6 +266,58 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
 .notesbox .notes{margin-top:8px;font-size:13px;color:var(--ink)}
 .consent{margin:-4px 2px 12px;font-size:11.5px;line-height:1.7;color:var(--ink2);padding-inline-start:18px;position:relative}
 .consent::before{content:"";position:absolute;inset-inline-start:2px;top:.55em;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--accent)}
+
+/* v10 */
+.ss .tp{display:block;font-size:12px;font-weight:700;color:var(--ink);margin-top:2px}
+.ss .bg{display:block;font-size:11px;color:var(--ink2);line-height:1.6}
+.ss .halves>span{display:block}
+.ss li .rt{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.ck{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);background:var(--sheet);cursor:pointer;padding:0;display:grid;place-items:center;transition:transform .2s cubic-bezier(.3,1.7,.5,1)}
+.ck[aria-pressed="true"]{background:var(--strong);border-color:var(--strong);transform:scale(1.08)}
+.ck[aria-pressed="true"]::after{content:"";width:9px;height:5px;border:2.5px solid #fff;border-top:0;border-right:0;transform:translate(0,-1px) rotate(-45deg)}
+.ck:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ss li.done>span:not(.rt){opacity:.55}
+.rel{font-weight:800}.rel.ok{color:var(--strong)}.rel.risk{color:var(--weak)}
+.qn .skip{display:inline-block;align-self:flex-start;justify-self:start;width:auto;margin-top:3px;border:1px solid var(--line);background:transparent;color:var(--ink2);border-radius:999px;font:inherit;font-size:11px;font-weight:700;padding:0 9px;cursor:pointer}
+.q.skipped{opacity:.5}.q.skipped .bub,.q.skipped .fav{pointer-events:none}
+.strat{margin-bottom:10px}
+.wkoff{margin-bottom:10px}.wkoff .chip{font-size:12px}
+.nudge{margin-bottom:10px;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--accent) 14%,var(--sheet));border:1.5px solid var(--accent);font-size:13px;font-weight:700}
+.blk{display:flex;flex-direction:column;gap:8px;padding:10px 12px;margin-bottom:8px;border-radius:12px;border:1.5px dashed var(--line)}
+.blk .b-x{align-self:flex-start;padding:4px 12px;font-size:12px}
+.covbox summary{cursor:pointer;font-size:12.5px;font-weight:800;color:var(--accent)}
+.cov{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:8px}
+.cov label{display:flex;flex-direction:column;gap:3px;font-size:11.5px;font-weight:700;color:var(--ink2)}
+.cov select{font-size:12px}
+@media (max-width:520px){.cov{grid-template-columns:minmax(0,1fr)}}
+.rbar{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;margin-bottom:8px}
+.rbar b{display:block;font-family:var(--display);font-weight:900;font-size:28px;line-height:1.2}
+.rbar small{font-size:11.5px;color:var(--ink2)}
+.rbar .mix i{background:var(--strong)}
+.prs{display:flex;flex-direction:column;gap:8px}
+.pr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,190px);gap:4px 10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+.pr .pn b{display:block;font-size:14px}
+.pr .pn small{font-size:11px;color:var(--ink2);line-height:1.5;display:block}
+.pr select{font-size:12px;padding:5px 6px}
+.pr .st{grid-column:1/-1;justify-self:start;font-size:11.5px;font-weight:800;border-radius:999px;padding:1px 10px;border:1.5px solid currentColor}
+.st-ok{color:var(--strong)}.st-on{color:var(--ink2)}.st-late{color:var(--weak)}
+.hist{display:flex;flex-direction:column;gap:4px;margin-top:12px}
+.hist>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 10px;font-size:12.5px;border-bottom:1px solid var(--line);padding:4px 0}
+.hist small{grid-column:1/-1;color:var(--ink2);font-size:11px}
+@media print{
+  .pe i{display:block;font-style:normal;font-size:10.5px;font-weight:700;color:#222}
+  .pe u{display:block;text-decoration:none;font-size:9.5px;color:#555}
+  .pe.pe-blk{border-right-color:#999;color:#555}
+}
+.st-unk{color:var(--accent)}
+@media print{
+  .pt td{font-size:10px;padding:4px;height:auto}
+  .pe{margin-bottom:4px;padding:2px 5px}
+  .pe b{font-size:11px}
+  .pe i{font-size:9.5px}
+  .pe u{font-size:8.5px;line-height:1.4}
+  .ph img{height:70px}
+}
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
 </head>
@@ -305,7 +357,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   </section>
 
   <section class="sheet fade" aria-labelledby="h-time" style="animation-delay:.05s">
-    <div class="sh"><h2 id="h-time">زمانت در هفته</h2><span>هر پارت ۱٫۵ ساعت + ۱۵ دقیقه استراحت</span></div>
+    <div class="sh"><h2 id="h-time">زمانت در هفته</h2><span id="h-time-sub">هر پارت ۱٫۵ ساعت + ۱۵ دقیقه استراحت</span></div>
     <div class="field"><span class="lab" id="l-school">مدرسه می‌روی؟</span><div class="chips" id="school" role="group" aria-labelledby="l-school"></div></div>
     <div class="field" id="f-sd"><span class="lab">روزهای مدرسه</span><div class="daypick" id="sd"></div></div>
     <div id="steps"></div>
@@ -315,16 +367,36 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
         <label>شروع مطالعه در روز تعطیل<input type="time" id="t-so" step="300"></label>
         <label>ناهار<span class="pair"><input type="time" id="t-l1" step="300"><input type="time" id="t-l2" step="300"></span></label>
         <label>شام<span class="pair"><input type="time" id="t-d1" step="300"><input type="time" id="t-d2" step="300"></span></label>
+        <label>استراحت بین پارت‌ها<select id="brk"></select></label>
       </div>
     </div>
-    <div class="field" style="margin-top:12px"><span class="lab" id="l-ex">آزمون آزمایشی این هفته داری؟</span><div class="chips" id="ex" role="group" aria-labelledby="l-ex"></div>
-      <div id="ex-more" class="exbox">
-        <span class="lab">روز آزمون</span><div class="daypick" id="exday"></div>
+    <div class="field" style="margin-top:12px"><span class="lab">کلاس‌ها و کارهای ثابت</span>
+      <p class="note" style="margin:0 0 6px">کلاس تقویتی، ورزش، استراحتِ بلندتر یا هر کار ثابتی؛ آن ساعت‌ها از مطالعه‌ی همان روز کم می‌شوند.</p>
+      <div id="blocks"></div>
+      <button type="button" class="btn ghost" id="blk-add">+ افزودن کلاس یا برنامه‌ی ثابت</button>
+    </div>
+    <div class="field" style="margin-top:12px"><label class="lab" for="inst">آزمون آزمایشی</label>
+      <select id="inst"></select>
+      <div id="ex-prog" class="exbox">
+        <div class="times">
+          <label>تاریخ نزدیک‌ترین آزمون<span class="pair"><select id="ex-jd" aria-label="روز"></select><select id="ex-jm" aria-label="ماه"></select></span></label>
+          <label>فاصله‌ی آزمون‌ها<select id="ex-every"></select></label>
+        </div>
+        <div id="ex-dates"></div>
+        <p class="note" id="ex-note" style="margin:0"></p>
+        <details class="covbox" id="ex-cov"></details>
+      </div>
+      <div id="ex-man" class="exbox">
+        <span class="lab" id="l-ex">این هفته آزمون داری؟</span><div class="chips" id="ex" role="group" aria-labelledby="l-ex"></div>
+        <div id="ex-day-box"><span class="lab">روز آزمون</span><div class="daypick" id="exday"></div></div>
+      </div>
+      <div id="ex-common" class="exbox">
         <div class="times">
           <label>ساعت شروع<input type="time" id="t-ex" step="300"></label>
           <label>مدت آزمون<select id="ex-dur"></select></label>
         </div>
-        <span class="lab">عصرِ همان روز، ۹۰ دقیقه تحلیل آزمون</span><div class="chips" id="exana"></div>
+        <span class="lab">تحلیل آزمون (عصرِ همان روز)</span><div class="chips" id="exana"></div>
+        <p class="note" id="ana-why" style="margin:0"></p>
       </div>
     </div>
     <div class="field" style="margin-top:6px"><span class="lab" id="l-anki">۱۵ دقیقه مرور Anki آخر هر شب</span><div class="chips" id="anki" role="group" aria-labelledby="l-anki"></div></div>
@@ -340,6 +412,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
 
   <section class="sheet fade" aria-labelledby="h-lvl" style="animation-delay:.15s">
     <div class="sh"><h2 id="h-lvl">وضعیتت در هر کتاب</h2><span>♥ = درسی که دوستش داری</span></div>
+    <div class="field strat"><span class="lab">استراتژی تست کنکور</span><div class="chips" id="strat" role="group"></div><p class="note" id="strat-note" style="margin:4px 0 0"></p></div>
     <div class="qhead"><span>کتاب</span><span>ضعیف</span><span>متوسط</span><span>قوی</span><span>علاقه</span></div>
     <div id="books"></div>
     <div id="review"></div>
@@ -357,8 +430,10 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     <div class="rows" id="rows"></div>
   </section>
 
-  <section class="sheet fade" aria-labelledby="h-week" style="animation-delay:.25s">
+  <section class="sheet fade" aria-labelledby="h-week" style="animation-delay:.25s" id="s-week">
     <div class="sh"><h2 id="h-week">برنامه‌ی هفتگی</h2><span id="edited" class="edited"></span></div>
+    <div class="chips wkoff" id="wkoff" role="group" aria-label="کدام هفته"></div>
+    <div class="nudge" id="rp-nudge" hidden>هفته رو به پایان است؛ پارت‌هایی را که خواندی تیک بزن و پایین صفحه گزارش این هفته را ثبت کن.</div>
     <div class="weekbar">
       <button type="button" class="btn acc" id="print">چاپ یا ذخیره‌ی PDF</button>
       <button type="button" class="btn ghost" id="reset" hidden>برگرداندن برنامه‌ی خودکار</button>
@@ -366,8 +441,13 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     <p class="note" id="printnote" hidden style="margin:-4px 0 10px">چاپ در نسخه‌ی روی سایت کانون فعال است.</p>
     <div class="tip" id="tip"></div>
     <div id="swapbar"></div>
-    <p class="note" style="margin:0 0 8px">روی هر پارت بزن تا ساعت، درس یا نوعش را عوض کنی، یا با پارت دیگری جابه‌جایش کنی.</p>
+    <p class="note" style="margin:0 0 8px">روی هر پارت بزن تا ساعت، درس یا نوعش را عوض کنی، یا با پارت دیگری جابه‌جایش کنی. دایره‌ی کنار ساعت را بعد از خواندن تیک بزن.</p>
     <div class="days" id="days"></div>
+  </section>
+
+  <section class="sheet fade" aria-labelledby="h-rp" style="animation-delay:.3s" id="s-rp">
+    <div class="sh"><h2 id="h-rp">گزارش پایان هفته</h2><span id="rp-sub"></span></div>
+    <div id="rp"></div>
   </section>
 
   <details class="method notesbox">
@@ -387,7 +467,10 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       <li>مدل تست‌ها: آموزشی (حین درسنامه، پاسخنامه بلافاصله)، تمرینی (بدون فشار زمان)، زمان‌دار (آخر فصل، مثلاً ۳۰ تست در ۶۰ دقیقه با روش ضربدر-منها)، نشان‌دار (تست‌های غلط و ایده‌دار برای مرور). کتاب ضعیف آموزشی، متوسط تمرینی، قوی و مرورها زمان‌دار می‌گیرند. روزِ قبل از آزمون تست‌ها زمان‌دار می‌شوند و فردای آزمون اولین پارت تستی، مرورِ نشان‌دارهاست.</li>
       <li>سهم تشریحی با فصل عوض می‌شود: پاییز کمتر (تسلط مفهومی و تستی)، از بهمن بیشتر، و در فصل نهایی‌ها بیشترین.</li>
       <li>آخر هر شب ۱۵ دقیقه مرور Anki برای منحنی فراموشی. اگر روزی دیرتر از ۲۳:۳۰ تمام شود، هشدار می‌دهیم.</li>
-      <li>روز آزمون آزمایشی، زمانِ آزمون و ۹۰ دقیقه تحلیل عصرش از ساعت مطالعه‌ی همان روز کم می‌شود.</li>
+      <li>روز آزمون آزمایشی، زمانِ آزمون و پارت‌های تحلیل عصرش از ساعت مطالعه‌ی همان روز کم می‌شود. اگر موسسه‌ی آزمونت را انتخاب کنی، آزمون‌ها خودکار در هفته‌ی خودشان قرار می‌گیرند.</li>
+      <li>برنامه‌ی مبحثی: برای هر کتاب، فصل‌هایی که تا آزمون بعد باید برسی، به نسبت سهم تست هر فصل بین هفته‌های باقی‌مانده تقسیم می‌شود و هر پارت می‌گوید کدام فصل و چند تست. مباحث آزمون‌ها تخمینِ ما بر اساس روند معمول مدرسه است و قابل ویرایش است.</li>
+      <li>گزارش هفته: پارت‌ها را تیک بزن و بگو هر درس تا کجا رسیده؛ درسی که از ددلاین عقب باشد، هفته‌ی بعد ۱۵٪ وقت بیشتر می‌گیرد.</li>
+      <li>ریسک درس: تست بعضی کتاب‌ها (مثل هندسه) خلاقیت زیادی می‌خواهد و در کنکور کمتر قابل‌اعتماد است؛ بعضی (مثل حسابان) قابل‌اعتمادترند. این ضریب‌ها تخمین ماست و فقط روی سهم تستی اثر دارد.</li>
     </ul>
   </details>
 
@@ -415,8 +498,8 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     get: function(k, d){ try { var v = localStorage.getItem('kp3:' + k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
     set: function(k, v){ try { localStorage.setItem('kp3:' + k, JSON.stringify(v)); } catch(e){} }
   };
-  var KEYS = ['anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
-  var DEF = { anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
+  var KEYS = ['inst','exFirst','exEvery','exSkip','anaN','blocks','brk','strat','norev','pg','wkPg','done','reports','boost','cov','wkOff','pgWk','anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
+  var DEF = { inst:'', exFirst:0, exEvery:14, exSkip:{}, anaN:0, blocks:[], brk:15, strat:'bal', norev:{}, pg:{}, wkPg:{}, done:{}, reports:[], boost:null, cov:{}, wkOff:0, pgWk:{}, anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
     tss:'15:15', tso:'08:00', l1:'13:00', l2:'14:00', d1:'20:30', d2:'21:15', plan:null, planKey:'' };
   var S = {}; KEYS.forEach(function(k){ S[k] = store.get(k, DEF[k]); });
   function save(){ KEYS.forEach(function(k){ store.set(k, S[k]); }); }
@@ -465,6 +548,88 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function key(b){ return S.track + '|' + S.grade + '|' + b; }
   function fam(b){ return String(b).replace(/[\s‌]*[۰-۹0-9]+$/, '').replace('مرور ', ''); }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  /* ---------- Jalali calendar (day numbers = JDN) ---------- */
+  var JB = [-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178];
+  function dv(a, b){ return ~~(a / b); }
+  function md(a, b){ return a - ~~(a / b) * b; }
+  function jalCal(jy){
+    var gy = jy + 621, leapJ = -14, jp = JB[0], jm, jump = 0, n, i;
+    for (i = 1; i < JB.length; i++){ jm = JB[i]; jump = jm - jp; if (jy < jm) break; leapJ += dv(jump, 33) * 8 + dv(md(jump, 33), 4); jp = jm; }
+    n = jy - jp; leapJ += dv(n, 33) * 8 + dv(md(n, 33) + 3, 4);
+    if (md(jump, 33) === 4 && jump - n === 4) leapJ += 1;
+    var leapG = dv(gy, 4) - dv((dv(gy, 100) + 1) * 3, 4) - 150, march = 20 + leapJ - leapG;
+    if (jump - n < 6) n = n - jump + dv(jump + 4, 33) * 33;
+    var leap = md(md(n + 1, 33) - 1, 4); if (leap === -1) leap = 4;
+    return { leap: leap, gy: gy, march: march };
+  }
+  function g2d(gy, gm, gd){
+    var d = dv((gy + dv(gm - 8, 6) + 100100) * 1461, 4) + dv(153 * md(gm + 9, 12) + 2, 5) + gd - 34840408;
+    return d - dv(dv(gy + 100100 + dv(gm - 8, 6), 100) * 3, 4) + 752;
+  }
+  function d2g(jdn){
+    var j = 4 * jdn + 139361631; j = j + dv(dv(4 * jdn + 183187720, 146097) * 3, 4) * 4 - 3908;
+    var i = dv(md(j, 1461), 4) * 5 + 308, gd = dv(md(i, 153), 5) + 1, gm = md(dv(i, 153), 12) + 1;
+    return { gy: dv(j, 1461) - 100100 + dv(8 - gm, 6), gm: gm, gd: gd };
+  }
+  function j2d(jy, jm, jd){ var r = jalCal(jy); return g2d(r.gy, 3, r.march) + (jm - 1) * 31 - dv(jm, 7) * (jm - 7) + jd - 1; }
+  function d2j(jdn){
+    var gy = d2g(jdn).gy, jy = gy - 621, r = jalCal(jy), k = jdn - g2d(gy, 3, r.march);
+    if (k >= 0){ if (k <= 185) return { jy: jy, jm: 1 + dv(k, 31), jd: md(k, 31) + 1 }; k -= 186; }
+    else { jy -= 1; k += 179; if (r.leap === 1) k += 1; }
+    return { jy: jy, jm: 7 + dv(k, 30), jd: md(k, 30) + 1 };
+  }
+  function todayJ(){ var t = new Date(); return g2d(t.getFullYear(), t.getMonth() + 1, t.getDate()); }
+  function satIdx(j){ return (j % 7 + 2) % 7; }   // 0 = شنبه … 6 = جمعه
+  var JM = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+  /* ---------- chapters (textbook order) with konkur weight (1405 budget) ---------- */
+  var CH = {
+    'ریاضی ۱': [['مجموعه، الگو و دنباله',1],['مثلثات',2],['توان‌های گویا و عبارت‌های جبری',1],['معادله‌ها و نامعادله‌ها',2],['تابع',1.5],['شمارش بدون شمردن',1],['آمار و احتمال',1.5]],
+    'ریاضی ۲': [['هندسه‌ی تحلیلی و جبر',1.5],['هندسه',2],['تابع',1.5],['مثلثات',2],['توابع نمایی و لگاریتمی',1],['حد و پیوستگی',2.5],['آمار و احتمال',1.5]],
+    'ریاضی ۳': [['تابع',1.5],['مثلثات',1.5],['حدهای نامتناهی و حد در بی‌نهایت',1.5],['مشتق',3],['کاربردهای مشتق',2],['هندسه',1.5],['احتمال',1.5]],
+    'حسابان ۱': [['جبر و معادله',2],['تابع',2],['توابع نمایی و لگاریتمی',1],['مثلثات',2],['حد و پیوستگی',2]],
+    'حسابان ۲': [['تابع',2],['مثلثات',1.5],['حدهای نامتناهی و حد در بی‌نهایت',1],['مشتق',2],['کاربردهای مشتق',1.5]],
+    'هندسه ۱': [['ترسیم‌های هندسی و استدلال',1],['قضیه‌ی تالس، تشابه و کاربردها',2],['چندضلعی‌ها',1],['تجسم فضایی',1]],
+    'هندسه ۲': [['دایره',2],['تبدیل‌های هندسی و کاربردها',2],['روابط طولی در مثلث',1]],
+    'هندسه ۳': [['ماتریس و کاربردها',2],['مقاطع مخروطی',2],['بردارها',1]],
+    'آمار و احتمال': [['آشنایی با مبانی ریاضیات',2],['احتمال',2],['آمار توصیفی',2],['آمار استنباطی',1]],
+    'ریاضیات گسسته': [['نظریه‌ی اعداد',1],['گراف و مدل‌سازی',1],['ترکیبیات (شمارش)',2]],
+    'ریاضی|فیزیک ۱': [['فیزیک و اندازه‌گیری',1],['ویژگی‌های فیزیکی مواد',3],['کار، انرژی و توان',1],['دما و گرما',2],['ترمودینامیک',3]],
+    'تجربی|فیزیک ۱': [['فیزیک و اندازه‌گیری',1],['ویژگی‌های فیزیکی مواد',2],['کار، انرژی و توان',2],['دما و گرما',3]],
+    'ریاضی|فیزیک ۲': [['الکتریسیته‌ی ساکن',3],['جریان الکتریکی و مدارها',3],['مغناطیس',2],['القای الکترومغناطیسی و جریان متناوب',2]],
+    'تجربی|فیزیک ۲': [['الکتریسیته‌ی ساکن',3],['جریان الکتریکی و مدارها',3],['مغناطیس و القای الکترومغناطیسی',3]],
+    'ریاضی|فیزیک ۳': [['حرکت بر خط راست',3],['دینامیک و حرکت دایره‌ای',2],['نوسان و امواج',4],['برهم‌کنش‌های موج',2],['فیزیک اتمی',2],['فیزیک هسته‌ای',2]],
+    'تجربی|فیزیک ۳': [['حرکت بر خط راست',3],['دینامیک',3],['نوسان و امواج',4],['فیزیک اتمی و هسته‌ای',3]],
+    'شیمی ۱': [['کیهان زادگاه الفبای هستی',5],['ردپای گازها در زندگی',3],['آب، آهنگ زندگی',3]],
+    'شیمی ۲': [['قدر هدایای زمینی را بدانیم',4],['در پی غذای سالم',4],['پوشاک، نیازی پایان‌ناپذیر',3]],
+    'شیمی ۳': [['مولکول‌ها در خدمت تندرستی',4],['آسایش و رفاه در سایه‌ی شیمی',3],['شیمی، جلوه‌ای از هنر و زیبایی',2],['شیمی، راهی به سوی آینده‌ای روشن‌تر',3]],
+    'زیست‌شناسی ۱': [['دنیای زنده',0.5],['گوارش و جذب مواد',3],['تبادلات گازی',2],['گردش مواد در بدن',3],['تنظیم اسمزی و دفع مواد زائد',2],['از یاخته تا گیاه',1],['جذب و انتقال مواد در گیاهان',1]],
+    'زیست‌شناسی ۲': [['تنظیم عصبی',3],['حواس',3],['دستگاه حرکتی',2],['تنظیم شیمیایی',1],['ایمنی',3],['تقسیم یاخته',1],['تولیدمثل',3],['تولیدمثل نهان‌دانگان',1],['پاسخ گیاهان به محرک‌ها',1]],
+    'زیست‌شناسی ۳': [['مولکول‌های اطلاعاتی',2],['جریان اطلاعات در یاخته',3],['انتقال اطلاعات در نسل‌ها',3],['تغییر در اطلاعات وراثتی',2],['از ماده به انرژی',1],['از انرژی به ماده',2],['فناوری‌های نوین زیستی',1],['رفتارهای جانوران',1]],
+    'زمین‌شناسی': [['آفرینش کیهان و تکوین زمین',1],['منابع معدنی و ذخایر انرژی',1],['منابع آب و خاک',1],['زمین‌شناسی و سازه‌های مهندسی',1],['زمین‌شناسی و سلامت',1],['پویایی زمین',1],['زمین‌شناسی ایران',1]],
+    'ریاضی و آمار ۱': [['عبارت‌های جبری',2],['معادله‌ی درجه‌ی دوم',3],['تابع',1],['کار با داده‌های آماری',1],['نمایش داده‌ها',2]],
+    'ریاضی و آمار ۲': [['منطق و استدلال ریاضی',1],['تابع',2],['آمار',2]],
+    'ریاضی و آمار ۳': [['الگوهای خطی',2],['الگوهای غیرخطی',1],['شمارش و احتمال',3]],
+    'اقتصاد': [['تولید',2],['بازار',2],['شاخص‌های اقتصادی',5],['پول و بانک',2],['فقر و توزیع درآمد',1],['اقتصاد بین‌الملل',2],['اقتصاد ایران',1]],
+    'منطق': [['منطق، ترازوی اندیشه',1],['لفظ و معنا',1],['مفهوم و مصداق',1],['تعریف',1],['اقسام استدلال',1],['قضیه‌ی حملی',1],['احکام قضایا',1],['قضیه‌ی شرطی و قیاس استثنایی',2],['نگاهی به تاریخچه‌ی معرفت',1]],
+    'روان‌شناسی': [['تعریف و روش مطالعه',1],['روان‌شناسی رشد',4],['احساس، توجه، ادراک',3],['حافظه و علل فراموشی',2],['تفکر ۱: حل مسئله',2],['تفکر ۲: تصمیم‌گیری',2],['انگیزه و نگرش',1],['روان‌شناسی سلامت',1]],
+    'زبان انگلیسی ۲': [['درس ۱',1],['درس ۲',1],['درس ۳',1]],
+    'زبان انگلیسی ۳': [['درس ۱',1],['درس ۲',1],['درس ۳',1]]
+  };
+  function quarters(){ return [['بخش ۱ از ۴ کتاب',1],['بخش ۲ از ۴ کتاب',1],['بخش ۳ از ۴ کتاب',1],['بخش ۴ از ۴ کتاب',1]]; }
+  function chOf(src){ return CH[S.track + '|' + src] || CH[src] || quarters(); }
+
+  /* ---------- how reliably a book's konkur tests can be answered (our estimate) ---------- */
+  var REL = { 'حسابان':1.15, 'ریاضی ۳':1.1, 'ریاضی ۱':1, 'ریاضی ۲':0.95, 'هندسه ۱':0.7, 'هندسه ۲':0.75, 'هندسه ۳':0.9, 'آمار و احتمال':0.9, 'ریاضیات گسسته':0.8,
+    'فیزیک ۱':1.05, 'فیزیک ۲':1, 'فیزیک ۳':0.95, 'شیمی ۱':1, 'شیمی ۲':1.05, 'شیمی ۳':0.95, 'زیست‌شناسی':0.95, 'زمین‌شناسی':1.1,
+    'ریاضی و آمار':1.05, 'اقتصاد':1.1, 'علوم و فنون ادبی':0.95, 'عربی تخصصی':1.05, 'تاریخ':0.95, 'جغرافیا':0.95, 'جامعه‌شناسی':0.95, 'منطق':1.05, 'فلسفه':0.85, 'روان‌شناسی':1 };
+  function relOf(b){ if (REL[b] != null) return REL[b]; for (var k in REL) if (b.indexOf(k) === 0) return REL[k]; return 1; }
+  function relF(b){ var a = { bal: 1, safe: 2.2, flat: 0 }[S.strat || 'bal']; return Math.pow(relOf(b), a); }
+  /* minutes per test at konkur speed */
+  function rateOf(b){
+    var R = [['زیست',1],['زمین',1],['شیمی',1.3],['فیزیک',1.6],['حسابان',1.8],['هندسه',1.9],['گسسته',1.8],['آمار و احتمال',1.7],['ریاضی و آمار',1.5],['ریاضی',1.7],['اقتصاد',1.2],['منطق',1.2]];
+    for (var i = 0; i < R.length; i++) if (b.indexOf(R[i][0]) >= 0) return R[i][1];
+    return 1;
+  }
 
   function chips(el, items, cur, on){
     el.innerHTML = '';
@@ -520,15 +685,16 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     showFuture();
   }
   /* ---------- books ---------- */
-  function bookList(){
+  function bookList(withSkipped){
     var all = DATA[S.track], g = +S.grade, list = [];
     all.forEach(function(d){
       if (d.g === g){
         var w = d.k + d.s; if (w <= 0) return;
-        list.push({ b: d.b, w: w * d.c, tash: g === 10 ? 0.7 : (d.gen ? 1 : Math.min(1, d.s / w * season().f)), gen: d.gen, c: d.c,
+        list.push({ b: d.b, w: (d.k * relF(d.b) + d.s) * d.c, rel: d.k > 0 ? relOf(d.b) : 1, tash: g === 10 ? 0.7 : (d.gen ? 1 : Math.min(1, d.s / w * season().f)), gen: d.gen, c: d.c,
           sub: d.gen ? 'عمومی • فقط نهایی' : (d.s > 0 ? 'اختصاصی • نهایی + کنکور' : 'اختصاصی • کنکور'), rev: false });
       } else if (d.g < g && S.rev && REVIEW[S.grade] > 0 && d.k > 0){
-        list.push({ b: 'مرور ' + d.b, src: d.b, w: d.k * REVIEW[S.grade], tash: 0, gen: false, c: 1, sub: 'مرور ' + NAME[d.g] + ' • تست کنکور', rev: true });
+        var skip = !!S.norev[key('مرور ' + d.b)]; if (skip && !withSkipped) return;
+        list.push({ b: 'مرور ' + d.b, src: d.b, skip: skip, rel: relOf(d.b), w: d.k * REVIEW[S.grade] * relF(d.b), tash: 0, gen: false, c: 1, sub: 'مرور ' + NAME[d.g] + ' • تست کنکور', rev: true });
       }
     });
     return list;
@@ -539,10 +705,14 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function isSchool(d){ return S.school && !!S.sd[d]; }
   var EXDUR = {'ریاضی':150, 'تجربی':180, 'انسانی':165};
   function exDur(){ return S.exDur || EXDUR[S.track] || 180; }
+  var ANA_T = ['دسته‌بندی غلط‌ها در ۴ دسته • تست‌ها را علامت بزن', 'رفع اشکال درس‌های ضعیف از روی غلط‌ها', 'تست مشابهِ سؤال‌های غلط • کارت Anki'];
   function fixedOf(d){
-    if (!S.ex || d !== S.exDay) return [];
-    var s = tmin(S.exStart), e = s + exDur(), out = [{ fx: 'exam', label: 'آزمون آزمایشی', s: s, e: e }];
-    if (S.exAna){ var a = Math.max(e + 60, tmin(S.l2)); out.push({ fx: 'ana', label: 'تحلیل آزمون', s: a, e: a + 90 }); }
+    var out = blocksOf(d), ex = exInfo();
+    if (!ex || d !== ex.day) return out;
+    var s = tmin(ex.start), e = s + exDur(), n = anaParts();
+    out.push({ fx: 'exam', label: 'آزمون آزمایشی' + (S.inst && INST[S.inst] ? ' ' + INST[S.inst].n : ''), s: s, e: e });
+    var a = Math.max(e + 60, tmin(S.l2));
+    for (var i = 0; i < n; i++){ out.push({ fx: 'ana', label: 'تحلیل آزمون' + (n > 1 ? ' (' + fa(i + 1) + ' از ' + fa(n) + ')' : ''), sub: ANA_T[i], s: a, e: a + 90 }); a += 90 + BRK(); }
     return out;
   }
   function fixedMin(d){ return fixedOf(d).reduce(function(a, f){ return a + f.e - f.s; }, 0); }
@@ -588,20 +758,8 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       st.appendChild(r);
     }
     [['t-ss','tss'],['t-so','tso'],['t-l1','l1'],['t-l2','l2'],['t-d1','d1'],['t-d2','d2']].forEach(function(p){ document.getElementById(p[0]).value = S[p[1]]; });
-    chips(document.getElementById('ex'), [[true,'بله'],[false,'نه']], S.ex, function(v){ S.ex = v; renderTime(); changed(true); });
-    document.getElementById('ex-more').hidden = !S.ex;
-    var xd = document.getElementById('exday'); xd.innerHTML = '';
-    DAYS.forEach(function(n, d){
-      var b = document.createElement('button'); b.type = 'button'; b.textContent = ['ش','ی','د','س','چ','پ','ج'][d]; b.title = n; b.setAttribute('aria-label', n);
-      b.setAttribute('aria-pressed', String(S.exDay === d));
-      b.addEventListener('click', function(){ S.exDay = d; renderTime(); changed(true); });
-      xd.appendChild(b);
-    });
-    document.getElementById('t-ex').value = S.exStart;
-    var ds = document.getElementById('ex-dur');
-    ds.innerHTML = [90,120,135,150,165,180,210,240].map(function(m){ return '<option value="' + m + '"' + (m === exDur() ? ' selected' : '') + '>' + hm(m) + '</option>'; }).join('');
+    renderExam(); renderBlocks();
     chips(document.getElementById('anki'), [[true,'بله'],[false,'نه']], S.anki, function(v){ S.anki = v; renderTime(); save(); renderWeek(); });
-    chips(document.getElementById('exana'), [[true,'بله، بگذار'],[false,'نه']], S.exAna, function(v){ S.exAna = v; renderTime(); changed(true); });
   }
   function renderTotal(){
     var h = dayHalves(), T = h.reduce(function(a, b){ return a + b; }, 0) * HALF, F = 0;
@@ -651,7 +809,13 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function bubbleRow(d, i){
     var row = document.createElement('div'); row.className = 'q'; row.style.setProperty('--i', i);
     row.setAttribute('role', 'group'); row.setAttribute('aria-label', d.b);
-    row.innerHTML = '<div class="qn"><b>' + fa(d.b) + '</b><em>' + d.sub + (d.c > 1 ? ' • <span class="cont">پایه‌ی سال بعد</span>' : '') + '</em></div>';
+    var rb = d.rel >= 1.08 ? ' • <span class="rel ok">تستش مطمئن</span>' : d.rel <= 0.85 ? ' • <span class="rel risk">پرریسک</span>' : '';
+    row.innerHTML = '<div class="qn"><b>' + fa(d.b) + '</b><em>' + d.sub + (d.c > 1 ? ' • <span class="cont">پایه‌ی سال بعد</span>' : '') + rb + '</em>'
+      + (d.rev ? '<button type="button" class="skip">' + (d.skip ? 'برگرداندن به برنامه' : 'مرورش نمی‌کنم') + '</button>' : '') + '</div>';
+    if (d.rev){
+      if (d.skip) row.classList.add('skipped');
+      row.querySelector('.skip').addEventListener('click', function(){ var k = key(d.b); if (S.norev[k]) delete S.norev[k]; else S.norev[k] = 1; renderBooks(); changed(true); });
+    }
     var cur = S.lv[key(d.b)] || 'm';
     [['w','ض','ضعیف'],['m','م','متوسط'],['s','ق','قوی']].forEach(function(o){
       var b = document.createElement('button');
@@ -680,14 +844,15 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       g.innerHTML = '<span>مرور پایه‌های قبل (فقط تست کنکور)</span><div class="chips"></div>';
       chips(g.querySelector('.chips'), [[true,'در برنامه باشد'],[false,'نه']], S.rev, function(v){ S.rev = v; renderBooks(); changed(true); });
       rv.appendChild(g);
-      list.filter(function(d){ return d.rev; }).sort(function(a, b){ return b.w - a.w; }).forEach(function(d, i){ rv.appendChild(bubbleRow(d, i)); });
+      bookList(true).filter(function(d){ return d.rev; }).sort(function(a, b){ return a.skip - b.skip || b.w - a.w; }).forEach(function(d, i){ rv.appendChild(bubbleRow(d, i)); });
     }
   }
 
   /* ---------- allocation (45-minute halves) ---------- */
   function compute(){
     var list = bookList(), H = dayHalves().reduce(function(a, b){ return a + b; }, 0);
-    var ws = list.map(function(d){ var l = S.lv[key(d.b)] || 'm'; return d.w * (l === 'w' ? WEAK : l === 's' ? STRONG : 1); });
+    var bo = S.boost && S.boost.wk === weekStart() ? S.boost.books : [];
+    var ws = list.map(function(d){ var l = S.lv[key(d.b)] || 'm'; return d.w * (l === 'w' ? WEAK : l === 's' ? STRONG : 1) * (bo.indexOf(d.b) >= 0 ? 1.15 : 1); });
     var W = ws.reduce(function(a, b){ return a + b; }, 0) || 1;
     var raw = ws.map(function(w){ return H * w / W; }), u = raw.map(Math.floor), left = H - u.reduce(function(a, b){ return a + b; }, 0);
     raw.map(function(r, i){ return [r - Math.floor(r), i]; }).sort(function(a, b){ return b[0] - a[0]; }).slice(0, left).forEach(function(x){ u[x[1]]++; });
@@ -770,7 +935,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
         var nx = pool.splice(pick, 1)[0]; list.push(nx); prev = nx.items.map(function(x){ return fam(x.src); });
       }
     });
-    var pre = S.ex ? (S.exDay + 6) % 7 : -1, post = S.ex ? (S.exDay + 1) % 7 : -1, marked = false;
+    var exi = exInfo(), pre = exi ? (exi.day + 6) % 7 : -1, post = exi ? (exi.day + 1) % 7 : -1, marked = false;
     return plan.map(function(list, d){ return list.map(function(p){
       var items = p.items.map(function(x){ var y = Object.assign({}, x); y.tk = tkFor(y, d === pre);
         if (d === post && !marked && y.tk){ y.tk = 'نشان‌دار'; marked = true; }
@@ -802,13 +967,13 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       if (p.start != null) t = tmin(p.start);
       for (var k = 0, moved = true; moved && k < 10; k++){
         moved = false;
-        blocks.forEach(function(b, bi){ if (t < b.e && t + p.len > b.s){ if (!used[bi]){ out.push(b); used[bi] = 1; } t = b.e + (b.fx === 'exam' ? 45 : b.fx ? BREAK : 0); moved = true; } });
+        blocks.forEach(function(b, bi){ if (t < b.e && t + p.len > b.s){ if (!used[bi]){ out.push(b); used[bi] = 1; } t = b.e + (b.fx === 'exam' ? 45 : b.fx === 'blk' ? (b.kind === 'استراحت' ? 0 : BRK()) : b.fx ? BRK() : 0); moved = true; } });
       }
-      out.push({ p: p, s: t, e: t + p.len }); t += p.len + BREAK;
+      out.push({ p: p, s: t, e: t + p.len }); t += p.len + BRK();
     });
     blocks.forEach(function(b, bi){ if (b.fx && !used[bi]) out.push(b); });
     out.sort(function(a, b){ return a.s - b.s; });
-    var last = 0; out.forEach(function(e){ if (!e.meal && e.e > last) last = e.e; });
+    var last = 0; out.forEach(function(e){ if (!e.meal && e.fx !== 'blk' && e.e > last) last = e.e; });
     if (S.anki && last) out.push({ fx: 'anki', label: 'مرور Anki', s: last + 15, e: last + 30 });
     return out;
   }
@@ -850,6 +1015,261 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     document.getElementById('rep-sub').textContent = NAME[S.grade] + ' ' + S.track;
   }
 
+  /* ---------- week, exam programs, deadlines ---------- */
+  function weekStart(){ var t = todayJ(); return t - satIdx(t) + 7 * (S.wkOff ? 1 : 0); }
+  function wkKey(){ return String(weekStart()); }
+  function jlabel(j, wd){ var x = d2j(j); return (wd ? DAYS[satIdx(j)] + ' ' : '') + fa(x.jd) + ' ' + JM[x.jm - 1]; }
+  var INST = {
+    qc:  { n: 'قلم‌چی (کانون فرهنگی آموزش)', every: 14, start: '07:30' },
+    g2:  { n: 'گزینه ۲', every: 21, start: '08:00' },
+    sj:  { n: 'سنجش (آزمون‌های آزمایشی)', every: 28, start: '08:00' },
+    maz: { n: 'ماز', every: 14, start: '08:00' },
+    gaj: { n: 'گاج', every: 28, start: '08:00' },
+    own: { n: 'مدرسه یا موسسه‌ی دیگر', every: 14, start: '08:00' }
+  };
+  var Y0 = j2d(1405, 7, 1), YEND = j2d(1406, 4, 15);
+  function examDates(){
+    if (!S.inst || !S.exFirst) return [];
+    var e = S.exEvery || 14, out = [], j = S.exFirst;
+    while (j - e >= Y0) j -= e;
+    for (; j <= YEND; j += e) out.push(j);
+    return out;
+  }
+  function liveExams(){ return examDates().filter(function(j){ return !S.exSkip[j]; }); }
+  function exInfo(){
+    if (S.inst){
+      var ws = weekStart(), d = liveExams().filter(function(j){ return j >= ws && j <= ws + 6; })[0];
+      return d == null ? null : { day: satIdx(d), start: S.exStart, j: d };
+    }
+    return S.ex ? { day: S.exDay, start: S.exStart } : null;
+  }
+  function nextExamJ(){ var ws = weekStart(); return liveExams().filter(function(j){ return j >= ws; })[0]; }
+  function anaParts(){
+    if (!S.exAna) return 0;
+    if (S.anaN) return S.anaN;
+    var weak = 0; for (var k in S.lv) if (k.indexOf(S.track + '|' + S.grade + '|') === 0 && S.lv[k] === 'w') weak++;
+    return Math.min(3, 1 + (S.grade !== '10' ? 1 : 0) * (weak >= 2 ? 1 : 0) + (S.grade === '12' && weak >= 4 ? 1 : 0));
+  }
+  /* where a book should be by a date: school pace for this grade's books, earlier for reviews */
+  function paceEnd(rev){ return rev ? (S.grade === '12' ? j2d(1405, 10, 30) : j2d(1405, 12, 25)) : (S.grade === '12' ? j2d(1405, 11, 30) : j2d(1406, 2, 15)); }
+  function paceAt(src, rev, j){
+    var n = chOf(src).length, f = Math.max(0, Math.min(1, (j - Y0) / (paceEnd(rev) - Y0)));
+    return Math.max(1, Math.min(n, Math.ceil(n * f - 1e-9)));
+  }
+  function targetFor(b, src, rev, j){ var o = S.cov[j + '|' + b]; return o != null ? o : paceAt(src, rev, j); }
+  function pgNow(b, src, rev){ var v = S.pg[key(b)]; return v != null ? v : Math.max(0, paceAt(src, rev, todayJ()) - 1); }
+  function pgStart(b, src, rev){
+    var w = wkKey(); S.wkPg[w] = S.wkPg[w] || {};
+    if (S.wkPg[w][b] == null) S.wkPg[w][b] = pgNow(b, src, rev);
+    return S.wkPg[w][b];
+  }
+  function binfo(b){ return bookList(true).filter(function(x){ return x.b === b; })[0] || { b: b, src: b }; }
+
+  /* ---------- topic plan: which chapter each part covers, and how to spend its minutes ---------- */
+  var TM = {}, EXP = {};
+  function chName(ch, i){ return /^(بخش|درس) /.test(ch[i][0]) ? ch[i][0] : 'فصل ' + fa(i + 1) + ': ' + ch[i][0]; }
+  function testsN(len, tk, src){
+    var mult = { 'آموزشی': 2.4, 'تمرینی': 1.7, 'زمان‌دار': 1, 'نشان‌دار': 1.6, 'آزمونی': 1 }[tk] || 1.7;
+    var work = (tk === 'زمان‌دار' || tk === 'آزمونی') ? len * 0.65 : len;
+    return Math.max(5, Math.round(work / (rateOf(src) * mult) / 5) * 5);
+  }
+  function budget(len, mode, tk, src, fresh, gen){
+    if (mode === 'تشریحی'){
+      if (gen) return len >= 90 ? '۶۰ دقیقه متن و نکته‌های درس + ۳۰ دقیقه سؤال‌های تشریحی' : '۳۰ دقیقه متن درس + ۱۵ دقیقه سؤال تشریحی';
+      if (fresh) return len >= 90 ? '۶۰ دقیقه درسنامه و مثال‌ها + ۳۰ دقیقه تمرین‌های کتاب' : '۳۰ دقیقه درسنامه + ۱۵ دقیقه تمرین کتاب';
+      return len >= 90 ? '۴۵ دقیقه مرور درسنامه + ۴۵ دقیقه سؤال تشریحی و نمونه‌سؤال نهایی' : '۲۰ دقیقه مرور + ۲۵ دقیقه سؤال تشریحی';
+    }
+    var tl = mode === 'ترکیبی' ? len / 2 : len, n = testsN(tl, tk || 'تمرینی', src), t = fa(n) + ' تست' + (tk ? ' ' + tk : '');
+    if (tk === 'زمان‌دار' || tk === 'آزمونی'){ var w = Math.round(tl * 0.65 / 5) * 5; t += ' (' + fa(w) + ' دقیقه حل + ' + fa(tl - w) + ' دقیقه تحلیل)'; }
+    return mode === 'ترکیبی' ? fa(tl) + ' دقیقه درسنامه + ' + t : t;
+  }
+  function buildTopics(){
+    TM = {}; EXP = {};
+    var ws = weekStart(), nx = nextExamJ(), dl = nx != null ? nx : ws + 6, W = Math.max(1, Math.ceil((dl - ws + 1) / 7)), byBook = {};
+    S.plan.forEach(function(list, d){ timeline(d, list).forEach(function(e){ if (!e.p) return;
+      e.p.items.forEach(function(x, xi){ (byBook[x.b] = byBook[x.b] || []).push({ k: e.p.id + ':' + xi, x: x, len: e.p.items.length > 1 ? HALF : e.p.len, mode: e.p.items.length > 1 ? x.mode : e.p.mode }); });
+    }); });
+    Object.keys(byBook).forEach(function(b){
+      var info = binfo(b), src = info.src || b, rev = !!info.rev, ch = chOf(src), w = ch.map(function(c){ return c[1]; });
+      var p0 = pgStart(b, src, rev), T = Math.max(p0, targetFor(b, src, rev, dl)), slots = byBook[b];
+      var desc = slots.filter(function(s){ return s.mode !== 'تستی'; }), cons = desc.length ? desc : slots;
+      var R = 0; for (var i = p0; i < T; i++) R += w[i];
+      var q = R / W, M = cons.reduce(function(a, s){ return a + s.len; }, 0) || 1, pos = 0;
+      // expected progress by the end of the week: chapters fully inside this week's quota
+      var acc = 0, full = p0; for (var i2 = p0; i2 < T; i2++){ acc += w[i2]; if (acc <= q + 1e-6) full = i2 + 1; }
+      EXP[b] = { p0: p0, T: T, exp: full, n: ch.length, src: src, rev: rev, gen: !!info.gen, dl: dl, ex: nx != null };
+      if (q > 0) cons.forEach(function(s){ s.r = [pos, pos + q * s.len / M]; pos = s.r[1]; });
+      var last = p0 - 1, cyc = 0;
+      var done = []; for (var i3 = 0; i3 < Math.max(p0, 1); i3++) done.push(i3);
+      done.sort(function(a, c){ return w[c] - w[a]; });
+      slots.forEach(function(s){
+        var label, fresh = false;
+        if (s.r){
+          var a = 0, cs = [];
+          for (var i4 = p0; i4 < T; i4++){ var lo = a, hi = a + w[i4]; if (hi > s.r[0] + 1e-6 && lo < s.r[1] - 1e-6) cs.push(i4); a = hi; }
+          if (!cs.length) cs = [Math.min(T, ch.length) - 1];
+          label = chName(ch, cs[0]) + (cs.length > 1 ? ' ← تا فصل ' + fa(cs[cs.length - 1] + 1) : '');
+          last = cs[cs.length - 1]; fresh = true;
+        } else if (q > 0 && s.mode === 'تستی'){
+          label = last >= 0 ? 'تست ' + chName(ch, last) : 'تست فصل‌های خوانده‌شده';
+        } else {
+          var k = done[cyc++ % done.length];
+          label = (rev ? 'مرور ' : 'تمرین و مرور ') + chName(ch, k);
+        }
+        TM[s.k] = { t: label, bg: budget(s.len, s.mode, s.x.tk, src, fresh, !!info.gen) };
+      });
+    });
+    return TM;
+  }
+
+  /* ---------- custom fixed blocks (classes, sport, long rests) ---------- */
+  var BKIND = [['کلاس','کلاس'],['ورزش','ورزش'],['استراحت','استراحت بلند'],['کار','کار دیگر']];
+  function blocksOf(d){
+    return (S.blocks || []).filter(function(b){ return b.days && b.days[d] && b.s && b.e && tmin(b.e) > tmin(b.s); })
+      .map(function(b){ return { fx: 'blk', kind: b.k, label: (b.t || (BKIND.filter(function(k){ return k[0] === b.k; })[0] || [0, 'برنامه'])[1]), s: tmin(b.s), e: tmin(b.e) }; });
+  }
+  function BRK(){ return S.brk || 15; }
+  /* ---------- exam program UI ---------- */
+  function renderExam(){
+    var sel = document.getElementById('inst');
+    sel.innerHTML = '<option value="">برنامه‌ی ثابت ندارم (هر هفته خودم می‌گویم)</option>' + Object.keys(INST).map(function(k){ return '<option value="' + k + '">' + INST[k].n + '</option>'; }).join('');
+    sel.value = S.inst || '';
+    var prog = !!S.inst, info = exInfo();
+    document.getElementById('ex-prog').hidden = !prog;
+    document.getElementById('ex-man').hidden = prog;
+    document.getElementById('ex-common').hidden = !(prog || S.ex);
+    if (prog){
+      var x = d2j(S.exFirst || todayJ()), jd = document.getElementById('ex-jd'), jm = document.getElementById('ex-jm'), ev = document.getElementById('ex-every');
+      var MO = [7, 8, 9, 10, 11, 12, 1, 2, 3, 4];
+      jm.innerHTML = MO.map(function(m){ return '<option value="' + m + '"' + (m === x.jm ? ' selected' : '') + '>' + JM[m - 1] + '</option>'; }).join('');
+      var dmax = x.jm <= 6 ? 31 : 30, o = ''; for (var i = 1; i <= dmax; i++) o += '<option value="' + i + '"' + (i === x.jd ? ' selected' : '') + '>' + fa(i) + '</option>';
+      jd.innerHTML = o;
+      ev.innerHTML = [[7,'هر هفته'],[14,'هر دو هفته'],[21,'هر سه هفته'],[28,'هر چهار هفته']].map(function(e){ return '<option value="' + e[0] + '"' + (e[0] === S.exEvery ? ' selected' : '') + '>' + e[1] + '</option>'; }).join('');
+      var t = todayJ(), up = examDates().filter(function(j){ return j >= t - satIdx(t); }).slice(0, 8), box = document.getElementById('ex-dates');
+      box.innerHTML = '<span class="lab">آزمون‌های پیش رو (روی تاریخی که آزمون نداری بزن)</span><div class="chips"></div>';
+      chips(box.querySelector('.chips'), up.map(function(j){ return [j, jlabel(j, true)]; }), function(j){ return !S.exSkip[j]; }, function(j){ if (S.exSkip[j]) delete S.exSkip[j]; else S.exSkip[j] = 1; renderExam(); changed(true); });
+      var nx = nextExamJ();
+      document.getElementById('ex-note').textContent = (info ? 'این هفته ' + jlabel(info.j, true) + ' آزمون داری؛ روزِ قبلش تست‌ها زمان‌دار می‌شوند. ' : (nx ? 'آزمون بعدی: ' + jlabel(nx, true) + '. ' : ''))
+        + 'فاصله‌ی آزمون‌ها و مباحث تخمینی است؛ تاریخ دقیق را از برنامه‌ی رسمی ' + INST[S.inst].n + ' بزن و اگر مباحث فرق داشت، پایین درستش کن.';
+      renderCov(nx);
+    } else {
+      chips(document.getElementById('ex'), [[true,'بله'],[false,'نه']], S.ex, function(v){ S.ex = v; renderExam(); changed(true); });
+      document.getElementById('ex-day-box').hidden = !S.ex;
+      var xd = document.getElementById('exday'); xd.innerHTML = '';
+      DAYS.forEach(function(n, d){
+        var b = document.createElement('button'); b.type = 'button'; b.textContent = ['ش','ی','د','س','چ','پ','ج'][d]; b.title = n; b.setAttribute('aria-label', n);
+        b.setAttribute('aria-pressed', String(S.exDay === d));
+        b.addEventListener('click', function(){ S.exDay = d; renderExam(); changed(true); });
+        xd.appendChild(b);
+      });
+    }
+    document.getElementById('t-ex').value = S.exStart;
+    var ds = document.getElementById('ex-dur');
+    ds.innerHTML = [90,120,135,150,165,180,210,240].map(function(m){ return '<option value="' + m + '"' + (m === exDur() ? ' selected' : '') + '>' + hm(m) + '</option>'; }).join('');
+    var auto = (function(){ var a = S.anaN; S.anaN = 0; var x0 = S.exAna; S.exAna = true; var n = anaParts(); S.anaN = a; S.exAna = x0; return n; })();
+    chips(document.getElementById('exana'), [[0,'خودکار (' + fa(auto) + ' پارت)'],[1,'۱ پارت'],[2,'۲ پارت'],[3,'۳ پارت'],[-1,'نه']], S.exAna ? S.anaN : -1, function(v){
+      if (v < 0){ S.exAna = false; } else { S.exAna = true; S.anaN = v; } renderExam(); changed(true); });
+    document.getElementById('ana-why').textContent = S.exAna ? 'تحلیل خودکار: دهم ۱ پارت؛ یازدهم و دوازدهم با ۲ درس ضعیف یا بیشتر ۲ پارت؛ دوازدهم با ۴ درس ضعیف یا بیشتر ۳ پارت. پارت اول: دسته‌بندی غلط‌ها؛ دوم: رفع اشکال درس ضعیف؛ سوم: تست مشابهِ غلط‌ها.' : '';
+  }
+  function renderCov(nx){
+    var box = document.getElementById('ex-cov');
+    if (nx == null){ box.hidden = true; return; } box.hidden = false;
+    var list = bookList(), html = '<summary>مباحث آزمون ' + jlabel(nx, true) + ' (برای ددلاین‌ها)</summary><div class="cov">';
+    list.forEach(function(d){
+      var src = d.src || d.b, ch = chOf(src), cur = targetFor(d.b, src, d.rev, nx);
+      html += '<label>' + fa(d.b) + '<select data-b="' + esc(d.b) + '">' + ch.map(function(c, i){ return '<option value="' + (i + 1) + '"' + (i + 1 === cur ? ' selected' : '') + '>تا ' + esc(chName(ch, i)) + '</option>'; }).join('') + '</select></label>';
+    });
+    box.innerHTML = html + '</div>';
+    box.querySelectorAll('select').forEach(function(s){ s.addEventListener('change', function(){ S.cov[nx + '|' + s.dataset.b] = +s.value; save(); renderWeek(); }); });
+  }
+
+  /* ---------- fixed blocks UI ---------- */
+  function renderBlocks(){
+    var box = document.getElementById('blocks'); box.innerHTML = '';
+    (S.blocks || []).forEach(function(b, i){
+      var row = document.createElement('div'); row.className = 'blk';
+      row.innerHTML = '<div class="times"><label>عنوان<input type="text" class="b-t" maxlength="30" placeholder="مثلاً: کلاس فیزیک" value="' + esc(b.t || '') + '"></label>'
+        + '<label>نوع<select class="b-k">' + BKIND.map(function(k){ return '<option value="' + k[0] + '"' + (k[0] === b.k ? ' selected' : '') + '>' + k[1] + '</option>'; }).join('') + '</select></label>'
+        + '<label>از ساعت<input type="time" class="b-s" step="300" value="' + (b.s || '') + '"></label><label>تا ساعت<input type="time" class="b-e" step="300" value="' + (b.e || '') + '"></label></div>'
+        + '<div class="daypick"></div><button type="button" class="btn ghost b-x">حذف</button>';
+      var dp = row.querySelector('.daypick');
+      DAYS.forEach(function(n, d){
+        var x = document.createElement('button'); x.type = 'button'; x.textContent = ['ش','ی','د','س','چ','پ','ج'][d]; x.title = n; x.setAttribute('aria-label', n);
+        x.setAttribute('aria-pressed', String(!!b.days[d]));
+        x.addEventListener('click', function(){ b.days[d] = b.days[d] ? 0 : 1; x.setAttribute('aria-pressed', String(!!b.days[d])); changed(true); });
+        dp.appendChild(x);
+      });
+      row.querySelector('.b-t').addEventListener('change', function(ev){ b.t = ev.target.value; changed(false); });
+      row.querySelector('.b-k').addEventListener('change', function(ev){ b.k = ev.target.value; changed(false); });
+      row.querySelector('.b-s').addEventListener('change', function(ev){ b.s = ev.target.value; changed(true); });
+      row.querySelector('.b-e').addEventListener('change', function(ev){ b.e = ev.target.value; changed(true); });
+      row.querySelector('.b-x').addEventListener('click', function(){ S.blocks.splice(i, 1); renderBlocks(); changed(true); });
+      box.appendChild(row);
+    });
+    var br = document.getElementById('brk');
+    br.innerHTML = [10, 15, 20, 25, 30].map(function(m){ return '<option value="' + m + '"' + (m === BRK() ? ' selected' : '') + '>' + fa(m) + ' دقیقه</option>'; }).join('');
+    document.getElementById('h-time-sub').textContent = 'هر پارت ۱٫۵ ساعت + ' + fa(BRK()) + ' دقیقه استراحت';
+  }
+
+  /* ---------- strategy UI ---------- */
+  var STRAT_NOTE = {
+    bal: 'درس‌هایی که تستشان در کنکور قابل‌اعتمادتر است (مثل حسابان و ریاضی ۳) کمی وقت بیشتر، و درس‌های خلاقیت‌محور و پرریسک (مثل هندسه) کمی کمتر می‌گیرند. سهم نهایی (تشریحی) دست نمی‌خورد.',
+    safe: 'تمرکز روی درس‌های مطمئن: وقت تستیِ درس‌های پرریسک به حداقل می‌رسد. در درس پرریسک فقط مباحث پرتکرار و تست‌های ساده تا متوسط را کار کن و سر جلسه آن‌ها را برای دور دوم بگذار. درس پرریسک را کامل رها نکن؛ نهایی‌اش هنوز مهم است.',
+    flat: 'وقت هر درس فقط به نسبت ضریب و تعداد تست تقسیم می‌شود؛ ریسک درس‌ها حساب نمی‌شود.'
+  };
+  function renderStrat(){
+    chips(document.getElementById('strat'), [['bal','متعادل'],['safe','درس‌های مطمئن‌تر'],['flat','همه به یک اندازه']], S.strat || 'bal', function(v){ S.strat = v; renderStrat(); renderBooks(); changed(true); });
+    document.getElementById('strat-note').textContent = STRAT_NOTE[S.strat || 'bal'];
+  }
+
+  /* ---------- weekly report ---------- */
+  function wkParts(){
+    var ids = []; (S.plan || []).forEach(function(l){ l.forEach(function(p){ ids.push(p.id); }); });
+    return ids;
+  }
+  function doneMap(){ var w = wkKey(); S.done[w] = S.done[w] || {}; return S.done[w]; }
+  function statusOf(b){
+    var e = EXP[b]; if (!e) return null;
+    var now = pgNow(b, e.src, e.rev);
+    if (now >= e.T) return { c: 'ok', t: e.ex ? 'به مباحث آزمون رسیدی' : 'جلوتر از برنامه', now: now };
+    if (now >= e.exp) return { c: 'on', t: 'روی برنامه', now: now };
+    if (S.pgWk[key(b)] !== wkKey()) return { c: 'unk', t: 'بزن تا کجا رسیدی', now: now };
+    return { c: 'late', t: 'عقب: ' + fa(e.exp - now) + ' فصل', now: now, behind: e.exp - now };
+  }
+  function renderRep(){
+    var box = document.getElementById('rp'); if (!box) return;
+    var ids = wkParts(), dm = doneMap(), dn = ids.filter(function(id){ return dm[id]; }).length, pct = ids.length ? Math.round(dn / ids.length * 100) : 0;
+    var nx = nextExamJ(), ws = weekStart();
+    document.getElementById('rp-sub').textContent = 'هفته‌ی ' + jlabel(ws) + ' تا ' + jlabel(ws + 6);
+    var rows = Object.keys(EXP).sort(function(a, b){ return EXP[a].rev - EXP[b].rev || EXP[a].gen - EXP[b].gen; }).map(function(b){
+      var e = EXP[b], st = statusOf(b), ch = chOf(e.src);
+      var opts = '<option value="0"' + (st.now === 0 ? ' selected' : '') + '>هنوز شروع نکرده‌ام</option>' + ch.map(function(c, i){ return '<option value="' + (i + 1) + '"' + (i + 1 === st.now ? ' selected' : '') + '>تا آخر ' + esc(chName(ch, i)) + '</option>'; }).join('');
+      return '<div class="pr"><div class="pn"><b>' + fa(b) + '</b><small>هدف این هفته: ' + (e.exp > e.p0 ? 'تا آخر فصل ' + fa(e.exp) : (e.T > e.p0 ? 'ادامه‌ی فصل ' + fa(e.p0 + 1) : 'تمرین و مرور')) + ' • ' + (e.ex ? 'آزمون بعد: تا فصل ' + fa(e.T) : 'تا آخر هفته: فصل ' + fa(e.T)) + '</small></div>'
+        + '<select data-b="' + esc(b) + '" aria-label="تا کجا خواندی: ' + esc(b) + '">' + opts + '</select><span class="st st-' + st.c + '">' + st.t + '</span></div>';
+    }).join('');
+    var last = (S.reports || [])[0], saved = last && last.wk === wkKey();
+    box.innerHTML = '<div class="rbar"><div><b>' + fa(pct) + '٪</b><small>' + fa(dn) + ' از ' + fa(ids.length) + ' پارت این هفته تیک خورده</small></div><div class="mix"><i class="t1" style="width:' + pct + '%"></i></div></div>'
+      + '<p class="note">' + (nx != null ? 'ددلاین: آزمون ' + (INST[S.inst] ? INST[S.inst].n + ' ' : '') + jlabel(nx, true) + '. ' : 'برنامه‌ی آزمون نداده‌ای؛ ددلاین‌ها بر اساس روند معمول مدرسه است. ') + 'هر درس را بزن که الان تا کجا خوانده‌ای.</p>'
+      + '<div class="prs">' + rows + '</div>'
+      + '<div class="weekbar" style="margin-top:10px"><button type="button" class="btn acc" id="rp-save">' + (saved ? 'به‌روز کردن گزارش این هفته' : 'ثبت گزارش این هفته') + '</button>' + (S.wkOff ? '' : '<button type="button" class="btn ghost" id="rp-next">برنامه‌ی هفته‌ی بعد</button>') + '</div>'
+      + '<p class="note" id="rp-msg" role="status"></p>'
+      + ((S.reports || []).length ? '<div class="hist"><span class="lab">گزارش‌های قبلی</span>' + S.reports.slice(0, 8).map(function(r){ return '<div><span>' + esc(r.label) + '</span><b>' + fa(r.pct) + '٪</b><small>' + (r.behind.length ? 'عقب: ' + r.behind.map(fa).join('، ') : 'همه روی برنامه') + '</small></div>'; }).join('') + '</div>' : '');
+    box.querySelectorAll('select[data-b]').forEach(function(s){ s.addEventListener('change', function(){ S.pg[key(s.dataset.b)] = +s.value; S.pgWk[key(s.dataset.b)] = wkKey(); save(); renderRep(); }); });
+    document.getElementById('rp-save').onclick = function(){
+      var behind = [], reached = [], unk = [];
+      Object.keys(EXP).forEach(function(b){ var st = statusOf(b); if (st.c === 'late') behind.push(b); if (st.c === 'unk') unk.push(b); if (st.c === 'ok' && EXP[b].ex) reached.push(b); });
+      var r = { wk: wkKey(), label: jlabel(ws) + ' تا ' + jlabel(ws + 6), pct: pct, done: dn, total: ids.length, behind: behind, reached: reached, unk: unk, at: Date.now(),
+        ex: nx != null ? jlabel(nx, true) : '', pg: Object.keys(EXP).map(function(b){ var st = statusOf(b); return { b: b, now: st.now, exp: EXP[b].exp, T: EXP[b].T, n: EXP[b].n, s: st.c }; }) };
+      S.reports = (S.reports || []).filter(function(x){ return x.wk !== r.wk; }); S.reports.unshift(r); S.reports = S.reports.slice(0, 16);
+      S.boost = { wk: ws + 7, books: behind };
+      save(); push('report'); renderRep();
+      document.getElementById('rp-msg').textContent = 'ثبت شد' + (syncOn ? ' و برای مشاورت فرستاده شد' : '') + '. ' + (behind.length ? 'هفته‌ی بعد درس‌های عقب‌مانده (' + behind.map(fa).join('، ') + ') کمی وقت بیشتری می‌گیرند.' : 'آفرین؛ همه‌چیز روی برنامه است.') + (unk.length ? ' برای ' + fa(unk.length) + ' درس هنوز نگفته‌ای تا کجا رسیدی.' : '');
+    };
+    var nb = document.getElementById('rp-next'); if (nb) nb.onclick = function(){ S.wkOff = 1; renderAll(false); document.getElementById('s-week').scrollIntoView({ behavior: 'smooth' }); };
+    var t = todayJ(), endish = !S.wkOff && satIdx(t) >= 5 && !saved;
+    document.getElementById('rp-nudge').hidden = !endish;
+  }
+
   /* ---------- render week (editable) ---------- */
   var sel = null, swapFrom = null;
   function allBooks(){ return bookList().map(function(d){ return d.b; }); }
@@ -857,6 +1277,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function colorOf(mode){ return mode === 'تستی' ? 'var(--accent)' : mode === 'تشریحی' ? 'var(--ink)' : 'linear-gradient(var(--ink) 50%, var(--accent) 50%)'; }
   function renderWeek(){
     var box = document.getElementById('days'); box.innerHTML = '';
+    var ws0 = todayJ() - satIdx(todayJ());
+    chips(document.getElementById('wkoff'), [[0, 'این هفته • ' + jlabel(ws0) + ' تا ' + jlabel(ws0 + 6)], [1, 'هفته‌ی بعد • ' + jlabel(ws0 + 7) + ' تا ' + jlabel(ws0 + 13)]], S.wkOff ? 1 : 0, function(v){ S.wkOff = v; renderAll(false); });
+    buildTopics(); var dm = doneMap();
     document.getElementById('swapbar').innerHTML = swapFrom ? '<div class="swapbar"><span>حالا پارتی را که می‌خواهی با این عوض شود بزن</span><button type="button" class="btn ghost" id="swapx" style="color:inherit;border-color:currentColor">لغو</button></div>' : '';
     if (swapFrom) document.getElementById('swapx').onclick = function(){ swapFrom = null; renderWeek(); };
     document.getElementById('reset').hidden = !S.planEdited;
@@ -871,13 +1294,16 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       var nextTT = (S.school && S.tt && S.sd[(d + 1) % 7]) ? (S.tt[(d + 1) % 7] || []) : [];
       tl.forEach(function(e){
         var li = document.createElement('li');
-        if (e.fx){ li.className = 'fixed fx-' + e.fx; li.innerHTML = '<i style="--c:' + (e.fx === 'exam' ? 'var(--weak)' : e.fx === 'anki' ? 'var(--accent)' : 'var(--strong)') + '"></i><span>' + e.label + '<small>' + (e.fx === 'exam' ? 'مثل روز کنکور: زمان‌سنج، بدون گوشی' : e.fx === 'anki' ? '۱۵ دقیقه، کارت‌های امروز' : 'غلط‌ها در ۴ دسته • تست‌ها را علامت بزن • کارت Anki') + '</small></span><time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time>'; ul.appendChild(li); return; }
+        if (e.fx){ li.className = 'fixed fx-' + e.fx; li.innerHTML = '<i style="--c:' + (e.fx === 'exam' ? 'var(--weak)' : e.fx === 'anki' ? 'var(--accent)' : e.fx === 'blk' ? 'var(--ink2)' : 'var(--strong)') + '"></i><span>' + esc(e.label) + '<small>' + (e.fx === 'exam' ? 'مثل روز کنکور: زمان‌سنج، بدون گوشی' : e.fx === 'anki' ? '۱۵ دقیقه، کارت‌های امروز' : e.fx === 'blk' ? 'برنامه‌ی ثابت' : (e.sub || '')) + '</small></span><time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time>'; ul.appendChild(li); return; }
         if (e.meal){ li.className = 'meal'; li.innerHTML = '<i style="--c:var(--line)"></i><span>' + e.meal + '</span><time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time>'; ul.appendChild(li); return; }
         var p = e.p, prep = p.items.some(function(x){ return !x.rev && nextTT.indexOf(x.src) >= 0; });
+        var tpc = function(xi){ var t = TM[p.id + ':' + xi]; return t ? '<span class="tp">' + esc(t.t) + '</span><span class="bg">' + esc(t.bg) + '</span>' : ''; };
         var names = p.items.length > 1
-          ? '<span class="halves">' + p.items.map(function(x){ return '<span>' + itemLabel(x) + '<small>' + x.mode + (x.tk ? ' • ' + x.tk : '') + ' • ۴۵ دقیقه</small></span>'; }).join('') + '</span>'
-          : '<span>' + itemLabel(p.items[0]) + '<small>' + p.mode + (p.items[0].tk ? ' • ' + p.items[0].tk : '') + '</small>' + (prep ? '<em class="prep">کلاس فردا</em>' : '') + '</span>';
-        li.innerHTML = '<i style="--c:' + colorOf(p.mode) + '"></i>' + names + '<time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time>';
+          ? '<span class="halves">' + p.items.map(function(x, xi){ return '<span>' + itemLabel(x) + '<small>' + x.mode + (x.tk ? ' • ' + x.tk : '') + ' • ۴۵ دقیقه</small>' + tpc(xi) + '</span>'; }).join('') + '</span>'
+          : '<span>' + itemLabel(p.items[0]) + '<small>' + p.mode + (p.items[0].tk ? ' • ' + p.items[0].tk : '') + '</small>' + (prep ? '<em class="prep">کلاس فردا</em>' : '') + tpc(0) + '</span>';
+        li.innerHTML = '<i style="--c:' + colorOf(p.mode) + '"></i>' + names + '<span class="rt"><time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time><button type="button" class="ck" aria-pressed="' + !!dm[p.id] + '" aria-label="خواندم"></button></span>';
+        if (dm[p.id]) li.classList.add('done');
+        li.querySelector('.ck').addEventListener('click', function(ev){ ev.stopPropagation(); if (dm[p.id]) delete dm[p.id]; else dm[p.id] = 1; save(); renderWeek(); });
         li.tabIndex = 0; li.setAttribute('role', 'button');
         if (sel === p.id || swapFrom === p.id) li.classList.add('sel');
         var act = function(){
@@ -894,7 +1320,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       if (endT > 23 * 60 + 30) el.insertAdjacentHTML('beforeend', '<div class="warn">این روز ساعت ' + fa(tstr(endT)) + ' تمام می‌شود. شب‌بیداری بازدهی را می‌کُشد؛ شروع را جلو بیاور یا ساعت کمتری بگذار.</div>');
       box.appendChild(el);
     });
-    renderPrint();
+    renderPrint(); renderRep();
   }
   function find(id){ for (var d = 0; d < 7; d++) for (var i = 0; i < S.plan[d].length; i++) if (S.plan[d][i].id === id) return [d, i]; return null; }
   function doSwap(a, b){
@@ -929,26 +1355,28 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function renderPrint(){
     var ps = document.getElementById('printsheet'), logo = document.getElementById('logofull').src;
     var head = '<div class="ph"><img src="' + logo + '" alt=""><div><h1>برنامه‌ی هفتگی مطالعه</h1><p>کانون طلوع نخبگان • برنامه‌ساز کنکور • ضرایب ۱۴۰۶</p></div>'
-      + '<div class="who"><b>' + esc(fullName() || '—') + '</b><br>' + NAME[S.grade] + ' ' + S.track + ' • ' + fa(dayHalves().reduce(function(a, b){ return a + b; }, 0) * HALF / 60) + ' ساعت در هفته</div></div>';
+      + '<div class="who"><b>' + esc(fullName() || '—') + '</b><br>' + NAME[S.grade] + ' ' + S.track + ' | ' + fa(dayHalves().reduce(function(a, b){ return a + b; }, 0) * HALF / 60) + ' ساعت در هفته</div></div>';
     var tip = NOTES[(new Date().getDate()) % NOTES.length];
     var th = '', td = '';
     S.plan.forEach(function(list, d){
       th += '<th>' + DAYS[d] + (isSchool(d) ? ' • مدرسه' : '') + '</th>';
       var cell = timeline(d, list).map(function(e){
-        if (e.fx) return '<div class="pe pe-' + e.fx + '"><b>☐ ' + e.label + '</b><span>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</span></div>';
+        if (e.fx) return '<div class="pe pe-' + e.fx + '"><b>' + (e.fx === 'blk' ? '' : '☐ ') + esc(e.label) + '</b><span>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</span></div>';
         if (e.meal) return '<div class="pe meal"><b>' + e.meal + '</b><span>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</span></div>';
         var c = e.p.mode === 'تستی' ? ' pe-t' : e.p.mode === 'ترکیبی' ? ' pe-x' : '';
-        return '<div class="pe' + c + '"><b>☐ ' + e.p.items.map(function(x){ return fa(x.b); }).join(' + ') + '</b>' + e.p.mode + (e.p.items.length === 1 && e.p.items[0].tk ? ' ' + e.p.items[0].tk : '') + ' • <span>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</span></div>';
+        var tp = e.p.items.map(function(x, xi){ var t = TM[e.p.id + ':' + xi]; return t ? t.t : ''; }).filter(Boolean).join(' | ');
+        var bg = e.p.items.length === 1 && TM[e.p.id + ':0'] ? TM[e.p.id + ':0'].bg : '';
+        return '<div class="pe' + c + '"><b>☐ ' + e.p.items.map(function(x){ return fa(x.b); }).join(' + ') + '</b>' + e.p.mode + (e.p.items.length === 1 && e.p.items[0].tk ? ' ' + e.p.items[0].tk : '') + ' • <span>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</span>' + (tp ? '<i>' + esc(tp) + '</i>' : '') + (bg ? '<u>' + esc(bg) + '</u>' : '') + '</div>';
       }).join('');
       td += '<td>' + (cell || 'استراحت') + '</td>';
     });
     var gl = goalLine(), anchor = (gl || S.gWhy) ? '<div class="pa">' + (S.gWhy ? '<div class="pq"><small>لنگرِ من</small>«' + esc(S.gWhy) + '»</div>' : '') + (gl ? '<div class="pg"><small>هدفِ من</small><b>' + esc(gl) + '</b></div>' : '') + '</div>' : '';
     ps.innerHTML = head + anchor + '<table class="pt"><thead><tr>' + th + '</tr></thead><tbody><tr>' + td + '</tr></tbody></table>'
-      + '<div class="pf"><span>خط سرمه‌ای: تشریحی • خط نارنجی: تستی • بین پارت‌ها ۱۵ دقیقه استراحت</span><span>یادداشت همایش: ' + tip + '</span></div>';
+      + '<div class="pf"><span>خط سرمه‌ای: تشریحی • خط نارنجی: تستی • بین پارت‌ها ' + fa(BRK()) + ' دقیقه استراحت</span><span>یادداشت همایش: ' + tip + '</span></div>';
   }
 
   /* ---------- orchestration ---------- */
-  function sig(){ return JSON.stringify([S.ex, S.exDay, S.exStart, S.exDur, S.exAna, S.track, S.grade, S.school, S.sd, S.hs, S.ho, S.hd, S.fri, S.rev, S.lv, S.fav, S.tt]); }
+  function sig(){ return JSON.stringify([weekStart(), S.inst, S.exFirst, S.exEvery, S.exSkip, S.anaN, S.blocks, S.brk, S.strat, S.norev, S.boost, S.ex, S.exDay, S.exStart, S.exDur, S.exAna, S.track, S.grade, S.school, S.sd, S.hs, S.ho, S.hd, S.fri, S.rev, S.lv, S.fav, S.tt]); }
   function changed(regen){
     renderTotal();
     var res = compute(); renderReport(res);
@@ -961,7 +1389,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     renderGoal();
     chips(document.getElementById('grade'), GRADES, S.grade, function(v){ S.grade = v; renderAll(true); });
     document.getElementById('hint').textContent = HINT[S.grade] + (S.grade !== '10' ? ' ' + season().label : '');
-    renderTime(); renderTT(); renderBooks();
+    renderTime(); renderTT(); renderStrat(); renderBooks();
     document.getElementById('rows').innerHTML = '';
     changed(regen);
   }
@@ -977,6 +1405,17 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   document.getElementById('reset').addEventListener('click', function(){ changed(true); });
   document.getElementById('t-ex').addEventListener('change', function(ev){ if (ev.target.value){ S.exStart = ev.target.value; changed(true); } });
   document.getElementById('ex-dur').addEventListener('change', function(ev){ S.exDur = +ev.target.value; changed(true); });
+  document.getElementById('inst').addEventListener('change', function(ev){
+    S.inst = ev.target.value; S.cov = {}; S.exSkip = {};
+    if (S.inst){ var I = INST[S.inst], t = todayJ(); S.exEvery = I.every; S.exStart = I.start; if (!S.exFirst || S.exFirst < t - 6) S.exFirst = t + (6 - satIdx(t)); }
+    renderExam(); changed(true);
+  });
+  function setFirst(){ var m = +document.getElementById('ex-jm').value, d = +document.getElementById('ex-jd').value, y = m >= 7 ? 1405 : 1406; if (m > 6 && d > 30) d = 30; S.exFirst = j2d(y, m, d); S.exSkip = {}; renderExam(); changed(true); }
+  document.getElementById('ex-jd').addEventListener('change', setFirst);
+  document.getElementById('ex-jm').addEventListener('change', setFirst);
+  document.getElementById('ex-every').addEventListener('change', function(ev){ S.exEvery = +ev.target.value; S.exSkip = {}; renderExam(); changed(true); });
+  document.getElementById('brk').addEventListener('change', function(ev){ S.brk = +ev.target.value; renderBlocks(); save(); renderWeek(); });
+  document.getElementById('blk-add').addEventListener('click', function(){ S.blocks.push({ t: '', k: 'کلاس', s: '16:00', e: '17:30', days: [0,0,0,0,0,0,0] }); renderBlocks(); save(); var r = document.querySelectorAll('#blocks .b-t'); if (r.length) r[r.length - 1].focus(); });
   (function(){
     var ol = document.getElementById('notes'), last = '';
     NOTES.forEach(function(n, i){ var li = document.createElement('li'); li.innerHTML = (NOTE_KH[i] !== last ? '<em>' + NOTE_KH[i] + '</em>' : '') + n; last = NOTE_KH[i]; ol.appendChild(li); });
@@ -997,6 +1436,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   ib.addEventListener('click', function(){ if (deferred){ deferred.prompt(); deferred = null; ib.hidden = true; } });
   try { if ('serviceWorker' in navigator && location.protocol === 'https:' && !IN_VIEWER) navigator.serviceWorker.register('sw.js').catch(function(){}); } catch(e){}
 
+  (function(){ var keep = weekStart() - 35; [S.wkPg, S.done].forEach(function(o){ Object.keys(o).forEach(function(k){ if (+k < keep) delete o[k]; }); }); })();
   S.planEdited = store.get('planEdited', false);
   var _save = save; save = function(){ _save(); store.set('planEdited', !!S.planEdited); };
   var bk = document.getElementById('books'); bk.classList.add('intro'); setTimeout(function(){ bk.classList.remove('intro'); }, 1600);
@@ -1012,8 +1452,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     var plan = (S.plan || []).map(function(list, d){
       return timeline(d, list).map(function(e){
         if (e.meal) return { k: 'meal', t: e.meal, s: tstr(e.s), e: tstr(e.e) };
-        if (e.fx) return { k: e.fx, t: e.label, s: tstr(e.s), e: tstr(e.e) };
-        return { k: 'part', t: e.p.items.map(function(x){ return x.b; }).join(' + '), m: e.p.mode, tk: e.p.items.length === 1 ? (e.p.items[0].tk || '') : '', s: tstr(e.s), e: tstr(e.e) };
+        if (e.fx) return { k: e.fx === 'blk' ? 'blk' : e.fx, t: e.label, s: tstr(e.s), e: tstr(e.e) };
+        var tp = e.p.items.map(function(x, xi){ var t = TM[e.p.id + ':' + xi]; return t ? t.t : ''; }).filter(Boolean).join(' | ');
+        return { k: 'part', t: e.p.items.map(function(x){ return x.b; }).join(' + '), m: e.p.mode, tk: e.p.items.length === 1 ? (e.p.items[0].tk || '') : '', s: tstr(e.s), e: tstr(e.e), tp: tp, bg: e.p.items.length === 1 && TM[e.p.id + ':0'] ? TM[e.p.id + ':0'].bg : '', ok: doneMap()[e.p.id] ? 1 : 0 };
       });
     });
     return { id: devId, v: 9, event: ev || 'save', name: (S.name || '').trim(), full: fullName(), track: S.track, grade: S.grade, gradeName: NAME[S.grade],
@@ -1024,7 +1465,13 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       weak: byLv('w'), strong: byLv('s'), fav: res.filter(function(x){ return x.fav; }).map(function(x){ return x.d.b; }),
       top: res.slice(0, 3).map(function(x){ return x.d.b; }),
       report: res.map(function(x){ return { b: x.d.b, m: x.m, t1: x.t1, t2: x.t2, lv: x.lv, fav: x.fav ? 1 : 0, gen: x.d.gen ? 1 : 0 }; }),
-      edited: !!S.planEdited, plan: plan, days: DAYS, ua: (navigator.userAgent || '').slice(0, 120) };
+      edited: !!S.planEdited, plan: plan, days: DAYS,
+      inst: S.inst ? INST[S.inst].n : '', nextExam: nextExamJ() != null ? jlabel(nextExamJ(), true) : '', anaParts: anaParts(), strat: S.strat, brk: BRK(),
+      blocks: (S.blocks || []).map(function(b){ return { t: b.t || b.k, s: b.s, e: b.e, days: b.days }; }), norev: Object.keys(S.norev).map(function(k){ return k.split('|')[2]; }),
+      week: jlabel(weekStart()) + ' تا ' + jlabel(weekStart() + 6),
+      progress: Object.keys(EXP).map(function(b){ var st = statusOf(b); return { b: b, now: st.now, exp: EXP[b].exp, T: EXP[b].T, n: EXP[b].n, s: st.c }; }),
+      donePct: (function(){ var ids = wkParts(), dm = doneMap(); return ids.length ? Math.round(ids.filter(function(i){ return dm[i]; }).length / ids.length * 100) : 0; })(),
+      reports: (S.reports || []).slice(0, 8).map(function(r){ return { label: r.label, pct: r.pct, behind: r.behind, reached: r.reached, unk: r.unk || [], ex: r.ex, at: r.at }; }), ua: (navigator.userAgent || '').slice(0, 120) };
   }
   var syncT = null, ready = false;
   function push(ev){

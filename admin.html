@@ -57,7 +57,7 @@ label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:70
 .seg button{border:0;background:transparent;color:var(--ink);font:inherit;font-weight:700;font-size:12.5px;padding:6px 11px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
 .filters input{max-width:240px}
-.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
 .bars{display:flex;flex-direction:column;gap:7px;margin:0;padding:0;list-style:none}
 .bars li{display:grid;grid-template-columns:minmax(0,1fr) 34px;gap:4px 8px;font-size:13px;align-items:center}
 .bars li .bn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -105,6 +105,13 @@ table.list{width:100%;border-collapse:collapse;font-size:13.5px}
 .be.meal{border-color:var(--line);color:var(--ink2)}
 .be.exam{border-color:var(--weak);background:color-mix(in srgb,var(--weak) 8%,transparent)}
 .be.ana{border-color:var(--strong);background:color-mix(in srgb,var(--strong) 8%,transparent)}
+.be .tp{display:block;font-weight:700;color:var(--ink)}
+.be .bg{display:block;font-size:10.5px;color:var(--ink2)}
+.be.ok{opacity:.6}.be.ok b::before{content:"✓ ";color:var(--strong)}
+.be.blk{border-color:var(--ink2);color:var(--ink2)}
+.st{font-size:11px;font-weight:800;border-radius:999px;padding:0 8px;border:1px solid currentColor;white-space:nowrap}
+.st-ok{color:var(--strong)}.st-on{color:var(--ink2)}.st-late{color:var(--weak)}.st-unk{color:var(--accent)}
+.meter{height:6px;border-radius:3px;background:var(--chip);overflow:hidden;margin-top:3px;min-width:60px}.meter i{display:block;height:100%;background:var(--strong)}
 .be.anki{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
 .sample{background:var(--accent);color:var(--accent-ink);border-radius:10px;padding:6px 12px;font-size:12.5px;font-weight:700}
 @media (max-width:860px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3,.dgrid{grid-template-columns:minmax(0,1fr)}.hide-sm{display:none}}
@@ -148,11 +155,12 @@ table.list{width:100%;border-collapse:collapse;font-size:13.5px}
   <div class="grid3">
     <section class="card"><h2>درس‌هایی که بیشتر «ضعیف» زده‌اند<small id="n-w"></small></h2><ul class="bars" id="b-weak"></ul></section>
     <section class="card"><h2>درس‌هایی که بیشتر «قوی» زده‌اند<small id="n-s"></small></h2><ul class="bars" id="b-strong"></ul></section>
+    <section class="card"><h2>عقب از ددلاین (آخرین گزارش)<small id="n-b"></small></h2><ul class="bars" id="b-behind"></ul></section>
     <section class="card"><h2>رشته‌های هدف<small id="n-g"></small></h2><ul class="bars" id="b-goal"></ul></section>
   </div>
   <section class="card">
     <h2>دانش‌آموزها<small id="n-list"></small></h2>
-    <div class="tablewrap"><table class="list"><thead><tr><th>نام</th><th>رشته و پایه</th><th>هدف</th><th class="hide-sm">ساعت در هفته</th><th>ضعیف / قوی</th><th>آخرین تغییر</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <div class="tablewrap"><table class="list"><thead><tr><th>نام</th><th>رشته و پایه</th><th>هدف</th><th class="hide-sm">ساعت در هفته</th><th>ضعیف / قوی</th><th>گزارش هفته</th><th>آخرین تغییر</th></tr></thead><tbody id="rows"></tbody></table></div>
   </section>
 </div>
 
@@ -229,15 +237,16 @@ table.list{width:100%;border-collapse:collapse;font-size:13.5px}
     seg($('f-grade'), [['','همه'],['10','دهم'],['11','یازدهم'],['12','دوازدهم']], 'grade');
     var rows = filtered(), wk = Date.now() - 7 * 864e5;
     var act = rows.filter(function(r){ return new Date(r.updated).getTime() > wk; }).length;
-    var pr = rows.filter(function(r){ return +r.prints > 0; }).length;
+    var pr = rows.filter(function(r){ return +r.prints > 0; }).length, rep = rows.filter(function(r){ return r.reports && r.reports.length; });
     var hrs = rows.filter(function(r){ return r.hours; }), avg = hrs.length ? hrs.reduce(function(a, r){ return a + r.hours; }, 0) / hrs.length : 0;
     $('kpis').innerHTML = [
       ['کاربرها', fa(rows.length), ROWS.length !== rows.length ? 'از ' + fa(ROWS.length) + ' نفر' : 'همه‌ی دستگاه‌ها'],
       ['فعال در ۷ روز اخیر', fa(act), rows.length ? fa(Math.round(act / rows.length * 100)) + '٪' : ''],
-      ['برنامه را چاپ کرده‌اند', fa(pr), rows.length ? fa(Math.round(pr / rows.length * 100)) + '٪' : ''],
+      ['گزارش هفته داده‌اند', fa(rep.length), rep.length ? 'میانگین انجام برنامه ' + fa(Math.round(rep.reduce(function(a, r){ return a + r.reports[0].pct; }, 0) / rep.length)) + '٪' : 'هنوز کسی گزارش نداده'],
       ['میانگین مطالعه در هفته', hours(avg), 'ساعت']
     ].map(function(k){ return '<div class="kpi"><small>' + k[0] + '</small><b>' + k[1] + '</b><span>' + k[2] + '</span></div>'; }).join('');
     var w = count(rows, function(r){ return r.weak; }), s = count(rows, function(r){ return r.strong; }), g = count(rows, function(r){ return [r.goal || 'هنوز نمی‌داند']; });
+    bars($('b-behind'), count(rep, function(r){ return r.reports[0].behind; }), 'var(--accent)'); $('n-b').textContent = fa(rep.filter(function(r){ return r.reports[0].behind.length; }).length) + ' نفر';
     bars($('b-weak'), w, 'var(--weak)'); bars($('b-strong'), s, 'var(--strong)'); bars($('b-goal'), g, 'var(--accent)');
     $('n-w').textContent = fa(rows.filter(function(r){ return r.weak && r.weak.length; }).length) + ' نفر';
     $('n-s').textContent = fa(rows.filter(function(r){ return r.strong && r.strong.length; }).length) + ' نفر';
@@ -252,21 +261,22 @@ table.list{width:100%;border-collapse:collapse;font-size:13.5px}
         + '<td class="num hide-sm">' + hours(r.hours) + '</td>'
         + '<td>' + (r.weak || []).slice(0, 3).map(function(b){ return '<span class="tag w">' + esc(fa(b)) + '</span>'; }).join('') + ((r.weak || []).length > 3 ? '<span class="tag w">+' + fa(r.weak.length - 3) + '</span>' : '')
         + (r.strong || []).slice(0, 2).map(function(b){ return '<span class="tag s">' + esc(fa(b)) + '</span>'; }).join('') + '</td>'
+        + '<td>' + (r.reports && r.reports.length ? '<b class="num">' + fa(r.reports[0].pct) + '٪</b><div class="meter"><i style="width:' + r.reports[0].pct + '%"></i></div>' + (r.reports[0].behind.length ? '<small class="muted">عقب در ' + fa(r.reports[0].behind.length) + ' درس</small>' : '') : '<small class="muted">نداده</small>') + '</td>'
         + '<td class="num">' + ago(r.updated) + '</td></tr>';
-    }).join('') : '<tr><td colspan="6" class="empty">هنوز کسی برنامه نساخته یا با این فیلتر کسی پیدا نشد.</td></tr>';
+    }).join('') : '<tr><td colspan="7" class="empty">هنوز کسی برنامه نساخته یا با این فیلتر کسی پیدا نشد.</td></tr>';
   }
   $('rows').addEventListener('click', function(e){ var tr = e.target.closest('tr[data-i]'); if (tr) open(ROWS[+tr.dataset.i]); });
   $('rows').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ var tr = e.target.closest('tr[data-i]'); if (tr) open(ROWS[+tr.dataset.i]); } });
 
   function open(r){
     var d = $('drawer'), pl = r.plan || [];
-    var kind = { part: '', meal: 'meal', exam: 'exam', ana: 'ana', anki: 'anki' };
+    var kind = { part: '', meal: 'meal', exam: 'exam', ana: 'ana', anki: 'anki', blk: 'blk' };
     var week = pl.map(function(list, i){
       var mins = list.filter(function(e){ return e.k === 'part'; }).reduce(function(a, e){ return a + (t2m(e.e) - t2m(e.s)); }, 0);
       return '<div class="wd"><h3>' + DAYS[i] + '<small>' + (r.schoolDayList && r.school && r.schoolDayList[i] ? 'مدرسه • ' : '') + (mins ? hours(mins / 60) + ' ساعت' : 'استراحت') + '</small></h3>'
         + list.map(function(e){
           var c = e.k === 'part' ? (e.m === 'تستی' ? 't' : e.m === 'ترکیبی' ? 'x' : '') : kind[e.k] || '';
-          return '<div class="be ' + c + '"><b>' + esc(fa(e.t)) + '</b>' + (e.m ? esc(e.m) + (e.tk ? ' ' + esc(e.tk) : '') : '') + '<time>' + fa(e.s) + '–' + fa(e.e) + '</time></div>';
+          return '<div class="be ' + c + (e.ok ? ' ok' : '') + '"><b>' + esc(fa(e.t)) + '</b>' + (e.m ? esc(e.m) + (e.tk ? ' ' + esc(e.tk) : '') : '') + (e.tp ? '<span class="tp">' + esc(e.tp) + '</span>' : '') + (e.bg ? '<span class="bg">' + esc(e.bg) + '</span>' : '') + '<time>' + fa(e.s) + '–' + fa(e.e) + '</time></div>';
         }).join('') + '</div>';
     }).join('');
     var rep = (r.report || []).map(function(x){
@@ -277,7 +287,11 @@ table.list{width:100%;border-collapse:collapse;font-size:13.5px}
       ['هدف', esc([r.goal, r.uni, r.rank ? 'رتبه‌ی زیر ' + fa(r.rank) : ''].filter(Boolean).join(' • ') || '—')],
       ['مطالعه در هفته', hours(r.hours) + ' ساعت'],
       ['مدرسه', r.school ? fa(r.schoolDays) + ' روز در هفته' : 'ندارد / تعطیل'],
-      ['آزمون آزمایشی', r.exam ? esc(r.exam.day) + ' ساعت ' + fa(r.exam.start) + (r.exam.ana ? ' + تحلیل' : '') : 'ندارد'],
+      ['آزمون آزمایشی', r.inst ? esc(r.inst) + (r.nextExam ? ' • بعدی ' + esc(r.nextExam) : '') : (r.exam ? esc(r.exam.day) + ' ساعت ' + fa(r.exam.start) : 'ندارد')],
+      ['تحلیل آزمون', r.anaParts ? fa(r.anaParts) + ' پارت' : '—'],
+      ['استراتژی تست', { bal: 'متعادل', safe: 'درس‌های مطمئن‌تر', flat: 'همه یکسان' }[r.strat] || '—'],
+      ['کلاس‌های ثابت', (r.blocks || []).length ? r.blocks.map(function(b){ return esc(b.t) + ' ' + fa(b.s) + '–' + fa(b.e); }).join('، ') : '—'],
+      ['مرور نمی‌کند', (r.norev || []).length ? r.norev.map(function(b){ return esc(fa(b)); }).join('، ') : '—'],
       ['Anki شبانه', r.anki ? 'دارد' : 'ندارد'],
       ['اولین بار', r.first ? new Date(r.first).toLocaleDateString('fa-IR') : '—'],
       ['آخرین تغییر', ago(r.updated) + (r.saves ? ' • ' + fa(r.saves) + ' بار ذخیره' : '')]
@@ -288,6 +302,12 @@ table.list{width:100%;border-collapse:collapse;font-size:13.5px}
       + '<div class="dgrid"><section class="card"><h2>مشخصات</h2><dl class="facts">' + facts + '</dl>'
       + '<p style="margin:10px 0 0">' + (r.weak || []).map(function(b){ return '<span class="tag w">' + esc(fa(b)) + '</span>'; }).join('') + (r.strong || []).map(function(b){ return '<span class="tag s">' + esc(fa(b)) + '</span>'; }).join('') + (r.fav || []).map(function(b){ return '<span class="tag f">♥ ' + esc(fa(b)) + '</span>'; }).join('') + '</p></section>'
       + '<section class="card"><h2>سهم هر درس در هفته</h2><div class="tablewrap"><table class="rep"><thead><tr><th>درس</th><th>کل (ساعت)</th><th>تشریحی</th><th>تستی</th></tr></thead><tbody>' + (rep || '<tr><td colspan="4" class="empty">—</td></tr>') + '</tbody></table></div></section></div>'
+      + '<div class="dgrid"><section class="card"><h2>پیشرفت مباحث و ددلاین‌ها<small>' + esc(r.week || '') + '</small></h2><div class="tablewrap"><table class="rep"><thead><tr><th>درس</th><th>رسیده تا</th><th>هدف هفته</th><th>آزمون بعد</th><th></th></tr></thead><tbody>'
+      + ((r.progress || []).map(function(x){ var st = { ok: 'رسیده', on: 'روی برنامه', late: 'عقب', unk: 'گزارش نشده' }[x.s] || ''; return '<tr><td>' + esc(fa(x.b)) + '</td><td class="num">' + (x.now ? 'فصل ' + fa(x.now) + ' از ' + fa(x.n) : '—') + '</td><td class="num">فصل ' + fa(x.exp) + '</td><td class="num">فصل ' + fa(x.T) + '</td><td><span class="st st-' + x.s + '">' + st + '</span></td></tr>'; }).join('') || '<tr><td colspan="5" class="empty">—</td></tr>')
+      + '</tbody></table></div></section>'
+      + '<section class="card"><h2>گزارش‌های هفتگی<small>' + (r.donePct != null ? 'این هفته تا الان ' + fa(r.donePct) + '٪ تیک خورده' : '') + '</small></h2>'
+      + ((r.reports || []).map(function(x){ return '<div style="border-bottom:1px solid var(--line);padding:6px 0"><b>' + esc(x.label) + '</b> <span class="num">' + fa(x.pct) + '٪</span><div class="meter"><i style="width:' + x.pct + '%"></i></div><small class="muted">' + (x.behind.length ? 'عقب: ' + x.behind.map(function(b){ return esc(fa(b)); }).join('، ') : 'درس عقب‌مانده نداشت') + ((x.unk || []).length ? ' • ' + fa(x.unk.length) + ' درس گزارش نشده' : '') + '</small></div>'; }).join('') || '<p class="empty">هنوز گزارشی نداده.</p>')
+      + '</section></div>'
       + '<section><h2 style="font-size:15px;margin:0 0 8px">برنامه‌ی هفتگی</h2><div class="week">' + (week || '<p class="empty">برنامه‌ای ثبت نشده.</p>') + '</div></section>';
     $('shade').classList.add('on'); d.classList.add('on'); d.scrollTop = 0;
     $('d-close').onclick = close; $('d-print').onclick = function(){ window.print(); };
@@ -333,9 +353,12 @@ table.list{width:100%;border-collapse:collapse;font-size:13.5px}
         out.push({ k: 'anki', t: 'مرور Anki', s: fmt(t), e: fmt(t + 15) });
         return out;
       });
+      plan.forEach(function(l){ l.forEach(function(e){ if (e.k === 'part'){ e.tp = 'فصل ' + fa(1 + Math.floor(rnd() * 3)) + ' • ' + (e.m === 'تستی' ? 'تست' : 'درسنامه'); e.bg = e.m === 'تستی' ? fa(20 + 5 * Math.floor(rnd() * 4)) + ' تست ' + (e.tk || '') : '۶۰ دقیقه درسنامه + ۳۰ دقیقه تمرین'; e.ok = rnd() < .5 ? 1 : 0; } }); });
+      var progress = report.slice(0, 6).map(function(x){ var n = 3 + Math.floor(rnd() * 5), T = 1 + Math.floor(rnd() * 3), now = Math.max(0, T - Math.floor(rnd() * 3)), s = now >= T ? 'ok' : rnd() < .3 ? 'unk' : 'late'; return { b: x.b, now: now, exp: T, T: T, n: n, s: s }; });
+      var reps = rnd() < .7 ? [0, 1, 2].map(function(k){ return { label: ['۲۴ مهر تا ۳۰ مهر','۱۷ مهر تا ۲۳ مهر','۱۰ مهر تا ۱۶ مهر'][k], pct: 40 + Math.floor(rnd() * 60), behind: weak.slice(0, Math.floor(rnd() * 3)), reached: [], unk: [] }; }) : [];
       var up = Date.now() - Math.floor(rnd() * 12 * 864e5) - Math.floor(rnd() * 3600e3 * 20);
       return { id: 's' + i, name: n, full: (g ? g[1] + ' ' : '') + n, track: tr, grade: gr, gradeName: { '10': 'دهم', '11': 'یازدهم', '12': 'دوازدهم' }[gr], goal: g ? g[0] : '', uni: g && rnd() < .6 ? pick(['دانشگاه تهران','شریف','امیرکبیر','علوم پزشکی شهید بهشتی','علم و صنعت']) : '', rank: g && rnd() < .5 ? String(pick([500, 1000, 2000, 3000])) : '', why: rnd() < .5 ? 'می‌خواهم خانواده‌ام به من افتخار کنند.' : '',
-        school: true, schoolDays: 5, schoolDayList: sd, hours: hrs, exam: i % 2 === 0 ? { day: 'جمعه', start: '08:00', ana: true } : null, anki: rnd() < .7, weak: weak, strong: strong, fav: fav, report: report, plan: plan, edited: rnd() < .25, prints: rnd() < .45 ? 1 + Math.floor(rnd() * 3) : 0, saves: 1 + Math.floor(rnd() * 20), updated: new Date(up).toISOString(), first: new Date(up - 864e5 * 3).toISOString() };
+        school: true, schoolDays: 5, schoolDayList: sd, progress: progress, reports: reps, donePct: Math.floor(rnd() * 80), week: '۱ آبان تا ۷ آبان', inst: i % 2 === 0 ? 'قلم‌چی (کانون فرهنگی آموزش)' : '', nextExam: i % 2 === 0 ? 'جمعه ۸ آبان' : '', anaParts: 1 + (i % 3), strat: ['bal','safe','flat'][i % 3], blocks: i % 3 === 0 ? [{ t: 'کلاس فیزیک', s: '16:00', e: '17:30' }] : [], norev: i % 4 === 0 ? ['شیمی ۱'] : [], hours: hrs, exam: i % 2 === 0 ? { day: 'جمعه', start: '08:00', ana: true } : null, anki: rnd() < .7, weak: weak, strong: strong, fav: fav, report: report, plan: plan, edited: rnd() < .25, prints: rnd() < .45 ? 1 + Math.floor(rnd() * 3) : 0, saves: 1 + Math.floor(rnd() * 20), updated: new Date(up).toISOString(), first: new Date(up - 864e5 * 3).toISOString() };
     });
   }
 })();
