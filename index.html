@@ -168,7 +168,7 @@ input[type=range]{width:100%;accent-color:var(--accent);height:28px;direction:rt
 .times{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .times label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--ink2)}
 .times .pair{display:flex;gap:6px;align-items:center}
-input[type=time],input[type=text],select{font:inherit;font-weight:700;font-size:14px;color:var(--ink);background:var(--sheet);border:1.5px solid var(--line);border-radius:10px;padding:6px 8px;min-width:0;width:100%;font-variant-numeric:tabular-nums}
+input[type=time],input[type=text],input[type=tel],input[type=number],select{font:inherit;font-weight:700;font-size:14px;color:var(--ink);background:var(--sheet);border:1.5px solid var(--line);border-radius:10px;padding:6px 8px;min-width:0;width:100%;font-variant-numeric:tabular-nums}
 input[type=time]{direction:ltr;text-align:center}
 input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
 .tt{display:flex;flex-direction:column;gap:8px}
@@ -318,6 +318,59 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   .pe u{font-size:8.5px;line-height:1.4}
   .ph img{height:70px}
 }
+
+/* v11: steps, registration, maz */
+.stepper{position:sticky;top:0;z-index:6;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin:0 -4px;padding:8px 4px 6px;border-bottom:1px solid var(--line)}
+.sp-top{display:flex;align-items:baseline;gap:10px}
+.sp-top b{font-family:var(--display);font-weight:900;font-size:22px;color:var(--accent);font-variant-numeric:tabular-nums}
+.sp-top span{font-size:13px;font-weight:700;color:var(--ink2)}
+.sp-bar{height:6px;border-radius:3px;background:var(--chip);overflow:hidden;margin:4px 0 8px}
+.sp-bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:3px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.sp-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.sp-chips::-webkit-scrollbar{display:none}
+.spc{flex:none;display:flex;align-items:center;gap:5px;border:1.5px solid var(--line);background:var(--sheet);color:var(--ink2);border-radius:999px;padding:3px 10px 3px 6px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.spc i{font-style:normal;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--chip);font-size:11px}
+.spc.seen{color:var(--ink)}.spc.seen i{background:var(--strong);color:#fff}
+.spc.on{border-color:var(--accent);color:var(--ink)}.spc.on i{background:var(--accent);color:var(--accent-ink)}
+.spc:disabled{opacity:.45;cursor:default}
+.spc:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.stepnav{display:flex;justify-content:space-between;gap:10px}
+.stepnav .btn{padding:10px 16px}
+.stepnav .btn:disabled{opacity:.4;cursor:default}
+.reg{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.reg .btn{padding:11px 16px;font-size:14.5px}
+.err{margin:0;color:var(--weak);font-size:12.5px;font-weight:700;min-height:1.2em}
+.qn select.skip{display:block;width:auto;margin-top:4px;font-size:11.5px;padding:2px 6px;border-width:1px;color:var(--ink2)}
+.mz{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.mz li{display:grid;grid-template-columns:minmax(0,110px) minmax(0,1fr);gap:0 10px;font-size:12.5px;border-bottom:1px dashed var(--line);padding-bottom:5px}
+.mz li b{font-size:12.5px}
+.mz li small{grid-column:2;color:var(--ink2);font-size:11px}
+.pgin{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink2)}
+.pgin input{width:90px;font:inherit;font-weight:700;font-size:14px;color:var(--ink);background:var(--sheet);border:1.5px solid var(--line);border-radius:10px;padding:5px 8px;text-align:center}
+.brk-x{font-size:10.5px;font-weight:700;color:var(--strong);white-space:nowrap}
+[hidden]{display:none!important}
+.scg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px}
+.scg label{display:flex;flex-direction:column;gap:3px;font-size:12.5px;font-weight:700;color:var(--ink2)}
+.scg .pair{display:flex;align-items:center;gap:6px}
+.scg input{text-align:center}
+.scg small{font-size:10.5px;color:var(--ink2);white-space:nowrap}
+.rv{border-radius:12px;padding:10px 14px;margin-bottom:10px;border:1.5px solid var(--line);background:var(--sheet);display:flex;flex-direction:column;gap:6px}
+.rv-h{display:flex;align-items:baseline;gap:8px}
+.rv-h b{font-size:14.5px;font-weight:900}
+.rv-h small{font-size:11px;color:var(--ink2)}
+.rv p{margin:0;font-size:12.5px;line-height:1.7;color:var(--ink2)}
+.rv blockquote{margin:0;padding:6px 10px;border-inline-start:3px solid currentColor;background:color-mix(in srgb,currentColor 7%,transparent);border-radius:6px;font-size:13px;font-weight:700;color:var(--ink)}
+.rv cite{display:block;font-style:normal;font-size:11px;color:var(--ink2);margin-top:2px}
+.rv .btn{align-self:flex-start}
+.rv-m{display:flex;flex-direction:column;gap:3px;font-size:11.5px;font-weight:700;color:var(--ink2)}
+.rv-draft{border-color:var(--accent);border-style:dashed}.rv-draft .rv-h b{color:var(--accent)}
+.rv-pending{border-color:var(--ink2)}
+.rv-ok{border-color:var(--strong);background:color-mix(in srgb,var(--strong) 8%,var(--sheet))}.rv-ok .rv-h b{color:var(--strong)}
+.rv-fix,.rv-changed{border-color:var(--weak);background:color-mix(in srgb,var(--weak) 6%,var(--sheet))}.rv-fix .rv-h b,.rv-changed .rv-h b{color:var(--weak)}
+.rv-fix blockquote{color:var(--weak)}
+@media print{.pstamp{display:inline-block;font-size:11px;font-weight:700;border:1.5px dashed #b3262b;color:#b3262b;border-radius:6px;padding:0 8px;margin-inline-start:8px;vertical-align:middle}.pstamp.ok{border-style:solid;border-color:#23806d;color:#23806d}}
+.ss .cn{display:block;font-size:11.5px;font-weight:700;color:var(--strong);margin-top:2px}
+.rv-au audio{width:100%;max-width:360px}
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
 </head>
@@ -331,9 +384,14 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     <button class="iconbtn" id="install" hidden>نصب روی گوشی</button>
     <button class="iconbtn" id="theme" aria-label="تغییر حالت روشن و تیره"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
   </header>
+  <nav class="stepper" id="stepper" aria-label="مراحل ساخت برنامه">
+    <div class="sp-top"><b id="sp-pct">۰٪</b><span id="sp-lab"></span></div>
+    <div class="sp-bar"><i id="sp-fill"></i></div>
+    <div class="sp-chips" id="sp-chips"></div>
+  </nav>
   <p class="consent" id="consent" hidden>برای این‌که مشاورهای کانون بتوانند راهنمایی‌ات کنند، مشخصات و برنامه‌ات (نام، رشته، هدف، درس‌های ضعیف و قوی و برنامه‌ی هفتگی) خودکار برایشان فرستاده می‌شود.</p>
 
-  <section class="sheet fade" aria-labelledby="h-me">
+  <section class="sheet fade" aria-labelledby="h-me" data-step="me">
     <div class="sh"><h2 id="h-me">مشخصات تو</h2><span>پاسخ‌برگ شماره‌ی ۱</span></div>
     <div class="field"><label class="lab" for="name">نام (برای چاپ برنامه)</label><input type="text" id="name" placeholder="مثلاً: علی رضایی" autocomplete="name"></div>
     <div class="field"><span class="lab" id="l-track">رشته</span><div class="chips" id="track" role="group" aria-labelledby="l-track"></div></div>
@@ -348,15 +406,21 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       <div class="times">
         <label>دانشگاه هدف<input type="text" id="g-uni" list="unis" placeholder="مثلاً: علوم پزشکی شیراز"></label>
         <label>رتبه‌ی هدف (زیرِ…)<input type="text" id="g-rank" inputmode="numeric" placeholder="مثلاً: ۲۰۰۰"></label>
+        <label>نام مدرسه (اختیاری)<input type="text" id="s-name" maxlength="60" placeholder="مثلاً: دبیرستان علامه"></label>
+        <label>شماره موبایل<input type="tel" id="phone" autocomplete="tel" inputmode="tel" maxlength="16" placeholder="۰۹…" style="direction:ltr;text-align:right"></label>
       </div>
       <datalist id="unis"><option value="دانشگاه تهران"><option value="صنعتی شریف"><option value="صنعتی امیرکبیر"><option value="علم و صنعت ایران"><option value="شهید بهشتی"><option value="علوم پزشکی تهران"><option value="علوم پزشکی شهید بهشتی"><option value="علوم پزشکی ایران"><option value="دانشگاه شیراز"><option value="علوم پزشکی شیراز"><option value="صنعتی اصفهان"><option value="علوم پزشکی اصفهان"><option value="فردوسی مشهد"><option value="علامه طباطبایی"><option value="دانشگاه فرهنگیان"></datalist>
       <label class="lab" for="g-why" style="margin-top:4px">لنگرِ تو: چرا این مسیر را می‌خواهی؟</label>
       <input type="text" id="g-why" maxlength="110" placeholder="مثلاً: می‌خواهم اولین پزشکِ روستایمان باشم">
     </div>
     <div class="hint" id="hint"></div>
+    <div class="reg" id="reg-box">
+      <button type="button" class="btn acc" id="reg-go">ثبت مشخصات و ساختن برنامه</button>
+      <p class="err" id="reg-err" role="alert"></p>
+    </div>
   </section>
 
-  <section class="sheet fade" aria-labelledby="h-time" style="animation-delay:.05s">
+  <section class="sheet fade" aria-labelledby="h-time" style="animation-delay:.05s" data-step="time">
     <div class="sh"><h2 id="h-time">زمانت در هفته</h2><span id="h-time-sub">هر پارت ۱٫۵ ساعت + ۱۵ دقیقه استراحت</span></div>
     <div class="field"><span class="lab" id="l-school">مدرسه می‌روی؟</span><div class="chips" id="school" role="group" aria-labelledby="l-school"></div></div>
     <div class="field" id="f-sd"><span class="lab">روزهای مدرسه</span><div class="daypick" id="sd"></div></div>
@@ -375,16 +439,24 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       <div id="blocks"></div>
       <button type="button" class="btn ghost" id="blk-add">+ افزودن کلاس یا برنامه‌ی ثابت</button>
     </div>
-    <div class="field" style="margin-top:12px"><label class="lab" for="inst">آزمون آزمایشی</label>
+    <div class="field" style="margin-top:6px"><span class="lab" id="l-anki">۱۵ دقیقه مرور Anki آخر هر شب</span><div class="chips" id="anki" role="group" aria-labelledby="l-anki"></div></div>
+    <div class="total"><span class="big" id="hbig"></span><small>ساعت در هفته</small>
+      <div class="perday"><b id="pparts"></b>پارت درسی</div></div>
+  </section>
+
+  <section class="sheet fade" aria-labelledby="h-ex" data-step="exam">
+    <div class="sh"><h2 id="h-ex">آزمون‌های آزمایشی</h2><span>تاریخ‌ها و مباحث، ددلاین درس‌ها را می‌سازند</span></div>
+    <div class="field"><label class="lab" for="inst">کدام آزمون آزمایشی را شرکت می‌کنی؟</label>
       <select id="inst"></select>
       <div id="ex-prog" class="exbox">
-        <div class="times">
+        <div class="times" id="ex-gen">
           <label>تاریخ نزدیک‌ترین آزمون<span class="pair"><select id="ex-jd" aria-label="روز"></select><select id="ex-jm" aria-label="ماه"></select></span></label>
           <label>فاصله‌ی آزمون‌ها<select id="ex-every"></select></label>
         </div>
         <div id="ex-dates"></div>
         <p class="note" id="ex-note" style="margin:0"></p>
         <details class="covbox" id="ex-cov"></details>
+        <div class="mazbox" id="ex-maz"></div>
       </div>
       <div id="ex-man" class="exbox">
         <span class="lab" id="l-ex">این هفته آزمون داری؟</span><div class="chips" id="ex" role="group" aria-labelledby="l-ex"></div>
@@ -392,25 +464,23 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       </div>
       <div id="ex-common" class="exbox">
         <div class="times">
-          <label>ساعت شروع<input type="time" id="t-ex" step="300"></label>
+          <label>ساعت ورود به آزمون<input type="time" id="t-ex" step="300"></label>
           <label>مدت آزمون<select id="ex-dur"></select></label>
         </div>
-        <span class="lab">تحلیل آزمون (عصرِ همان روز)</span><div class="chips" id="exana"></div>
+        <p class="note" id="t-ex-note" style="margin:0"></p>
+        <span class="lab">تحلیل آزمون (عصرِ همان روز، از ساعت ۱۵ به بعد)</span><div class="chips" id="exana"></div>
         <p class="note" id="ana-why" style="margin:0"></p>
       </div>
     </div>
-    <div class="field" style="margin-top:6px"><span class="lab" id="l-anki">۱۵ دقیقه مرور Anki آخر هر شب</span><div class="chips" id="anki" role="group" aria-labelledby="l-anki"></div></div>
-    <div class="total"><span class="big" id="hbig"></span><small>ساعت در هفته</small>
-      <div class="perday"><b id="pparts"></b>پارت درسی</div></div>
   </section>
 
-  <section class="sheet fade" aria-labelledby="h-tt" style="animation-delay:.1s" id="s-tt">
+  <section class="sheet fade" aria-labelledby="h-tt" style="animation-delay:.1s" id="s-tt" data-step="school">
     <div class="sh"><h2 id="h-tt">برنامه‌ی کلاسی مدرسه</h2><span id="tt-sub">برای آماده شدنِ کلاس فردا</span></div>
     <p class="note" style="margin:0 0 8px">درس‌هایی را که هر روز در مدرسه داری بزن. پارت‌های شبِ قبل از کلاس، اول تشریحی و عمومیِ همان درس می‌شوند.</p>
     <div class="tt" id="tt"></div>
   </section>
 
-  <section class="sheet fade" aria-labelledby="h-lvl" style="animation-delay:.15s">
+  <section class="sheet fade" aria-labelledby="h-lvl" style="animation-delay:.15s" data-step="books">
     <div class="sh"><h2 id="h-lvl">وضعیتت در هر کتاب</h2><span>♥ = درسی که دوستش داری</span></div>
     <div class="field strat"><span class="lab">استراتژی تست کنکور</span><div class="chips" id="strat" role="group"></div><p class="note" id="strat-note" style="margin:4px 0 0"></p></div>
     <div class="qhead"><span>کتاب</span><span>ضعیف</span><span>متوسط</span><span>قوی</span><span>علاقه</span></div>
@@ -418,7 +488,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     <div id="review"></div>
   </section>
 
-  <section class="sheet fade" aria-labelledby="h-rep" style="animation-delay:.2s">
+  <section class="sheet fade" aria-labelledby="h-rep" style="animation-delay:.2s" data-step="plan">
     <div class="sh"><h2 id="h-rep">کارنامه‌ی هفته‌ی تو</h2><span id="rep-sub"></span></div>
     <div class="sum">
       <div><small>کل هفته</small><b id="s-all"></b></div>
@@ -430,7 +500,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     <div class="rows" id="rows"></div>
   </section>
 
-  <section class="sheet fade" aria-labelledby="h-week" style="animation-delay:.25s" id="s-week">
+  <section class="sheet fade" aria-labelledby="h-week" style="animation-delay:.25s" id="s-week" data-step="plan">
     <div class="sh"><h2 id="h-week">برنامه‌ی هفتگی</h2><span id="edited" class="edited"></span></div>
     <div class="chips wkoff" id="wkoff" role="group" aria-label="کدام هفته"></div>
     <div class="nudge" id="rp-nudge" hidden>هفته رو به پایان است؛ پارت‌هایی را که خواندی تیک بزن و پایین صفحه گزارش این هفته را ثبت کن.</div>
@@ -438,6 +508,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       <button type="button" class="btn acc" id="print">چاپ یا ذخیره‌ی PDF</button>
       <button type="button" class="btn ghost" id="reset" hidden>برگرداندن برنامه‌ی خودکار</button>
     </div>
+    <div class="rv" id="rv" role="status"></div>
     <p class="note" id="printnote" hidden style="margin:-4px 0 10px">چاپ در نسخه‌ی روی سایت کانون فعال است.</p>
     <div class="tip" id="tip"></div>
     <div id="swapbar"></div>
@@ -445,10 +516,17 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     <div class="days" id="days"></div>
   </section>
 
-  <section class="sheet fade" aria-labelledby="h-rp" style="animation-delay:.3s" id="s-rp">
+  <section class="sheet fade" aria-labelledby="h-sc" data-step="report" id="s-sc">
+    <div class="sh"><h2 id="h-sc">کارنامه‌ی آزمون</h2><span>درصد هر درس؛ برنامه‌ی هفته‌های بعد با آن تنظیم می‌شود</span></div>
+    <div id="sc"></div>
+  </section>
+
+  <section class="sheet fade" aria-labelledby="h-rp" style="animation-delay:.3s" id="s-rp" data-step="report">
     <div class="sh"><h2 id="h-rp">گزارش پایان هفته</h2><span id="rp-sub"></span></div>
     <div id="rp"></div>
   </section>
+
+  <div class="stepnav" id="stepnav"><button type="button" class="btn ghost" id="st-prev">مرحله‌ی قبل</button><button type="button" class="btn acc" id="st-next">مرحله‌ی بعد</button></div>
 
   <details class="method notesbox">
     <summary>چکیده‌ی همایش «هفت‌خوانِ کنکور»</summary>
@@ -470,6 +548,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       <li>روز آزمون آزمایشی، زمانِ آزمون و پارت‌های تحلیل عصرش از ساعت مطالعه‌ی همان روز کم می‌شود. اگر موسسه‌ی آزمونت را انتخاب کنی، آزمون‌ها خودکار در هفته‌ی خودشان قرار می‌گیرند.</li>
       <li>برنامه‌ی مبحثی: برای هر کتاب، فصل‌هایی که تا آزمون بعد باید برسی، به نسبت سهم تست هر فصل بین هفته‌های باقی‌مانده تقسیم می‌شود و هر پارت می‌گوید کدام فصل و چند تست. مباحث آزمون‌ها تخمینِ ما بر اساس روند معمول مدرسه است و قابل ویرایش است.</li>
       <li>گزارش هفته: پارت‌ها را تیک بزن و بگو هر درس تا کجا رسیده؛ درسی که از ددلاین عقب باشد، هفته‌ی بعد ۱۵٪ وقت بیشتر می‌گیرد.</li>
+      <li>آزمون ماز: تاریخ‌ها و مباحث هر آزمون از برنامه‌ی رسمی ماز ۱۴۰۵-۱۴۰۶ آمده و بودجه‌ی صفحه‌های هر آزمون بین پارت‌های هفته‌های باقی‌مانده تقسیم می‌شود؛ هر پارت می‌گوید چند درصد از بودجه‌ی آن آزمون را باید جلو ببری.</li>
       <li>ریسک درس: تست بعضی کتاب‌ها (مثل هندسه) خلاقیت زیادی می‌خواهد و در کنکور کمتر قابل‌اعتماد است؛ بعضی (مثل حسابان) قابل‌اعتمادترند. این ضریب‌ها تخمین ماست و فقط روی سهم تستی اثر دارد.</li>
     </ul>
   </details>
@@ -485,6 +564,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
 
 <script src="config.js"></script>
 <script id="planner-data" type="application/json">{"ریاضی": [{"b": "ریاضی ۱", "g": 10, "k": 0.857, "s": 0, "tq": 2, "gen": false, "c": 1.15}, {"b": "هندسه ۱", "g": 10, "k": 2.143, "s": 0, "tq": 5, "gen": false, "c": 1.05}, {"b": "حسابان ۱", "g": 11, "k": 2.571, "s": 0, "tq": 6, "gen": false, "c": 1.15}, {"b": "هندسه ۲", "g": 11, "k": 2.143, "s": 3.06, "tq": 5, "gen": false, "c": 1.0}, {"b": "آمار و احتمال", "g": 11, "k": 3.0, "s": 0, "tq": 7, "gen": false, "c": 1.05}, {"b": "حسابان ۲", "g": 12, "k": 2.571, "s": 4.902, "tq": 6, "gen": false, "c": 1.0}, {"b": "هندسه ۳", "g": 12, "k": 2.143, "s": 3.294, "tq": 5, "gen": false, "c": 1.0}, {"b": "ریاضیات گسسته", "g": 12, "k": 1.714, "s": 2.826, "tq": 4, "gen": false, "c": 1.0}, {"b": "فیزیک ۱", "g": 10, "k": 3.673, "s": 0, "tq": 10, "gen": false, "c": 1.05}, {"b": "فیزیک ۲", "g": 11, "k": 3.673, "s": 3.942, "tq": 10, "gen": false, "c": 1.05}, {"b": "فیزیک ۳", "g": 12, "k": 5.51, "s": 5.556, "tq": 15, "gen": false, "c": 1.0}, {"b": "شیمی ۱", "g": 10, "k": 3.143, "s": 0, "tq": 9.4, "gen": false, "c": 1.1}, {"b": "شیمی ۲", "g": 11, "k": 3.429, "s": 0, "tq": 10.3, "gen": false, "c": 1.05}, {"b": "شیمی ۳", "g": 12, "k": 3.429, "s": 6.42, "tq": 10.3, "gen": false, "c": 1.0}, {"b": "فارسی ۲", "g": 11, "k": 0, "s": 3.57, "tq": 0, "gen": true, "c": 1.0}, {"b": "عربی، زبان قرآن ۲", "g": 11, "k": 0, "s": 1.572, "tq": 0, "gen": true, "c": 1.0}, {"b": "دین و زندگی ۲", "g": 11, "k": 0, "s": 2.868, "tq": 0, "gen": true, "c": 1.0}, {"b": "زبان انگلیسی ۲", "g": 11, "k": 0, "s": 1.992, "tq": 0, "gen": true, "c": 1.0}, {"b": "فارسی ۳", "g": 12, "k": 0, "s": 6.654, "tq": 0, "gen": true, "c": 1.0}, {"b": "عربی، زبان قرآن ۳", "g": 12, "k": 0, "s": 2.784, "tq": 0, "gen": true, "c": 1.0}, {"b": "دین و زندگی ۳", "g": 12, "k": 0, "s": 5.082, "tq": 0, "gen": true, "c": 1.0}, {"b": "زبان انگلیسی ۳", "g": 12, "k": 0, "s": 3.63, "tq": 0, "gen": true, "c": 1.0}, {"b": "سلامت و بهداشت", "g": 12, "k": 0, "s": 1.056, "tq": 0, "gen": true, "c": 1.0}, {"b": "علوم اجتماعی", "g": 12, "k": 0, "s": 0.786, "tq": 0, "gen": true, "c": 1.0}], "تجربی": [{"b": "زیست‌شناسی ۱", "g": 10, "k": 3.556, "s": 0, "tq": 12, "gen": false, "c": 1.05}, {"b": "زیست‌شناسی ۲", "g": 11, "k": 5.333, "s": 3.834, "tq": 18, "gen": false, "c": 1.05}, {"b": "زیست‌شناسی ۳", "g": 12, "k": 4.444, "s": 6.396, "tq": 15, "gen": false, "c": 1.0}, {"b": "شیمی ۱", "g": 10, "k": 3.143, "s": 0, "tq": 11, "gen": false, "c": 1.1}, {"b": "شیمی ۲", "g": 11, "k": 3.429, "s": 3.162, "tq": 12, "gen": false, "c": 1.05}, {"b": "شیمی ۳", "g": 12, "k": 3.429, "s": 5.514, "tq": 12, "gen": false, "c": 1.0}, {"b": "فیزیک ۱", "g": 10, "k": 2.074, "s": 0, "tq": 8, "gen": false, "c": 1.05}, {"b": "فیزیک ۲", "g": 11, "k": 2.333, "s": 0, "tq": 9, "gen": false, "c": 1.05}, {"b": "فیزیک ۳", "g": 12, "k": 3.37, "s": 5.07, "tq": 13, "gen": false, "c": 1.0}, {"b": "ریاضی ۱", "g": 10, "k": 1.877, "s": 0, "tq": 7.2, "gen": false, "c": 1.15}, {"b": "ریاضی ۲", "g": 11, "k": 2.682, "s": 0, "tq": 10.3, "gen": false, "c": 1.1}, {"b": "ریاضی ۳", "g": 12, "k": 3.218, "s": 6.024, "tq": 12.4, "gen": false, "c": 1.0}, {"b": "زمین‌شناسی", "g": 11, "k": 1.111, "s": 0, "tq": 15, "gen": false, "c": 1.0}, {"b": "فارسی ۲", "g": 11, "k": 0, "s": 3.57, "tq": 0, "gen": true, "c": 1.0}, {"b": "عربی، زبان قرآن ۲", "g": 11, "k": 0, "s": 1.572, "tq": 0, "gen": true, "c": 1.0}, {"b": "دین و زندگی ۲", "g": 11, "k": 0, "s": 2.868, "tq": 0, "gen": true, "c": 1.0}, {"b": "زبان انگلیسی ۲", "g": 11, "k": 0, "s": 1.992, "tq": 0, "gen": true, "c": 1.0}, {"b": "فارسی ۳", "g": 12, "k": 0, "s": 6.654, "tq": 0, "gen": true, "c": 1.0}, {"b": "عربی، زبان قرآن ۳", "g": 12, "k": 0, "s": 2.784, "tq": 0, "gen": true, "c": 1.0}, {"b": "دین و زندگی ۳", "g": 12, "k": 0, "s": 5.082, "tq": 0, "gen": true, "c": 1.0}, {"b": "زبان انگلیسی ۳", "g": 12, "k": 0, "s": 3.63, "tq": 0, "gen": true, "c": 1.0}, {"b": "سلامت و بهداشت", "g": 12, "k": 0, "s": 1.056, "tq": 0, "gen": true, "c": 1.0}, {"b": "علوم اجتماعی", "g": 12, "k": 0, "s": 0.786, "tq": 0, "gen": true, "c": 1.0}], "انسانی": [{"b": "ریاضی و آمار ۱", "g": 10, "k": 2.842, "s": 0, "tq": 9, "gen": false, "c": 1.1}, {"b": "ریاضی و آمار ۲", "g": 11, "k": 1.579, "s": 0, "tq": 5, "gen": false, "c": 1.05}, {"b": "ریاضی و آمار ۳", "g": 12, "k": 1.895, "s": 4.626, "tq": 6, "gen": false, "c": 1.0}, {"b": "اقتصاد", "g": 10, "k": 2.105, "s": 0, "tq": 15, "gen": false, "c": 1.0}, {"b": "علوم و فنون ادبی ۱", "g": 10, "k": 2.807, "s": 0, "tq": 10, "gen": false, "c": 1.15}, {"b": "علوم و فنون ادبی ۲", "g": 11, "k": 2.807, "s": 0, "tq": 10, "gen": false, "c": 1.1}, {"b": "علوم و فنون ادبی ۳", "g": 12, "k": 2.807, "s": 5.208, "tq": 10, "gen": false, "c": 1.0}, {"b": "عربی تخصصی ۱", "g": 10, "k": 1.579, "s": 0, "tq": 6, "gen": false, "c": 1.15}, {"b": "عربی تخصصی ۲", "g": 11, "k": 1.842, "s": 2.538, "tq": 7, "gen": false, "c": 1.1}, {"b": "عربی تخصصی ۳", "g": 12, "k": 1.842, "s": 2.58, "tq": 7, "gen": false, "c": 1.0}, {"b": "تاریخ ۱", "g": 10, "k": 1.053, "s": 0, "tq": 5, "gen": false, "c": 1.0}, {"b": "تاریخ ۲", "g": 11, "k": 0.632, "s": 3.144, "tq": 3, "gen": false, "c": 1.0}, {"b": "تاریخ ۳", "g": 12, "k": 1.053, "s": 3.228, "tq": 5, "gen": false, "c": 1.0}, {"b": "جغرافیا ۱", "g": 10, "k": 0.632, "s": 0, "tq": 3, "gen": false, "c": 1.0}, {"b": "جغرافیا ۲", "g": 11, "k": 1.053, "s": 0, "tq": 5, "gen": false, "c": 1.0}, {"b": "جغرافیا ۳", "g": 12, "k": 0.842, "s": 4.626, "tq": 4, "gen": false, "c": 1.0}, {"b": "جامعه‌شناسی ۱", "g": 10, "k": 1.754, "s": 0, "tq": 5, "gen": false, "c": 1.0}, {"b": "جامعه‌شناسی ۲", "g": 11, "k": 1.754, "s": 2.892, "tq": 5, "gen": false, "c": 1.0}, {"b": "جامعه‌شناسی ۳", "g": 12, "k": 1.754, "s": 2.976, "tq": 5, "gen": false, "c": 1.0}, {"b": "منطق", "g": 10, "k": 3.289, "s": 0, "tq": 12.5, "gen": false, "c": 1.0}, {"b": "فلسفه ۱", "g": 11, "k": 0.987, "s": 0, "tq": 3.8, "gen": false, "c": 1.05}, {"b": "فلسفه ۲", "g": 12, "k": 0.987, "s": 3.33, "tq": 3.8, "gen": false, "c": 1.0}, {"b": "روان‌شناسی", "g": 11, "k": 2.105, "s": 0, "tq": 15, "gen": false, "c": 1.0}, {"b": "فارسی ۲", "g": 11, "k": 0, "s": 3.57, "tq": 0, "gen": true, "c": 1.0}, {"b": "دین و زندگی ۲", "g": 11, "k": 0, "s": 2.868, "tq": 0, "gen": true, "c": 1.0}, {"b": "زبان انگلیسی ۲", "g": 11, "k": 0, "s": 1.992, "tq": 0, "gen": true, "c": 1.0}, {"b": "فارسی ۳", "g": 12, "k": 0, "s": 6.654, "tq": 0, "gen": true, "c": 1.0}, {"b": "دین و زندگی ۳", "g": 12, "k": 0, "s": 5.082, "tq": 0, "gen": true, "c": 1.0}, {"b": "زبان انگلیسی ۳", "g": 12, "k": 0, "s": 3.63, "tq": 0, "gen": true, "c": 1.0}, {"b": "سلامت و بهداشت", "g": 12, "k": 0, "s": 1.056, "tq": 0, "gen": true, "c": 1.0}]}</script>
+<script id="maz-data" type="application/json">{"انسانی|10":[{"y":1405,"m":7,"d":17,"b":{"ریاضی و آمار ۱":{"t":"معادله‌ی درجه‌ی دوم (معادله و مسائل توصیفی)","p":[[9,18]]},"علوم و فنون ادبی ۱":{"t":"مبانی تحلیل متن","p":[[12,20]]},"جامعه‌شناسی ۱":{"t":"کنش‌های ما","p":[[3,9]]},"عربی تخصصی ۱":{"t":"ذاک هو الله (تا پایان حوار)","p":[[1,10]]},"تاریخ ۱":{"t":"تاریخ و تاریخ‌نگاری (تا منابع دست اول)","p":[[2,8]]},"جغرافیا ۱":{"t":"جغرافیا، علمی برای زندگی بهتر","p":[[1,7]]},"منطق":{"t":"منطق، ترازوی اندیشه (تا تعریف و استدلال)","p":[[1,7]]},"اقتصاد":{"t":"کسب‌وکار و کارآفرینی (تا فعالیت فردی)","p":[[2,9]]}}},{"y":1405,"m":8,"d":1,"b":{"ریاضی و آمار ۱":{"t":"معادله‌ی درجه‌ی دوم (تا تجزیه‌ی عبارت‌های جبری)","p":[[9,22]]},"علوم و فنون ادبی ۱":{"t":"مبانی تحلیل متن + سازه‌ها و عوامل تأثیرگذار در شعر فارسی","p":[[12,25]]},"جامعه‌شناسی ۱":{"t":"کنش‌های ما + پدیده‌های اجتماعی","p":[[3,18]]},"عربی تخصصی ۱":{"t":"ذاک هو الله","p":[[1,16]]},"تاریخ ۱":{"t":"تاریخ‌نگاری + زمان و مکان در تاریخ (تا مراحل کار باستان‌شناسی)","p":[[2,23]]},"جغرافیا ۱":{"t":"جغرافیا + روش مطالعه و پژوهش (تا سؤالات کلیدی)","p":[[1,9]]},"منطق":{"t":"منطق ترازوی اندیشه + لفظ و معنا (تا نحوه‌ی دلالت)","p":[[1,15]]},"اقتصاد":{"t":"کسب‌وکار + انتخاب نوع کسب‌وکار (تا پایان درس زندگی)","p":[[2,18]]}}},{"y":1405,"m":8,"d":15,"b":{"ریاضی و آمار ۱":{"t":"معادله‌ی درجه‌ی دوم (تا ابتدای کار در کلاس)","p":[[9,29]]},"علوم و فنون ادبی ۱":{"t":"سازه‌ها و عوامل تأثیرگذار + واج‌آرایی و واژه‌آرایی + کارگاه ۱","p":[[12,35]]},"جامعه‌شناسی ۱":{"t":"پدیده‌های اجتماعی + جهان اجتماعی (تا گستره‌ی جهان اجتماعی)","p":[[3,22]]},"عربی تخصصی ۱":{"t":"ذاک هو الله + إنکم مسؤولون (تا حوار)","p":[[1,25]]},"تاریخ ۱":{"t":"تاریخ‌نگاری تا میراث فرهنگی (تا آکدوبابل)","p":[[2,37]]},"جغرافیا ۱":{"t":"جغرافیا + روش مطالعه و پژوهش در جغرافیا","p":[[1,12]]},"منطق":{"t":"لفظ و معنا + مفهوم و مصداق (تا نسبت‌های چهارگانه)","p":[[1,23]]},"اقتصاد":{"t":"کسب‌وکار + اصول انتخاب درست (تا قانون چهارم)","p":[[2,28]]}}},{"y":1405,"m":8,"d":29,"b":{"ریاضی و آمار ۱":{"t":"معادله‌ی درجه‌ی دوم (معادله‌های شامل عبارت گویا)","p":[[23,35]]},"علوم و فنون ادبی ۱":{"t":"واج‌آرایی + کارگاه ۱ + تاریخ ادبیات پیش از اسلام و قرن‌های اولیه‌ی هجری","p":[[26,46]]},"جامعه‌شناسی ۱":{"t":"جهان اجتماعی + اجزا و لایه‌های جهان اجتماعی","p":[[19,35]]},"عربی تخصصی ۱":{"t":"إنکم مسؤولون","p":[[17,30]]},"تاریخ ۱":{"t":"پیدایش تمدن: بین‌النهرین و مصر + هند و چین","p":[[30,49]]},"جغرافیا ۱":{"t":"روش مطالعه (مراحل پژوهش) + موقعیت جغرافیایی ایران","p":[[9,21]]},"منطق":{"t":"مفهوم و مصداق + اقسام و شرایط تعریف (تا اقسام تعریف)","p":[[20,31]]},"اقتصاد":{"t":"اصول انتخاب درست + مرز امکانات تولید","p":[[22,42]]}}},{"y":1405,"m":9,"d":13,"b":{"ریاضی و آمار ۱":{"t":"معادله‌ی درجه‌ی دوم (تا پایان درس ۳) + مفهوم تابع","p":[[9,49]]},"علوم و فنون ادبی ۱":{"t":"مرور مباحث گذشته + هماهنگی پاره‌های کلام","p":[[12,51]]},"جامعه‌شناسی ۱":{"t":"مرور مباحث گذشته + جهان‌های اجتماعی","p":[[3,42]]},"عربی تخصصی ۱":{"t":"ذاک هو الله + إنکم مسؤولون + مطر السمک (تا اعلموا)","p":[[1,43]]},"تاریخ ۱":{"t":"مرور + یونان و روم","p":[[2,60]]},"جغرافیا ۱":{"t":"مرور + ناهمواری‌های ایران (تا منطقه‌ی کوهستانی شمال)","p":[[1,26]]},"منطق":{"t":"مرور + اقسام استدلال استقرایی (تا استقرای تمثیلی)","p":[[1,44]]},"اقتصاد":{"t":"مرور + بازار چیست و چگونه عمل می‌کند","p":[[2,54]]}}},{"y":1405,"m":9,"d":27,"b":{"ریاضی و آمار ۱":{"t":"تابع (مفهوم تابع، ضابطه‌ی جبری)","p":[[39,55]]},"علوم و فنون ادبی ۱":{"t":"هماهنگی پاره‌های کلام + سجع و انواع آن","p":[[47,55]]},"جامعه‌شناسی ۱":{"t":"جهان‌های اجتماعی + پیامدهای جهان اجتماعی + ارزیابی جهان‌های اجتماعی","p":[[36,55]]},"عربی تخصصی ۱":{"t":"مطر السمک + التعایش السلمی (تا اعلموا)","p":[[31,55]]},"تاریخ ۱":{"t":"یونان و روم + مطالعه و کاوش در گذشته‌های دور","p":[[50,65]]},"جغرافیا ۱":{"t":"ناهمواری‌های ایران + آب و هوای ایران (تا فعالیت)","p":[[22,36]]},"منطق":{"t":"اقسام و شرایط تعریف + اقسام استدلال استقرایی","p":[[32,52]]},"اقتصاد":{"t":"بازار + نقش دولت در اقتصاد (تا بیشتر بدانیم)","p":[[44,64]]}}},{"y":1405,"m":10,"d":25,"b":{"ریاضی و آمار ۱":{"t":"تابع (تا نمودار تابع خطی)","p":[[39,62]]},"علوم و فنون ادبی ۱":{"t":"تاریخ ادبیات پیش از اسلام + هماهنگی پاره‌های کلام + سجع + کارگاه ۲","p":[[38,58]]},"جامعه‌شناسی ۱":{"t":"جهان‌های اجتماعی + هویت","p":[[36,76]]},"عربی تخصصی ۱":{"t":"مطر السمک + التعایش السلمی","p":[[31,66]]},"تاریخ ۱":{"t":"یونان و روم + گذشته‌های دور + سپیده‌دم تمدن ایرانی","p":[[50,79]]},"جغرافیا ۱":{"t":"ناهمواری‌های ایران + آب و هوای ایران","p":[[22,46]]},"منطق":{"t":"اقسام تعریف + استدلال استقرایی + قضیه‌ی حملی","p":[[32,61]]},"اقتصاد":{"t":"بازار + نقش دولت + تجارت بین‌الملل","p":[[44,80]]}}},{"y":1405,"m":11,"d":9,"b":{"ریاضی و آمار ۱":{"t":"فصل ۱ و ۲ (تا پایان درس ۳)","p":[[9,62]]},"علوم و فنون ادبی ۱":{"t":"فصل ۱ و ۲","p":[[12,58]]},"جامعه‌شناسی ۱":{"t":"درس ۱ تا ۸","p":[[3,76]]},"عربی تخصصی ۱":{"t":"درس ۱ تا ۴","p":[[1,66]]},"تاریخ ۱":{"t":"درس ۱ تا ۸","p":[[2,79]]},"جغرافیا ۱":{"t":"درس ۱ تا ۵","p":[[1,46]]},"منطق":{"t":"درس ۱ تا ۶","p":[[1,61]]},"اقتصاد":{"t":"فصل ۱ و ۲","p":[[2,80]]}}},{"y":1405,"m":11,"d":23,"b":{"ریاضی و آمار ۱":{"t":"تابع (نمودار تابع خطی و درجه‌ی ۲)","p":[[56,70]]},"علوم و فنون ادبی ۱":{"t":"کارگاه تحلیل فصل ۲ + سبک و سبک‌شناسی (سبک خراسانی)","p":[[56,66]]},"جامعه‌شناسی ۱":{"t":"ارزیابی جهان‌های اجتماعی + هویت + بازتولید هویت اجتماعی","p":[[55,83]]},"عربی تخصصی ۱":{"t":"التعایش السلمی + هذا خلق الله (تا اعلموا)","p":[[55,73]]},"تاریخ ۱":{"t":"از ورود آریایی‌ها تا پایان خامنشیان","p":[[65,89]]},"جغرافیا ۱":{"t":"آب و هوای ایران + منابع آب ایران","p":[[36,62]]},"منطق":{"t":"قضیه‌ی حملی + احکام قضایا (تا تداخل)","p":[[53,67]]},"اقتصاد":{"t":"تجارت بین‌الملل + رکود، بیکاری و فقر","p":[[64,91]]}}},{"y":1405,"m":12,"d":7,"b":{"ریاضی و آمار ۱":{"t":"تابع درجه‌ی ۲ + کار با داده‌های آماری (گردآوری داده‌ها)","p":[[63,84]]},"علوم و فنون ادبی ۱":{"t":"سبک و سبک‌شناسی (سبک خراسانی) + وزن شعر فارسی","p":[[60,72]]},"جامعه‌شناسی ۱":{"t":"بازتولید هویت اجتماعی + تغییرات هویت اجتماعی","p":[[77,90]]},"عربی تخصصی ۱":{"t":"هذا خلق الله","p":[[67,80]]},"تاریخ ۱":{"t":"از ورود آریایی‌ها تا پایان خامنشیان + اشکانیان و ساسانیان","p":[[80,98]]},"جغرافیا ۱":{"t":"منابع آب ایران + ویژگی‌های جمعیت ایران","p":[[47,72]]},"منطق":{"t":"احکام قضایا","p":[[62,71]]},"اقتصاد":{"t":"رکود، بیکاری و فقر + تورم و کاهش قدرت خرید","p":[[82,104]]}}},{"y":1405,"m":12,"d":21,"b":{"ریاضی و آمار ۱":{"t":"تابع درجه‌ی ۲ + کار با داده‌های آماری (معیارهای گرایش به مرکز)","p":[[63,88]]},"علوم و فنون ادبی ۱":{"t":"سبک خراسانی + وزن شعر فارسی + موازنه و ترصیع + کارگاه فصل ۳","p":[[60,78]]},"جامعه‌شناسی ۱":{"t":"بازتولید هویت + تغییرات هویت + تحولات هویتی جهان اجتماعی (علل درونی)","p":[[77,97]]},"عربی تخصصی ۱":{"t":"هذا خلق الله + المعالم الخلابة (تا اعلموا)","p":[[67,88]]},"تاریخ ۱":{"t":"از ورود آریایی‌ها تا ساسانیان + آیین کشورداری","p":[[80,108]]},"جغرافیا ۱":{"t":"منابع آب + ویژگی‌های جمعیت + تقسیمات کشوری ایران","p":[[47,79]]},"منطق":{"t":"احکام قضایا + قیاس اقترانی (تا دامنه‌ی مصادیق)","p":[[62,77]]},"اقتصاد":{"t":"رکود و فقر + تورم + مقاوم‌سازی اقتصاد","p":[[82,115]]}}},{"y":1406,"m":1,"d":6,"b":{"ریاضی و آمار ۱":{"t":"کل مباحث نیم‌سال اول","p":[[9,62]]},"علوم و فنون ادبی ۱":{"t":"کل مباحث نیم‌سال اول (فصل ۱ و ۲)","p":[[12,58]]},"جامعه‌شناسی ۱":{"t":"کل مباحث نیم‌سال اول (درس ۱ تا ۸)","p":[[3,76]]},"عربی تخصصی ۱":{"t":"کل مباحث نیم‌سال اول (درس ۱ تا ۴)","p":[[1,66]]},"تاریخ ۱":{"t":"کل مباحث نیم‌سال اول (درس ۱ تا ۸)","p":[[2,79]]},"جغرافیا ۱":{"t":"کل مباحث نیم‌سال اول (درس ۱ تا ۵)","p":[[1,46]]},"منطق":{"t":"کل مباحث نیم‌سال اول (درس ۱ تا ۶)","p":[[1,61]]},"اقتصاد":{"t":"کل مباحث نیم‌سال اول (فصل ۱ و ۲)","p":[[2,80]]}}},{"y":1406,"m":1,"d":20,"b":{"ریاضی و آمار ۱":{"t":"تابع درجه‌ی ۲ + کار با داده‌های آماری (تا ابتدای صفحه‌ی ۹۲)","p":[[63,92]]},"علوم و فنون ادبی ۱":{"t":"سبک خراسانی + وزن + موازنه و ترصیع + کارگاه ۳ + ادبیات سده‌های پنجم و ششم","p":[[60,87]]},"جامعه‌شناسی ۱":{"t":"بازتولید و تغییرات هویت + تحولات هویتی جهان اجتماعی","p":[[77,105]]},"عربی تخصصی ۱":{"t":"هذا خلق الله + المعالم الخلابة","p":[[67,92]]},"تاریخ ۱":{"t":"از ورود آریایی‌ها تا ساسانیان + آیین کشورداری + جامعه و خانواده","p":[[80,117]]},"جغرافیا ۱":{"t":"منابع آب + جمعیت + تقسیمات کشوری + سکونتگاه‌های ایران","p":[[47,85]]},"منطق":{"t":"احکام قضایا + قیاس اقترانی","p":[[62,82]]},"اقتصاد":{"t":"رکود و فقر + تورم + مقاوم‌سازی + رشد و پیشرفت اقتصادی","p":[[82,128]]}}},{"y":1406,"m":2,"d":3,"b":{"ریاضی و آمار ۱":{"t":"کار با داده‌های آماری (معیارهای پراکندگی) + نمایش داده‌ها","p":[[89,109]]},"علوم و فنون ادبی ۱":{"t":"زبان و ادبیات سده‌های پنجم و ششم + قافیه","p":[[80,96]]},"جامعه‌شناسی ۱":{"t":"تحولات هویتی جهان اجتماعی (علل بیرونی) + هویت ایرانی","p":[[98,123]]},"عربی تخصصی ۱":{"t":"المعالم الخلابة + صناعة النفط","p":[[89,104]]},"تاریخ ۱":{"t":"جامعه و خانواده + اقتصاد و معیشت + دین و اعتقادات","p":[[109,135]]},"جغرافیا ۱":{"t":"تقسیمات کشوری + سکونتگاه‌ها + توان‌های اقتصادی ایران (تا بخش‌داری)","p":[[79,95]]},"منطق":{"t":"قیاس اقترانی + قضیه‌ی شرطی و قیاس استثنایی","p":[[77,96]]},"اقتصاد":{"t":"رشد و پیشرفت اقتصادی + بودجه‌بندی","p":[[116,139]]}}},{"y":1406,"m":2,"d":17,"b":{"ریاضی و آمار ۱":{"t":"کار با داده‌های آماری + نمایش داده‌ها (تا نمودار حبابی)","p":[[93,112]]},"علوم و فنون ادبی ۱":{"t":"قافیه + جناس و انواع آن","p":[[88,101]]},"جامعه‌شناسی ۱":{"t":"هویت ایرانی ۱ تا ۴ (تا سیاست‌های جمعیتی)","p":[[106,135]]},"عربی تخصصی ۱":{"t":"صناعة النفط + یامن فی البحار عجائبه (تا اعلموا)","p":[[93,113]]},"تاریخ ۱":{"t":"اقتصاد و معیشت + دین و اعتقادات + زبان، علم و آموزش","p":[[118,142]]},"جغرافیا ۱":{"t":"سکونتگاه‌های ایران + توان‌های اقتصادی ایران (تا صنعت و معدن)","p":[[86,101]]},"منطق":{"t":"قضیه‌ی شرطی و قیاس استثنایی + سنجش‌گری در تفکر (تا کاربردهای استدلال)","p":[[83,104]]},"اقتصاد":{"t":"بودجه‌بندی + تصمیم‌گیری در مخارج","p":[[130,149]]}}},{"y":1406,"m":2,"d":24,"b":{"ریاضی و آمار ۱":{"t":"کار با داده‌های آماری + نمایش داده‌ها","p":[[93,117]]},"علوم و فنون ادبی ۱":{"t":"قافیه + جناس و انواع آن + کارگاه تحلیل فصل ۴","p":[[88,107]]},"جامعه‌شناسی ۱":{"t":"هویت ایرانی ۱ تا ۴","p":[[106,141]]},"عربی تخصصی ۱":{"t":"صناعة النفط + یامن فی البحار عجائبه","p":[[93,116]]},"تاریخ ۱":{"t":"اقتصاد و معیشت + دین و اعتقادات + زبان، علم و آموزش + هنر و معماری","p":[[118,152]]},"جغرافیا ۱":{"t":"سکونتگاه‌های ایران + توان‌های اقتصادی ایران","p":[[86,106]]},"منطق":{"t":"قضیه‌ی شرطی و قیاس استثنایی + سنجش‌گری در تفکر","p":[[83,113]]},"اقتصاد":{"t":"بودجه‌بندی + تصمیم‌گیری در مخارج + پس‌انداز و سرمایه‌گذاری","p":[[130,160]]}}},{"y":1406,"m":3,"d":28,"b":{},"all":"جمع‌بندی کل کتاب‌های دهم"}],"انسانی|11":[{"y":1405,"m":7,"d":17,"b":{"ریاضی و آمار ۲":{"t":"آشنایی با منطق و استدلال ریاضی (تا ترکیب فصلی دو گزاره)","p":[[2,6]]},"علوم و فنون ادبی ۲":{"t":"تاریخ ادبیات فارسی در قرن‌های هفتم، هشتم و نهم","p":[[10,19]]},"جامعه‌شناسی ۲":{"t":"فرهنگ جهانی (جهان فرهنگی)","p":[[1,10]]},"روان‌شناسی":{"t":"روان‌شناسی: تعریف و روش مورد مطالعه (تا ویژگی‌های روش علمی)","p":[[8,18]]},"عربی تخصصی ۲":{"t":"مواعظ قیّمة (ترجمه و لغات درس ۱)","p":[[1,4]]},"تاریخ ۲":{"t":"تاریخ‌شناسی (تا نوشته‌های جغرافیایی)","p":[[1,8]]},"جغرافیا ۲":{"t":"ناحیه چیست؟ (معنا و مفهوم ناحیه)","p":[[1,10]]},"فلسفه ۱":{"t":"فلسفه و ابعاد آن (تا واژه‌ی فلسفه)","p":[[1,8]]}}},{"y":1405,"m":8,"d":1,"b":{"ریاضی و آمار ۲":{"t":"آشنایی با منطق و استدلال ریاضی (تا ترکیب شرطی دو گزاره)","p":[[2,7]]},"علوم و فنون ادبی ۲":{"t":"تاریخ ادبیات قرن‌های ۷ تا ۹ + پایه‌های آوایی","p":[[10,25]]},"جامعه‌شناسی ۲":{"t":"فرهنگ جهانی","p":[[1,18]]},"روان‌شناسی":{"t":"تعریف و روش مورد مطالعه (تا روش‌های جمع‌آوری اطلاعات)","p":[[8,27]]},"عربی تخصصی ۲":{"t":"مواعظ قیّمة (تا پایان حوار)","p":[[1,9]]},"تاریخ ۲":{"t":"تاریخ‌شناسی (تا مطابقت با عقل)","p":[[1,15]]},"جغرافیا ۲":{"t":"ناحیه چیست؟ (انسان و ناحیه)","p":[[1,18]]},"فلسفه ۱":{"t":"فلسفه و ابعاد آن (تا شاخه‌های فلسفه)","p":[[1,15]]}}},{"y":1405,"m":8,"d":15,"b":{"ریاضی و آمار ۲":{"t":"گزاره‌ها و ترکیب گزاره‌ها","p":[[2,11]]},"علوم و فنون ادبی ۲":{"t":"تاریخ ادبیات + پایه‌های آوایی + تشبیه","p":[[10,33]]},"جامعه‌شناسی ۲":{"t":"فرهنگ جهانی + نمونه‌های فرهنگ جهانی ۱","p":[[1,26]]},"روان‌شناسی":{"t":"تعریف و روش + روان‌شناسی رشد (تا عوامل وراثتی)","p":[[8,41]]},"عربی تخصصی ۲":{"t":"مواعظ قیّمة (درس ۱)","p":[[1,16]]},"تاریخ ۲":{"t":"تاریخ‌شناسی + ظهور اسلام (تا اسلام در مکه)","p":[[1,30]]},"جغرافیا ۲":{"t":"ناحیه چیست؟ + نواحی طبیعی (تا بارش)","p":[[1,28]]},"فلسفه ۱":{"t":"فلسفه و ابعاد آن (تا معنای زندگی)","p":[[1,22]]}}},{"y":1405,"m":8,"d":29,"b":{"ریاضی و آمار ۲":{"t":"گزاره‌ها + ترکیب دوشرطی + استدلال ریاضی (تا کار در کلاس)","p":[[8,15]]},"علوم و فنون ادبی ۲":{"t":"تشبیه + کارگاه تحلیل فصل ۱ + سبک عراقی (تا ویژگی‌های شعر)","p":[[26,38]]},"جامعه‌شناسی ۲":{"t":"نمونه‌های فرهنگ جهانی ۱ و ۲","p":[[19,33]]},"روان‌شناسی":{"t":"روان‌شناسی رشد (تا رشد درک اخلاقی در دوره‌ی کودکی)","p":[[34,52]]},"عربی تخصصی ۲":{"t":"مواعظ قیّمة + صناعة التلمیع فی الأدب الفارسی (تمرین درس ۱ و لغات درس ۲)","p":[[10,21]]},"تاریخ ۲":{"t":"ظهور اسلام (اسلام در مکه، امت و حکومت نبوی در مدینه)","p":[[19,42]]},"جغرافیا ۲":{"t":"نواحی طبیعی (نواحی آب و هوایی)","p":[[19,36]]},"فلسفه ۱":{"t":"فلسفه و زندگی","p":[[19,27]]}}},{"y":1405,"m":9,"d":13,"b":{"ریاضی و آمار ۲":{"t":"گزاره‌ها و ترکیب گزاره‌ها + استدلال ریاضی","p":[[2,20]]},"علوم و فنون ادبی ۲":{"t":"تاریخ ادبیات + پایه‌های آوایی + تشبیه + کارگاه + سبک عراقی","p":[[10,41]]},"جامعه‌شناسی ۲":{"t":"فرهنگ جهانی / فرهنگ معاصر غرب و نظام نوین جهانی (تا اومانیسم)","p":[[1,41]]},"روان‌شناسی":{"t":"تعریف و روش + روان‌شناسی رشد","p":[[8,65]]},"عربی تخصصی ۲":{"t":"مواعظ قیّمة + صناعة التلمیع (تا قواعد درس ۲)","p":[[1,25]]},"تاریخ ۲":{"t":"تاریخ‌شناسی + ظهور اسلام (تا خلافت نخستین)","p":[[1,55]]},"جغرافیا ۲":{"t":"ناحیه چیست؟ + نواحی طبیعی (تا فرسایش انحلالی)","p":[[1,46]]},"فلسفه ۱":{"t":"فلسفه و ابعاد آن + آغاز تاریخی فلسفه (تا فلسفه در یونان)","p":[[1,33]]}}},{"y":1405,"m":9,"d":27,"b":{"ریاضی و آمار ۲":{"t":"استدلال ریاضی + تابع (تابع ثابت، چندضابطه‌ای و همانی)","p":[[16,27]]},"علوم و فنون ادبی ۲":{"t":"سبک عراقی + پایه‌های آوایی همسان (۱)","p":[[36,50]]},"جامعه‌شناسی ۲":{"t":"فرهنگ معاصر غرب و نظام نوین جهانی (تا جامعه‌ی جهانی در گذشته و حال)","p":[[35,57]]},"روان‌شناسی":{"t":"روان‌شناسی رشد (دوره‌ی نوجوانی) + احساس، توجه، ادراک","p":[[52,83]]},"عربی تخصصی ۲":{"t":"صناعة التلمیع فی الأدب الفارسی","p":[[21,30]]},"تاریخ ۲":{"t":"ظهور اسلام + حرکتی تازه در تاریخ بشر (تا نظام اداری)","p":[[44,74]]},"جغرافیا ۲":{"t":"نواحی طبیعی (ناهمواری‌ها و اشکال زمین، تا نواحی ساحلی)","p":[[37,61]]},"فلسفه ۱":{"t":"فلسفه و ابعاد آن + آغاز تاریخی فلسفه (تا سقراط)","p":[[28,39]]}}},{"y":1405,"m":10,"d":25,"b":{"ریاضی و آمار ۲":{"t":"استدلال ریاضی + تابع (تا تابع چندضابطه‌ای)","p":[[16,29]]},"علوم و فنون ادبی ۲":{"t":"سبک عراقی + پایه‌های آوایی همسان (۱) + مجاز","p":[[36,54]]},"جامعه‌شناسی ۲":{"t":"فرهنگ معاصر غرب و نظام نوین جهانی (تا تحولات اقتصادی-سیاسی)","p":[[35,66]]},"روان‌شناسی":{"t":"روان‌شناسی رشد + احساس، توجه، ادراک + حافظه و علل فراموشی (تا انواع حافظه)","p":[[52,98]]},"عربی تخصصی ۲":{"t":"صناعة التلمیع + عجائب المخلوقات (قواعد درس ۲ و ۳، تا اعلموا)","p":[[21,39]]},"تاریخ ۲":{"t":"ظهور اسلام + گسترش اسلام در دوران خلفای نخستین تا امویان و عباسیان","p":[[44,82]]},"جغرافیا ۲":{"t":"نواحی طبیعی + نواحی انسانی (تا تنوع زبانی)","p":[[37,73]]},"فلسفه ۱":{"t":"آغاز تاریخی فلسفه + معرفت و شناخت (تا چیستی معرفت)","p":[[28,46]]}}},{"y":1405,"m":11,"d":9,"b":{"ریاضی و آمار ۲":{"t":"دوره‌ی نیم‌سال اول (فصل ۱ و فصل ۲ درس ۱)","p":[[2,33]]},"علوم و فنون ادبی ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۶)","p":[[10,56]]},"جامعه‌شناسی ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۸)","p":[[1,72]]},"روان‌شناسی":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۴)","p":[[8,111]]},"عربی تخصصی ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۳)","p":[[1,46]]},"تاریخ ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۸)","p":[[1,94]]},"جغرافیا ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۶)","p":[[1,82]]},"فلسفه ۱":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۶)","p":[[1,49]]}}},{"y":1405,"m":11,"d":23,"b":{"ریاضی و آمار ۲":{"t":"تابع (از تابع چندضابطه‌ای تا توابع پلکانی و قدرمطلقی)","p":[[27,35]]},"علوم و فنون ادبی ۲":{"t":"مجاز + کارگاه + تاریخ ادبیات فارسی در قرن‌های دهم و یازدهم","p":[[51,62]]},"جامعه‌شناسی ۲":{"t":"فرهنگ معاصر غرب + چالش‌های جهانی (تا دوقطبی‌ها)","p":[[57,73]]},"روان‌شناسی":{"t":"احساس، توجه، ادراک + حافظه + تفکر ۱: حل مسئله","p":[[83,118]]},"عربی تخصصی ۲":{"t":"عجائب المخلوقات + تأثیر اللغة الفارسیة علی اللغة العربیة","p":[[31,54]]},"تاریخ ۲":{"t":"حرکتی تازه + ایران از ورود اسلام تا پایان صفویه (تا عصر طاهریان)","p":[[74,104]]},"جغرافیا ۲":{"t":"نواحی طبیعی / نواحی انسانی (تا ناحیه‌ی اقتصادی)","p":[[56,92]]},"فلسفه ۱":{"t":"فلسفه و زندگی + معرفت و شناخت (تا دوره‌ی جدید اروپا)","p":[[46,63]]}}},{"y":1405,"m":12,"d":7,"b":{"ریاضی و آمار ۲":{"t":"تابع (توابع پلکانی و قدرمطلقی تا تابع علامت)","p":[[34,36]]},"علوم و فنون ادبی ۲":{"t":"تاریخ ادبیات قرن‌های ۱۰ و ۱۱ + پایه‌های آوایی همسان (۲)","p":[[54,70]]},"جامعه‌شناسی ۲":{"t":"چالش‌های جهانی (جنگ‌ها و نقاط چالش جهانی)","p":[[73,90]]},"روان‌شناسی":{"t":"تفکر ۱: حل مسئله","p":[[113,133]]},"عربی تخصصی ۲":{"t":"تأثیر اللغة الفارسیة علی اللغة العربیة (درس ۴)","p":[[47,61]]},"تاریخ ۲":{"t":"ایران از ورود اسلام تا پایان صفویه (طاهریان تا خوارزمشاهیان)","p":[[104,133]]},"جغرافیا ۲":{"t":"نواحی انسانی (نواحی اقتصادی: کشاورزی و صنعت)","p":[[83,105]]},"فلسفه ۱":{"t":"معرفت و شناخت (ابزارهای شناخت، نگاهی به تاریخچه‌ی معرفت)","p":[[50,63]]}}},{"y":1405,"m":12,"d":21,"b":{"ریاضی و آمار ۲":{"t":"تابع (توابع پلکانی و قدرمطلقی، تا تابع جزء صحیح)","p":[[34,39]]},"علوم و فنون ادبی ۲":{"t":"تاریخ ادبیات + پایه‌های آوایی همسان (۲) + استعاره + کارگاه","p":[[54,78]]},"جامعه‌شناسی ۲":{"t":"چالش‌های جهانی (بحران‌های اقتصادی و زیست‌محیطی)","p":[[79,90]]},"روان‌شناسی":{"t":"تفکر ۱: حل مسئله + تفکر ۲: تصمیم‌گیری (تا مراحل تصمیم‌گیری)","p":[[112,148]]},"عربی تخصصی ۲":{"t":"تأثیر اللغة الفارسیة + الصدق (درس ۴ و ۵، تا حوار)","p":[[47,70]]},"تاریخ ۲":{"t":"ایران از ورود اسلام تا پایان صفویه (تا مغول و تیموریان)","p":[[104,145]]},"جغرافیا ۲":{"t":"نواحی انسانی (نواحی اقتصادی: تجارت و اقتصاد جهانی)","p":[[83,112]]},"فلسفه ۱":{"t":"معرفت و شناخت (ابزارهای شناخت)","p":[[50,68]]}}},{"y":1406,"m":1,"d":6,"b":{"ریاضی و آمار ۲":{"t":"دوره‌ی نیم‌سال اول (فصل ۱ و فصل ۲ درس ۱)","p":[[2,33]]},"علوم و فنون ادبی ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۶)","p":[[10,56]]},"جامعه‌شناسی ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۸)","p":[[1,72]]},"روان‌شناسی":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۴)","p":[[8,111]]},"عربی تخصصی ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۳)","p":[[1,46]]},"تاریخ ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۸)","p":[[1,94]]},"جغرافیا ۲":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۶)","p":[[1,82]]},"فلسفه ۱":{"t":"دوره‌ی نیم‌سال اول (درس ۱ تا ۶)","p":[[1,49]]}}},{"y":1406,"m":1,"d":20,"b":{"ریاضی و آمار ۲":{"t":"تابع (توابع پلکانی و قدرمطلقی)","p":[[34,44]]},"علوم و فنون ادبی ۲":{"t":"تاریخ ادبیات قرن‌های ۱۰ و ۱۱ + پایه‌های آوایی همسان (۲) + استعاره + کارگاه","p":[[54,85]]},"جامعه‌شناسی ۲":{"t":"چالش‌های جهانی (جهان دوقطبی، بحران‌های اقتصادی و معنوی)","p":[[73,103]]},"روان‌شناسی":{"t":"تفکر ۱: حل مسئله + تفکر ۲: تصمیم‌گیری","p":[[113,157]]},"عربی تخصصی ۲":{"t":"تأثیر اللغة الفارسیة + الصدق (درس ۴ و ۵)","p":[[47,70]]},"تاریخ ۲":{"t":"ایران از ورود اسلام تا پایان صفویه (تا جامعه و فرهنگ)","p":[[104,159]]},"جغرافیا ۲":{"t":"نواحی انسانی (نواحی سیاسی و اقتصادی)","p":[[83,126]]},"فلسفه ۱":{"t":"معرفت و شناخت (چیستی انسان)","p":[[50,75]]}}},{"y":1406,"m":2,"d":3,"b":{"ریاضی و آمار ۲":{"t":"تابع (اعمال بر روی توابع)","p":[[45,54]]},"علوم و فنون ادبی ۲":{"t":"سبک هندی + پایه‌های آوایی همسان دولختی","p":[[80,94]]},"جامعه‌شناسی ۲":{"t":"بیداری اسلامی و جهان جدید (سرآغاز بیداری اسلامی تا نهضت مشروطه)","p":[[103,118]]},"روان‌شناسی":{"t":"انگیزه و نگرش","p":[[158,185]]},"عربی تخصصی ۲":{"t":"ارحموا ثلاثة (درس ۶)","p":[[71,75]]},"تاریخ ۲":{"t":"ایران از ورود اسلام تا پایان صفویه (تحولات سیاسی و اقتصادی در عصر صفوی)","p":[[124,151]]},"جغرافیا ۲":{"t":"نواحی سیاسی (کشور، یک ناحیه‌ی سیاسی)","p":[[127,141]]},"فلسفه ۱":{"t":"انسان (چیستی انسان ۱)","p":[[76,82]]}}},{"y":1406,"m":2,"d":17,"b":{"ریاضی و آمار ۲":{"t":"آمار (شاخص‌های آماری)","p":[[55,62]]},"علوم و فنون ادبی ۲":{"t":"کنایه + کارگاه تحلیل فصل ۴","p":[[95,107]]},"جامعه‌شناسی ۲":{"t":"بیداری اسلامی و جهان جدید (انقلاب اسلامی ایران تا افق بیداری)","p":[[118,133]]},"روان‌شناسی":{"t":"روان‌شناسی سلامت","p":[[186,205]]},"عربی تخصصی ۲":{"t":"لا تقنطوا (درس ۷)","p":[[76,89]]},"تاریخ ۲":{"t":"اروپا در قرون وسطا و عصر جدید (قرون وسطا، رنسانس و عصر جدید)","p":[[160,174]]},"جغرافیا ۲":{"t":"نواحی سیاسی (ژئوپلیتیک)","p":[[142,159]]},"فلسفه ۱":{"t":"انسان، موجود اخلاق‌گرا","p":[[83,93]]}}},{"y":1406,"m":2,"d":24,"b":{"ریاضی و آمار ۲":{"t":"تابع (اعمال بر روی توابع) + آمار (شاخص‌های آماری)","p":[[45,62]]},"علوم و فنون ادبی ۲":{"t":"سبک هندی + پایه‌های آوایی همسان دولختی + کنایه + کارگاه","p":[[80,107]]},"جامعه‌شناسی ۲":{"t":"بیداری اسلامی و جهان جدید","p":[[103,133]]},"روان‌شناسی":{"t":"انگیزه و نگرش + روان‌شناسی سلامت","p":[[158,205]]},"عربی تخصصی ۲":{"t":"ارحموا ثلاثة + لا تقنطوا","p":[[71,89]]},"تاریخ ۲":{"t":"ایران از ورود اسلام تا پایان صفویه + اروپا در قرون وسطا و عصر جدید","p":[[124,174]]},"جغرافیا ۲":{"t":"نواحی سیاسی (کشور + ژئوپلیتیک)","p":[[127,159]]},"فلسفه ۱":{"t":"چیستی انسان ۱ و ۲ + انسان، موجود اخلاق‌گرا","p":[[76,93]]}}},{"y":1406,"m":3,"d":28,"b":{},"all":"جمع‌بندی کل کتاب‌های یازدهم"}],"انسانی|12":[{"y":1405,"m":7,"d":17,"b":{"ریاضی و آمار ۳":{"t":"شمارش (تا پایان تبدیل)","p":[[1,8]]},"ریاضی و آمار ۱":{"t":"معادله‌ی درجه‌ی دوم (معادله و مسائل توصیفی، کاربردها)","p":[[9,32]]},"علوم و فنون ادبی ۳":{"t":"تاریخ ادبیات قرن‌های ۱۲ و ۱۳ (بازگشت و بیداری)","p":[[10,21]]},"علوم و فنون ادبی ۱":{"t":"فصل یکم (درس ۱ تا ۳) + کارگاه تحلیل فصل ۱","p":[[10,35]]},"جامعه‌شناسی ۳":{"t":"ذخیره‌ی دانشی + علوم اجتماعی (تا علوم انسانی و اجتماعی)","p":[[2,12]]},"جامعه‌شناسی ۱":{"t":"زندگی اجتماعی (کنش‌ها، پدیده‌ها، جهان اجتماعی)","p":[[1,28]]},"عربی تخصصی ۳":{"t":"من الأشعار المنسوبة إلی الإمام علی (ع) (متن درس ۱)","p":[[1,4]]},"عربی تخصصی ۱":{"t":"ذاک هو الله + إنکم مسؤولون (درس ۱ و ۲)","p":[[1,30]]},"تاریخ ۳":{"t":"تاریخ‌نگاری و منابع دوره‌ی معاصر","p":[[1,15]]},"تاریخ ۱":{"t":"تاریخ‌شناسی (درس ۱ تا ۳)","p":[[1,28]]},"جغرافیا ۳":{"t":"شهرها و روستاها (تا جهان در حال شهری شدن)","p":[[1,11]]},"جغرافیا ۱":{"t":"جغرافیا چیست؟ (درس ۱ و ۲)","p":[[1,12]]},"فلسفه ۲":{"t":"هستی و چیستی","p":[[1,7]]},"منطق":{"t":"منطق، ترازوی اندیشه","p":[[1,10]]},"فلسفه ۱":{"t":"چیستی فلسفه","p":[[1,11]]},"اقتصاد":{"t":"اصول انتخاب در کسب‌وکار (درس ۱ و ۲)","p":[[1,21]]}}},{"y":1405,"m":8,"d":1,"b":{"ریاضی و آمار ۳":{"t":"شمارش + احتمال (تا فضای نمونه)","p":[[1,15]]},"ریاضی و آمار ۱":{"t":"معادله‌ی درجه‌ی دوم (معادله‌های شامل عبارت گویا) + مفهوم تابع","p":[[33,49]]},"علوم و فنون ادبی ۳":{"t":"تاریخ ادبیات قرن‌های ۱۲ و ۱۳ + پایه‌های آوایی ناهمسان","p":[[10,28]]},"علوم و فنون ادبی ۱":{"t":"فصل دوم (درس ۴ تا ۶) + کارگاه تحلیل فصل ۲","p":[[37,58]]},"جامعه‌شناسی ۳":{"t":"ذخیره‌ی دانشی + علوم اجتماعی","p":[[2,18]]},"جامعه‌شناسی ۱":{"t":"زندگی اجتماعی (اجزا و لایه‌ها، جهان‌های اجتماعی، پیامدها)","p":[[29,54]]},"عربی تخصصی ۳":{"t":"من الأشعار المنسوبة (متن و قواعد درس ۱)","p":[[1,10]]},"عربی تخصصی ۱":{"t":"مطر السمک + التعایش السلمی (درس ۳ و ۴)","p":[[31,66]]},"تاریخ ۳":{"t":"تاریخ‌نگاری و منابع دوره‌ی معاصر + ایران و جهان در آستانه‌ی دوره‌ی معاصر","p":[[1,24]]},"تاریخ ۱":{"t":"جهان در عصر باستان (درس ۴ تا ۶)","p":[[29,60]]},"جغرافیا ۳":{"t":"شهرها و روستاها","p":[[1,20]]},"جغرافیا ۱":{"t":"جغرافیای طبیعی ایران (درس ۳ و ۴)","p":[[13,33]]},"فلسفه ۲":{"t":"هستی و چیستی + جهان ممکنات","p":[[1,12]]},"منطق":{"t":"لفظ و معنا","p":[[11,19]]},"فلسفه ۱":{"t":"ریشه و شاخه‌های فلسفه + فلسفه و زندگی","p":[[12,27]]},"اقتصاد":{"t":"اصول انتخاب در کسب‌وکار (درس ۳ تا ۴)","p":[[1,33]]}}},{"y":1405,"m":8,"d":15,"b":{"ریاضی و آمار ۳":{"t":"احتمال (از ابتدای پیشامد)","p":[[15,27]]},"ریاضی و آمار ۱":{"t":"تابع (ضابطه‌ی جبری، نمودار، تابع خطی)","p":[[50,62]]},"علوم و فنون ادبی ۳":{"t":"پایه‌های آوایی ناهمسان + مراعات نظیر، تلمیح و تضمین + کارگاه","p":[[22,40]]},"علوم و فنون ادبی ۱":{"t":"فصل سوم (درس ۷ تا ۹) + کارگاه تحلیل فصل ۳","p":[[59,78]]},"جامعه‌شناسی ۳":{"t":"نظم اجتماعی (تا پایان نظم اجتماعی)","p":[[19,25]]},"جامعه‌شناسی ۱":{"t":"زندگی اجتماعی (ارزیابی جهان‌های اجتماعی) + هویت","p":[[55,85]]},"عربی تخصصی ۳":{"t":"من الأشعار المنسوبة (تمرین‌های درس ۱)","p":[[11,18]]},"عربی تخصصی ۱":{"t":"هذا خلق الله + المعالم الخلابة (درس ۵ و ۶)","p":[[67,92]]},"تاریخ ۳":{"t":"ایران و جهان در آستانه‌ی دوره‌ی معاصر + سیاست و حکومت در عصر قاجار (تا ارتش و تشکیلات نظامی)","p":[[24,40]]},"تاریخ ۱":{"t":"ایران در عصر باستان (درس ۷ تا ۹)","p":[[61,89]]},"جغرافیا ۳":{"t":"مدیریت شهر و روستا (تا مدیریت شهرها)","p":[[21,29]]},"جغرافیا ۱":{"t":"جغرافیای طبیعی ایران (درس ۵ و ۶)","p":[[34,62]]},"فلسفه ۲":{"t":"جهان علّی و معلولی","p":[[13,21]]},"منطق":{"t":"مفهوم و مصداق","p":[[20,26]]},"فلسفه ۱":{"t":"آغاز تاریخی فلسفه","p":[[28,35]]},"اقتصاد":{"t":"اصول انتخاب در کسب‌وکار (درس ۴ و ۵)","p":[[34,54]]}}},{"y":1405,"m":8,"d":29,"b":{"ریاضی و آمار ۳":{"t":"چرخه‌ی آمار در حل مسائل (تا پایان گام ۵)","p":[[28,37]]},"ریاضی و آمار ۱":{"t":"تابع","p":[[39,70]]},"علوم و فنون ادبی ۳":{"t":"مراعات نظیر، تلمیح و تضمین + کارگاه + سبک‌شناسی قرن‌های ۱۲ و ۱۳","p":[[29,47]]},"علوم و فنون ادبی ۱":{"t":"فصل چهارم (درس ۱۰ تا ۱۲)","p":[[79,101]]},"جامعه‌شناسی ۳":{"t":"نظم اجتماعی (از جامعه‌شناسی تبیینی) + کنش اجتماعی (تا خشت بنای جامعه)","p":[[25,36]]},"جامعه‌شناسی ۱":{"t":"هویت (تغییرات هویت، تحولات هویتی جهان اجتماعی)","p":[[86,107]]},"عربی تخصصی ۳":{"t":"الوجه النافع والوجه المضر (متن درس ۲)","p":[[19,24]]},"عربی تخصصی ۱":{"t":"المعالم الخلابة + صناعة النفط (درس ۶ و ۷)","p":[[81,104]]},"تاریخ ۳":{"t":"سیاست و حکومت در عصر قاجار + اوضاع اجتماعی، اقتصادی و فرهنگی عصر قاجار","p":[[34,60]]},"تاریخ ۱":{"t":"ایران در عصر باستان (درس ۱۰ تا ۱۲)","p":[[90,117]]},"جغرافیا ۳":{"t":"مدیریت شهر و روستا (از مدیریت روستاها)","p":[[30,37]]},"جغرافیا ۱":{"t":"جغرافیای انسانی ایران (درس ۷ و ۸)","p":[[63,82]]},"فلسفه ۲":{"t":"کدام تصویر از جهان؟ + خدا در فلسفه (تا دوره‌ی یونان باستان)","p":[[22,34]]},"منطق":{"t":"اقسام و شرایط تعریف","p":[[27,38]]},"فلسفه ۱":{"t":"زندگی براساس اندیشه","p":[[36,42]]},"اقتصاد":{"t":"بازیگران اصلی در میدان اقتصاد (درس ۵ و ۶)","p":[[43,68]]}}},{"y":1405,"m":9,"d":13,"b":{"ریاضی و آمار ۳":{"t":"شمارش + احتمال + چرخه‌ی آمار در حل مسائل","p":[[1,44]]},"ریاضی و آمار ۲":{"t":"تابع (توابع ثابت، چندضابطه‌ای و همانی)","p":[[21,33]]},"علوم و فنون ادبی ۳":{"t":"فصل یکم و دوم + اختیارات شاعری (۱): زبانی","p":[[10,56]]},"علوم و فنون ادبی ۱":{"t":"فصل چهارم + کارگاه تحلیل فصل ۴","p":[[79,107]]},"جامعه‌شناسی ۳":{"t":"درس‌های اول تا چهارم","p":[[2,41]]},"جامعه‌شناسی ۱":{"t":"هویت (هویت ایرانی ۱ تا ۴)","p":[[108,142]]},"عربی تخصصی ۳":{"t":"من الأشعار المنسوبة + الوجه النافع والوجه المضر (کل درس ۱ + متن و قواعد درس ۲)","p":[[1,27]]},"عربی تخصصی ۱":{"t":"صناعة النفط + یا من فی البحار عجائبه (درس ۷ و ۸)","p":[[93,119]]},"تاریخ ۳":{"t":"درس‌های اول تا چهارم + نهضت مشروطه‌ی ایران (تا خودکامگی محمدعلی‌شاه)","p":[[1,70]]},"تاریخ ۱":{"t":"ایران در عصر باستان (درس ۱۳ تا ۱۶)","p":[[118,152]]},"جغرافیا ۳":{"t":"شهرها و روستاها + مدیریت شهر و روستا + مهارت‌های جغرافیایی ۱","p":[[1,40]]},"جغرافیا ۱":{"t":"جغرافیای انسانی ایران (درس ۹ و ۱۰)","p":[[83,106]]},"فلسفه ۲":{"t":"درس‌های اول تا پنجم","p":[[1,40]]},"منطق":{"t":"اقسام استدلال استقرایی","p":[[39,52]]},"فلسفه ۱":{"t":"امکان شناخت","p":[[43,49]]},"اقتصاد":{"t":"بازیگران اصلی در میدان اقتصاد (درس ۷ و ۸)","p":[[55,80]]}}},{"y":1405,"m":9,"d":27,"b":{"ریاضی و آمار ۳":{"t":"چرخه‌ی آمار در حل مسائل + الگوهای خطی (مدل‌سازی و دنباله)","p":[[37,54]]},"ریاضی و آمار ۲":{"t":"تابع","p":[[21,54]]},"علوم و فنون ادبی ۳":{"t":"اختیارات شاعری (۱): زبانی + لف‌ونشر، تضاد و متناقض‌نما","p":[[48,63]]},"علوم و فنون ادبی ۲":{"t":"فصل یکم (درس ۱ تا ۳) + کارگاه تحلیل فصل ۱","p":[[10,34]]},"جامعه‌شناسی ۳":{"t":"کنش اجتماعی (از پیامدهای ناخواسته) + معنای زندگی (تا پیچیدگی پدیده‌های انسانی)","p":[[36,47]]},"جامعه‌شناسی ۲":{"t":"فرهنگ جهانی (جهان فرهنگی، نمونه‌های فرهنگ جهانی ۱)","p":[[1,26]]},"عربی تخصصی ۳":{"t":"الوجه النافع والوجه المضر (قواعد و تمرین‌های درس ۲)","p":[[25,31]]},"عربی تخصصی ۲":{"t":"مواعظ قیّمة + صناعة التلمیع فی الأدب الفارسی (درس ۱ و ۲)","p":[[1,30]]},"تاریخ ۳":{"t":"نهضت مشروطه‌ی ایران + جنگ جهانی اول و ایران (تا زمینه‌های جنگ جهانی اول)","p":[[61,82]]},"تاریخ ۲":{"t":"تاریخ‌شناسی + ظهور اسلام (درس ۱ تا ۳)","p":[[1,29]]},"جغرافیا ۳":{"t":"فنون و مهارت‌های جغرافیایی ۱ + ویژگی‌ها و انواع شیوه‌های حمل‌ونقل (تا قطارهای پرسرعت)","p":[[38,49]]},"جغرافیا ۲":{"t":"ناحیه چیست؟ (درس ۱ و ۲)","p":[[1,18]]},"فلسفه ۲":{"t":"خدا در فلسفه (قسمت اول و دوم، تا استدلال ابن‌سینا)","p":[[34,46]]},"منطق":{"t":"اقسام استدلال استقرایی + قضیه‌ی حملی (درس ۵ و ۶)","p":[[39,61]]},"فلسفه ۱":{"t":"امکان شناخت + ابزارهای شناخت (درس ۶ و ۷)","p":[[43,57]]},"اقتصاد":{"t":"بازیگران اصلی در میدان اقتصاد + اقتصاد رشد و پیشرفت (درس ۷ و ۸)","p":[[69,91]]}}},{"y":1405,"m":10,"d":25,"b":{"ریاضی و آمار ۳":{"t":"آمار و احتمال + الگوهای خطی (مدل‌سازی و دنباله)","p":[[1,60]]},"علوم و فنون ادبی ۳":{"t":"فصل‌های یکم و دوم","p":[[10,65]]},"جامعه‌شناسی ۳":{"t":"درس‌های اول تا پنجم","p":[[2,53]]},"عربی تخصصی ۳":{"t":"من الأشعار المنسوبة + الوجه النافع والوجه المضر (درس ۱ و ۲)","p":[[1,36]]},"تاریخ ۳":{"t":"درس‌های ۱ تا ۶","p":[[1,91]]},"جغرافیا ۳":{"t":"درس‌های ۱ تا ۳","p":[[1,58]]},"فلسفه ۲":{"t":"درس‌های ۱ تا ۶","p":[[1,51]]}}},{"y":1405,"m":11,"d":9,"b":{"ریاضی و آمار ۳":{"t":"دنباله‌های حسابی (تا جمله‌ی عمومی و نمایش دنباله)","p":[[61,68]]},"ریاضی و آمار ۱":{"t":"کار با داده‌های آماری + نمایش داده‌ها (نمودارهای یک‌متغیره)","p":[[71,109]]},"علوم و فنون ادبی ۳":{"t":"تاریخ ادبیات قرن چهاردهم (دوره‌ی معاصر و انقلاب اسلامی)","p":[[66,82]]},"علوم و فنون ادبی ۲":{"t":"فصل دوم (درس ۴ تا ۶) + کارگاه تحلیل فصل ۲","p":[[35,56]]},"جامعه‌شناسی ۳":{"t":"قدرت اجتماعی (تا مطالعه‌ی علمی قدرت و سیاست)","p":[[54,64]]},"جامعه‌شناسی ۲":{"t":"فرهنگ جهانی (نمونه‌های فرهنگ جهانی ۲) + فرهنگ معاصر غرب و نظام نوین جهانی","p":[[27,54]]},"روان‌شناسی":{"t":"تفکر ۲: تصمیم‌گیری","p":[[134,157]]}}},{"y":1405,"m":12,"d":7,"b":{"ریاضی و آمار ۳":{"t":"دنباله‌ی هندسی","p":[[73,85]]},"ریاضی و آمار ۲":{"t":"آمار","p":[[55,70]]},"علوم و فنون ادبی ۳":{"t":"اغراق، ایهام و ایهام تناسب + کارگاه تحلیل فصل","p":[[88,94]]},"علوم و فنون ادبی ۲":{"t":"فصل سوم (درس ۷ تا ۹) + کارگاه تحلیل فصل سوم","p":[[57,78]]},"جامعه‌شناسی ۳":{"t":"نابرابری اجتماعی (جامعه‌شناسی انتقادی) + سیاست هویت","p":[[76,92]]},"جامعه‌شناسی ۲":{"t":"چالش‌های جهانی (جنگ‌ها، بحران‌های اقتصادی، زیست‌محیطی و معنوی)","p":[[83,103]]},"روان‌شناسی":{"t":"انگیزه و نگرش","p":[[158,185]]}}},{"y":1405,"m":12,"d":21,"b":{"ریاضی و آمار ۳":{"t":"دنباله‌های حسابی و هندسی (مرور) + ریشه‌ی n ام و توان گویا + تابع نمایی (پیشروی)","p":[[61,104]]},"ریاضی و آمار ۲":{"t":"آشنایی با منطق و استدلال ریاضی","p":[[1,20]]},"علوم و فنون ادبی ۳":{"t":"فصل سوم (مرور) + فصل چهارم (پیشروی)","p":[[66,122]]},"علوم و فنون ادبی ۲":{"t":"فصل چهارم (درس ۱۰ تا ۱۲) + کارگاه تحلیل فصل چهارم","p":[[79,108]]},"جامعه‌شناسی ۳":{"t":"درس‌های ششم، هفتم و هشتم (مرور) + پیشینه‌ی علوم اجتماعی در جهان اسلام (پیشروی)","p":[[54,115]]},"جامعه‌شناسی ۲":{"t":"بیداری اسلامی و جهان جدید","p":[[105,136]]},"روان‌شناسی":{"t":"روان‌شناسی سلامت","p":[[186,206]]}}},{"y":1406,"m":3,"d":28,"b":{},"all":"جمع‌بندی و آزمون‌های جامع"}],"ریاضی|10":[{"y":1405,"m":7,"d":17,"b":{"ریاضی ۱":{"t":"مجموعه، الگو و دنباله (تا اجتماع دو مجموعه)","p":[[1,10]]},"هندسه ۱":{"t":"ترسیم‌های هندسی","p":[[9,16]]},"فیزیک ۱":{"t":"فیزیک و اندازه‌گیری (تا پیشوندهای یکاها)","p":[[1,11]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (تا تکنسیم)","p":[[1,9]]}}},{"y":1405,"m":8,"d":1,"b":{"ریاضی ۱":{"t":"مجموعه، الگو و دنباله","p":[[1,20]]},"هندسه ۱":{"t":"ترسیم‌های هندسی + استدلال","p":[[9,20]]},"فیزیک ۱":{"t":"فیزیک و اندازه‌گیری (کل فصل ۱)","p":[[1,22]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (تا جرم اتمی عنصرها)","p":[[1,15]]}}},{"y":1405,"m":8,"d":15,"b":{"ریاضی ۱":{"t":"مجموعه، الگو و دنباله (کل فصل ۱)","p":[[1,27]]},"هندسه ۱":{"t":"ترسیم‌ها و استدلال (تا قضیه‌های دوشرطی)","p":[[9,24]]},"فیزیک ۱":{"t":"اندازه‌گیری + ویژگی‌های فیزیکی مواد (تا فشار در شاره‌ها)","p":[[1,32]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (تا نشر نور و طیف نشری)","p":[[1,23]]}}},{"y":1405,"m":8,"d":29,"b":{"ریاضی ۱":{"t":"دنباله‌های حسابی و هندسی + نسبت‌های مثلثاتی","p":[[21,35]]},"هندسه ۱":{"t":"استدلال + قضیه‌ی تالس (نسبت و تناسب)","p":[[21,33]]},"فیزیک ۱":{"t":"ویژگی‌های فیزیکی مواد (تا فشارسنج شاره‌ها)","p":[[23,38]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (از شمارش ذره‌ها تا آرایش الکترونی)","p":[[16,30]]}}},{"y":1405,"m":9,"d":13,"b":{"ریاضی ۱":{"t":"مجموعه، الگو و دنباله + مثلثات (فصل ۱ و ۲)","p":[[1,46]]},"هندسه ۱":{"t":"ترسیم و استدلال + تالس (تا قضیه‌ی تالس)","p":[[9,37]]},"فیزیک ۱":{"t":"اندازه‌گیری + ویژگی‌های فیزیکی مواد","p":[[1,52]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (تا ساختار اتم و رفتار آن)","p":[[1,38]]}}},{"y":1405,"m":9,"d":27,"b":{"ریاضی ۱":{"t":"مثلثات + توان‌های گویا (ریشه و توان، ریشه‌ی n ام)","p":[[36,61]]},"هندسه ۱":{"t":"تالس و تشابه (تا فیثاغورس و روابط طولی)","p":[[34,41]]},"فیزیک ۱":{"t":"ویژگی‌های مواد + کار و انرژی (تا انرژی جنبشی)","p":[[37,60]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (از ساختار اتم تا پایان فصل)","p":[[24,46]]}}},{"y":1405,"m":10,"d":25,"b":{"ریاضی ۱":{"t":"مثلثات + توان‌های گویا و عبارت‌های جبری (کل فصل ۳)","p":[[36,68]]},"هندسه ۱":{"t":"تالس، تشابه و کاربردها","p":[[34,49]]},"فیزیک ۱":{"t":"ویژگی‌های مواد + کار، انرژی و توان (تا انرژی مکانیکی)","p":[[38,68]]},"شیمی ۱":{"t":"ساختار اتم + ردپای گازها (تا اکسیژن با فلزها و نافلزها)","p":[[24,58]]}}},{"y":1405,"m":11,"d":9,"b":{"ریاضی ۱":{"t":"فصل‌های ۱ تا ۳ + معادله‌ی درجه‌ی دوم","p":[[1,77]]},"هندسه ۱":{"t":"فصل‌های ۱ و ۲","p":[[9,52]]},"فیزیک ۱":{"t":"فصل‌های ۱ تا ۳ (تا کار و انرژی درونی)","p":[[1,70]]},"شیمی ۱":{"t":"فصل ۱ و ۲ (تا اکسیدهای فلزی و نافلزی)","p":[[1,61]]}}},{"y":1405,"m":11,"d":23,"b":{"ریاضی ۱":{"t":"عبارت‌های جبری + معادله‌ها و نامعادله‌ها (کل فصل ۴)","p":[[62,93]]},"هندسه ۱":{"t":"کاربردهای تالس + چندضلعی‌ها (تا مستطیل و لوزی)","p":[[45,59]]},"فیزیک ۱":{"t":"کار، انرژی و توان (از انرژی جنبشی تا پایان فصل ۳)","p":[[61,82]]},"شیمی ۱":{"t":"ردپای گازها (تا اثر گلخانه‌ای)","p":[[47,69]]}}},{"y":1405,"m":12,"d":7,"b":{"ریاضی ۱":{"t":"معادله‌ها و نامعادله‌ها + مفهوم تابع","p":[[78,100]]},"هندسه ۱":{"t":"چندضلعی‌ها و ویژگی‌های آن‌ها","p":[[53,64]]},"فیزیک ۱":{"t":"کار و انرژی درونی + دما و گرما (تا گرما)","p":[[71,95]]},"شیمی ۱":{"t":"ردپای گازها (از واکنش‌های شیمیایی تا اوزون)","p":[[62,75]]}}},{"y":1405,"m":12,"d":21,"b":{"ریاضی ۱":{"t":"معادله‌ها و نامعادله‌ها + تابع (دامنه و برد)","p":[[78,108]]},"هندسه ۱":{"t":"چندضلعی‌ها (تا نقاط شبکه‌ای و مساحت)","p":[[53,69]]},"فیزیک ۱":{"t":"کار و انرژی درونی + دما و گرما (تا تغییر حالت)","p":[[71,103]]},"شیمی ۱":{"t":"ردپای گازها (از واکنش‌های شیمیایی تا پایان فصل)","p":[[62,84]]}}},{"y":1406,"m":1,"d":6,"b":{"ریاضی ۱":{"t":"جمع‌بندی نیم‌سال اول (فصل‌های ۱ تا ۳ + معادله‌ی درجه‌ی دوم)","p":[[1,77]]},"هندسه ۱":{"t":"فصل‌های ۱ و ۲","p":[[9,52]]},"فیزیک ۱":{"t":"فصل‌های ۱ تا ۳ (تا کار و انرژی درونی)","p":[[1,70]]},"شیمی ۱":{"t":"فصل ۱ و ۲ (تا اکسیدهای فلزی و نافلزی)","p":[[1,61]]}}},{"y":1406,"m":1,"d":20,"b":{"ریاضی ۱":{"t":"معادله‌ها و نامعادله‌ها + تابع (کل فصل ۵)","p":[[78,117]]},"هندسه ۱":{"t":"چندضلعی‌ها (کل فصل ۳)","p":[[53,76]]},"فیزیک ۱":{"t":"کار و انرژی درونی + دما و گرما (تا روش‌های انتقال گرما)","p":[[71,111]]},"شیمی ۱":{"t":"ردپای گازها + آب، آهنگ زندگی (تا همراهان ناپیدای آب)","p":[[62,92]]}}},{"y":1406,"m":2,"d":3,"b":{"ریاضی ۱":{"t":"تابع (انواع توابع) + شمارش بدون شمردن","p":[[109,132]]},"هندسه ۱":{"t":"چندضلعی‌ها (مساحت) + تجسم فضایی (خط، نقطه و صفحه)","p":[[69,86]]},"فیزیک ۱":{"t":"دما و گرما (از تغییر حالت تا پایان فصل ۴)","p":[[103,126]]},"شیمی ۱":{"t":"آب، آهنگ زندگی (تا مولکول‌های آب در میدان الکتریکی)","p":[[85,103]]}}},{"y":1406,"m":2,"d":17,"b":{"ریاضی ۱":{"t":"شمارش بدون شمردن + احتمال","p":[[118,151]]},"هندسه ۱":{"t":"تجسم فضایی (تا تفکر تجسمی)","p":[[77,91]]},"فیزیک ۱":{"t":"دما و گرما + ترمودینامیک (تا فرایند هم‌دما)","p":[[111,135]]},"شیمی ۱":{"t":"آب، آهنگ زندگی (از محلول تا انحلال گازها در آب)","p":[[93,116]]}}},{"y":1406,"m":2,"d":24,"b":{"ریاضی ۱":{"t":"شمارش بدون شمردن + آمار و احتمال (فصل ۶ و ۷)","p":[[118,170]]},"هندسه ۱":{"t":"تجسم فضایی (کل فصل ۴)","p":[[77,96]]},"فیزیک ۱":{"t":"دما و گرما + ترمودینامیک (تا پایان کتاب)","p":[[111,149]]},"شیمی ۱":{"t":"آب، آهنگ زندگی (فصل ۳)","p":[[93,122]]}}},{"y":1406,"m":3,"d":28,"b":{},"all":"جمع‌بندی کل کتاب"}],"ریاضی|11":[{"y":1405,"m":7,"d":17,"b":{"حسابان ۱":{"t":"جبر و معادله (مجموع جملات دنباله‌های حسابی و هندسی تا روابط بین ریشه‌های معادله‌ی درجه‌ی دوم)","p":[[1,9]]},"هندسه ۲":{"t":"دایره (مفاهیم اولیه و زاویه‌ها، تا زاویه‌ی ظلی)","p":[[9,14]]},"آمار و احتمال":{"t":"آشنایی با مبانی ریاضیات (تا ترکیب شرطی دو گزاره)","p":[[1,7]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (تا برهم‌نهی نیروهای الکتروستاتیکی)","p":[[1,8]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا رفتار عنصرها و شعاع اتم)","p":[[1,14]]}}},{"y":1405,"m":8,"d":1,"b":{"حسابان ۱":{"t":"جبر و معادله (تا معادلات شامل عبارت‌های گویا)","p":[[1,19]]},"هندسه ۲":{"t":"دایره (کل درس ۱: مفاهیم اولیه و زاویه‌ها)","p":[[9,17]]},"آمار و احتمال":{"t":"آشنایی با مبانی ریاضیات (تا سورها)","p":[[1,11]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (تا برهم‌نهی میدان‌های الکتریکی)","p":[[1,14]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا عنصرها در طبیعت)","p":[[1,22]]}}},{"y":1405,"m":8,"d":15,"b":{"حسابان ۱":{"t":"جبر و معادله (تا قدرمطلق و ویژگی‌های آن)","p":[[1,28]]},"هندسه ۲":{"t":"دایره (تا حالت‌های دو دایره نسبت به هم)","p":[[9,20]]},"آمار و احتمال":{"t":"آشنایی با منطق ریاضی (کل درس ۱)","p":[[1,15]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (تا پتانسیل الکتریکی)","p":[[1,23]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا قبل از خود را بیازمایید ص ۲۴)","p":[[1,24]]}}},{"y":1405,"m":8,"d":29,"b":{"حسابان ۱":{"t":"جبر و معادله (عبارت‌های گنگ، قدرمطلق، آشنایی با هندسه‌ی تحلیلی)","p":[[20,36]]},"هندسه ۲":{"t":"دایره (کل درس ۲: رابطه‌های طولی در دایره)","p":[[18,23]]},"آمار و احتمال":{"t":"آشنایی با مبانی ریاضیات (از سورها تا مجموعه‌های مساوی)","p":[[11,20]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (از برهم‌نهی میدان‌ها تا ابتدای خازن)","p":[[14,32]]},"شیمی ۲":{"t":"قدر هدایای زمینی (از دنیای رنگی تا جریان فلز در محیط)","p":[[14,29]]}}},{"y":1405,"m":9,"d":13,"b":{"حسابان ۱":{"t":"جبر و معادله (کل فصل ۱) + تابع (آشنایی بیشتر با تابع)","p":[[1,43]]},"هندسه ۲":{"t":"دایره (تا چهارضلعی‌های محاطی و محیطی)","p":[[9,26]]},"آمار و احتمال":{"t":"آشنایی با مبانی ریاضیات (تا قوانین دمورگان)","p":[[1,27]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن","p":[[1,44]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا نام‌گذاری آلکان‌ها)","p":[[1,40]]}}},{"y":1405,"m":9,"d":27,"b":{"حسابان ۱":{"t":"تابع (انواع توابع، وارون توابع)","p":[[37,62]]},"هندسه ۲":{"t":"دایره (کل درس ۳) + تبدیل‌های هندسی (تا پایان فعالیت)","p":[[24,33]]},"آمار و احتمال":{"t":"آشنایی با مبانی ریاضیات (جبر مجموعه‌ها)","p":[[21,34]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن + جریان الکتریکی (از خازن تا عوامل مؤثر بر مقاومت)","p":[[32,51]]},"شیمی ۲":{"t":"قدر هدایای زمینی (از نفت تا پایان فصل)","p":[[29,50]]}}},{"y":1405,"m":10,"d":25,"b":{"حسابان ۱":{"t":"تابع (کل فصل ۲)","p":[[37,70]]},"هندسه ۲":{"t":"دایره (درس ۳) + تبدیل‌های هندسی (تا ابتدای انتقال)","p":[[24,38]]},"آمار و احتمال":{"t":"مبانی ریاضیات (جبر مجموعه‌ها) + احتمال (کل درس ۱: مبانی احتمال)","p":[[21,43]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن + جریان الکتریکی (از خازن تا نیروی محرکه)","p":[[32,61]]},"شیمی ۲":{"t":"قدر هدایای زمینی + در پی غذای سالم (تا گرما و دما)","p":[[29,58]]}}},{"y":1405,"m":11,"d":9,"b":{"حسابان ۱":{"t":"جبر و معادله + تابع + توابع نمایی و لگاریتم (تابع نمایی)","p":[[1,79]]},"هندسه ۲":{"t":"دایره (کل فصل ۱) + تبدیل‌های هندسی (تا ابتدای انتقال)","p":[[9,38]]},"آمار و احتمال":{"t":"مبانی ریاضیات (کل فصل ۱) + احتمال (درس ۱ و ۲)","p":[[1,47]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن + جریان الکتریکی (تا توان در مدارهای الکتریکی)","p":[[1,66]]},"شیمی ۲":{"t":"قدر هدایای زمینی (کل) + در پی غذای سالم (تا گرما در واکنش‌ها)","p":[[1,65]]}}},{"y":1405,"m":11,"d":23,"b":{"حسابان ۱":{"t":"تابع (اعمال روی توابع) + توابع نمایی و لگاریتم","p":[[63,85]]},"هندسه ۲":{"t":"تبدیل‌های هندسی (از بازتاب تا ابتدای تجانس)","p":[[35,43]]},"آمار و احتمال":{"t":"احتمال (احتمال غیرهم‌شانس + احتمال شرطی تا قانون احتمال کل)","p":[[44,54]]},"فیزیک ۲":{"t":"جریان الکتریکی (از عوامل مؤثر بر مقاومت تا ترکیب مقاومت‌ها)","p":[[51,70]]},"شیمی ۲":{"t":"در پی غذای سالم (تا آنتالپی پیوند)","p":[[51,72]]}}},{"y":1405,"m":12,"d":7,"b":{"حسابان ۱":{"t":"توابع نمایی و لگاریتم (تا پایان فصل ۳) + مثلثات (رادیان)","p":[[80,97]]},"هندسه ۲":{"t":"تبدیل‌های هندسی (از انتقال تا پایان درس ۱)","p":[[38,49]]},"آمار و احتمال":{"t":"احتمال (کل درس ۳: احتمال شرطی)","p":[[48,62]]},"فیزیک ۲":{"t":"جریان الکتریکی (از توان در مدارها تا پایان فصل ۲)","p":[[67,82]]},"شیمی ۲":{"t":"در پی غذای سالم (تا جمع‌پذیری گرمای واکنش‌ها، قانون هس)","p":[[65,77]]}}},{"y":1405,"m":12,"d":21,"b":{"حسابان ۱":{"t":"توابع نمایی و لگاریتم + مثلثات (رادیان، نسبت‌های مثلثاتی برخی زوایا)","p":[[80,104]]},"هندسه ۲":{"t":"تبدیل‌های هندسی (از انتقال تا ابتدای مسائل کوتاه‌ترین مسیر)","p":[[38,52]]},"آمار و احتمال":{"t":"احتمال شرطی + پیشامدهای مستقل و وابسته","p":[[48,68]]},"فیزیک ۲":{"t":"جریان الکتریکی + مغناطیس (تا میدان مغناطیسی حاصل از جریان)","p":[[67,94]]},"شیمی ۲":{"t":"در پی غذای سالم (تا آهنگ واکنش)","p":[[65,85]]}}},{"y":1406,"m":1,"d":6,"b":{"حسابان ۱":{"t":"جبر و معادله + تابع + توابع نمایی و لگاریتم (تابع نمایی)","p":[[1,79]]},"هندسه ۲":{"t":"دایره (کل فصل ۱) + تبدیل‌های هندسی (تا ابتدای انتقال)","p":[[9,38]]},"آمار و احتمال":{"t":"مبانی ریاضیات (کل فصل ۱) + احتمال (درس ۱ و ۲)","p":[[1,47]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن + جریان الکتریکی (تا توان در مدارهای الکتریکی)","p":[[1,66]]},"شیمی ۲":{"t":"قدر هدایای زمینی (کل) + در پی غذای سالم (تا گرما در واکنش‌ها)","p":[[1,65]]}}},{"y":1406,"m":1,"d":20,"b":{"حسابان ۱":{"t":"توابع نمایی و لگاریتم + مثلثات (کل فصل ۴)","p":[[80,112]]},"هندسه ۲":{"t":"تبدیل‌های هندسی (از انتقال تا پایان درس ۱ و کل درس ۲)","p":[[38,54]]},"آمار و احتمال":{"t":"احتمال شرطی + پیشامدهای مستقل + آمار توصیفی (درس ۱)","p":[[48,78]]},"فیزیک ۲":{"t":"جریان الکتریکی + مغناطیس (تا ویژگی‌های مغناطیسی مواد)","p":[[67,101]]},"شیمی ۲":{"t":"در پی غذای سالم (تا خوراکی‌های رنگین)","p":[[65,92]]}}},{"y":1406,"m":2,"d":3,"b":{"حسابان ۱":{"t":"حد و پیوستگی (تا ابتدای قضایای حد)","p":[[113,129]]},"هندسه ۲":{"t":"روابط طولی در مثلث (درس ۱ و ۲)","p":[[59,67]]},"آمار و احتمال":{"t":"آمار توصیفی","p":[[80,96]]},"فیزیک ۲":{"t":"مغناطیس + القای الکترومغناطیسی (از میدان سیملوله تا ابتدای قانون لنز)","p":[[99,117]]},"شیمی ۲":{"t":"در پی غذای سالم (از سرعت واکنش) + پوشاک (تا پلیمری شدن)","p":[[92,106]]}}},{"y":1406,"m":2,"d":17,"b":{"حسابان ۱":{"t":"حد و پیوستگی","p":[[130,151]]},"هندسه ۲":{"t":"روابط طولی در مثلث (درس ۳ و ۴)","p":[[68,74]]},"آمار و احتمال":{"t":"آمار استنباطی","p":[[97,121]]},"فیزیک ۲":{"t":"القای الکترومغناطیسی و جریان متناوب (از قانون لنز تا پایان کتاب)","p":[[117,130]]},"شیمی ۲":{"t":"پوشاک، نیازی پایان‌ناپذیر","p":[[107,123]]}}},{"y":1406,"m":2,"d":24,"b":{"حسابان ۱":{"t":"حد و پیوستگی (کل فصل ۵)","p":[[113,151]]},"هندسه ۲":{"t":"روابط طولی در مثلث (کل فصل ۳)","p":[[59,74]]},"آمار و احتمال":{"t":"آمار توصیفی + آمار استنباطی","p":[[80,121]]},"فیزیک ۲":{"t":"مغناطیس + القای الکترومغناطیسی و جریان متناوب","p":[[99,130]]},"شیمی ۲":{"t":"پوشاک، نیازی پایان‌ناپذیر","p":[[99,123]]}}},{"y":1406,"m":3,"d":28,"b":{},"all":"جمع‌بندی کل کتاب‌های یازدهم"}],"ریاضی|12":[{"y":1405,"m":7,"d":17,"b":{"حسابان ۲":{"t":"تابع","p":[[1,12]]},"ریاضی ۱":{"t":"معادله، نامعادله، تعیین علامت + تابع","p":[[83,117]]},"حسابان ۱":{"t":"تابع","p":[[37,53]]},"هندسه ۳":{"t":"ماتریس و کاربردها (تا ضرب ماتریس سطری در ستونی)","p":[[9,17]]},"هندسه ۱":{"t":"ترسیم‌های هندسی و استدلال","p":[[9,27]]},"ریاضیات گسسته":{"t":"نظریه‌ی اعداد (تا اثبات‌های بازگشتی)","p":[[1,6]]},"فیزیک ۳":{"t":"حرکت بر خط راست (تا قبل از شتاب متوسط)","p":[[1,10]]},"فیزیک ۱":{"t":"فیزیک و اندازه‌گیری","p":[[1,22]]},"شیمی ۳":{"t":"مولکول‌ها در خدمت تندرستی (تا سرِ باهم بیندیشیم)","p":[[1,14]]},"شیمی ۱":{"t":"کیهان زادگاه الفبای هستی (تا سرِ ساختار اتم)","p":[[1,23]]}}},{"y":1405,"m":8,"d":1,"b":{"حسابان ۲":{"t":"تابع","p":[[1,22]]},"ریاضی ۱":{"t":"تابع","p":[[94,117]]},"حسابان ۱":{"t":"تابع","p":[[37,70]]},"هندسه ۳":{"t":"ماتریس (تا حل دستگاه با ماتریس وارون)","p":[[9,23]]},"هندسه ۱":{"t":"قضیه‌ی تالس، تشابه و کاربردها","p":[[29,37]]},"ریاضیات گسسته":{"t":"نظریه‌ی اعداد","p":[[1,12]]},"فیزیک ۳":{"t":"حرکت بر خط راست (تا قبل از حرکت با شتاب ثابت)","p":[[1,15]]},"فیزیک ۱":{"t":"ویژگی‌های فیزیکی مواد","p":[[23,52]]},"شیمی ۳":{"t":"مولکول‌ها در خدمت تندرستی (تا ابتدای pH)","p":[[1,24]]},"شیمی ۱":{"t":"کیهان زادگاه الفبای هستی","p":[[19,46]]}}},{"y":1405,"m":8,"d":15,"b":{"حسابان ۲":{"t":"مثلثات","p":[[23,34]]},"ریاضی ۱":{"t":"مثلثات","p":[[28,46]]},"حسابان ۱":{"t":"مثلثات","p":[[91,104]]},"هندسه ۳":{"t":"ماتریس (از حل دستگاه تا دترمینان)","p":[[23,26]]},"هندسه ۱":{"t":"قضیه‌ی تالس، تشابه و کاربردها","p":[[38,49]]},"ریاضیات گسسته":{"t":"نظریه‌ی اعداد (از ب.م.م تا فعالیت)","p":[[13,22]]},"فیزیک ۳":{"t":"حرکت بر خط راست (از سرعت ثابت تا پایان فصل ۱)","p":[[13,28]]},"فیزیک ۱":{"t":"کار، انرژی و توان","p":[[53,82]]},"شیمی ۳":{"t":"از ابتدای pH تا شوینده‌های خورنده","p":[[24,30]]},"شیمی ۱":{"t":"ردپای گازها در زندگی (تا اثر گلخانه‌ای)","p":[[47,69]]}}},{"y":1405,"m":8,"d":29,"b":{"حسابان ۲":{"t":"مثلثات","p":[[35,44]]},"ریاضی ۱":{"t":"مثلثات","p":[[28,46]]},"حسابان ۱":{"t":"مثلثات","p":[[91,112]]},"هندسه ۳":{"t":"ماتریس و کاربردها","p":[[27,31]]},"هندسه ۱":{"t":"چندضلعی‌ها","p":[[53,73]]},"ریاضیات گسسته":{"t":"نظریه‌ی اعداد (از فعالیت ص ۲۲ تا معادله‌ی سیاله)","p":[[22,25]]},"فیزیک ۳":{"t":"حرکت + دینامیک و حرکت دایره‌ای (تا نیروی کشش)","p":[[15,44]]},"فیزیک ۱":{"t":"دما و گرما","p":[[83,126]]},"شیمی ۳":{"t":"پایان فصل ۱ + آسایش و رفاه (تا هدایت الکترون)","p":[[24,44]]},"شیمی ۱":{"t":"ردپای گازها + آب، آهنگ زندگی (تا قسمت در میلیون)","p":[[70,98]]}}},{"y":1405,"m":9,"d":13,"b":{"حسابان ۲":{"t":"تابع + مثلثات + حدهای نامتناهی","p":[[1,58]]},"ریاضی ۱":{"t":"الگو و دنباله","p":[[14,27]]},"حسابان ۱":{"t":"الگو و دنباله","p":[[1,6]]},"هندسه ۳":{"t":"ماتریس + مقاطع مخروطی","p":[[9,39]]},"هندسه ۱":{"t":"تجسم فضایی","p":[[77,96]]},"ریاضیات گسسته":{"t":"نظریه‌ی اعداد (کل فصل ۱)","p":[[1,30]]},"فیزیک ۳":{"t":"حرکت + دینامیک (تا نیروی گرانشی)","p":[[1,53]]},"فیزیک ۱":{"t":"ترمودینامیک","p":[[127,149]]},"شیمی ۳":{"t":"کل فصل ۱ + آسایش و رفاه (تا سلول سوختی)","p":[[1,50]]},"شیمی ۱":{"t":"آب، آهنگ زندگی","p":[[98,122]]}}},{"y":1405,"m":9,"d":27,"b":{"حسابان ۲":{"t":"حدهای نامتناهی و حد در بی‌نهایت","p":[[45,69]]},"حسابان ۱":{"t":"حد و پیوستگی","p":[[113,151]]},"هندسه ۳":{"t":"مقاطع مخروطی","p":[[33,46]]},"هندسه ۲":{"t":"دایره (تا حالت‌های دو دایره)","p":[[9,20]]},"ریاضیات گسسته":{"t":"نظریه‌ی اعداد (از معادله‌ی سیاله) + معرفی گراف","p":[[26,42]]},"فیزیک ۳":{"t":"دینامیک و حرکت دایره‌ای (از اصطکاک تا پایان فصل ۲)","p":[[39,60]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (تا قبل از خازن)","p":[[1,32]]},"شیمی ۳":{"t":"آسایش و رفاه (از سفر الکترون تا آبکاری)","p":[[42,60]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا دنیای واقعی واکنش‌ها)","p":[[1,25]]}}},{"y":1405,"m":10,"d":25,"b":{"حسابان ۲":{"t":"تابع + مثلثات + حد","p":[[1,69]]},"هندسه ۳":{"t":"ماتریس + مقاطع مخروطی","p":[[9,46]]},"ریاضیات گسسته":{"t":"نظریه‌ی اعداد + معرفی گراف","p":[[1,42]]},"فیزیک ۳":{"t":"فصل‌های ۱ تا ۳ (تا موج و انواع آن)","p":[[1,69]]},"شیمی ۳":{"t":"فصل ۱ و ۲ کامل","p":[[1,66]]}}},{"y":1405,"m":11,"d":9,"b":{"حسابان ۲":{"t":"مشتق","p":[[71,83]]},"حسابان ۱":{"t":"جبر و معادله (از روش هندسی تا پایان فصل)","p":[[14,36]]},"هندسه ۳":{"t":"مقاطع مخروطی (تا ابتدای سهمی)","p":[[47,50]]},"هندسه ۲":{"t":"دایره (از حالت‌های دو دایره تا پایان فصل)","p":[[20,30]]},"ریاضیات گسسته":{"t":"گراف و مدل‌سازی (تا فعالیت ص ۴۸)","p":[[43,48]]},"آمار و احتمال":{"t":"آشنایی با مبانی ریاضیات","p":[[1,34]]},"ریاضی ۱":{"t":"مجموعه (مبانی ریاضیات)","p":[[1,13]]},"فیزیک ۳":{"t":"نوسان و موج (تا قبل از موج عرضی)","p":[[61,72]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن + جریان (از خازن تا نیروی محرکه)","p":[[32,61]]},"شیمی ۳":{"t":"جلوه‌ای از هنر (تا هنرنمایی شاره‌ها)","p":[[67,77]]},"شیمی ۲":{"t":"قدر هدایای زمینی را بدانیم","p":[[25,50]]}}},{"y":1405,"m":11,"d":23,"b":{"حسابان ۲":{"t":"مشتق (تا مشتق‌پذیری روی بازه)","p":[[84,97]]},"ریاضی ۱":{"t":"تابع و معادله‌ی درجه ۲ + احتمال","p":[[69,82],[141,151]]},"حسابان ۱":{"t":"تابع و معادله‌ی درجه ۲","p":[[7,13]]},"هندسه ۳":{"t":"مقاطع مخروطی (از سهمی)","p":[[50,54]]},"هندسه ۲":{"t":"تبدیل‌های هندسی (تا تجانس)","p":[[31,43]]},"ریاضیات گسسته":{"t":"گراف (از فعالیت ص ۴۸ تا پایان فصل)","p":[[48,54]]},"آمار و احتمال":{"t":"احتمال","p":[[35,68]]},"فیزیک ۳":{"t":"نوسان و موج (از موج و انواع آن تا پایان فصل ۳)","p":[[69,88]]},"فیزیک ۲":{"t":"جریان الکتریکی (از نیروی محرکه تا پایان فصل ۲)","p":[[61,82]]},"شیمی ۳":{"t":"جلوه‌ای از هنر (تا خود را بیازمایید وانادیم)","p":[[67,86]]},"شیمی ۲":{"t":"در پی غذای سالم (تا جمع‌پذیری گرما)","p":[[51,77]]}}},{"y":1405,"m":12,"d":7,"b":{"حسابان ۲":{"t":"مشتق (از مشتق‌پذیری روی بازه تا پایان فصل)","p":[[97,110]]},"ریاضی ۱":{"t":"توان‌های گویا و عبارت‌های جبری + شمارش بدون شمردن","p":[[47,68],[118,140]]},"هندسه ۳":{"t":"مقاطع مخروطی (تا پایان فصل) + بردارها","p":[[54,63]]},"هندسه ۲":{"t":"تبدیل‌های هندسی (از تجانس تا پایان فصل)","p":[[43,54]]},"ریاضیات گسسته":{"t":"ترکیبیات","p":[[55,61]]},"آمار و احتمال":{"t":"آمار توصیفی","p":[[69,95]]},"فیزیک ۳":{"t":"برهم‌کنش‌های موج","p":[[89,114]]},"فیزیک ۲":{"t":"مغناطیس","p":[[83,108]]},"شیمی ۳":{"t":"پایان جلوه‌ای از هنر + آینده‌ای روشن‌تر (تا خود را بیازمایید)","p":[[77,102]]},"شیمی ۲":{"t":"در پی غذای سالم (از غذای سالم)","p":[[77,98]]}}},{"y":1405,"m":12,"d":21,"b":{"حسابان ۲":{"t":"کاربردهای مشتق (پیشروی)","p":[[111,144]]},"حسابان ۱":{"t":"توابع نمایی و لگاریتمی","p":[[71,90]]},"هندسه ۳":{"t":"بردارها (پیشروی)","p":[[64,84]]},"هندسه ۲":{"t":"روابط طولی در مثلث","p":[[59,74]]},"ریاضیات گسسته":{"t":"ترکیبیات (پیشروی)","p":[[62,84]]},"آمار و احتمال":{"t":"آمار استنباطی","p":[[97,121]]},"ریاضی ۱":{"t":"آمار","p":[[152,170]]},"فیزیک ۳":{"t":"برهم‌کنش موج + فیزیک اتمی و هسته‌ای (پیشروی)","p":[[103,156]]},"فیزیک ۲":{"t":"القای الکترومغناطیسی و جریان متناوب","p":[[109,130]]},"شیمی ۳":{"t":"راهی به سوی آینده‌ای روشن‌تر (پیشروی)","p":[[91,123]]},"شیمی ۲":{"t":"پوشاک، نیازی پایان‌ناپذیر","p":[[99,123]]}}},{"y":1406,"m":1,"d":6,"b":{"ریاضی ۱":{"t":"آزمون جامع ریاضی پایه (کل کتاب)","p":[]},"حسابان ۱":{"t":"آزمون جامع ریاضی پایه (کل کتاب)","p":[]},"هندسه ۱":{"t":"آزمون جامع هندسه‌ی پایه (کل کتاب)","p":[]},"هندسه ۲":{"t":"آزمون جامع هندسه‌ی پایه (کل کتاب)","p":[]},"آمار و احتمال":{"t":"آزمون جامع آمار و احتمال (کل کتاب)","p":[]},"فیزیک ۱":{"t":"جامع فیزیک پایه (کل کتاب)","p":[]},"فیزیک ۲":{"t":"جامع فیزیک پایه (کل کتاب)","p":[]},"شیمی ۱":{"t":"جامع شیمی پایه (کل کتاب)","p":[]},"شیمی ۲":{"t":"جامع شیمی پایه (کل کتاب)","p":[]}}},{"y":1406,"m":1,"d":20,"b":{"حسابان ۲":{"t":"تابع + مثلثات + حد","p":[[1,69]]},"هندسه ۳":{"t":"ماتریس + مقاطع مخروطی","p":[[9,46]]},"ریاضیات گسسته":{"t":"نظریه‌ی اعداد + معرفی گراف","p":[[1,42]]},"فیزیک ۳":{"t":"فصل‌های ۱ تا ۳ (تا موج و انواع آن)","p":[[1,69]]},"شیمی ۳":{"t":"فصل ۱ و ۲ کامل","p":[[1,66]]}}},{"y":1406,"m":2,"d":3,"b":{"حسابان ۲":{"t":"کاربردهای مشتق","p":[[111,126]]},"ریاضی ۱":{"t":"الگو و دنباله + توان‌های گویا + معادله و نامعادله + مثلثات (فصل‌های ۱ تا ۴)","p":[]},"حسابان ۱":{"t":"فصل‌های ۱ و ۴","p":[]},"هندسه ۳":{"t":"بردارها","p":[[64,76]]},"هندسه ۱":{"t":"کل کتاب","p":[]},"ریاضیات گسسته":{"t":"ترکیبیات","p":[[62,72]]},"آمار و احتمال":{"t":"احتمال (فصل ۲)","p":[]},"فیزیک ۳":{"t":"آشنایی با فیزیک اتمی","p":[[115,136]]},"فیزیک ۱":{"t":"کل کتاب","p":[]},"شیمی ۳":{"t":"آینده‌ای روشن‌تر (از آمونیاک تا ارزش فناوری‌ها)","p":[[103,111]]},"شیمی ۲":{"t":"آزمون جامع شیمی آلی","p":[]}}},{"y":1406,"m":2,"d":17,"b":{"حسابان ۲":{"t":"کاربردهای مشتق","p":[[127,144]]},"ریاضی ۱":{"t":"تابع + نمایی و لگاریتمی + حد (فصل ۵)","p":[]},"حسابان ۱":{"t":"تابع + نمایی و لگاریتمی + حد و پیوستگی (فصل‌های ۲، ۳ و ۵)","p":[]},"هندسه ۳":{"t":"بردارها","p":[[77,84]]},"هندسه ۲":{"t":"کل کتاب","p":[]},"ریاضیات گسسته":{"t":"ترکیبیات","p":[[73,84]]},"آمار و احتمال":{"t":"آمار و احتمال (فصل‌های ۱، ۳ و ۴)","p":[]},"فیزیک ۳":{"t":"آشنایی با فیزیک هسته‌ای","p":[[137,156]]},"فیزیک ۲":{"t":"کل کتاب","p":[]},"شیمی ۳":{"t":"آینده‌ای روشن‌تر (از ارزش فناوری‌ها تا پایان)","p":[[111,123]]},"شیمی ۲":{"t":"آزمون جامع محاسباتی شیمی","p":[]},"شیمی ۱":{"t":"آزمون جامع محاسباتی شیمی","p":[]}}},{"y":1406,"m":2,"d":24,"b":{"حسابان ۲":{"t":"مشتق + کاربردهای مشتق","p":[[71,144]]},"هندسه ۳":{"t":"مقاطع مخروطی (از بیضی) + بردارها","p":[[47,84]]},"ریاضیات گسسته":{"t":"گراف (از مدل‌سازی) + ترکیبیات","p":[[43,84]]},"فیزیک ۳":{"t":"فصل‌های ۳ تا ۶","p":[[69,156]]},"شیمی ۳":{"t":"فصل‌های ۳ و ۴ کامل","p":[[67,123]]}}},{"y":1406,"m":3,"d":21,"b":{},"all":"جامع شبیه‌ساز کنکور ۱"},{"y":1406,"m":3,"d":28,"b":{},"all":"جامع شبیه‌ساز کنکور ۲"},{"y":1406,"m":4,"d":4,"b":{},"all":"جامع شبیه‌ساز کنکور ۳"}],"تجربی|10":[{"y":1405,"m":7,"d":17,"b":{"زیست‌شناسی ۱":{"t":"دنیای زنده (تا مولکول‌های زیستی)","p":[[1,8]]},"فیزیک ۱":{"t":"فیزیک و اندازه‌گیری (تا نمادگذاری علمی)","p":[[1,11]]},"ریاضی ۱":{"t":"مجموعه، الگو و دنباله (تا اجتماع دو مجموعه)","p":[[1,10]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (تا تکنسیم)","p":[[1,9]]}}},{"y":1405,"m":8,"d":1,"b":{"زیست‌شناسی ۱":{"t":"دنیای زنده (تا بافت‌های بدن انسان)","p":[[1,15]]},"فیزیک ۱":{"t":"فیزیک و اندازه‌گیری","p":[[1,22]]},"ریاضی ۱":{"t":"مجموعه، الگو و دنباله","p":[[1,20]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (تا جرم اتمی عنصرها)","p":[[1,15]]}}},{"y":1405,"m":8,"d":15,"b":{"زیست‌شناسی ۱":{"t":"دنیای زنده + گوارش و جذب مواد (تا شیره‌ی معده)","p":[[1,21]]},"فیزیک ۱":{"t":"اندازه‌گیری + ویژگی‌های فیزیکی مواد (تا فشار در شاره‌ها)","p":[[1,32]]},"ریاضی ۱":{"t":"مجموعه، الگو و دنباله (کل فصل ۱)","p":[[1,27]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (تا نشر نور و طیف نشری)","p":[[1,23]]}}},{"y":1405,"m":8,"d":29,"b":{"زیست‌شناسی ۱":{"t":"گوارش و جذب مواد","p":[[17,29]]},"فیزیک ۱":{"t":"ویژگی‌های فیزیکی مواد (تا فشارسنج شاره‌ها)","p":[[23,38]]},"ریاضی ۱":{"t":"دنباله‌های حسابی و هندسی + نسبت‌های مثلثاتی","p":[[21,35]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (از شمارش ذره‌ها تا آرایش الکترونی)","p":[[16,30]]}}},{"y":1405,"m":9,"d":13,"b":{"زیست‌شناسی ۱":{"t":"دنیای زنده + گوارش + تبادلات گازی","p":[[1,39]]},"فیزیک ۱":{"t":"اندازه‌گیری + ویژگی‌های مواد (تا شناوری)","p":[[1,40]]},"ریاضی ۱":{"t":"مجموعه، الگو و دنباله + مثلثات (فصل ۱ و ۲)","p":[[1,46]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (تا ساختار اتم و رفتار آن)","p":[[1,38]]}}},{"y":1405,"m":9,"d":27,"b":{"زیست‌شناسی ۱":{"t":"تبادلات گازی","p":[[33,44]]},"فیزیک ۱":{"t":"ویژگی‌های فیزیکی مواد (از فشارسنج هوا تا پایان فصل ۲)","p":[[37,52]]},"ریاضی ۱":{"t":"مثلثات + توان‌های گویا (ریشه و توان، ریشه‌ی n ام)","p":[[36,61]]},"شیمی ۱":{"t":"کیهان زادگاه عنصرها (از ساختار اتم تا پایان فصل)","p":[[24,46]]}}},{"y":1405,"m":10,"d":25,"b":{"زیست‌شناسی ۱":{"t":"تبادلات گازی + گردش مواد (تا شبکه‌ی هادی قلب)","p":[[33,51]]},"فیزیک ۱":{"t":"ویژگی‌های مواد + کار، انرژی و توان (تا نیروی ثابت)","p":[[38,55]]},"ریاضی ۱":{"t":"مثلثات + توان‌های گویا و عبارت‌های جبری (کل فصل ۳)","p":[[36,68]]},"شیمی ۱":{"t":"ساختار اتم + ردپای گازها (تا اکسیژن با فلزها و نافلزها)","p":[[24,58]]}}},{"y":1405,"m":11,"d":9,"b":{"زیست‌شناسی ۱":{"t":"فصل‌های ۱ تا ۴","p":[[1,54]]},"فیزیک ۱":{"t":"فصل‌های ۱ تا ۳ (تا کار و انرژی جنبشی)","p":[[1,60]]},"ریاضی ۱":{"t":"فصل‌های ۱ تا ۳ + معادله‌ی درجه‌ی دوم","p":[[1,77]]},"شیمی ۱":{"t":"فصل ۱ و ۲ (تا اکسیدهای فلزی و نافلزی)","p":[[1,61]]}}},{"y":1405,"m":11,"d":23,"b":{"زیست‌شناسی ۱":{"t":"گردش مواد در بدن","p":[[47,60]]},"فیزیک ۱":{"t":"کار، انرژی و توان (تا کار و انرژی پتانسیل)","p":[[53,64]]},"ریاضی ۱":{"t":"عبارت‌های جبری + معادله‌ها و نامعادله‌ها (کل فصل ۴)","p":[[62,93]]},"شیمی ۱":{"t":"ردپای گازها (تا اثر گلخانه‌ای)","p":[[47,69]]}}},{"y":1405,"m":12,"d":7,"b":{"زیست‌شناسی ۱":{"t":"گردش مواد در بدن","p":[[55,68]]},"فیزیک ۱":{"t":"کار، انرژی و توان (تا کار و انرژی درونی)","p":[[61,70]]},"ریاضی ۱":{"t":"معادله‌ها و نامعادله‌ها + مفهوم تابع","p":[[78,100]]},"شیمی ۱":{"t":"ردپای گازها (از واکنش‌های شیمیایی تا اوزون)","p":[[62,75]]}}},{"y":1405,"m":12,"d":21,"b":{"زیست‌شناسی ۱":{"t":"گردش مواد + تنظیم اسمزی و دفع مواد زائد","p":[[55,75]]},"فیزیک ۱":{"t":"کار، انرژی و توان (تا پایان فصل ۳)","p":[[61,82]]},"ریاضی ۱":{"t":"معادله‌ها و نامعادله‌ها + تابع (دامنه و برد)","p":[[78,108]]},"شیمی ۱":{"t":"ردپای گازها (از واکنش‌های شیمیایی تا پایان فصل)","p":[[62,84]]}}},{"y":1406,"m":1,"d":6,"b":{"زیست‌شناسی ۱":{"t":"فصل‌های ۱ تا ۴","p":[[1,54]]},"فیزیک ۱":{"t":"فصل‌های ۱ تا ۳ (تا کار و انرژی جنبشی)","p":[[1,60]]},"ریاضی ۱":{"t":"جمع‌بندی نیم‌سال اول (فصل‌های ۱ تا ۳ + معادله‌ی درجه‌ی دوم)","p":[[1,77]]},"شیمی ۱":{"t":"فصل ۱ و ۲ (تا اکسیدهای فلزی و نافلزی)","p":[[1,61]]}}},{"y":1406,"m":1,"d":20,"b":{"زیست‌شناسی ۱":{"t":"گردش مواد + تنظیم اسمزی و دفع مواد زائد","p":[[55,78]]},"فیزیک ۱":{"t":"کار، انرژی و توان + دما و گرما (تا انبساط گرمایی)","p":[[61,87]]},"ریاضی ۱":{"t":"معادله‌ها و نامعادله‌ها + تابع (کل فصل ۵)","p":[[78,117]]},"شیمی ۱":{"t":"ردپای گازها + آب، آهنگ زندگی (تا همراهان ناپیدای آب)","p":[[62,92]]}}},{"y":1406,"m":2,"d":3,"b":{"زیست‌شناسی ۱":{"t":"تنظیم اسمزی + از یاخته تا گیاه","p":[[76,89]]},"فیزیک ۱":{"t":"دما و گرما (تا تغییر حالت‌های ماده)","p":[[83,102]]},"ریاضی ۱":{"t":"تابع (انواع توابع) + شمارش بدون شمردن","p":[[109,132]]},"شیمی ۱":{"t":"آب، آهنگ زندگی (تا مولکول‌های آب در میدان الکتریکی)","p":[[85,103]]}}},{"y":1406,"m":2,"d":17,"b":{"زیست‌شناسی ۱":{"t":"از یاخته تا گیاه + جذب و انتقال مواد در گیاهان","p":[[79,101]]},"فیزیک ۱":{"t":"دما و گرما (از انبساط تا روش‌های انتقال گرما)","p":[[87,111]]},"ریاضی ۱":{"t":"شمارش بدون شمردن + احتمال","p":[[118,151]]},"شیمی ۱":{"t":"آب، آهنگ زندگی (از محلول تا انحلال گازها در آب)","p":[[93,116]]}}},{"y":1406,"m":2,"d":24,"b":{"زیست‌شناسی ۱":{"t":"از یاخته تا گیاه + جذب و انتقال مواد در گیاهان","p":[[79,111]]},"فیزیک ۱":{"t":"دما و گرما (تا پایان کتاب)","p":[[87,120]]},"ریاضی ۱":{"t":"شمارش بدون شمردن + آمار و احتمال (فصل ۶ و ۷)","p":[[118,170]]},"شیمی ۱":{"t":"آب، آهنگ زندگی (فصل ۳)","p":[[93,122]]}}},{"y":1406,"m":3,"d":28,"b":{},"all":"جمع‌بندی کل کتاب"}],"تجربی|11":[{"y":1405,"m":7,"d":17,"b":{"زیست‌شناسی ۲":{"t":"تنظیم عصبی (تا حفاظت از مغز و نخاع)","p":[[1,10]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (تا برایند نیروهای الکتریکی)","p":[[1,7]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا رفتار عنصرها و شعاع اتم)","p":[[1,14]]},"ریاضی ۲":{"t":"هندسه‌ی تحلیلی و جبر","p":[[1,10]]},"زمین‌شناسی":{"t":"آفرینش کیهان و تکوین زمین (تا تکوین زمین)","p":[[9,15]]}}},{"y":1405,"m":8,"d":1,"b":{"زیست‌شناسی ۲":{"t":"تنظیم عصبی","p":[[1,18]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (تا برایند میدان‌های الکتریکی)","p":[[1,13]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا عنصرها در طبیعت)","p":[[1,22]]},"ریاضی ۲":{"t":"هندسه‌ی تحلیلی و جبر","p":[[1,18]]},"زمین‌شناسی":{"t":"آفرینش کیهان و تکوین زمین","p":[[9,21]]}}},{"y":1405,"m":8,"d":15,"b":{"زیست‌شناسی ۲":{"t":"تنظیم عصبی + حواس (تا شنوایی و تعادل)","p":[[1,28]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (تا پتانسیل الکتریکی)","p":[[1,21]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا قبل از خود را بیازمایید ص ۲۴)","p":[[1,24]]},"ریاضی ۲":{"t":"هندسه‌ی تحلیلی و جبر + هندسه (تا پایان درس اول)","p":[[1,30]]},"زمین‌شناسی":{"t":"آفرینش کیهان + منابع معدنی و ذخایر انرژی (تا کانسنگ‌ها)","p":[[9,29]]}}},{"y":1405,"m":8,"d":29,"b":{"زیست‌شناسی ۲":{"t":"حواس","p":[[19,36]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (از برایند میدان‌ها تا ابتدای خازن)","p":[[13,27]]},"شیمی ۲":{"t":"قدر هدایای زمینی (از دنیای رنگی تا جریان فلز در محیط)","p":[[14,29]]},"ریاضی ۲":{"t":"هندسه‌ی تحلیلی + هندسه (تا پایان درس دوم)","p":[[19,41]]},"زمین‌شناسی":{"t":"منابع معدنی و ذخایر انرژی","p":[[23,39]]}}},{"y":1405,"m":9,"d":13,"b":{"زیست‌شناسی ۲":{"t":"تنظیم عصبی + حواس + دستگاه حرکتی","p":[[1,44]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن","p":[[1,38]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا نام‌گذاری آلکان‌ها)","p":[[1,40]]},"ریاضی ۲":{"t":"هندسه‌ی تحلیلی و جبر + هندسه","p":[[1,46]]},"زمین‌شناسی":{"t":"آفرینش کیهان + منابع معدنی + آب و خاک (تا آب زیرزمینی)","p":[[9,44]]}}},{"y":1405,"m":9,"d":27,"b":{"زیست‌شناسی ۲":{"t":"دستگاه حرکتی + تنظیم شیمیایی","p":[[37,62]]},"فیزیک ۲":{"t":"خازن + جریان الکتریکی (تا عوامل مؤثر بر مقاومت)","p":[[28,45]]},"شیمی ۲":{"t":"قدر هدایای زمینی (از نفت تا پایان فصل)","p":[[29,50]]},"ریاضی ۲":{"t":"هندسه + تابع","p":[[42,64]]},"زمین‌شناسی":{"t":"منابع آب و خاک","p":[[41,51]]}}},{"y":1405,"m":10,"d":25,"b":{"زیست‌شناسی ۲":{"t":"دستگاه حرکتی + تنظیم شیمیایی + ایمنی","p":[[37,71]]},"فیزیک ۲":{"t":"خازن + جریان الکتریکی (تا نیروی محرکه)","p":[[28,49]]},"شیمی ۲":{"t":"قدر هدایای زمینی + در پی غذای سالم (تا گرما و دما)","p":[[29,58]]},"ریاضی ۲":{"t":"هندسه + تابع","p":[[42,70]]},"زمین‌شناسی":{"t":"منابع آب و خاک","p":[[41,53]]}}},{"y":1405,"m":11,"d":9,"b":{"زیست‌شناسی ۲":{"t":"فصل‌های ۱ تا ۵","p":[[1,78]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن + جریان الکتریکی (تا توان در مدارها)","p":[[1,53]]},"شیمی ۲":{"t":"قدر هدایای زمینی (کل) + در پی غذای سالم (تا گرما در واکنش‌ها)","p":[[1,65]]},"ریاضی ۲":{"t":"هندسه‌ی تحلیلی + هندسه + تابع + مثلثات (تا درس اول)","p":[[1,76]]},"زمین‌شناسی":{"t":"آفرینش کیهان + منابع معدنی + آب و خاک","p":[[9,58]]}}},{"y":1405,"m":11,"d":23,"b":{"زیست‌شناسی ۲":{"t":"ایمنی + تقسیم یاخته","p":[[63,83]]},"فیزیک ۲":{"t":"جریان الکتریکی (از عوامل مؤثر بر مقاومت تا پایان فصل ۲)","p":[[45,64]]},"شیمی ۲":{"t":"در پی غذای سالم (تا آنتالپی پیوند)","p":[[51,72]]},"ریاضی ۲":{"t":"تابع + مثلثات (تا پایان درس دوم)","p":[[65,87]]},"زمین‌شناسی":{"t":"منابع آب و خاک + پویایی زمین (تا آتشفشان)","p":[[47,65]]}}},{"y":1405,"m":12,"d":7,"b":{"زیست‌شناسی ۲":{"t":"تقسیم یاخته","p":[[79,96]]},"فیزیک ۲":{"t":"جریان + مغناطیس (تا نیروی وارد بر ذره‌ی باردار)","p":[[53,70]]},"شیمی ۲":{"t":"در پی غذای سالم (تا قانون هس)","p":[[65,77]]},"ریاضی ۲":{"t":"مثلثات","p":[[77,94]]},"زمین‌شناسی":{"t":"پویایی زمین (تا امواج لرزه‌ای)","p":[[59,71]]}}},{"y":1405,"m":12,"d":21,"b":{"زیست‌شناسی ۲":{"t":"تقسیم یاخته + تولیدمثل","p":[[79,101]]},"فیزیک ۲":{"t":"جریان + مغناطیس (تا میدان مغناطیسی حاصل از جریان)","p":[[53,76]]},"شیمی ۲":{"t":"در پی غذای سالم (تا آهنگ واکنش)","p":[[65,85]]},"ریاضی ۲":{"t":"مثلثات + توابع نمایی و لگاریتمی (تا درس اول)","p":[[77,104]]},"زمین‌شناسی":{"t":"پویایی زمین + زمین‌شناسی و سلامت (تا بیماری‌های زمین‌زاد)","p":[[59,82]]}}},{"y":1406,"m":1,"d":6,"b":{"زیست‌شناسی ۲":{"t":"فصل‌های ۱ تا ۵","p":[[1,78]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن + جریان الکتریکی (تا توان در مدارها)","p":[[1,53]]},"شیمی ۲":{"t":"قدر هدایای زمینی (کل) + در پی غذای سالم (تا گرما در واکنش‌ها)","p":[[1,65]]},"ریاضی ۲":{"t":"هندسه‌ی تحلیلی + هندسه + تابع + مثلثات (تا درس اول)","p":[[1,76]]},"زمین‌شناسی":{"t":"آفرینش کیهان + منابع معدنی + آب و خاک","p":[[9,58]]}}},{"y":1406,"m":1,"d":20,"b":{"زیست‌شناسی ۲":{"t":"تقسیم یاخته + تولیدمثل","p":[[79,114]]},"فیزیک ۲":{"t":"جریان + مغناطیس (تا ویژگی‌های مغناطیسی مواد)","p":[[53,83]]},"شیمی ۲":{"t":"در پی غذای سالم (تا خوراکی‌های رنگین)","p":[[65,92]]},"ریاضی ۲":{"t":"مثلثات + توابع نمایی و لگاریتمی","p":[[77,118]]},"زمین‌شناسی":{"t":"پویایی زمین + زمین‌شناسی و سلامت","p":[[59,91]]}}},{"y":1406,"m":2,"d":3,"b":{"زیست‌شناسی ۲":{"t":"تولیدمثل + تولیدمثل نهان‌دانگان","p":[[115,129]]},"فیزیک ۲":{"t":"مغناطیس و القا (تا قانون لنز)","p":[[83,91]]},"شیمی ۲":{"t":"در پی غذای سالم (از سرعت واکنش) + پوشاک (تا پلیمری شدن)","p":[[92,106]]},"ریاضی ۲":{"t":"حد و پیوستگی","p":[[119,142]]},"زمین‌شناسی":{"t":"زمین‌شناسی و سازه‌های مهندسی","p":[[93,108]]}}},{"y":1406,"m":2,"d":17,"b":{"زیست‌شناسی ۲":{"t":"تولیدمثل نهان‌دانگان + پاسخ گیاهان به محرک‌ها","p":[[130,152]]},"فیزیک ۲":{"t":"مغناطیس و القا (از قانون لنز تا پایان کتاب)","p":[[91,104]]},"شیمی ۲":{"t":"پوشاک، نیازی پایان‌ناپذیر","p":[[107,123]]},"ریاضی ۲":{"t":"آمار و احتمال","p":[[143,166]]},"زمین‌شناسی":{"t":"زمین‌شناسی ایران","p":[[109,125]]}}},{"y":1406,"m":2,"d":24,"b":{"زیست‌شناسی ۲":{"t":"تولیدمثل نهان‌دانگان + پاسخ گیاهان به محرک‌ها","p":[[119,152]]},"فیزیک ۲":{"t":"مغناطیس و القا (از ویژگی‌های مغناطیسی مواد تا پایان کتاب)","p":[[83,104]]},"شیمی ۲":{"t":"پوشاک، نیازی پایان‌ناپذیر","p":[[99,123]]},"ریاضی ۲":{"t":"حد و پیوستگی + آمار و احتمال","p":[[119,166]]},"زمین‌شناسی":{"t":"زمین‌شناسی و سازه‌های مهندسی + زمین‌شناسی ایران","p":[[93,125]]}}},{"y":1406,"m":3,"d":28,"b":{},"all":"جمع‌بندی کل کتاب‌های یازدهم"}],"تجربی|12":[{"y":1405,"m":7,"d":17,"b":{"زیست‌شناسی ۳":{"t":"مولکول‌های اطلاعاتی","p":[[1,14]]},"زیست‌شناسی ۱":{"t":"دنیای زنده + گوارش و جذب مواد","p":[[1,24]]},"فیزیک ۳":{"t":"حرکت بر خط راست (تا قبل از شتاب متوسط)","p":[[1,10]]},"فیزیک ۱":{"t":"فیزیک و اندازه‌گیری","p":[[1,22]]},"شیمی ۳":{"t":"مولکول‌ها در خدمت تندرستی (تا سرِ باهم بیندیشیم)","p":[[1,14]]},"شیمی ۱":{"t":"کیهان زادگاه الفبای هستی (تا سرِ ساختار اتم)","p":[[1,23]]},"ریاضی ۳":{"t":"تابع","p":[[1,14]]},"ریاضی ۲":{"t":"تابع + معادله، نامعادله و تعیین علامت","p":[[47,56],[19,24]]},"ریاضی ۱":{"t":"تابع + معادله، نامعادله و تعیین علامت","p":[[94,117],[83,93]]},"زمین‌شناسی":{"t":"آفرینش کیهان و تکوین زمین","p":[[8,15]]}}},{"y":1405,"m":8,"d":1,"b":{"زیست‌شناسی ۳":{"t":"مولکول‌های اطلاعاتی","p":[[1,20]]},"زیست‌شناسی ۱":{"t":"گوارش و جذب مواد + تبادلات گازی","p":[[25,46]]},"فیزیک ۳":{"t":"حرکت بر خط راست (تا قبل از حرکت با شتاب ثابت)","p":[[1,15]]},"فیزیک ۱":{"t":"ویژگی‌های فیزیکی مواد","p":[[23,52]]},"شیمی ۳":{"t":"مولکول‌ها در خدمت تندرستی (تا ابتدای بحث pH)","p":[[1,24]]},"شیمی ۱":{"t":"کیهان زادگاه الفبای هستی","p":[[19,46]]},"ریاضی ۳":{"t":"تابع","p":[[1,29]]},"ریاضی ۲":{"t":"تابع + معادله‌ی درجه ۲","p":[[47,70],[11,18]]},"ریاضی ۱":{"t":"تابع + معادله‌ی درجه ۲","p":[[94,117],[70,82]]},"زمین‌شناسی":{"t":"آفرینش کیهان + منابع معدنی و ذخایر انرژی","p":[[8,26]]}}},{"y":1405,"m":8,"d":15,"b":{"زیست‌شناسی ۳":{"t":"جریان اطلاعات در یاخته","p":[[21,32]]},"زیست‌شناسی ۱":{"t":"گردش مواد در بدن","p":[[47,68]]},"فیزیک ۳":{"t":"حرکت بر خط راست (از حرکت با سرعت ثابت تا پایان فصل ۱)","p":[[13,26]]},"فیزیک ۱":{"t":"کار، انرژی و توان","p":[[53,82]]},"شیمی ۳":{"t":"از ابتدای pH تا شوینده‌های خورنده","p":[[24,30]]},"شیمی ۱":{"t":"ردپای گازها در زندگی (تا انتهای اثر گلخانه‌ای)","p":[[47,69]]},"ریاضی ۳":{"t":"مثلثات","p":[[31,41]]},"ریاضی ۲":{"t":"مثلثات","p":[[71,94]]},"ریاضی ۱":{"t":"مثلثات + توان‌های گویا و عبارت‌های جبری","p":[[28,46],[47,68]]},"زمین‌شناسی":{"t":"منابع معدنی و ذخایر انرژی (تا سوخت‌های فسیلی)","p":[[23,35]]}}},{"y":1405,"m":8,"d":29,"b":{"زیست‌شناسی ۳":{"t":"جریان اطلاعات در یاخته + انتقال اطلاعات در نسل‌ها","p":[[27,41]]},"زیست‌شناسی ۱":{"t":"تنظیم اسمزی و دفع مواد زائد + از یاخته تا گیاه","p":[[69,89]]},"فیزیک ۳":{"t":"حرکت با شتاب ثابت + دینامیک (تا قبل از اصطکاک)","p":[[15,37]]},"فیزیک ۱":{"t":"دما و گرما (تا قبل از تغییر حالت‌های ماده)","p":[[83,103]]},"شیمی ۳":{"t":"پایان فصل ۱ + آسایش و رفاه (تا هدایت الکترون)","p":[[24,44]]},"شیمی ۱":{"t":"ردپای گازها + آب، آهنگ زندگی (تا قسمت در میلیون)","p":[[70,98]]},"ریاضی ۳":{"t":"مثلثات","p":[[42,48]]},"ریاضی ۲":{"t":"مثلثات + توابع نمایی و لگاریتمی","p":[[71,94],[95,118]]},"ریاضی ۱":{"t":"مثلثات","p":[[28,46]]},"زمین‌شناسی":{"t":"منابع معدنی + منابع آب و خاک (تا تخلخل)","p":[[23,45]]}}},{"y":1405,"m":9,"d":13,"b":{"زیست‌شناسی ۳":{"t":"فصل‌های ۱ تا ۳","p":[[1,46]]},"زیست‌شناسی ۱":{"t":"از یاخته تا گیاه + جذب و انتقال مواد در گیاهان","p":[[90,111]]},"فیزیک ۳":{"t":"حرکت بر خط راست + دینامیک (تا قبل از تکانه)","p":[[1,44]]},"فیزیک ۱":{"t":"دما و گرما (از تغییر حالت تا پایان فصل ۴)","p":[[103,120]]},"شیمی ۳":{"t":"کل فصل ۱ + آسایش و رفاه (تا سلول سوختی)","p":[[1,50]]},"شیمی ۱":{"t":"آب، آهنگ زندگی","p":[[98,122]]},"ریاضی ۳":{"t":"تابع + مثلثات + حد در بی‌نهایت","p":[[1,57]]},"ریاضی ۲":{"t":"فصل‌های ۳، ۴ و ۶","p":[]},"ریاضی ۱":{"t":"فصل‌های ۲ و ۵ + مجموعه، الگو و دنباله","p":[[1,27]]},"زمین‌شناسی":{"t":"آفرینش کیهان + منابع معدنی + آب و خاک (تا منابع خاک)","p":[[8,52]]}}},{"y":1405,"m":9,"d":27,"b":{"زیست‌شناسی ۳":{"t":"انتقال اطلاعات در نسل‌ها + تغییر در اطلاعات وراثتی","p":[[37,56]]},"زیست‌شناسی ۲":{"t":"تنظیم عصبی + حواس","p":[[1,36]]},"فیزیک ۳":{"t":"دینامیک (از اصطکاک تا پایان فصل ۲)","p":[[37,52]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن (تا پتانسیل الکتریکی)","p":[[1,21]]},"شیمی ۳":{"t":"آسایش و رفاه (از سفر الکترون تا آبکاری)","p":[[42,60]]},"شیمی ۲":{"t":"قدر هدایای زمینی (تا دنیای واقعی واکنش‌ها)","p":[[1,25]]},"ریاضی ۳":{"t":"حد بی‌نهایت و حد در بی‌نهایت","p":[[49,64]]},"ریاضی ۱":{"t":"آمار","p":[[152,170]]},"ریاضی ۲":{"t":"آمار + فصل ۶","p":[[153,166]]},"زمین‌شناسی":{"t":"منابع آب و خاک + پویایی زمین (تا آتشفشان)","p":[[46,65]]}}},{"y":1405,"m":10,"d":25,"b":{"زیست‌شناسی ۳":{"t":"فصل‌های ۱ تا ۴","p":[[1,62]]},"فیزیک ۳":{"t":"فصل‌های ۱ تا ۳ (تا مشخصه‌های موج)","p":[[1,62]]},"شیمی ۳":{"t":"فصل ۱ و ۲ کامل","p":[[1,66]]},"ریاضی ۳":{"t":"تابع + مثلثات + حد + مشتق","p":[[1,76]]},"زمین‌شناسی":{"t":"آفرینش کیهان تا پویایی زمین","p":[[8,65]]}}},{"y":1405,"m":11,"d":9,"b":{"زیست‌شناسی ۳":{"t":"از ماده به انرژی","p":[[63,72]]},"زیست‌شناسی ۲":{"t":"دستگاه حرکتی + تنظیم شیمیایی","p":[[37,62]]},"فیزیک ۳":{"t":"نوسان و امواج (تا قبل از موج عرضی)","p":[[53,64]]},"فیزیک ۲":{"t":"الکتریسیته‌ی ساکن + جریان الکتریکی (تا عوامل مؤثر بر مقاومت)","p":[[22,45]]},"شیمی ۳":{"t":"جلوه‌ای از هنر (تا هنرنمایی شاره‌ها)","p":[[67,77]]},"شیمی ۲":{"t":"قدر هدایای زمینی را بدانیم","p":[[25,50]]},"ریاضی ۳":{"t":"مشتق","p":[[77,100]]},"ریاضی ۲":{"t":"هندسه‌ی تحلیلی + هندسه","p":[[1,10],[25,30]]},"زمین‌شناسی":{"t":"پویایی زمین","p":[[59,75]]}}},{"y":1405,"m":11,"d":23,"b":{"زیست‌شناسی ۳":{"t":"از ماده به انرژی + از انرژی به ماده","p":[[63,81]]},"زیست‌شناسی ۲":{"t":"ایمنی + تقسیم یاخته","p":[[63,96]]},"فیزیک ۳":{"t":"نوسان و امواج (از موج و انواع آن تا بازتاب)","p":[[61,76]]},"فیزیک ۲":{"t":"جریان الکتریکی (از عوامل مؤثر بر مقاومت تا پایان فصل ۲)","p":[[45,64]]},"شیمی ۳":{"t":"جلوه‌ای از هنر (تا خود را بیازمایید وانادیم)","p":[[67,86]]},"شیمی ۲":{"t":"در پی غذای سالم (تا جمع‌پذیری گرمای واکنش)","p":[[51,77]]},"ریاضی ۳":{"t":"کاربرد مشتق","p":[[101,112]]},"ریاضی ۲":{"t":"هندسه","p":[[31,46]]},"زمین‌شناسی":{"t":"زمین‌شناسی و سلامت","p":[[77,91]]}}},{"y":1405,"m":12,"d":7,"b":{"زیست‌شناسی ۳":{"t":"از انرژی به ماده","p":[[77,90]]},"زیست‌شناسی ۲":{"t":"تولیدمثل","p":[[97,118]]},"فیزیک ۳":{"t":"نوسان و امواج (از موج صوتی تا پایان فصل ۳)","p":[[70,94]]},"فیزیک ۲":{"t":"مغناطیس و القا (تا قبل از پدیده‌ی القا)","p":[[65,85]]},"شیمی ۳":{"t":"پایان جلوه‌ای از هنر + آینده‌ای روشن‌تر (تا خود را بیازمایید)","p":[[77,102]]},"شیمی ۲":{"t":"در پی غذای سالم (از غذای سالم)","p":[[77,98]]},"ریاضی ۳":{"t":"کاربرد مشتق","p":[[101,120]]},"ریاضی ۱":{"t":"شمارش بدون شمردن","p":[[118,140]]},"زمین‌شناسی":{"t":"زمین‌شناسی و سازه‌های مهندسی","p":[[93,107]]}}},{"y":1405,"m":12,"d":21,"b":{"زیست‌شناسی ۳":{"t":"فناوری‌های نوین زیستی + رفتارهای جانوران (پیشروی)","p":[[91,124]]},"زیست‌شناسی ۲":{"t":"تولیدمثل نهان‌دانگان + پاسخ گیاهان به محرک‌ها","p":[[119,152]]},"فیزیک ۳":{"t":"آشنایی با فیزیک اتمی و هسته‌ای (پیشروی)","p":[[95,125]]},"فیزیک ۲":{"t":"مغناطیس و القا (از پدیده‌ی القا تا پایان فصل ۳)","p":[[85,104]]},"شیمی ۳":{"t":"راهی به سوی آینده‌ای روشن‌تر (پیشروی)","p":[[91,123]]},"شیمی ۲":{"t":"پوشاک، نیازی پایان‌ناپذیر","p":[[99,123]]},"ریاضی ۳":{"t":"هندسه + احتمال (پیشروی)","p":[[121,148]]},"ریاضی ۱":{"t":"احتمال","p":[[141,151]]},"ریاضی ۲":{"t":"احتمال","p":[[143,152]]},"زمین‌شناسی":{"t":"زمین‌شناسی ایران","p":[[109,125]]}}},{"y":1406,"m":1,"d":6,"b":{"زیست‌شناسی ۱":{"t":"جامع زیست پایه (کل کتاب)","p":[]},"زیست‌شناسی ۲":{"t":"جامع زیست پایه (کل کتاب)","p":[]},"فیزیک ۱":{"t":"جامع فیزیک پایه (کل کتاب)","p":[]},"فیزیک ۲":{"t":"جامع فیزیک پایه (کل کتاب)","p":[]},"شیمی ۱":{"t":"جامع شیمی پایه (کل کتاب)","p":[]},"شیمی ۲":{"t":"جامع شیمی پایه (کل کتاب)","p":[]},"ریاضی ۱":{"t":"جامع ریاضی پایه (کل کتاب)","p":[]},"ریاضی ۲":{"t":"جامع ریاضی پایه (کل کتاب)","p":[]},"زمین‌شناسی":{"t":"کل کتاب","p":[[8,125]]}}},{"y":1406,"m":1,"d":20,"b":{"زیست‌شناسی ۳":{"t":"فصل‌های ۱ تا ۴","p":[[1,62]]},"فیزیک ۳":{"t":"فصل‌های ۱ تا ۳ (تا مشخصه‌های موج)","p":[[1,62]]},"شیمی ۳":{"t":"فصل ۱ و ۲ کامل","p":[[1,66]]},"ریاضی ۳":{"t":"تابع + مثلثات + حد + مشتق","p":[[1,76]]}}},{"y":1406,"m":2,"d":3,"b":{"زیست‌شناسی ۳":{"t":"فناوری‌های نوین زیستی","p":[[91,106]]},"زیست‌شناسی ۱":{"t":"زیست گیاهی: فصل‌های ۶ و ۷","p":[]},"زیست‌شناسی ۲":{"t":"زیست گیاهی: فصل‌های ۸ و ۹","p":[]},"فیزیک ۳":{"t":"فیزیک اتمی و هسته‌ای (تا ساختار هسته)","p":[[95,111]]},"فیزیک ۱":{"t":"کل کتاب","p":[]},"شیمی ۳":{"t":"آینده‌ای روشن‌تر (از آمونیاک تا ارزش فناوری‌ها)","p":[[103,111]]},"شیمی ۲":{"t":"آزمون جامع شیمی آلی","p":[]},"ریاضی ۳":{"t":"هندسه","p":[[121,142]]}}},{"y":1406,"m":2,"d":17,"b":{"زیست‌شناسی ۳":{"t":"رفتارهای جانوران","p":[[107,124]]},"زیست‌شناسی ۱":{"t":"زیست جانوری (مباحث جانوری)","p":[]},"زیست‌شناسی ۲":{"t":"زیست جانوری (مباحث جانوری)","p":[]},"فیزیک ۳":{"t":"فیزیک اتمی و هسته‌ای (از ساختار هسته تا پایان)","p":[[103,125]]},"فیزیک ۲":{"t":"کل کتاب","p":[]},"شیمی ۳":{"t":"آینده‌ای روشن‌تر (از ارزش فناوری‌ها تا پایان)","p":[[111,123]]},"شیمی ۲":{"t":"آزمون جامع محاسباتی شیمی","p":[]},"شیمی ۱":{"t":"آزمون جامع محاسباتی شیمی","p":[]},"ریاضی ۳":{"t":"جامع شمارش و احتمال","p":[[143,148]]},"ریاضی ۱":{"t":"جامع شمارش و احتمال","p":[[118,151]]},"ریاضی ۲":{"t":"جامع شمارش و احتمال","p":[[143,152]]}}},{"y":1406,"m":2,"d":24,"b":{"زیست‌شناسی ۳":{"t":"فصل‌های ۵ تا ۸","p":[[63,124]]},"فیزیک ۳":{"t":"فصل‌های ۳ و ۴","p":[[53,125]]},"شیمی ۳":{"t":"فصل‌های ۳ و ۴ کامل","p":[[67,123]]},"ریاضی ۳":{"t":"مشتق + کاربرد مشتق + هندسه + احتمال","p":[[65,148]]}}},{"y":1406,"m":3,"d":21,"b":{},"all":"جامع شبیه‌ساز کنکور ۱"},{"y":1406,"m":3,"d":28,"b":{},"all":"جامع شبیه‌ساز کنکور ۲"},{"y":1406,"m":4,"d":4,"b":{},"all":"جامع شبیه‌ساز کنکور ۳"}]}</script>
 <script>
 (function(){
   var DATA = JSON.parse(document.getElementById('planner-data').textContent);
@@ -498,8 +578,8 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     get: function(k, d){ try { var v = localStorage.getItem('kp3:' + k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
     set: function(k, v){ try { localStorage.setItem('kp3:' + k, JSON.stringify(v)); } catch(e){} }
   };
-  var KEYS = ['inst','exFirst','exEvery','exSkip','anaN','blocks','brk','strat','norev','pg','wkPg','done','reports','boost','cov','wkOff','pgWk','anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
-  var DEF = { inst:'', exFirst:0, exEvery:14, exSkip:{}, anaN:0, blocks:[], brk:15, strat:'bal', norev:{}, pg:{}, wkPg:{}, done:{}, reports:[], boost:null, cov:{}, wkOff:0, pgWk:{}, anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
+  var KEYS = ['cpApplied','rv','scores','reg','step','maxStep','phone','sName','off','pp','inst','exFirst','exEvery','exSkip','anaN','blocks','brk','strat','norev','pg','wkPg','done','reports','boost','cov','wkOff','pgWk','anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
+  var DEF = { cpApplied:0, rv:null, scores:{}, reg:0, step:0, maxStep:0, phone:'', sName:'', off:{}, pp:{}, inst:'', exFirst:0, exEvery:14, exSkip:{}, anaN:1, blocks:[], brk:15, strat:'bal', norev:{}, pg:{}, wkPg:{}, done:{}, reports:[], boost:null, cov:{}, wkOff:0, pgWk:{}, anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
     tss:'15:15', tso:'08:00', l1:'13:00', l2:'14:00', d1:'20:30', d2:'21:15', plan:null, planKey:'' };
   var S = {}; KEYS.forEach(function(k){ S[k] = store.get(k, DEF[k]); });
   function save(){ KEYS.forEach(function(k){ store.set(k, S[k]); }); }
@@ -690,15 +770,17 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     all.forEach(function(d){
       if (d.g === g){
         var w = d.k + d.s; if (w <= 0) return;
-        list.push({ b: d.b, w: (d.k * relF(d.b) + d.s) * d.c, rel: d.k > 0 ? relOf(d.b) : 1, tash: g === 10 ? 0.7 : (d.gen ? 1 : Math.min(1, d.s / w * season().f)), gen: d.gen, c: d.c,
+        var of1 = offOf(d.b); if (of1 && !withSkipped) return;
+        list.push({ b: d.b, skip: of1, w: (d.k * relF(d.b) + d.s) * d.c, rel: d.k > 0 ? relOf(d.b) : 1, tash: g === 10 ? 0.7 : (d.gen ? 1 : Math.min(1, d.s / w * season().f)), gen: d.gen, c: d.c,
           sub: d.gen ? 'عمومی • فقط نهایی' : (d.s > 0 ? 'اختصاصی • نهایی + کنکور' : 'اختصاصی • کنکور'), rev: false });
       } else if (d.g < g && S.rev && REVIEW[S.grade] > 0 && d.k > 0){
-        var skip = !!S.norev[key('مرور ' + d.b)]; if (skip && !withSkipped) return;
-        list.push({ b: 'مرور ' + d.b, src: d.b, skip: skip, rel: relOf(d.b), w: d.k * REVIEW[S.grade] * relF(d.b), tash: 0, gen: false, c: 1, sub: 'مرور ' + NAME[d.g] + ' • تست کنکور', rev: true });
+        var ofr = offOf('مرور ' + d.b); if (ofr && !withSkipped) return;
+        list.push({ b: 'مرور ' + d.b, src: d.b, skip: ofr, rel: relOf(d.b), w: d.k * REVIEW[S.grade] * relF(d.b), tash: 0, gen: false, c: 1, sub: 'مرور ' + NAME[d.g] + ' • تست کنکور', rev: true });
       }
     });
     return list;
   }
+  function offOf(b){ var v = S.off[key(b)]; return v === 'all' ? 'all' : (v && v === wkKey() ? 'wk' : ''); }
   function schoolBooks(){ return DATA[S.track].filter(function(d){ return d.g === +S.grade && d.k + d.s > 0; }).map(function(d){ return d.b; }); }
 
   /* ---------- time ---------- */
@@ -709,9 +791,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function fixedOf(d){
     var out = blocksOf(d), ex = exInfo();
     if (!ex || d !== ex.day) return out;
-    var s = tmin(ex.start), e = s + exDur(), n = anaParts();
+    var s = Math.min(tmin(ex.start), S.inst === 'maz' ? 12 * 60 + 30 : 24 * 60), e = s + exDur(), n = anaParts();
     out.push({ fx: 'exam', label: 'آزمون آزمایشی' + (S.inst && INST[S.inst] ? ' ' + INST[S.inst].n : ''), s: s, e: e });
-    var a = Math.max(e + 60, tmin(S.l2));
+    var a = Math.max(e + 60, tmin(S.l2), 15 * 60);
     for (var i = 0; i < n; i++){ out.push({ fx: 'ana', label: 'تحلیل آزمون' + (n > 1 ? ' (' + fa(i + 1) + ' از ' + fa(n) + ')' : ''), sub: ANA_T[i], s: a, e: a + 90 }); a += 90 + BRK(); }
     return out;
   }
@@ -734,10 +816,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     show(); return row;
   }
   function renderTime(){
-    chips(document.getElementById('school'), [[true,'بله، مدرسه می‌روم'],[false,'نه (پشت کنکور / غیرحضوری)']], S.school, function(v){ S.school = v; renderTime(); renderTT(); changed(true); });
+    chips(document.getElementById('school'), [[true,'بله، مدرسه می‌روم'],[false,'نه (پشت کنکور / غیرحضوری)']], S.school, function(v){ S.school = v; renderTime(); renderTT(); changed(true); if (typeof showStep === 'function') showStep(S.step); });
     document.getElementById('f-sd').hidden = !S.school;
     document.getElementById('w-ss').hidden = !S.school;
-    document.getElementById('s-tt').hidden = !S.school;
     var sd = document.getElementById('sd'); sd.innerHTML = '';
     DAYS.forEach(function(n, d){
       var b = document.createElement('button'); b.type = 'button'; b.textContent = n.replace('‌شنبه', '‌ش').replace('شنبه', 'شنبه');
@@ -811,11 +892,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     row.setAttribute('role', 'group'); row.setAttribute('aria-label', d.b);
     var rb = d.rel >= 1.08 ? ' • <span class="rel ok">تستش مطمئن</span>' : d.rel <= 0.85 ? ' • <span class="rel risk">پرریسک</span>' : '';
     row.innerHTML = '<div class="qn"><b>' + fa(d.b) + '</b><em>' + d.sub + (d.c > 1 ? ' • <span class="cont">پایه‌ی سال بعد</span>' : '') + rb + '</em>'
-      + (d.rev ? '<button type="button" class="skip">' + (d.skip ? 'برگرداندن به برنامه' : 'مرورش نمی‌کنم') + '</button>' : '') + '</div>';
-    if (d.rev){
-      if (d.skip) row.classList.add('skipped');
-      row.querySelector('.skip').addEventListener('click', function(){ var k = key(d.b); if (S.norev[k]) delete S.norev[k]; else S.norev[k] = 1; renderBooks(); changed(true); });
-    }
+      + '<select class="skip" aria-label="در برنامه بودن ' + esc(d.b) + '"><option value="">در برنامه</option><option value="wk"' + (d.skip === 'wk' ? ' selected' : '') + '>این هفته نه</option><option value="all"' + (d.skip === 'all' ? ' selected' : '') + '>' + (d.rev ? 'کلاً مرورش نمی‌کنم' : 'کلاً نه') + '</option></select></div>';
+    if (d.skip) row.classList.add('skipped');
+    row.querySelector('.skip').addEventListener('change', function(ev){ var k = key(d.b), v = ev.target.value; if (!v) delete S.off[k]; else S.off[k] = v === 'all' ? 'all' : wkKey(); renderBooks(); changed(true); });
     var cur = S.lv[key(d.b)] || 'm';
     [['w','ض','ضعیف'],['m','م','متوسط'],['s','ق','قوی']].forEach(function(o){
       var b = document.createElement('button');
@@ -838,13 +917,13 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function renderBooks(){
     var list = bookList(), box = document.getElementById('books'), rv = document.getElementById('review');
     box.innerHTML = ''; rv.innerHTML = '';
-    list.filter(function(d){ return !d.rev; }).sort(function(a, b){ return b.w - a.w; }).forEach(function(d, i){ box.appendChild(bubbleRow(d, i)); });
+    bookList(true).filter(function(d){ return !d.rev; }).sort(function(a, b){ return !!a.skip - !!b.skip || b.w - a.w; }).forEach(function(d, i){ box.appendChild(bubbleRow(d, i)); });
     if (REVIEW[S.grade] > 0){
       var g = document.createElement('div'); g.className = 'grp';
       g.innerHTML = '<span>مرور پایه‌های قبل (فقط تست کنکور)</span><div class="chips"></div>';
       chips(g.querySelector('.chips'), [[true,'در برنامه باشد'],[false,'نه']], S.rev, function(v){ S.rev = v; renderBooks(); changed(true); });
       rv.appendChild(g);
-      bookList(true).filter(function(d){ return d.rev; }).sort(function(a, b){ return a.skip - b.skip || b.w - a.w; }).forEach(function(d, i){ rv.appendChild(bubbleRow(d, i)); });
+      bookList(true).filter(function(d){ return d.rev; }).sort(function(a, b){ return !!a.skip - !!b.skip || b.w - a.w; }).forEach(function(d, i){ rv.appendChild(bubbleRow(d, i)); });
     }
   }
 
@@ -852,7 +931,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function compute(){
     var list = bookList(), H = dayHalves().reduce(function(a, b){ return a + b; }, 0);
     var bo = S.boost && S.boost.wk === weekStart() ? S.boost.books : [];
-    var ws = list.map(function(d){ var l = S.lv[key(d.b)] || 'm'; return d.w * (l === 'w' ? WEAK : l === 's' ? STRONG : 1) * (bo.indexOf(d.b) >= 0 ? 1.15 : 1); });
+    var ws = list.map(function(d){ var l = S.lv[key(d.b)] || 'm'; return d.w * (l === 'w' ? WEAK : l === 's' ? STRONG : 1) * (bo.indexOf(d.b) >= 0 ? 1.15 : 1) * scoreF(d.src || d.b); });
     var W = ws.reduce(function(a, b){ return a + b; }, 0) || 1;
     var raw = ws.map(function(w){ return H * w / W; }), u = raw.map(Math.floor), left = H - u.reduce(function(a, b){ return a + b; }, 0);
     raw.map(function(r, i){ return [r - Math.floor(r), i]; }).sort(function(a, b){ return b[0] - a[0]; }).slice(0, left).forEach(function(x){ u[x[1]]++; });
@@ -969,7 +1048,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
         moved = false;
         blocks.forEach(function(b, bi){ if (t < b.e && t + p.len > b.s){ if (!used[bi]){ out.push(b); used[bi] = 1; } t = b.e + (b.fx === 'exam' ? 45 : b.fx === 'blk' ? (b.kind === 'استراحت' ? 0 : BRK()) : b.fx ? BRK() : 0); moved = true; } });
       }
-      out.push({ p: p, s: t, e: t + p.len }); t += p.len + BRK();
+      out.push({ p: p, s: t, e: t + p.len }); t += p.len + (p.brk || BRK());
     });
     blocks.forEach(function(b, bi){ if (b.fx && !used[bi]) out.push(b); });
     out.sort(function(a, b){ return a.s - b.s; });
@@ -1020,15 +1099,32 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function wkKey(){ return String(weekStart()); }
   function jlabel(j, wd){ var x = d2j(j); return (wd ? DAYS[satIdx(j)] + ' ' : '') + fa(x.jd) + ' ' + JM[x.jm - 1]; }
   var INST = {
-    qc:  { n: 'قلم‌چی (کانون فرهنگی آموزش)', every: 14, start: '07:30' },
-    g2:  { n: 'گزینه ۲', every: 21, start: '08:00' },
-    sj:  { n: 'سنجش (آزمون‌های آزمایشی)', every: 28, start: '08:00' },
-    maz: { n: 'ماز', every: 14, start: '08:00' },
-    gaj: { n: 'گاج', every: 28, start: '08:00' },
-    own: { n: 'مدرسه یا موسسه‌ی دیگر', every: 14, start: '08:00' }
+    maz: { n: 'ماز (تطابق بیشتر با برنامه)', s: 'ماز', every: 14, start: '08:00' },
+    own: { n: 'آزمون دیگر (مدرسه یا موسسه‌ی دیگر)', s: 'آزمون', every: 14, start: '08:00' }
   };
+  var MAZ = JSON.parse(document.getElementById('maz-data').textContent);
+  var MAZD = { '12': ['7/17','8/1','8/15','8/29','9/13','9/27','10/25','11/9','11/23','12/7','12/21','1/6','1/20','2/3','2/17','2/24','3/21','3/28','4/4'],
+               '11': ['7/17','8/1','8/15','8/29','9/13','9/27','10/25','11/9','11/23','12/7','12/21','1/6','1/20','2/3','2/17','2/24','3/28'] };
+  MAZD['10'] = MAZD['11'];
+  function mazList(){
+    var L = MAZ[S.track + '|' + S.grade], byJ = {};
+    (L || []).forEach(function(e){ byJ[j2d(e.y, e.m, e.d)] = e; });
+    MAZD[S.grade].forEach(function(t){ var p = t.split('/'), m = +p[0], j = j2d(m >= 7 ? 1405 : 1406, m, +p[1]); if (!byJ[j]) byJ[j] = { b: {}, est: 1 }; });
+    return Object.keys(byJ).map(Number).sort(function(a, b){ return a - b; }).map(function(j){ var e = byJ[j]; e.j = j; return e; });
+  }
+  /* the next Maz exam (from this week on) whose budget includes this book */
+  function mazFor(src){
+    if (S.inst !== 'maz') return null;
+    var ws = weekStart(), L = mazList();
+    for (var i = 0; i < L.length; i++){ var e = L[i]; if (e.j < ws || S.exSkip[e.j]) continue; if (e.b[src]) return { j: e.j, t: e.b[src].t, p: e.b[src].p }; }
+    return null;
+  }
+  function pagesOf(p){ return (p || []).reduce(function(a, r){ return a + r[1] - r[0] + 1; }, 0); }
+  function pageAt(p, off){ for (var i = 0; i < p.length; i++){ var n = p[i][1] - p[i][0] + 1; if (off < n) return p[i][0] + Math.floor(off); off -= n; } var l = p[p.length - 1]; return l ? l[1] : 0; }
+  function offOfPage(p, page){ var o = 0; for (var i = 0; i < p.length; i++){ var r = p[i]; if (page >= r[1]) o += r[1] - r[0] + 1; else if (page >= r[0]) o += page - r[0] + 1; } return o; }
   var Y0 = j2d(1405, 7, 1), YEND = j2d(1406, 4, 15);
   function examDates(){
+    if (S.inst === 'maz') return mazList().map(function(e){ return e.j; });
     if (!S.inst || !S.exFirst) return [];
     var e = S.exEvery || 14, out = [], j = S.exFirst;
     while (j - e >= Y0) j -= e;
@@ -1046,9 +1142,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function nextExamJ(){ var ws = weekStart(); return liveExams().filter(function(j){ return j >= ws; })[0]; }
   function anaParts(){
     if (!S.exAna) return 0;
-    if (S.anaN) return S.anaN;
-    var weak = 0; for (var k in S.lv) if (k.indexOf(S.track + '|' + S.grade + '|') === 0 && S.lv[k] === 'w') weak++;
-    return Math.min(3, 1 + (S.grade !== '10' ? 1 : 0) * (weak >= 2 ? 1 : 0) + (S.grade === '12' && weak >= 4 ? 1 : 0));
+    return S.anaN || 1;
   }
   /* where a book should be by a date: school pace for this grade's books, earlier for reviews */
   function paceEnd(rev){ return rev ? (S.grade === '12' ? j2d(1405, 10, 30) : j2d(1405, 12, 25)) : (S.grade === '12' ? j2d(1405, 11, 30) : j2d(1406, 2, 15)); }
@@ -1090,7 +1184,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       e.p.items.forEach(function(x, xi){ (byBook[x.b] = byBook[x.b] || []).push({ k: e.p.id + ':' + xi, x: x, len: e.p.items.length > 1 ? HALF : e.p.len, mode: e.p.items.length > 1 ? x.mode : e.p.mode }); });
     }); });
     Object.keys(byBook).forEach(function(b){
-      var info = binfo(b), src = info.src || b, rev = !!info.rev, ch = chOf(src), w = ch.map(function(c){ return c[1]; });
+      var info = binfo(b), src = info.src || b, rev = !!info.rev, mz = mazFor(src);
+      if (mz){ mazTopics(b, info, src, rev, mz, byBook[b], ws); return; }
+      var ch = chOf(src), w = ch.map(function(c){ return c[1]; });
       var p0 = pgStart(b, src, rev), T = Math.max(p0, targetFor(b, src, rev, dl)), slots = byBook[b];
       var desc = slots.filter(function(s){ return s.mode !== 'تستی'; }), cons = desc.length ? desc : slots;
       var R = 0; for (var i = p0; i < T; i++) R += w[i];
@@ -1119,7 +1215,40 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
         TM[s.k] = { t: label, bg: budget(s.len, s.mode, s.x.tk, src, fresh, !!info.gen) };
       });
     });
+    (S.plan || []).forEach(function(l){ l.forEach(function(p){ p.items.forEach(function(x, xi){ if (x.tpo){ var k = p.id + ':' + xi; TM[k] = { t: x.tpo, bg: TM[k] ? TM[k].bg : '' }; } }); }); });
     return TM;
+  }
+
+  /* Maz: split the exam's page budget over the parts left until the exam; each part = a share of that budget */
+  function mazStart(b, mz){
+    var w = wkKey(); S.wkPg[w] = S.wkPg[w] || {};
+    var cur = S.pp[key(b)], off = cur && cur.j === mz.j ? cur.o : 0, st = S.wkPg[w]['m:' + b];
+    if (!st || st.j !== mz.j){ st = S.wkPg[w]['m:' + b] = { j: mz.j, o: off }; }
+    return st.o;
+  }
+  function mazTopics(b, info, src, rev, mz, slots, ws){
+    var P = pagesOf(mz.p), lbl = 'ماز ' + jlabel(mz.j), W = Math.max(1, Math.ceil((mz.j - ws + 1) / 7));
+    var o0 = P ? Math.min(P, mazStart(b, mz)) : 0, desc = slots.filter(function(s){ return s.mode !== 'تستی'; }), cons = desc.length ? desc : slots;
+    var M = cons.reduce(function(a, s){ return a + s.len; }, 0) || 1, wkShare = P ? (P - o0) / W : 0, pos = o0;
+    var expO = Math.min(P, o0 + wkShare);
+    EXP[b] = { maz: 1, j: mz.j, P: P, p: mz.p, t: mz.t, o0: o0, exp: expO, src: src, rev: rev, gen: !!info.gen, ex: true, n: P };
+    var lastR = null;
+    slots.forEach(function(s){
+      var fresh = cons.indexOf(s) >= 0 && s.mode !== 'تستی', label, share;
+      if (P && cons.indexOf(s) >= 0){
+        var q = wkShare * s.len / M, a = pos, z = Math.min(P, pos + q); pos = z;
+        share = P ? Math.max(1, Math.round((z - a) / P * 100)) : 0;
+        var pa = pageAt(mz.p, a), pz = pageAt(mz.p, Math.max(a, z - 0.01));
+        label = lbl + ' • ' + mz.t + ' • صفحه‌ی ' + fa(pa) + (pz > pa ? ' تا ' + fa(pz) : '');
+        lastR = [pa, pz];
+      } else if (P){
+        var hi = lastR ? lastR[1] : pageAt(mz.p, Math.max(0, o0 - 0.01)), lo = mz.p[0][0];
+        label = lbl + ' • تست ' + mz.t + (hi > lo ? ' (صفحه‌ی ' + fa(lo) + ' تا ' + fa(hi) + ')' : ' (بخش‌هایی که خوانده‌ای)'); share = 0;
+      } else {
+        share = Math.round(100 / Math.max(1, W * cons.length)); label = lbl + ' • ' + mz.t;
+      }
+      TM[s.k] = { t: label, bg: (share ? fa(share) + '٪ از بودجه‌ی این آزمون • ' : '') + budget(s.len, s.mode, s.x.tk, src, fresh, !!info.gen), sh: share };
+    });
   }
 
   /* ---------- custom fixed blocks (classes, sport, long rests) ---------- */
@@ -1134,7 +1263,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     var sel = document.getElementById('inst');
     sel.innerHTML = '<option value="">برنامه‌ی ثابت ندارم (هر هفته خودم می‌گویم)</option>' + Object.keys(INST).map(function(k){ return '<option value="' + k + '">' + INST[k].n + '</option>'; }).join('');
     sel.value = S.inst || '';
-    var prog = !!S.inst, info = exInfo();
+    var prog = !!S.inst, info = exInfo(), isMaz = S.inst === 'maz';
+    document.getElementById('ex-gen').hidden = isMaz;
+    document.getElementById('ex-maz').hidden = !isMaz;
     document.getElementById('ex-prog').hidden = !prog;
     document.getElementById('ex-man').hidden = prog;
     document.getElementById('ex-common').hidden = !(prog || S.ex);
@@ -1150,8 +1281,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       chips(box.querySelector('.chips'), up.map(function(j){ return [j, jlabel(j, true)]; }), function(j){ return !S.exSkip[j]; }, function(j){ if (S.exSkip[j]) delete S.exSkip[j]; else S.exSkip[j] = 1; renderExam(); changed(true); });
       var nx = nextExamJ();
       document.getElementById('ex-note').textContent = (info ? 'این هفته ' + jlabel(info.j, true) + ' آزمون داری؛ روزِ قبلش تست‌ها زمان‌دار می‌شوند. ' : (nx ? 'آزمون بعدی: ' + jlabel(nx, true) + '. ' : ''))
-        + 'فاصله‌ی آزمون‌ها و مباحث تخمینی است؛ تاریخ دقیق را از برنامه‌ی رسمی ' + INST[S.inst].n + ' بزن و اگر مباحث فرق داشت، پایین درستش کن.';
-      renderCov(nx);
+        + (isMaz ? (MAZ[S.track + '|' + S.grade] ? 'تاریخ‌ها و مباحث از برنامه‌ی رسمی ماز ۱۴۰۵-۱۴۰۶ است.' : 'تاریخ‌ها از برنامه‌ی ماز است؛ مباحث این پایه هنوز در برنامه‌ساز نیست و ددلاین‌ها تخمینی‌اند.')
+          : 'فاصله‌ی آزمون‌ها و مباحث تخمینی است؛ تاریخ دقیق را از برنامه‌ی آزمونت بزن و اگر مباحث فرق داشت، پایین درستش کن.');
+      if (isMaz){ document.getElementById('ex-cov').hidden = true; renderMaz(nx); } else renderCov(nx);
     } else {
       chips(document.getElementById('ex'), [[true,'بله'],[false,'نه']], S.ex, function(v){ S.ex = v; renderExam(); changed(true); });
       document.getElementById('ex-day-box').hidden = !S.ex;
@@ -1163,13 +1295,20 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
         xd.appendChild(b);
       });
     }
-    document.getElementById('t-ex').value = S.exStart;
+    var tx = document.getElementById('t-ex'); tx.value = S.exStart;
+    if (S.inst === 'maz'){ tx.min = '08:00'; tx.max = '12:30'; } else { tx.removeAttribute('min'); tx.removeAttribute('max'); }
+    document.getElementById('t-ex-note').textContent = S.inst === 'maz' ? 'ماز از ساعت ۸ شروع می‌شود و دیرترین زمان ورود ۱۲:۳۰ است. ساعتی را بزن که خودت وارد می‌شوی.' : '';
     var ds = document.getElementById('ex-dur');
     ds.innerHTML = [90,120,135,150,165,180,210,240].map(function(m){ return '<option value="' + m + '"' + (m === exDur() ? ' selected' : '') + '>' + hm(m) + '</option>'; }).join('');
-    var auto = (function(){ var a = S.anaN; S.anaN = 0; var x0 = S.exAna; S.exAna = true; var n = anaParts(); S.anaN = a; S.exAna = x0; return n; })();
-    chips(document.getElementById('exana'), [[0,'خودکار (' + fa(auto) + ' پارت)'],[1,'۱ پارت'],[2,'۲ پارت'],[3,'۳ پارت'],[-1,'نه']], S.exAna ? S.anaN : -1, function(v){
+    chips(document.getElementById('exana'), [[1,'۱ پارت'],[2,'۲ پارت'],[3,'۳ پارت'],[-1,'نه']], S.exAna ? (S.anaN || 1) : -1, function(v){
       if (v < 0){ S.exAna = false; } else { S.exAna = true; S.anaN = v; } renderExam(); changed(true); });
-    document.getElementById('ana-why').textContent = S.exAna ? 'تحلیل خودکار: دهم ۱ پارت؛ یازدهم و دوازدهم با ۲ درس ضعیف یا بیشتر ۲ پارت؛ دوازدهم با ۴ درس ضعیف یا بیشتر ۳ پارت. پارت اول: دسته‌بندی غلط‌ها؛ دوم: رفع اشکال درس ضعیف؛ سوم: تست مشابهِ غلط‌ها.' : '';
+    document.getElementById('ana-why').textContent = S.exAna ? 'هر پارت ۹۰ دقیقه. پارت اول: دسته‌بندی غلط‌ها؛ دوم: رفع اشکال درس‌های ضعیف؛ سوم: تست مشابهِ غلط‌ها. اگر درس ضعیف زیاد داری، ۲ یا ۳ پارت بگذار.' : '';
+  }
+  function renderMaz(nx){
+    var box = document.getElementById('ex-maz'), e = mazList().filter(function(x){ return x.j === nx; })[0];
+    if (!e){ box.innerHTML = ''; return; }
+    var rows = Object.keys(e.b).map(function(b){ var x = e.b[b], P = pagesOf(x.p); return '<li><b>' + fa(b) + '</b><span>' + esc(x.t) + '</span>' + (P ? '<small>' + x.p.map(function(r){ return 'صفحه‌ی ' + fa(r[0]) + ' تا ' + fa(r[1]); }).join(' و ') + ' (' + fa(P) + ' صفحه)</small>' : '') + '</li>'; }).join('');
+    box.innerHTML = '<span class="lab">بودجه‌ی آزمون ' + jlabel(nx, true) + '</span>' + (rows ? '<ul class="mz">' + rows + '</ul>' : '<p class="note" style="margin:0">' + esc(e.all || 'مباحث این آزمون ثبت نشده.') + '</p>');
   }
   function renderCov(nx){
     var box = document.getElementById('ex-cov');
@@ -1222,6 +1361,47 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     document.getElementById('strat-note').textContent = STRAT_NOTE[S.strat || 'bal'];
   }
 
+  /* ---------- exam scorecard ---------- */
+  function scKey(){ return S.track + '|' + S.grade; }
+  function scAll(){ var o = S.scores[scKey()] || {}; return Object.keys(o).map(Number).sort(function(a, b){ return b - a; }).map(function(j){ return { j: j, v: o[j] }; }); }
+  function lastScore(src){ var L = scAll(); for (var i = 0; i < L.length; i++) if (L[i].v[src] != null && L[i].v[src] !== '') return { j: L[i].j, p: +L[i].v[src], prev: (function(){ for (var k = i + 1; k < L.length; k++) if (L[k].v[src] != null && L[k].v[src] !== '') return +L[k].v[src]; return null; })() }; return null; }
+  function scoreF(src){
+    var x = lastScore(src); if (!x || weekStart() - x.j > 42) return 1;
+    var f = x.p < 25 ? 1.25 : x.p < 45 ? 1.12 : x.p > 75 ? 0.9 : 1;
+    if (x.prev != null && x.prev - x.p >= 15) f *= 1.08;
+    return f;
+  }
+  function scBooks(j){
+    var e = S.inst === 'maz' ? mazList().filter(function(x){ return x.j === j; })[0] : null;
+    var mine = DATA[S.track].filter(function(d){ return d.g <= +S.grade && d.k > 0; }).map(function(d){ return d.b; });
+    if (e && Object.keys(e.b).length) return Object.keys(e.b).filter(function(b){ return mine.indexOf(b) >= 0; });
+    return DATA[S.track].filter(function(d){ return d.g === +S.grade && d.k > 0; }).map(function(d){ return d.b; });
+  }
+  var scSel = null;
+  function renderScores(){
+    var box = document.getElementById('sc'); if (!box) return;
+    var t = todayJ(), past = examDates().filter(function(j){ return j <= t && !S.exSkip[j]; }).reverse().slice(0, 8);
+    if (!past.length){ box.innerHTML = '<p class="note" style="margin:0">' + (S.inst ? 'هنوز آزمونی از برنامه‌ات برگزار نشده؛ بعد از اولین آزمون، درصدهایت را این‌جا بزن.' : 'وقتی آزمونت را در مرحله‌ی «آزمون» انتخاب کنی، این‌جا می‌توانی درصد هر درس را بزنی.') + '</p>'; return; }
+    if (past.indexOf(scSel) < 0) scSel = past[0];
+    var cur = (S.scores[scKey()] || {})[scSel] || {}, bs = scBooks(scSel);
+    var html = '<div class="field"><label class="lab" for="sc-ex">کدام آزمون؟</label><select id="sc-ex">' + past.map(function(j){ var has = (S.scores[scKey()] || {})[j]; return '<option value="' + j + '"' + (j === scSel ? ' selected' : '') + '>' + (S.inst === 'maz' ? 'ماز ' : '') + jlabel(j, true) + (has ? ' ✓' : '') + '</option>'; }).join('') + '</select></div>'
+      + '<div class="scg">' + bs.map(function(b){ var x = lastScore(b), pv = x && x.j !== scSel ? x.p : null;
+        return '<label>' + fa(b) + '<span class="pair"><input type="number" inputmode="decimal" min="-33.3" max="100" step="0.1" data-sb="' + esc(b) + '" value="' + (cur[b] != null ? cur[b] : '') + '" placeholder="درصد">' + (pv != null ? '<small>قبلی ' + fa(Math.round(pv)) + '٪</small>' : '') + '</span></label>'; }).join('') + '</div>'
+      + '<div class="weekbar" style="margin-top:10px"><button type="button" class="btn acc" id="sc-save">ثبت کارنامه</button></div><p class="note" id="sc-msg" role="status" style="margin:0"></p>';
+    box.innerHTML = html;
+    document.getElementById('sc-ex').onchange = function(ev){ scSel = +ev.target.value; renderScores(); };
+    document.getElementById('sc-save').onclick = function(){
+      var o = {}, bad = 0;
+      box.querySelectorAll('[data-sb]').forEach(function(el){ var v = String(el.value).trim(); if (v === '') return; var n = +v; if (isNaN(n) || n < -33.34 || n > 100){ bad++; return; } o[el.dataset.sb] = Math.round(n * 10) / 10; });
+      if (bad){ document.getElementById('sc-msg').textContent = 'درصد باید بین منفی ۳۳ و ۱۰۰ باشد.'; return; }
+      if (!Object.keys(o).length){ document.getElementById('sc-msg').textContent = 'حداقل درصد یک درس را بزن.'; return; }
+      S.scores[scKey()] = S.scores[scKey()] || {}; S.scores[scKey()][scSel] = o;
+      changed(true); push('score'); scSel = scSel; renderScores();
+      var low = Object.keys(o).filter(function(b){ return o[b] < 45; });
+      document.getElementById('sc-msg').textContent = 'ثبت شد. ' + (low.length ? 'درس‌های زیر ۴۵٪ (' + low.map(fa).join('، ') + ') در برنامه وقت بیشتری گرفتند.' : 'برنامه با درصدهایت تنظیم شد.');
+    };
+  }
+
   /* ---------- weekly report ---------- */
   function wkParts(){
     var ids = []; (S.plan || []).forEach(function(l){ l.forEach(function(p){ ids.push(p.id); }); });
@@ -1230,6 +1410,13 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   function doneMap(){ var w = wkKey(); S.done[w] = S.done[w] || {}; return S.done[w]; }
   function statusOf(b){
     var e = EXP[b]; if (!e) return null;
+    if (e.maz){
+      var c = S.pp[key(b)], o = c && c.j === e.j ? c.o : 0, rep = c && c.wk === wkKey();
+      if (e.P && o >= e.P) return { c: 'ok', t: 'بودجه‌ی آزمون تمام شد', now: o };
+      if (o >= e.exp - 0.5) return { c: 'on', t: 'روی برنامه', now: o };
+      if (!rep) return { c: 'unk', t: 'بزن تا کجا رسیدی', now: o };
+      return { c: 'late', t: 'عقب: ' + fa(Math.round(e.exp - o)) + ' صفحه', now: o };
+    }
     var now = pgNow(b, e.src, e.rev);
     if (now >= e.T) return { c: 'ok', t: e.ex ? 'به مباحث آزمون رسیدی' : 'جلوتر از برنامه', now: now };
     if (now >= e.exp) return { c: 'on', t: 'روی برنامه', now: now };
@@ -1242,7 +1429,14 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     var nx = nextExamJ(), ws = weekStart();
     document.getElementById('rp-sub').textContent = 'هفته‌ی ' + jlabel(ws) + ' تا ' + jlabel(ws + 6);
     var rows = Object.keys(EXP).sort(function(a, b){ return EXP[a].rev - EXP[b].rev || EXP[a].gen - EXP[b].gen; }).map(function(b){
-      var e = EXP[b], st = statusOf(b), ch = chOf(e.src);
+      var e = EXP[b], st = statusOf(b);
+      if (e.maz){
+        var pg = st.now ? pageAt(e.p, st.now - 0.01) : '', ex = e.P ? pageAt(e.p, Math.max(0, e.exp - 0.01)) : 0;
+        return '<div class="pr"><div class="pn"><b>' + fa(b) + '</b><small>ماز ' + jlabel(e.j) + ': ' + esc(e.t) + (e.P ? ' • هدف این هفته: تا صفحه‌ی ' + fa(ex) + ' (' + fa(Math.round(e.exp / e.P * 100)) + '٪ بودجه)' : '') + '</small></div>'
+          + (e.P ? '<label class="pgin">تا صفحه‌ی<input type="number" inputmode="numeric" data-mb="' + esc(b) + '" min="' + e.p[0][0] + '" max="' + e.p[e.p.length - 1][1] + '" value="' + pg + '" placeholder="' + fa(e.p[0][0]) + '"></label>' : '<select data-mb="' + esc(b) + '"><option value="0">هنوز نه</option><option value="1"' + (st.now ? ' selected' : '') + '>تمام شد</option></select>')
+          + '<span class="st st-' + st.c + '">' + st.t + (e.P ? ' • ' + fa(Math.round(st.now / e.P * 100)) + '٪' : '') + '</span></div>';
+      }
+      var ch = chOf(e.src);
       var opts = '<option value="0"' + (st.now === 0 ? ' selected' : '') + '>هنوز شروع نکرده‌ام</option>' + ch.map(function(c, i){ return '<option value="' + (i + 1) + '"' + (i + 1 === st.now ? ' selected' : '') + '>تا آخر ' + esc(chName(ch, i)) + '</option>'; }).join('');
       return '<div class="pr"><div class="pn"><b>' + fa(b) + '</b><small>هدف این هفته: ' + (e.exp > e.p0 ? 'تا آخر فصل ' + fa(e.exp) : (e.T > e.p0 ? 'ادامه‌ی فصل ' + fa(e.p0 + 1) : 'تمرین و مرور')) + ' • ' + (e.ex ? 'آزمون بعد: تا فصل ' + fa(e.T) : 'تا آخر هفته: فصل ' + fa(e.T)) + '</small></div>'
         + '<select data-b="' + esc(b) + '" aria-label="تا کجا خواندی: ' + esc(b) + '">' + opts + '</select><span class="st st-' + st.c + '">' + st.t + '</span></div>';
@@ -1254,18 +1448,21 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       + '<div class="weekbar" style="margin-top:10px"><button type="button" class="btn acc" id="rp-save">' + (saved ? 'به‌روز کردن گزارش این هفته' : 'ثبت گزارش این هفته') + '</button>' + (S.wkOff ? '' : '<button type="button" class="btn ghost" id="rp-next">برنامه‌ی هفته‌ی بعد</button>') + '</div>'
       + '<p class="note" id="rp-msg" role="status"></p>'
       + ((S.reports || []).length ? '<div class="hist"><span class="lab">گزارش‌های قبلی</span>' + S.reports.slice(0, 8).map(function(r){ return '<div><span>' + esc(r.label) + '</span><b>' + fa(r.pct) + '٪</b><small>' + (r.behind.length ? 'عقب: ' + r.behind.map(fa).join('، ') : 'همه روی برنامه') + '</small></div>'; }).join('') + '</div>' : '');
+    box.querySelectorAll('[data-mb]').forEach(function(s){ s.addEventListener('change', function(){
+      var b = s.dataset.mb, e = EXP[b], v = +s.value, o = e.P ? offOfPage(e.p, v) : (v ? 1 : 0);
+      S.pp[key(b)] = { j: e.j, o: o, wk: wkKey() }; save(); renderRep(); }); });
     box.querySelectorAll('select[data-b]').forEach(function(s){ s.addEventListener('change', function(){ S.pg[key(s.dataset.b)] = +s.value; S.pgWk[key(s.dataset.b)] = wkKey(); save(); renderRep(); }); });
     document.getElementById('rp-save').onclick = function(){
       var behind = [], reached = [], unk = [];
       Object.keys(EXP).forEach(function(b){ var st = statusOf(b); if (st.c === 'late') behind.push(b); if (st.c === 'unk') unk.push(b); if (st.c === 'ok' && EXP[b].ex) reached.push(b); });
       var r = { wk: wkKey(), label: jlabel(ws) + ' تا ' + jlabel(ws + 6), pct: pct, done: dn, total: ids.length, behind: behind, reached: reached, unk: unk, at: Date.now(),
-        ex: nx != null ? jlabel(nx, true) : '', pg: Object.keys(EXP).map(function(b){ var st = statusOf(b); return { b: b, now: st.now, exp: EXP[b].exp, T: EXP[b].T, n: EXP[b].n, s: st.c }; }) };
+        ex: nx != null ? jlabel(nx, true) : '', pg: Object.keys(EXP).map(function(b){ var st = statusOf(b), e = EXP[b]; return e.maz ? { b: b, maz: 1, pct: e.P ? Math.round(st.now / e.P * 100) : (st.now ? 100 : 0), expPct: e.P ? Math.round(e.exp / e.P * 100) : 0, ex: jlabel(e.j), s: st.c } : { b: b, now: st.now, exp: e.exp, T: e.T, n: e.n, s: st.c }; }) };
       S.reports = (S.reports || []).filter(function(x){ return x.wk !== r.wk; }); S.reports.unshift(r); S.reports = S.reports.slice(0, 16);
       S.boost = { wk: ws + 7, books: behind };
       save(); push('report'); renderRep();
       document.getElementById('rp-msg').textContent = 'ثبت شد' + (syncOn ? ' و برای مشاورت فرستاده شد' : '') + '. ' + (behind.length ? 'هفته‌ی بعد درس‌های عقب‌مانده (' + behind.map(fa).join('، ') + ') کمی وقت بیشتری می‌گیرند.' : 'آفرین؛ همه‌چیز روی برنامه است.') + (unk.length ? ' برای ' + fa(unk.length) + ' درس هنوز نگفته‌ای تا کجا رسیدی.' : '');
     };
-    var nb = document.getElementById('rp-next'); if (nb) nb.onclick = function(){ S.wkOff = 1; renderAll(false); document.getElementById('s-week').scrollIntoView({ behavior: 'smooth' }); };
+    var nb = document.getElementById('rp-next'); if (nb) nb.onclick = function(){ S.wkOff = 1; renderAll(false); showStep('plan', true); };
     var t = todayJ(), endish = !S.wkOff && satIdx(t) >= 5 && !saved;
     document.getElementById('rp-nudge').hidden = !endish;
   }
@@ -1297,11 +1494,11 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
         if (e.fx){ li.className = 'fixed fx-' + e.fx; li.innerHTML = '<i style="--c:' + (e.fx === 'exam' ? 'var(--weak)' : e.fx === 'anki' ? 'var(--accent)' : e.fx === 'blk' ? 'var(--ink2)' : 'var(--strong)') + '"></i><span>' + esc(e.label) + '<small>' + (e.fx === 'exam' ? 'مثل روز کنکور: زمان‌سنج، بدون گوشی' : e.fx === 'anki' ? '۱۵ دقیقه، کارت‌های امروز' : e.fx === 'blk' ? 'برنامه‌ی ثابت' : (e.sub || '')) + '</small></span><time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time>'; ul.appendChild(li); return; }
         if (e.meal){ li.className = 'meal'; li.innerHTML = '<i style="--c:var(--line)"></i><span>' + e.meal + '</span><time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time>'; ul.appendChild(li); return; }
         var p = e.p, prep = p.items.some(function(x){ return !x.rev && nextTT.indexOf(x.src) >= 0; });
-        var tpc = function(xi){ var t = TM[p.id + ':' + xi]; return t ? '<span class="tp">' + esc(t.t) + '</span><span class="bg">' + esc(t.bg) + '</span>' : ''; };
+        var tpc = function(xi){ var t = TM[p.id + ':' + xi], it = p.items[xi] || {}; return (t ? '<span class="tp">' + esc(t.t) + '</span>' + (t.bg ? '<span class="bg">' + esc(t.bg) + '</span>' : '') : '') + (it.cn ? '<span class="cn">مشاور: ' + esc(it.cn) + '</span>' : ''); };
         var names = p.items.length > 1
           ? '<span class="halves">' + p.items.map(function(x, xi){ return '<span>' + itemLabel(x) + '<small>' + x.mode + (x.tk ? ' • ' + x.tk : '') + ' • ۴۵ دقیقه</small>' + tpc(xi) + '</span>'; }).join('') + '</span>'
           : '<span>' + itemLabel(p.items[0]) + '<small>' + p.mode + (p.items[0].tk ? ' • ' + p.items[0].tk : '') + '</small>' + (prep ? '<em class="prep">کلاس فردا</em>' : '') + tpc(0) + '</span>';
-        li.innerHTML = '<i style="--c:' + colorOf(p.mode) + '"></i>' + names + '<span class="rt"><time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time><button type="button" class="ck" aria-pressed="' + !!dm[p.id] + '" aria-label="خواندم"></button></span>';
+        li.innerHTML = '<i style="--c:' + colorOf(p.mode) + '"></i>' + names + '<span class="rt"><time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time><button type="button" class="ck" aria-pressed="' + !!dm[p.id] + '" aria-label="خواندم"></button>' + (p.brk ? '<span class="brk-x">بعدش ' + fa(p.brk) + ' دقیقه استراحت</span>' : '') + '</span>';
         if (dm[p.id]) li.classList.add('done');
         li.querySelector('.ck').addEventListener('click', function(ev){ ev.stopPropagation(); if (dm[p.id]) delete dm[p.id]; else dm[p.id] = 1; save(); renderWeek(); });
         li.tabIndex = 0; li.setAttribute('role', 'button');
@@ -1320,7 +1517,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       if (endT > 23 * 60 + 30) el.insertAdjacentHTML('beforeend', '<div class="warn">این روز ساعت ' + fa(tstr(endT)) + ' تمام می‌شود. شب‌بیداری بازدهی را می‌کُشد؛ شروع را جلو بیاور یا ساعت کمتری بگذار.</div>');
       box.appendChild(el);
     });
-    renderPrint(); renderRep();
+    renderPrint(); renderRep(); renderScores(); if (typeof renderReview === 'function' && document.getElementById('rv')) try { renderReview(); } catch(e){}
   }
   function find(id){ for (var d = 0; d < 7; d++) for (var i = 0; i < S.plan[d].length; i++) if (S.plan[d][i].id === id) return [d, i]; return null; }
   function doSwap(a, b){
@@ -1337,13 +1534,14 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       + '<label>مدل تست<select class="e-k">' + ['','آموزشی','تمرینی','زمان‌دار','نشان‌دار','آزمونی'].map(function(k){ return '<option value="' + k + '"' + (k === (p.items[0].tk || '') ? ' selected' : '') + '>' + (k || '—') + '</option>'; }).join('') + '</select></label>'
       + '<label>شروع<input type="time" class="e-s" step="300" value="' + tstr(e.s) + '"></label>'
       + '<label>مدت<select class="e-l">' + [45, 60, 75, 90, 120].map(function(l){ return '<option value="' + l + '"' + (l === p.len ? ' selected' : '') + '>' + fa(l) + ' دقیقه</option>'; }).join('') + '</select></label>'
+      + '<label>استراحتِ بعد از این پارت<select class="e-r"><option value="0">مثل بقیه (' + fa(BRK()) + ' دقیقه)</option>' + [10, 20, 30, 45, 60, 90, 120].map(function(l){ return '<option value="' + l + '"' + (l === p.brk ? ' selected' : '') + '>' + fa(l) + ' دقیقه</option>'; }).join('') + '</select></label>'
       + '<div class="acts"><button type="button" class="btn e-ok">ذخیره</button><button type="button" class="btn ghost e-sw">جابه‌جا با پارت دیگر</button><button type="button" class="btn ghost e-del">حذف پارت</button></div>';
     box.querySelector('.e-ok').onclick = function(){
       var b = box.querySelector('.e-b').value, info = bookList().filter(function(x){ return x.b === b; })[0] || {};
       var m = box.querySelector('.e-m').value;
       var tk = m === 'تشریحی' ? '' : (box.querySelector('.e-k').value || 'تمرینی');
       p.items = [{ b: b, mode: m, tk: tk, gen: !!info.gen, rev: !!info.rev, fav: !!S.fav[key(b)], src: info.src || b }]; p.mode = m;
-      p.len = +box.querySelector('.e-l').value; p.start = box.querySelector('.e-s').value;
+      p.len = +box.querySelector('.e-l').value; p.start = box.querySelector('.e-s').value; p.brk = +box.querySelector('.e-r').value || 0;
       sel = null; S.planEdited = true; save(); renderWeek();
     };
     box.querySelector('.e-sw').onclick = function(){ swapFrom = p.id; sel = null; renderWeek(); };
@@ -1354,7 +1552,8 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   /* ---------- print sheet ---------- */
   function renderPrint(){
     var ps = document.getElementById('printsheet'), logo = document.getElementById('logofull').src;
-    var head = '<div class="ph"><img src="' + logo + '" alt=""><div><h1>برنامه‌ی هفتگی مطالعه</h1><p>کانون طلوع نخبگان • برنامه‌ساز کنکور • ضرایب ۱۴۰۶</p></div>'
+    var rs = rvState(), stamp = rs === 'ok' ? '<span class="pstamp ok">تأیید مشاور کانون' + (S.rv && S.rv.by ? ' • ' + esc(S.rv.by) : '') + '</span>' : '<span class="pstamp">پیش‌نویس • هنوز تأیید مشاور ندارد</span>';
+    var head = '<div class="ph"><img src="' + logo + '" alt=""><div><h1>برنامه‌ی هفتگی مطالعه ' + stamp + '</h1><p>کانون طلوع نخبگان • برنامه‌ساز کنکور • ضرایب ۱۴۰۶</p></div>'
       + '<div class="who"><b>' + esc(fullName() || '—') + '</b><br>' + NAME[S.grade] + ' ' + S.track + ' | ' + fa(dayHalves().reduce(function(a, b){ return a + b; }, 0) * HALF / 60) + ' ساعت در هفته</div></div>';
     var tip = NOTES[(new Date().getDate()) % NOTES.length];
     var th = '', td = '';
@@ -1364,7 +1563,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
         if (e.fx) return '<div class="pe pe-' + e.fx + '"><b>' + (e.fx === 'blk' ? '' : '☐ ') + esc(e.label) + '</b><span>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</span></div>';
         if (e.meal) return '<div class="pe meal"><b>' + e.meal + '</b><span>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</span></div>';
         var c = e.p.mode === 'تستی' ? ' pe-t' : e.p.mode === 'ترکیبی' ? ' pe-x' : '';
-        var tp = e.p.items.map(function(x, xi){ var t = TM[e.p.id + ':' + xi]; return t ? t.t : ''; }).filter(Boolean).join(' | ');
+        var tp = e.p.items.map(function(x, xi){ var t = TM[e.p.id + ':' + xi]; return (t ? t.t : '') + (x.cn ? ' (مشاور: ' + x.cn + ')' : ''); }).filter(Boolean).join(' | ');
         var bg = e.p.items.length === 1 && TM[e.p.id + ':0'] ? TM[e.p.id + ':0'].bg : '';
         return '<div class="pe' + c + '"><b>☐ ' + e.p.items.map(function(x){ return fa(x.b); }).join(' + ') + '</b>' + e.p.mode + (e.p.items.length === 1 && e.p.items[0].tk ? ' ' + e.p.items[0].tk : '') + ' • <span>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</span>' + (tp ? '<i>' + esc(tp) + '</i>' : '') + (bg ? '<u>' + esc(bg) + '</u>' : '') + '</div>';
       }).join('');
@@ -1376,7 +1575,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   }
 
   /* ---------- orchestration ---------- */
-  function sig(){ return JSON.stringify([weekStart(), S.inst, S.exFirst, S.exEvery, S.exSkip, S.anaN, S.blocks, S.brk, S.strat, S.norev, S.boost, S.ex, S.exDay, S.exStart, S.exDur, S.exAna, S.track, S.grade, S.school, S.sd, S.hs, S.ho, S.hd, S.fri, S.rev, S.lv, S.fav, S.tt]); }
+  function sig(){ return JSON.stringify([weekStart(), S.inst, S.exFirst, S.exEvery, S.exSkip, S.anaN, S.blocks, S.brk, S.strat, S.off, wkKey(), S.boost, S.ex, S.exDay, S.exStart, S.exDur, S.exAna, S.track, S.grade, S.school, S.sd, S.hs, S.ho, S.hd, S.fri, S.rev, S.lv, S.fav, S.tt]); }
   function changed(regen){
     renderTotal();
     var res = compute(); renderReport(res);
@@ -1403,11 +1602,13 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     document.getElementById(p[0]).addEventListener('change', function(ev){ if (ev.target.value){ S[p[1]] = ev.target.value; save(); renderWeek(); } });
   });
   document.getElementById('reset').addEventListener('click', function(){ changed(true); });
-  document.getElementById('t-ex').addEventListener('change', function(ev){ if (ev.target.value){ S.exStart = ev.target.value; changed(true); } });
+  document.getElementById('t-ex').addEventListener('change', function(ev){ var v = ev.target.value; if (!v) return;
+    if (S.inst === 'maz'){ var m = tmin(v); if (m < 480) v = '08:00'; if (m > 750) v = '12:30'; ev.target.value = v; }
+    S.exStart = v; changed(true); });
   document.getElementById('ex-dur').addEventListener('change', function(ev){ S.exDur = +ev.target.value; changed(true); });
   document.getElementById('inst').addEventListener('change', function(ev){
     S.inst = ev.target.value; S.cov = {}; S.exSkip = {};
-    if (S.inst){ var I = INST[S.inst], t = todayJ(); S.exEvery = I.every; S.exStart = I.start; if (!S.exFirst || S.exFirst < t - 6) S.exFirst = t + (6 - satIdx(t)); }
+    if (S.inst){ var I = INST[S.inst], t = todayJ(); S.exEvery = I.every; if (S.inst !== 'maz' || tmin(S.exStart) < 480 || tmin(S.exStart) > 750) S.exStart = I.start; if (!S.exFirst || S.exFirst < t - 6) S.exFirst = t + (6 - satIdx(t)); }
     renderExam(); changed(true);
   });
   function setFirst(){ var m = +document.getElementById('ex-jm').value, d = +document.getElementById('ex-jd').value, y = m >= 7 ? 1405 : 1406; if (m > 6 && d > 30) d = 30; S.exFirst = j2d(y, m, d); S.exSkip = {}; renderExam(); changed(true); }
@@ -1469,13 +1670,15 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       inst: S.inst ? INST[S.inst].n : '', nextExam: nextExamJ() != null ? jlabel(nextExamJ(), true) : '', anaParts: anaParts(), strat: S.strat, brk: BRK(),
       blocks: (S.blocks || []).map(function(b){ return { t: b.t || b.k, s: b.s, e: b.e, days: b.days }; }), norev: Object.keys(S.norev).map(function(k){ return k.split('|')[2]; }),
       week: jlabel(weekStart()) + ' تا ' + jlabel(weekStart() + 6),
-      progress: Object.keys(EXP).map(function(b){ var st = statusOf(b); return { b: b, now: st.now, exp: EXP[b].exp, T: EXP[b].T, n: EXP[b].n, s: st.c }; }),
+      progress: Object.keys(EXP).map(function(b){ var st = statusOf(b), e = EXP[b]; return e.maz ? { b: b, maz: 1, t: e.t, ex: jlabel(e.j), pct: e.P ? Math.round(st.now / e.P * 100) : (st.now ? 100 : 0), expPct: e.P ? Math.round(e.exp / e.P * 100) : 0, s: st.c } : { b: b, now: st.now, exp: e.exp, T: e.T, n: e.n, s: st.c }; }),
+      phone: S.phone || '', sName: S.sName || '', reg: S.reg || 0, wk: weekStart(), sig: planSig(), raw: S.plan, rvMsg: rvMsg || '', rvState: rvState(),
+      scores: scAll().slice(0, 10).map(function(x){ return { ex: (S.inst === 'maz' ? 'ماز ' : '') + jlabel(x.j), j: x.j, v: x.v }; }),
       donePct: (function(){ var ids = wkParts(), dm = doneMap(); return ids.length ? Math.round(ids.filter(function(i){ return dm[i]; }).length / ids.length * 100) : 0; })(),
       reports: (S.reports || []).slice(0, 8).map(function(r){ return { label: r.label, pct: r.pct, behind: r.behind, reached: r.reached, unk: r.unk || [], ex: r.ex, at: r.at }; }), ua: (navigator.userAgent || '').slice(0, 120) };
   }
   var syncT = null, ready = false;
   function push(ev){
-    if (!syncOn) return;
+    if (!syncOn || !S.reg) return;
     var body;
     try { body = JSON.stringify(snapshot(ev)); } catch(e){ return; }
     store.set('pending', ev || 'save');
@@ -1489,9 +1692,126 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden' && syncT){ clearTimeout(syncT); syncT = null; push('save'); } });
   pb.addEventListener('click', function(){ clearTimeout(syncT); syncT = null; push('print'); });
   window.addEventListener('online', function(){ if (store.get('pending', '')) push(store.get('pending', 'save')); });
+  /* ---------- counselor review before the plan is final ---------- */
+  var rvMsg = '';
+  function planSig(){
+    var x = JSON.stringify([weekStart(), (S.plan || []).map(function(l){ return l.map(function(p){ return [p.items.map(function(i){ return i.b + '|' + i.mode + '|' + (i.tk || ''); }), p.len, p.start || '', p.brk || 0]; }); })]);
+    var h = 5381; for (var i = 0; i < x.length; i++) h = ((h << 5) + h + x.charCodeAt(i)) | 0;
+    return (h >>> 0).toString(36);
+  }
+  function rvState(){
+    var r = S.rv; if (!r || !r.st) return 'draft';
+    if (r.sig && r.sig !== planSig()) return 'changed';
+    return r.st;   // pending | ok | fix
+  }
+  var RV_TXT = {
+    draft: ['پیش‌نویس', 'این برنامه هنوز پیش‌نویس است. وقتی از آن راضی بودی، برای مشاور کانون بفرست تا بررسی و تأییدش کند.'],
+    pending: ['منتظر بررسی مشاور', 'برنامه برای مشاور کانون فرستاده شد. بعد از بررسی، نتیجه همین‌جا نشان داده می‌شود. تا آن موقع می‌توانی طبق همین پیش‌نویس جلو بروی.'],
+    ok: ['تأیید مشاور', 'مشاور کانون این برنامه را تأیید کرد. حالا نسخه‌ی نهایی را چاپ کن.'],
+    edited: ['اصلاح و تأیید مشاور', 'مشاور کانون برنامه‌ات را خودش اصلاح و تأیید کرد؛ برنامه‌ی پایین همان نسخه است. حالا نسخه‌ی نهایی را چاپ کن.'],
+    fix: ['نیاز به اصلاح', 'مشاور کانون خواسته برنامه را اصلاح کنی:'],
+    changed: ['تغییر کرده', 'بعد از ارسال، برنامه را تغییر دادی. برای تأیید نسخه‌ی جدید، دوباره بفرست.']
+  };
+  function renderReview(){
+    var box = document.getElementById('rv'); if (!box) return;
+    var st = rvState(), r = S.rv || {}, t = RV_TXT[st === 'ok' && r.ed ? 'edited' : st], keep = document.getElementById('rv-msg'), kept = keep ? keep.value : '';
+    var canSend = st === 'draft' || st === 'fix' || st === 'changed';
+    box.className = 'rv rv-' + st;
+    box.innerHTML = '<div class="rv-h"><b>' + t[0] + '</b>' + (r.at && st !== 'draft' ? '<small>' + new Date(r.at).toLocaleDateString('fa-IR') + '</small>' : '') + '</div><p>' + t[1] + '</p>'
+      + ((st === 'fix' || st === 'ok') && r.note ? '<blockquote>' + esc(r.note) + (r.by ? '<cite>' + esc(r.by) + '</cite>' : '') + '</blockquote>' : '')
+      + ((st === 'fix' || st === 'ok') && r.aid ? '<div class="rv-au" id="rv-au"><button type="button" class="btn ghost" id="rv-play">🎧 پخش پیام صوتی مشاور</button></div>' : '')
+      + (canSend ? '<label class="rv-m">پیام برای مشاور (اختیاری)<input type="text" id="rv-msg" maxlength="200" placeholder="مثلاً: سه‌شنبه‌ها کلاس زبان دارم"></label><button type="button" class="btn acc" id="rv-send">' + (st === 'draft' ? 'ارسال برای بررسی مشاور' : 'ارسال دوباره برای مشاور') + '</button>' : '')
+      + (st === 'pending' ? '<button type="button" class="btn ghost" id="rv-check">بررسی وضعیت</button>' : '')
+      + (!syncOn ? '<p class="note" style="margin:6px 0 0">ارسال برای مشاور در نسخه‌ی روی سایت کانون فعال است.</p>' : '');
+    var mi = document.getElementById('rv-msg'); if (mi && kept) mi.value = kept;
+    var sb = document.getElementById('rv-send');
+    if (sb) sb.onclick = function(){
+      if (!syncOn){ return; }
+      rvMsg = (document.getElementById('rv-msg').value || '').trim();
+      S.rv = { st: 'pending', sig: planSig(), at: Date.now() }; _save2();
+      clearTimeout(syncT); syncT = null; push('review'); rvMsg = '';
+      renderReview(); renderPrint();
+    };
+    var pl = document.getElementById('rv-play'); if (pl) pl.onclick = function(){
+      pl.textContent = 'در حال دریافت…'; pl.disabled = true;
+      fetch(SYNC + '?action=audio&aid=' + encodeURIComponent(r.aid), { cache: 'force-cache' }).then(function(x){ return x.json(); }).then(function(j){
+        if (!j.ok) throw 0;
+        document.getElementById('rv-au').innerHTML = '<audio controls autoplay src="data:' + esc(j.mime || 'audio/webm') + ';base64,' + j.b64 + '"></audio>';
+      }).catch(function(){ pl.disabled = false; pl.textContent = 'دریافت نشد؛ دوباره بزن'; });
+    };
+    var cb = document.getElementById('rv-check'); if (cb) cb.onclick = function(){ cb.textContent = 'در حال بررسی…'; pullReview(true); };
+    var pb2 = document.getElementById('print'); pb2.textContent = st === 'ok' ? 'چاپ برنامه‌ی نهایی' : 'چاپ پیش‌نویس';
+  }
+  var rvT = null;
+  function pullReview(manual){
+    if (!syncOn || !S.reg) return;
+    fetch(SYNC + '?action=status&id=' + encodeURIComponent(devId) + '&t=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(j){
+      if (!j.ok) throw 0;
+      var r = j.review;
+      if (r && r.cplan && r.cpv && r.cpv !== S.cpApplied && r.wk === weekStart()){
+        var mx = 0; r.cplan.forEach(function(l){ l.forEach(function(p){ if (p.id > mx) mx = p.id; }); });
+        r.cplan.forEach(function(l){ l.forEach(function(p){ if (!p.id) p.id = ++mx; p.items.forEach(function(x){ x.src = x.src || x.b; }); }); });
+        S.plan = r.cplan; S.planKey = sig(); S.planEdited = true; S.cpApplied = r.cpv; sel = null; swapFrom = null;
+        S.rv = { st: 'ok', ed: 1, sig: planSig(), note: r.note, at: r.at, by: r.by, aid: r.aid };
+        _save2(); renderWeek(); renderReview(); return;
+      }
+      if (r && r.st){
+        var old = JSON.stringify(S.rv), keepSig = r.cpv && r.cpv === S.cpApplied && S.rv ? S.rv.sig : r.sig;
+        S.rv = { st: r.st, sig: keepSig, note: r.note, at: r.at, by: r.by, aid: r.aid, ed: r.cpv && r.cpv === S.cpApplied ? 1 : 0 };
+        if (old !== JSON.stringify(S.rv)){ _save2(); renderPrint(); renderReview(); return; }
+      }
+      if (manual) renderReview();
+    }).catch(function(){ if (manual){ var cb = document.getElementById('rv-check'); if (cb) cb.textContent = 'وصل نشد؛ دوباره امتحان کن'; } });
+  }
+  var lastPull = 0;
+  function pullSoon(){ if (Date.now() - lastPull < 20000) return; lastPull = Date.now(); pullReview(false); }
+  setInterval(function(){ if (document.visibilityState === 'visible' && S.rv && S.rv.st) pullReview(false); }, rvState() === 'pending' ? 90000 : 180000);
+  document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible' && S.rv && S.rv.st) pullSoon(); });
+
+  /* ---------- steps ---------- */
+  var STEPS = [['me','مشخصات'],['time','زمان'],['exam','آزمون'],['school','مدرسه'],['books','درس‌ها'],['plan','برنامه'],['report','گزارش هفته']];
+  function steps(){ return STEPS.filter(function(x){ return x[0] !== 'school' || S.school; }); }
+  function showStep(id, scroll){
+    var st = steps(), ids = st.map(function(x){ return x[0]; });
+    if (!S.reg) id = 'me';
+    var i = Math.max(0, ids.indexOf(id)); if (ids.indexOf(id) < 0) id = ids[0];
+    S.step = ids[i]; if (S.reg) S.maxStep = Math.max(S.maxStep || 0, i);
+    document.querySelectorAll('[data-step]').forEach(function(el){ var on = el.dataset.step === ids[i] && !(el.id === 's-tt' && !S.school); el.hidden = !on; if (on){ el.classList.remove('fade'); void el.offsetWidth; el.classList.add('fade'); } });
+    var n = st.length, pct = S.reg ? Math.round((Math.max(S.maxStep || 0, i) + 1) / n * 100) : 0;
+    document.getElementById('sp-pct').textContent = fa(pct) + '٪';
+    document.getElementById('sp-lab').textContent = S.reg ? 'مرحله‌ی ' + fa(i + 1) + ' از ' + fa(n) + ': ' + st[i][1] : 'اول مشخصاتت را ثبت کن';
+    document.getElementById('sp-fill').style.width = pct + '%';
+    var box = document.getElementById('sp-chips'); box.innerHTML = '';
+    st.forEach(function(x, k){
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'spc' + (k === i ? ' on' : '') + (S.reg && k <= (S.maxStep || 0) ? ' seen' : '');
+      b.innerHTML = '<i>' + fa(k + 1) + '</i>' + x[1]; b.disabled = !S.reg && k > 0; if (k === i) b.setAttribute('aria-current', 'step');
+      b.addEventListener('click', function(){ showStep(x[0], true); });
+      box.appendChild(b);
+    });
+    document.getElementById('reg-box').hidden = !!S.reg;
+    document.getElementById('stepnav').hidden = !S.reg;
+    document.getElementById('st-prev').disabled = i === 0;
+    document.getElementById('st-next').textContent = i === n - 1 ? 'برگشت به برنامه' : 'مرحله‌ی بعد: ' + st[i + 1][1];
+    document.getElementById('st-next').onclick = function(){ showStep(i === n - 1 ? 'plan' : ids[i + 1], true); };
+    document.getElementById('st-prev').onclick = function(){ showStep(ids[Math.max(0, i - 1)], true); };
+    _save2();
+    if (scroll) try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e){ window.scrollTo(0, 0); }
+  }
+  [['phone','phone'],['s-name','sName']].forEach(function(p){ var el = document.getElementById(p[0]); el.value = S[p[1]] || ''; el.addEventListener('input', function(){ S[p[1]] = el.value; save(); }); });
+  document.getElementById('reg-go').addEventListener('click', function(){
+    var n = (S.name || '').trim(), er = document.getElementById('reg-err');
+    if (n.length < 2){ er.textContent = 'اسمت را بنویس تا برنامه به اسم خودت ساخته شود.'; document.getElementById('name').focus(); return; }
+    var ph = String(S.phone || '').replace(/[۰-۹]/g, function(c){ return '۰۱۲۳۴۵۶۷۸۹'.indexOf(c); }).replace(/[٠-٩]/g, function(c){ return '٠١٢٣٤٥٦٧٨٩'.indexOf(c); }).replace(/[\s\-]/g, '').replace(/^\+98/, '0').replace(/^0098/, '0');
+    if (!/^09\d{9}$/.test(ph)){ er.textContent = 'شماره موبایل را درست بنویس (۱۱ رقم، با ۰۹ شروع می‌شود).'; document.getElementById('phone').focus(); return; }
+    S.phone = ph;
+    if (!S.goal){ er.textContent = 'رشته‌ی هدفت را انتخاب کن (اگر نمی‌دانی، «هنوز نمی‌دانم» را بزن).'; document.getElementById('goal').focus(); return; }
+    er.textContent = ''; S.reg = Date.now(); _save2(); push('register'); showStep('time', true);
+  });
   renderAll(false);
+  showStep(S.step || 'me');
   ready = true;
-  if (syncOn && (store.get('pending', '') || !store.get('synced', 0) || Date.now() - store.get('synced', 0) > 864e5)) setTimeout(function(){ push(store.get('pending', '') || 'open'); }, 3000);
+  renderReview(); setTimeout(function(){ pullReview(false); }, 1500);
+  if (syncOn && S.reg && (store.get('pending', '') || !store.get('synced', 0) || Date.now() - store.get('synced', 0) > 864e5)) setTimeout(function(){ push(store.get('pending', '') || 'open'); }, 3000);
   window.__kp = { S: S, compute: compute, buildPlan: buildPlan, timeline: timeline, dayHalves: dayHalves, renderAll: renderAll, sampleTT: sampleTT, snapshot: snapshot, push: push };
 })();
 </script>
