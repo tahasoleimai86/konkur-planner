@@ -376,6 +376,20 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
 .bale code{font-size:12px;background:var(--chip);padding:1px 6px;border-radius:5px;user-select:all}
 .bale-btns{display:flex;flex-wrap:wrap;gap:8px}.bale-btns .btn{text-decoration:none}
 .msgr{display:flex;flex-direction:column;gap:6px;margin:0 0 12px}.msgr .note{margin:0}
+.note.warnc{color:var(--weak)}
+.pslot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:-2px 0 12px}.pslot small{color:var(--ink2);font-size:12px}
+.btn.faint{opacity:.72;font-weight:500;font-size:13px;padding:7px 12px}.btn.faint:hover{opacity:1}
+@media print{.pslot{display:none!important}}
+.fire{margin-inline-start:auto;display:inline-flex;align-items:baseline;gap:3px;font-weight:900;font-size:15px;padding:2px 10px;border-radius:999px;background:color-mix(in srgb,#f08a24 16%,var(--sheet));border:1.5px solid color-mix(in srgb,#f08a24 55%,transparent);cursor:help}
+.fire small{font-size:11px;font-weight:700;color:var(--ink2)}.fire em{font-style:normal;font-size:11px}
+.fire.cold{filter:grayscale(1);opacity:.7}.fire.risk{animation:firepulse 1.6s ease-in-out infinite}
+@keyframes firepulse{50%{box-shadow:0 0 0 5px color-mix(in srgb,#f08a24 25%,transparent)}}
+@media (prefers-reduced-motion:reduce){.fire.risk{animation:none}}
+.btn.fwd{margin:8px 12px 0;font-size:12.5px;padding:5px 10px}
+li.moved>i{outline:2px dashed var(--accent);outline-offset:1px}
+li.moved>span:first-of-type::after{content:" ↻";color:var(--accent);font-weight:900}
+@media print{.fire,.btn.fwd{display:none!important}}
+.au-help{margin:6px 0 0;font-size:12.5px}
 
 /* pdf */
 #pdfbox .ph{display:flex;align-items:center;gap:12px;border-bottom:2px solid #1b2540;padding-bottom:6px;margin-bottom:8px}
@@ -411,7 +425,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
 #pdfbox .pe u{font-size:8.5px;line-height:1.4}
 #pdfbox .ph img{height:70px}
 #pdfbox .pstamp{display:inline-block;font-size:11px;font-weight:700;border:1.5px dashed #b3262b;color:#b3262b;border-radius:6px;padding:0 8px;margin-inline-start:8px;vertical-align:middle}
-#pdfbox .pstamp.ok{border-style:solid;border-color:#23806d;color:#23806d}</style>
+#pdfbox .pstamp.ok{border-style:solid;border-color:#23806d;color:#23806d}
+#pdfbox .pslot{display:none!important}
+#pdfbox .fire,#pdfbox .btn.fwd{display:none!important}</style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -478,6 +494,13 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
         <label>شام<span class="pair"><input type="time" id="t-d1" step="300"><input type="time" id="t-d2" step="300"></span></label>
         <label>استراحت بین پارت‌ها<select id="brk"></select></label>
       </div>
+    </div>
+    <div class="field sleep" style="margin-top:12px"><span class="lab">خواب شب 😴</span>
+      <div class="times">
+        <label>ساعت خواب<input type="time" id="t-bed" step="300"></label>
+        <label>ساعت بیداری<input type="time" id="t-wake" step="300"></label>
+      </div>
+      <p class="note" id="sleep-note" role="status" style="margin:6px 0 0"></p>
     </div>
     <div class="field" style="margin-top:12px"><span class="lab">کلاس‌ها و کارهای ثابت</span>
       <p class="note" style="margin:0 0 6px">کلاس تقویتی، ورزش، استراحتِ بلندتر یا هر کار ثابتی؛ آن ساعت‌ها از مطالعه‌ی همان روز کم می‌شوند.</p>
@@ -546,7 +569,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   </section>
 
   <section class="sheet fade" aria-labelledby="h-week" style="animation-delay:.25s" id="s-week" data-step="plan">
-    <div class="sh"><h2 id="h-week">برنامه‌ی هفتگی</h2><span id="edited" class="edited"></span></div>
+    <div class="sh"><h2 id="h-week">برنامه‌ی هفتگی</h2><span id="edited" class="edited"></span><span id="fire" class="fire" hidden></span></div>
     <div class="chips wkoff" id="wkoff" role="group" aria-label="کدام هفته"></div>
     <div class="nudge" id="rp-nudge" hidden>هفته رو به پایان است؛ پارت‌هایی را که خواندی تیک بزن و پایین صفحه گزارش این هفته را ثبت کن.</div>
     <div class="weekbar">
@@ -626,9 +649,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     get: function(k, d){ try { var v = localStorage.getItem('kp3:' + k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
     set: function(k, v){ try { localStorage.setItem('kp3:' + k, JSON.stringify(v)); } catch(e){} }
   };
-  var KEYS = ['bot','tbot','via','msgr','baleOn','cpApplied','rv','scores','reg','step','maxStep','phone','sName','off','pp','inst','exFirst','exEvery','exSkip','anaN','blocks','brk','strat','norev','pg','wkPg','done','reports','boost','cov','wkOff','pgWk','anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
-  var DEF = { bot:'', tbot:'', via:'', msgr:'b', baleOn:false, cpApplied:0, rv:null, scores:{}, reg:0, step:0, maxStep:0, phone:'', sName:'', off:{}, pp:{}, inst:'', exFirst:0, exEvery:14, exSkip:{}, anaN:1, blocks:[], brk:15, strat:'bal', norev:{}, pg:{}, wkPg:{}, done:{}, reports:[], boost:null, cov:{}, wkOff:0, pgWk:{}, anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
-    tss:'15:15', tso:'08:00', l1:'13:00', l2:'14:00', d1:'20:30', d2:'21:15', plan:null, planKey:'' };
+  var KEYS = ['sigMap','vapid','bed','wake','streak','mvDone','pushOn','bot','tbot','via','msgr','baleOn','cpApplied','rv','scores','reg','step','maxStep','phone','sName','off','pp','inst','exFirst','exEvery','exSkip','anaN','blocks','brk','strat','norev','pg','wkPg','done','reports','boost','cov','wkOff','pgWk','anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
+  var DEF = { sigMap:{}, vapid:'', streak:null, mvDone:{}, pushOn:0, bot:'', tbot:'', via:'', msgr:'b', baleOn:false, cpApplied:0, rv:null, scores:{}, reg:0, step:0, maxStep:0, phone:'', sName:'', off:{}, pp:{}, inst:'', exFirst:0, exEvery:14, exSkip:{}, anaN:1, blocks:[], brk:15, strat:'bal', norev:{}, pg:{}, wkPg:{}, done:{}, reports:[], boost:null, cov:{}, wkOff:0, pgWk:{}, anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
+    tss:'15:15', tso:'08:00', bed:'23:00', wake:'06:30', l1:'13:00', l2:'14:00', d1:'20:30', d2:'21:15', plan:null, planKey:'' };
   var S = {}; KEYS.forEach(function(k){ S[k] = store.get(k, DEF[k]); });
   function save(){ KEYS.forEach(function(k){ store.set(k, S[k]); }); }
   var NOTE_SRC = [
@@ -846,13 +869,37 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     return out;
   }
   function fixedMin(d){ return fixedOf(d).reduce(function(a, f){ return a + f.e - f.s; }, 0); }
+  /* sleep: bedtime on the same evening (after midnight → +24h); at least 6 hours of sleep */
+  function bedMin(){ var b = tmin(S.bed || '23:00'); return b < 12 * 60 ? b + 1440 : b; }
+  function sleepMin(){ return ((tmin(S.wake || '06:30') - tmin(S.bed || '23:00')) % 1440 + 1440) % 1440; }
+  var CALM = 30;   // the last half hour before bed: no heavy parts
+  function overlap(a, b, c, d){ return Math.max(0, Math.min(b, d) - Math.max(a, c)); }
+  /* minutes free for parts on day d between its start and bedtime − CALM */
+  function freeMin(d){
+    var st = tmin(isSchool(d) ? S.tss : S.tso), end = bedMin() - CALM, f = end - st;
+    [[tmin(S.l1), tmin(S.l2)], [tmin(S.d1), tmin(S.d2)]].forEach(function(m){ f -= overlap(st, end, m[0], m[1]); });
+    fixedOf(d).forEach(function(x){ f -= overlap(st, end, x.s, x.e); });
+    return Math.max(0, f);
+  }
+  function capHalves(d){ return Math.max(0, Math.floor((freeMin(d) + BRK()) / (PART + BRK()) * 2)); }
   function dayHalves(){
     var out = [];
     for (var d = 0; d < 7; d++){
       var h = S.school ? (isSchool(d) ? S.hs : S.ho) : (d === 6 && S.fri ? Math.round(S.hd / 2) : S.hd);
-      out.push(Math.max(0, h - Math.ceil(fixedMin(d) / HALF)));
+      out.push(Math.max(0, Math.min(h - Math.ceil(fixedMin(d) / HALF), capHalves(d))));
     }
     return out;
+  }
+  function wantHalves(d){ var h = S.school ? (isSchool(d) ? S.hs : S.ho) : (d === 6 && S.fri ? Math.round(S.hd / 2) : S.hd); return Math.max(0, h - Math.ceil(fixedMin(d) / HALF)); }
+  function renderSleep(){
+    var el = document.getElementById('sleep-note'); if (!el) return;
+    var m = sleepMin(), h = Math.floor(m / 60), mm = m % 60, cut = [];
+    for (var d = 0; d < 7; d++) if (capHalves(d) < wantHalves(d)) cut.push(DAYS[d]);
+    el.className = 'note' + (m < 420 || cut.length ? ' warnc' : '');
+    el.textContent = 'خوابت: ' + fa(h) + ' ساعت' + (mm ? ' و ' + fa(mm) + ' دقیقه' : '') + '. '
+      + (m < 420 ? 'کمتر از ۷ ساعت است؛ برای حافظه و تمرکز، ۸ ساعت بهترین است. ' : m >= 480 ? 'عالی؛ خواب کافی نصفِ یادگیری است. ' : '')
+      + 'نیم ساعت آخر قبل از خواب پارت سنگین نمی‌گذاریم.'
+      + (cut.length ? ' ⚠️ به‌خاطر ساعت خواب، ' + cut.join('، ') + ' کمتر از ساعتی که خواستی پارت دارد؛ شروع را زودتر کن یا دیرتر بخواب.' : '');
   }
   function stepper(label, sub, k, min, max){
     var row = document.createElement('div'); row.className = 'step';
@@ -889,6 +936,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     [['t-ss','tss'],['t-so','tso'],['t-l1','l1'],['t-l2','l2'],['t-d1','d1'],['t-d2','d2']].forEach(function(p){ document.getElementById(p[0]).value = S[p[1]]; });
     renderExam(); renderBlocks();
     chips(document.getElementById('anki'), [[true,'بله'],[false,'نه']], S.anki, function(v){ S.anki = v; renderTime(); save(); renderWeek(); });
+    renderSleep();
   }
   function renderTotal(){
     var h = dayHalves(), T = h.reduce(function(a, b){ return a + b; }, 0) * HALF, F = 0;
@@ -1534,6 +1582,8 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       var tl = timeline(d, list), tot = list.reduce(function(a, p){ return a + p.len; }, 0) + fixedMin(d);
       var tag = isSchool(d) ? '<span class="tag">مدرسه</span>' : '<span class="tag off">' + (!S.school && d === 6 && S.fri ? 'نیم‌روز' : 'تعطیل') + '</span>';
       el.innerHTML = '<div class="dh"><b>' + DAYS[d] + '</b>' + tag + '<span class="dt">' + clock(tot) + '</span></div>';
+      var isToday = !S.wkOff && d === satIdx(todayJ()) && d < 6, allDone = list.length && list.every(function(p){ return dm[p.id]; }), nxp = (S.plan[d + 1] || []).filter(function(p){ return !dm[p.id]; })[0], hasNext = !!nxp && capLeft()[d] >= nxp.len;
+      if (isToday && allDone && hasNext){ var fb = document.createElement('button'); fb.type = 'button'; fb.className = 'btn ghost fwd'; fb.textContent = '⚡ وقت اضافه آوردم: یک پارت از فردا'; fb.onclick = function(){ pullForward(d); }; el.appendChild(fb); }
       if (!tl.some(function(e){ return !e.meal; })){ el.insertAdjacentHTML('beforeend', '<div class="empty">استراحت</div>'); box.appendChild(el); return; }
       var ul = document.createElement('ul'); ul.className = 'ss';
       var nextTT = (S.school && S.tt && S.sd[(d + 1) % 7]) ? (S.tt[(d + 1) % 7] || []) : [];
@@ -1548,6 +1598,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
           : '<span>' + itemLabel(p.items[0]) + '<small>' + p.mode + (p.items[0].tk ? ' • ' + p.items[0].tk : '') + '</small>' + (prep ? '<em class="prep">کلاس فردا</em>' : '') + tpc(0) + '</span>';
         li.innerHTML = '<i style="--c:' + colorOf(p.mode) + '"></i>' + names + '<span class="rt"><time>' + fa(tstr(e.s)) + '–' + fa(tstr(e.e)) + '</time><button type="button" class="ck" aria-pressed="' + !!dm[p.id] + '" aria-label="خواندم"></button>' + (p.brk ? '<span class="brk-x">بعدش ' + fa(p.brk) + ' دقیقه استراحت</span>' : '') + '</span>';
         if (dm[p.id]) li.classList.add('done');
+        if (p.mv) li.classList.add('moved');
         li.querySelector('.ck').addEventListener('click', function(ev){ ev.stopPropagation(); if (dm[p.id]) delete dm[p.id]; else dm[p.id] = 1; save(); renderWeek(); });
         li.tabIndex = 0; li.setAttribute('role', 'button');
         if (sel === p.id || swapFrom === p.id) li.classList.add('sel');
@@ -1562,7 +1613,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       });
       el.appendChild(ul);
       var endT = 0; tl.forEach(function(e){ if (!e.meal && e.e > endT) endT = e.e; });
-      if (endT > 23 * 60 + 30) el.insertAdjacentHTML('beforeend', '<div class="warn">این روز ساعت ' + fa(tstr(endT)) + ' تمام می‌شود. شب‌بیداری بازدهی را می‌کُشد؛ شروع را جلو بیاور یا ساعت کمتری بگذار.</div>');
+      if (endT > bedMin() - CALM) el.insertAdjacentHTML('beforeend', '<div class="warn">این روز ساعت ' + fa(tstr(endT)) + ' تمام می‌شود ولی ساعت خوابت ' + fa(S.bed) + ' است. شروع را جلو بیاور یا یک پارت را جابه‌جا کن.</div>');
       box.appendChild(el);
     });
     renderPrint(); renderRep(); renderScores(); if (typeof renderReview === 'function' && document.getElementById('rv')) try { renderReview(); } catch(e){}
@@ -1647,7 +1698,15 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   [['g-uni','gUni'],['g-rank','gRank'],['g-why','gWhy']].forEach(function(p){ var el = document.getElementById(p[0]); el.value = S[p[1]] || ''; el.addEventListener('input', function(){ S[p[1]] = el.value; save(); showFuture(); renderPrint(); }); });
   document.getElementById('goal-prefix').addEventListener('change', function(ev){ S.goalPrefix = ev.target.value; save(); showFuture(); renderPrint(); });
   [['t-ss','tss'],['t-so','tso'],['t-l1','l1'],['t-l2','l2'],['t-d1','d1'],['t-d2','d2']].forEach(function(p){
-    document.getElementById(p[0]).addEventListener('change', function(ev){ if (ev.target.value){ S[p[1]] = ev.target.value; save(); renderWeek(); } });
+    document.getElementById(p[0]).addEventListener('change', function(ev){ if (ev.target.value){ var before = dayHalves().join(); S[p[1]] = ev.target.value; save(); renderSleep(); if (dayHalves().join() !== before) changed(true); else renderWeek(); } });
+  });
+  [['t-bed','bed'],['t-wake','wake']].forEach(function(p){
+    var el = document.getElementById(p[0]); el.value = S[p[1]];
+    el.addEventListener('change', function(){
+      if (!el.value) return; var old = S[p[1]]; S[p[1]] = el.value;
+      if (sleepMin() < 360){ S[p[1]] = old; el.value = old; var n = document.getElementById('sleep-note'); n.className = 'note warnc'; n.textContent = '⛔ کمتر از ۶ ساعت خواب مجاز نیست؛ بدن و حافظه‌ات به آن نیاز دارند. ساعت دیگری انتخاب کن.'; return; }
+      renderSleep(); changed(true);
+    });
   });
   document.getElementById('reset').addEventListener('click', function(){ changed(true); });
   document.getElementById('t-ex').addEventListener('change', function(ev){ var v = ev.target.value; if (!v) return;
@@ -1696,6 +1755,20 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   document.getElementById('consent').hidden = !(syncOn || IN_VIEWER);
   var devId = store.get('id', '');
   if (!devId){ devId = (Date.now().toString(36) + Math.random().toString(36).slice(2, 10)).replace(/[^a-z0-9]/g, ''); store.set('id', devId); }
+  /* how much a part matters if it has to give its place to a missed one:
+     konkur weight of the book × weak/strong × how far behind the exam budget it is (review parts and finished budgets matter less) */
+  function impOf(p){
+    var nx = nextExamJ(), soon = nx != null && nx - todayJ() <= 7;
+    return Math.round(Math.max.apply(null, p.items.map(function(x){
+      var info = binfo(x.b), lv = S.lv[key(x.b)] || 'm', st = EXP[x.b] ? statusOf(x.b) : null;
+      var f = (info.w || 1) * (lv === 'w' ? WEAK : lv === 's' ? STRONG : 1) * (x.rev ? 0.7 : 1) * (x.gen ? 0.85 : 1);
+      if (st) f *= { late: 1.4, unk: 1, on: 0.9, ok: 0.6 }[st.c] || 1;
+      if (soon && EXP[x.b] && EXP[x.b].maz) f *= 1.2;
+      return f;
+    })) * 100) / 100;
+  }
+  /* minutes still free on each day before bedtime (for moving missed parts there) */
+  function capLeft(){ return (S.plan || []).map(function(list, d){ var used = list.reduce(function(a, p){ return a + p.len + (p.brk || BRK()); }, 0); return Math.max(0, freeMin(d) - used); }); }
   function snapshot(ev){
     var res = compute(), g = goalInfo(), byLv = function(l){ return res.filter(function(x){ return x.lv === l; }).map(function(x){ return x.d.b; }); };
     var plan = (S.plan || []).map(function(list, d){
@@ -1703,7 +1776,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
         if (e.meal) return { k: 'meal', t: e.meal, s: tstr(e.s), e: tstr(e.e) };
         if (e.fx) return { k: e.fx === 'blk' ? 'blk' : e.fx, t: e.label, s: tstr(e.s), e: tstr(e.e) };
         var tp = e.p.items.map(function(x, xi){ var t = TM[e.p.id + ':' + xi]; return t ? t.t : ''; }).filter(Boolean).join(' | ');
-        return { k: 'part', t: e.p.items.map(function(x){ return x.b; }).join(' + '), m: e.p.mode, tk: e.p.items.length === 1 ? (e.p.items[0].tk || '') : '', s: tstr(e.s), e: tstr(e.e), tp: tp, bg: e.p.items.length === 1 && TM[e.p.id + ':0'] ? TM[e.p.id + ':0'].bg : '', ok: doneMap()[e.p.id] ? 1 : 0 };
+        return { k: 'part', id: e.p.id, imp: impOf(e.p), mv: e.p.mv ? 1 : 0, t: e.p.items.map(function(x){ return x.b; }).join(' + '), m: e.p.mode, tk: e.p.items.length === 1 ? (e.p.items[0].tk || '') : '', s: tstr(e.s), e: tstr(e.e), tp: tp, bg: e.p.items.length === 1 && TM[e.p.id + ':0'] ? TM[e.p.id + ':0'].bg : '', ok: doneMap()[e.p.id] ? 1 : 0 };
       });
     });
     return { id: devId, v: 9, event: ev || 'save', name: (S.name || '').trim(), full: fullName(), track: S.track, grade: S.grade, gradeName: NAME[S.grade],
@@ -1714,7 +1787,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       weak: byLv('w'), strong: byLv('s'), fav: res.filter(function(x){ return x.fav; }).map(function(x){ return x.d.b; }),
       top: res.slice(0, 3).map(function(x){ return x.d.b; }),
       report: res.map(function(x){ return { b: x.d.b, m: x.m, t1: x.t1, t2: x.t2, lv: x.lv, fav: x.fav ? 1 : 0, gen: x.d.gen ? 1 : 0 }; }),
-      edited: !!S.planEdited, plan: plan, days: DAYS,
+      edited: !!S.planEdited, plan: plan, days: DAYS, cap: capLeft(), bed: S.bed, wake: S.wake, mvDone: Object.keys(S.mvDone || {}),
       inst: S.inst ? INST[S.inst].n : '', nextExam: nextExamJ() != null ? jlabel(nextExamJ(), true) : '', anaParts: anaParts(), strat: S.strat, brk: BRK(),
       blocks: (S.blocks || []).map(function(b){ return { t: b.t || b.k, s: b.s, e: b.e, days: b.days }; }), norev: Object.keys(S.norev).map(function(k){ return k.split('|')[2]; }),
       week: jlabel(weekStart()) + ' تا ' + jlabel(weekStart() + 6),
@@ -1722,6 +1795,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       phone: S.phone || '', sName: S.sName || '', reg: S.reg || 0, wk: weekStart(), sig: planSig(), raw: S.plan, rvMsg: rvMsg || '', rvState: rvState(),
       scores: scAll().slice(0, 10).map(function(x){ return { ex: (S.inst === 'maz' ? 'ماز ' : '') + jlabel(x.j), j: x.j, v: x.v }; }),
       donePct: (function(){ var ids = wkParts(), dm = doneMap(); return ids.length ? Math.round(ids.filter(function(i){ return dm[i]; }).length / ids.length * 100) : 0; })(),
+      sub: ev === 'sub' ? pushSub : undefined,
       reports: (S.reports || []).slice(0, 8).map(function(r){ return { label: r.label, pct: r.pct, behind: r.behind, reached: r.reached, unk: r.unk || [], ex: r.ex, at: r.at }; }), ua: (navigator.userAgent || '').slice(0, 120) };
   }
   var syncT = null, ready = false;
@@ -1810,11 +1884,12 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     box.className = 'rv rv-' + st;
     box.innerHTML = '<div class="rv-h"><b>' + t[0] + '</b>' + (r.at && st !== 'draft' ? '<small>' + new Date(r.at).toLocaleDateString('fa-IR') + '</small>' : '') + '</div><p>' + t[1] + '</p>'
       + ((st === 'fix' || st === 'ok') && r.note ? '<blockquote>' + esc(r.note) + (r.by ? '<cite>' + esc(r.by) + '</cite>' : '') + '</blockquote>' : '')
-      + ((st === 'fix' || st === 'ok') && r.aid ? '<div class="rv-au" id="rv-au"><button type="button" class="btn ghost" id="rv-play">🎧 پخش پیام صوتی مشاور</button></div>' : '')
+      + ((st === 'fix' || st === 'ok') && r.aid ? '<div class="rv-au" id="rv-au"><button type="button" class="btn ghost" id="rv-play">🎧 پخش پیام صوتی مشاور</button>' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? '<p class="note au-help">' + voiceHelp() + '</p>' : '') + '</div>' : '')
       + (canSend ? '<label class="rv-m">پیام برای مشاور (اختیاری)<input type="text" id="rv-msg" maxlength="200" placeholder="مثلاً: سه‌شنبه‌ها کلاس زبان دارم"></label><button type="button" class="btn acc" id="rv-send">' + (st === 'draft' ? 'ارسال برای بررسی مشاور' : 'ارسال دوباره برای مشاور') + '</button>' : '')
       + (st === 'pending' ? '<button type="button" class="btn ghost" id="rv-check">بررسی وضعیت</button>' : '')
       + (!syncOn ? '<p class="note" style="margin:6px 0 0">ارسال برای مشاور در نسخه‌ی روی سایت کانون فعال است.</p>' : '')
-      + (syncOn ? botCard() : '');
+      + (syncOn ? botCard() : '')
+      + (pushOk() ? (S.pushOn ? '<p class="note" style="margin:4px 0 0">🔔 اعلان‌های سایت روشن است.</p>' : '<div class="bale pushc"><b>🔔 اعلان روی همین گوشی</b><p>بدون پیام‌رسان هم یادآورها و جواب مشاور را به‌صورت اعلان بگیر.' + (/iPhone|iPad/.test(navigator.userAgent) && !navigator.standalone ? ' در آیفون اول سایت را با «Add to Home Screen» به صفحه‌ی اصلی اضافه کن و از همان‌جا باز کن.' : '') + '</p><button type="button" class="btn ghost" id="push-on">روشن کردن اعلان‌ها</button></div>') : '');
     var mi = document.getElementById('rv-msg'); if (mi && kept) mi.value = kept;
     var sb = document.getElementById('rv-send');
     if (sb) sb.onclick = function(){
@@ -1828,11 +1903,21 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       pl.textContent = 'در حال دریافت…'; pl.disabled = true;
       fetch(SYNC + '?action=audio&aid=' + encodeURIComponent(r.aid), { cache: 'force-cache' }).then(function(x){ return x.json(); }).then(function(j){
         if (!j.ok) throw 0;
-        document.getElementById('rv-au').innerHTML = '<audio controls autoplay src="data:' + esc(j.mime || 'audio/webm') + ';base64,' + j.b64 + '"></audio>';
+        var box2 = document.getElementById('rv-au'), mime = j.mime || 'audio/webm';
+        box2.innerHTML = '<audio controls autoplay src="data:' + esc(mime) + ';base64,' + j.b64 + '"></audio>';
+        var au = box2.querySelector('audio'), shown = false, help = function(){ if (shown) return; shown = true; box2.insertAdjacentHTML('beforeend', '<p class="note au-help">' + voiceHelp() + '</p>'); };
+        au.addEventListener('error', help);
+        var probe = document.createElement('audio'); if (!probe.canPlayType(mime.split(';')[0])) help();   // e.g. iPhone + ogg from Bale/Telegram
       }).catch(function(){ pl.disabled = false; pl.textContent = 'دریافت نشد؛ دوباره بزن'; });
     };
+    var po = document.getElementById('push-on'); if (po) po.onclick = function(){ enablePush(po); };
     var cb = document.getElementById('rv-check'); if (cb) cb.onclick = function(){ cb.textContent = 'در حال بررسی…'; pullReview(true); };
     var pb2 = document.getElementById('print'); pb2.textContent = st === 'ok' ? 'چاپ برنامه‌ی نهایی' : 'چاپ پیش‌نویس';
+    // before the counselor approves: the draft print is quiet and sits under «send to counselor»
+    var wb = document.querySelector('#s-week .weekbar'), draft = syncOn && st !== 'ok';
+    if (draft){ var slot = document.getElementById('pslot'); if (!slot){ slot = document.createElement('div'); slot.id = 'pslot'; slot.className = 'pslot'; box.after(slot); } slot.appendChild(pb2); pb2.className = 'btn ghost faint';
+      if (!document.getElementById('pnote')) slot.insertAdjacentHTML('beforeend', '<small id="pnote">بهتر است اول مشاور تأیید کند، بعد چاپ کنی.</small>'); }
+    else { wb.insertBefore(pb2, wb.firstChild); pb2.className = 'btn acc'; var sl = document.getElementById('pslot'); if (sl) sl.remove(); }
   }
   /* bots: Bale and (optionally) Telegram. A bot can't message anyone first, so the student taps Start once; the link carries their id. */
   var PNAME = { b: 'بله', t: 'تلگرام' };
@@ -1864,12 +1949,93 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
     chips(document.getElementById('msgr'), opts, S.msgr, function(v){ S.msgr = v; save(); renderMsgr(); renderReview(); });
     document.getElementById('msgr-note').textContent = S.msgr ? 'با زدن «ثبت»، ربات ' + PNAME[S.msgr] + ' باز می‌شود؛ آنجا فقط یک بار «شروع» (Start) را بزن تا روی همین ثبت‌نام فعال شود.' + (S.msgr === 't' ? ' (تلگرام فقط با فیلترشکن باز می‌شود.)' : '') : 'بعداً هم از بخش «بررسی مشاور» می‌توانی وصل شوی.';
   }
+  /* why a voice note may not play in the browser (iPhone can't play ogg/webm) and where to hear it instead */
+  function voiceHelp(){
+    return S.baleOn
+      ? '🎧 اگر پخش نشد: مرورگرِ آیفون بعضی فایل‌های صوتی را پخش نمی‌کند. همین پیام صوتی در ربات ' + PNAME[S.via || 'b'] + ' هم برایت فرستاده شده؛ ربات را باز کن و همان‌جا گوش بده.'
+      : '🎧 اگر پخش نشد: مرورگرِ آیفون بعضی فایل‌های صوتی را پخش نمی‌کند. به ربات کانون در بله یا تلگرام وصل شو (دکمه‌ی پایین همین کادر)؛ از این به بعد پیام‌های صوتی مشاور همان‌جا برایت می‌آید و در ربات «📋 وضعیت برنامه» را بزن تا همین پیام را هم بگیری.';
+  }
+  /* ticks, moves and streak decided in the bot */
+  function findS(id){ for (var d = 0; d < 7; d++) for (var i = 0; i < (S.plan[d] || []).length; i++) if (String(S.plan[d][i].id) === String(id)) return [d, i]; return null; }
+  function movePart(mv){
+    if (mv.k === 'b'){ var eb = EXP[mv.book]; if (eb) S.pp[key(mv.book)] = { j: eb.j, o: eb.P || 1, wk: wkKey() }; return 'quiet'; }   // budget finished early
+    var a = findS(mv.pid); if (!a) return false;
+    if (mv.k === 'd'){   // started late: this part (and so the rest of the day) starts `min` minutes later
+      var ent = timeline(a[0], S.plan[a[0]]).filter(function(x){ return x.p && x.p.id === S.plan[a[0]][a[1]].id; })[0]; if (!ent) return false;
+      S.plan[a[0]][a[1]].start = tstr(ent.s + (+mv.min || 0)); return true;
+    }
+    if (mv.k === 'c'){   // this session goes to another (behind) book
+      var bi = binfo(mv.book), pc = S.plan[a[0]][a[1]];
+      pc.items = pc.items.map(function(x){ return { b: mv.book, mode: x.mode, gen: !!bi.gen, rev: false, fav: false, src: bi.src || mv.book }; }); pc.mv = 1; return true;
+    }
+    if (mv.k === 'x'){   // one extra session of a book that is behind
+      if (findS(mv.nid)) return false;
+      var cp = JSON.parse(JSON.stringify(S.plan[a[0]][a[1]])), Lx = S.plan[+mv.to]; if (!Lx) return false;
+      cp.id = +mv.nid; cp.start = null; cp.mv = 1;
+      if (mv.rep){ var rb = findS(mv.rep); if (!rb || rb[0] !== +mv.to) return false; Lx.splice(rb[1], 1, cp); } else Lx.push(cp);
+      return true;
+    }
+    var p = S.plan[a[0]][a[1]], L = S.plan[+mv.to]; if (!L) return false;
+    if (mv.k === 'r'){ var b = findS(mv.rep); if (!b || b[0] !== +mv.to) return false; S.plan[a[0]].splice(a[1], 1); b = findS(mv.rep); L.splice(b[1], 1, p); }
+    else { S.plan[a[0]].splice(a[1], 1); L.push(p); }
+    p.mv = 1; p.start = null; return true;
+  }
+  function keepApproval(fn){   // moving a part after the counselor's approval doesn't need a new approval
+    var was = rvState(); fn();
+    if (S.rv && S.rv.sig && (was === 'ok' || was === 'pending')){ var o = S.rv.sig, n = planSig(); if (o !== n){ S.sigMap = S.sigMap || {}; S.sigMap[o] = n; S.rv.sig = n; } }
+  }
+  function applyServer(j){
+    var ch = false, t = j.ticks;
+    if (t && t.wk === weekStart()){
+      var dm = doneMap(); (t.ok || []).forEach(function(id){ if (!dm[id]){ dm[id] = 1; ch = true; } });
+      S.mvDone = S.mvDone || {};
+      keepApproval(function(){ (t.mv || []).forEach(function(m){ if (S.mvDone[m.id]) return; var r = movePart(m); if (r === false && m.k !== 'd') return; S.mvDone[m.id] = 1; ch = true; if (r === true) S.planEdited = true; }); });
+    }
+    if (j.streak && JSON.stringify(j.streak) !== JSON.stringify(S.streak)){ S.streak = j.streak; ch = true; }
+    if (j.vapid !== undefined && (j.vapid || '') !== (S.vapid || '')){ S.vapid = j.vapid || ''; }
+    if (j.push !== undefined && !!j.push !== !!S.pushOn){ S.pushOn = j.push ? 1 : 0; ch = true; }
+    if (ch){ _save2(); renderWeek(); }
+    renderFire();
+  }
+  function renderFire(){
+    var el = document.getElementById('fire'), z = S.streak; if (!el) return;
+    el.hidden = !syncOn || !z;
+    if (!z) return;
+    el.className = 'fire' + (z.n ? '' : ' cold') + (!z.safe && z.n ? ' risk' : '');
+    el.innerHTML = '🔥 ' + fa(z.n) + '<small>' + (z.n ? 'روز' : 'زنجیره') + '</small>' + (z.fz ? '<em>' + Array(z.fz + 1).join('❄️') + '</em>' : '');
+    el.title = (z.n ? fa(z.n) + ' روز پشت‌سرهم همه‌ی پارت‌ها را خواندی' : 'یک روز را کامل کن تا زنجیره شروع شود') + ' • بهترین: ' + fa(z.best) + ' روز' + (z.total ? ' • امروز ' + fa(z.done) + ' از ' + fa(z.total) : '') + (z.fz ? ' • ❄️ هر یخ یک روز جامانده را می‌پوشاند' : '');
+  }
+  /* «⚡ وقت اضافه آوردم»: the first unfinished part of tomorrow comes to today */
+  function pullForward(d){
+    var dm = doneMap(), next = (S.plan[d + 1] || []).filter(function(p){ return !dm[p.id]; })[0]; if (!next) return;
+    keepApproval(function(){ var a = find(next.id); S.plan[a[0]].splice(a[1], 1); next.mv = 1; next.start = null; S.plan[d].push(next); S.planEdited = true; });
+    save(); renderWeek(); push('save');
+  }
+  /* web push: notifications from the site itself */
+  function b64uBytes(s){ s = s.replace(/-/g, '+').replace(/_/g, '/'); var r = atob(s + '==='.slice((s.length + 3) % 4)), a = new Uint8Array(r.length); for (var i = 0; i < r.length; i++) a[i] = r.charCodeAt(i); return a; }
+  function pushOk(){ return syncOn && S.vapid && 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window; }
+  function enablePush(btn){
+    if (!pushOk()) return;
+    var say = function(t){ if (btn) btn.textContent = t; };
+    say('در حال روشن کردن…');
+    Notification.requestPermission().then(function(perm){
+      if (perm !== 'granted') throw new Error('اجازه داده نشد');
+      return navigator.serviceWorker.ready;
+    }).then(function(reg){
+      return reg.pushManager.getSubscription().then(function(old){ return old || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uBytes(S.vapid) }); });
+    }).then(function(sub){
+      pushSub = sub.toJSON(); S.pushOn = 1; _save2(); push('sub'); renderReview();
+    }).catch(function(e){ say('روشن نشد: ' + (e && e.message ? e.message : 'مرورگر اجازه نداد')); });
+  }
+  var pushSub = null;
+  try { if ('caches' in window && syncOn) caches.open('kp-meta').then(function(c){ c.put('./kp-meta', new Response(JSON.stringify({ sync: SYNC, id: devId }))); }); } catch(e){}
   var rvT = null;
   function pullReview(manual){
     if (!syncOn) return;
     fetch(SYNC + '?action=status&id=' + encodeURIComponent(devId) + '&t=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(j){
       if (!j.ok) throw 0;
       setBots(j); if (!S.reg) return;
+      applyServer(j);
       var r = j.review;
       if (r && r.cplan && r.cpv && r.cpv !== S.cpApplied && r.wk === weekStart()){
         var mx = 0; r.cplan.forEach(function(l){ l.forEach(function(p){ if (p.id > mx) mx = p.id; }); });
@@ -1880,6 +2046,7 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
       }
       if (r && r.st){
         var old = JSON.stringify(S.rv), keepSig = r.cpv && r.cpv === S.cpApplied && S.rv ? S.rv.sig : r.sig;
+        for (var g = 0; g < 20 && S.sigMap && S.sigMap[keepSig]; g++) keepSig = S.sigMap[keepSig];   // parts moved after approval keep the approval
         S.rv = { st: r.st, sig: keepSig, note: r.note, at: r.at, by: r.by, aid: r.aid, ed: r.cpv && r.cpv === S.cpApplied ? 1 : 0 };
         if (old !== JSON.stringify(S.rv)){ _save2(); renderPrint(); renderReview(); return; }
       }
@@ -1936,9 +2103,9 @@ input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline
   renderAll(false);
   showStep(S.step || 'me');
   ready = true;
-  renderReview(); renderMsgr(); setTimeout(function(){ pullReview(false); }, S.reg ? 1500 : 300);
+  renderReview(); renderMsgr(); renderFire(); setTimeout(function(){ pullReview(false); }, S.reg ? 1500 : 300);
   if (syncOn && S.reg && (store.get('pending', '') || !store.get('synced', 0) || Date.now() - store.get('synced', 0) > 864e5)) setTimeout(function(){ push(store.get('pending', '') || 'open'); }, 3000);
-  window.__kp = { S: S, compute: compute, buildPlan: buildPlan, timeline: timeline, dayHalves: dayHalves, renderAll: renderAll, sampleTT: sampleTT, snapshot: snapshot, push: push, makePdf: makePdf };
+  window.__kp = { planSig: planSig, weekStart: weekStart, S: S, compute: compute, buildPlan: buildPlan, timeline: timeline, dayHalves: dayHalves, renderAll: renderAll, sampleTT: sampleTT, snapshot: snapshot, push: push, makePdf: makePdf };
 })();
 </script>
 

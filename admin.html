@@ -70,6 +70,11 @@ label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:70
 .code{font-size:22px;font-weight:900;letter-spacing:1px;background:var(--chip);border-radius:8px;padding:6px 10px;text-align:center;user-select:all}
 .chk{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:13px}.chk label{flex-direction:row;align-items:center;gap:4px;color:var(--ink)}.chk input{width:auto}
 code{font-size:12px;background:var(--chip);padding:1px 6px;border-radius:5px}
+table.heat{border-collapse:separate;border-spacing:3px;font-size:12.5px;min-width:100%}.heat th{font-size:11.5px;color:var(--ink2);font-weight:700;text-align:right;white-space:nowrap;padding:2px 6px}
+.heat thead th{text-align:center}.heat th small{display:block;font-weight:500;font-size:10.5px}.heat td{text-align:center;border-radius:6px;padding:6px 4px;font-weight:800;font-variant-numeric:tabular-nums;min-width:62px}
+.heat td.na{color:var(--ink2);font-weight:500;background:var(--chip)}.hh{font-size:13px;margin:12px 0 4px}
+.tag.mem{color:var(--strong)}.fire{font-size:11.5px;font-weight:800;color:#d9730d;white-space:nowrap}
+.memchk{flex-direction:row;align-items:center;gap:6px;color:var(--ink);font-size:13px;margin-inline-end:6px}.memchk input{width:auto}
 .rvbox{border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px;background:var(--sheet)}
 .rvbox.pending{border-color:var(--accent)}.rvbox.ok{border-color:var(--strong)}.rvbox.fix{border-color:var(--weak)}
 .rvbox h2{margin:0 0 6px;font-size:15px;font-weight:900}
@@ -177,7 +182,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     <div class="logo"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxYjI1NDAiLz48ZyBmaWxsPSIjZWVmMWYwIj48cmVjdCB4PSI5IiB5PSIxMiIgd2lkdGg9IjUiIGhlaWdodD0iNCIvPjxyZWN0IHg9IjkiIHk9IjIyIiB3aWR0aD0iNSIgaGVpZ2h0PSI0Ii8+PHJlY3QgeD0iOSIgeT0iMzIiIHdpZHRoPSI1IiBoZWlnaHQ9IjQiLz48cmVjdCB4PSI5IiB5PSI0MiIgd2lkdGg9IjUiIGhlaWdodD0iNCIvPjwvZz48Y2lyY2xlIGN4PSIzOCIgY3k9IjMyIiByPSIxMyIgZmlsbD0iI2UwN2ExZiIvPjwvc3ZnPgo=" alt=""></div>
     <div class="brand"><h1>پنل مشاور</h1><p><b id="who"></b> • <span id="stamp">—</span></p></div>
     <span class="sample" id="samplebadge" hidden>داده‌ی نمونه</span>
-    <button class="btn ghost" id="mybale" hidden>📲 اتصال من به ربات بله</button>
+    <button class="btn ghost" id="mybale" hidden>📲 اتصال من به ربات</button>
     <a class="btn ghost" id="sheetlink" target="_blank" rel="noopener" hidden>باز کردن شیت</a>
     <button class="btn ghost" id="csv">خروجی CSV</button>
     <button class="btn ghost" id="csv2">خروجی کارنامه‌ها</button>
@@ -190,6 +195,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     <div class="seg" id="f-track"></div>
     <div class="seg" id="f-grade"></div>
     <select id="f-cid" style="width:auto" hidden></select>
+    <select id="f-mem" style="width:auto" hidden><option value="">عضو و غیرعضو</option><option value="1">فقط اعضای کانون</option><option value="0">فقط غیرعضو</option></select>
     <input type="search" id="q" placeholder="جست‌وجوی نام، تلفن یا رشته‌ی هدف…">
     <button type="button" class="btn ghost" id="f-rv" aria-pressed="false">منتظر بررسی برنامه</button>
     <button type="button" class="btn ghost" id="f-alert" aria-pressed="false">فقط نیازمند حمایت</button>
@@ -200,9 +206,14 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     <section class="card"><h2>عقب از ددلاین (آخرین گزارش)<small id="n-b"></small></h2><ul class="bars" id="b-behind"></ul></section>
     <section class="card"><h2>رشته‌های هدف<small id="n-g"></small></h2><ul class="bars" id="b-goal"></ul></section>
   </div>
+  <section class="card" id="heat-card" hidden>
+    <h2>🗺 نقشه‌ی حرارتی کانون<small>فقط دانش‌آموزهایی که «عضو کانون» زده‌اید؛ کدام پایه، کدام درس و کدام هفته عقب است</small></h2>
+    <button class="btn ghost" id="heat-go">نمایش نقشه</button><span class="muted" id="heat-msg" style="margin-inline-start:8px"></span>
+    <div id="heat"></div>
+  </section>
   <section class="card" id="cs-card" hidden>
-    <h2>مشاورها و نقش‌ها<small>هر مشاور رمز و کد اتصال بله‌ی خودش را دارد؛ دانش‌آموز تازه خودکار به مشاورِ همان رشته و پایه سپرده می‌شود. خودتان هم یک ردیف با نقش «مدیر» بسازید تا به بله وصل شوید و پیام دانش‌آموزهای بدون مشاور را بگیرید.</small></h2>
-    <div class="tablewrap"><table class="rep"><thead><tr><th>نام</th><th>نقش</th><th>رشته‌ها</th><th>پایه‌ها</th><th>دانش‌آموز</th><th>رمز پنل</th><th>بله</th><th></th></tr></thead><tbody id="cs-rows"></tbody></table></div>
+    <h2>مشاورها و نقش‌ها<small>هر مشاور رمز و کد اتصال ربات (بله یا تلگرام) خودش را دارد؛ دانش‌آموز تازه خودکار به مشاورِ همان رشته و پایه سپرده می‌شود. خودتان هم یک ردیف با نقش «مدیر» بسازید تا به ربات وصل شوید و پیام دانش‌آموزهای بدون مشاور را بگیرید.</small></h2>
+    <div class="tablewrap"><table class="rep"><thead><tr><th>نام</th><th>نقش</th><th>رشته‌ها</th><th>پایه‌ها</th><th>دانش‌آموز</th><th>رمز پنل</th><th>پیام‌رسان</th><th></th></tr></thead><tbody id="cs-rows"></tbody></table></div>
     <div class="edgrid" id="cs-form" style="margin-top:10px"></div>
     <p class="muted" id="cs-msg" role="status"></p>
   </section>
@@ -223,7 +234,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
   var ls = { get: function(k){ try { return localStorage.getItem('kpa:' + k); } catch(e){ return null; } }, set: function(k, v){ try { v == null ? localStorage.removeItem('kpa:' + k) : localStorage.setItem('kpa:' + k, v); } catch(e){} } };
   var $ = function(id){ return document.getElementById(id); };
   var DAYS = ['شنبه','یک‌شنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه'];
-  var ROWS = [], F = { track: '', grade: '', q: '', cid: '' }, SAMPLE = false, EP = '', PW = '', SHEET = '', ME = { role: 'admin', name: 'مدیر' }, CS = [], BOT = '', TBOT = '', PN = { b: 'بله', t: 'تلگرام' };
+  var ROWS = [], F = { track: '', grade: '', q: '', cid: '', mem: '' }, SAMPLE = false, EP = '', PW = '', SHEET = '', ME = { role: 'admin', name: 'مدیر' }, CS = [], BOT = '', TBOT = '', PN = { b: 'بله', t: 'تلگرام' };
   function isAdmin(){ return ME.role === 'admin'; }
   var cfg = (window.KP_CONFIG && window.KP_CONFIG.endpoint) || '';
   $('ep').value = ls.get('ep') || cfg; $('pw').value = ls.get('pw') || ''; $('remember').checked = !!ls.get('pw');
@@ -259,7 +270,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
   $('demo').onclick = function(){ SAMPLE = true; ROWS = sample(); ME = { role: 'admin', name: 'مدیر نمونه', id: 'admin' }; BOT = 'konkur_bot'; TBOT = 'konkur_tg_bot';
     CS = [{ id: 'k1', name: 'آقای کریمی', role: 'counselor', tracks: ['تجربی'], grades: ['11','12'], key: 'a1b2c3d4e5', bale: true, via: 'b', link: 'https://ble.ir/konkur_bot?start=cdemo1', tlink: 'https://t.me/konkur_tg_bot?start=cdemo1', code: 'cdemo1' },
           { id: 'k2', name: 'خانم احمدی', role: 'counselor', tracks: ['ریاضی','انسانی'], grades: [], key: 'f6g7h8i9j0', bale: false, link: 'https://ble.ir/konkur_bot?start=cdemo2', tlink: 'https://t.me/konkur_tg_bot?start=cdemo2', code: 'cdemo2' }];
-    ROWS.forEach(function(r, i){ r.cid = i % 3 === 2 ? '' : (r.track === 'تجربی' ? 'k1' : 'k2'); r.cname = (CS.filter(function(c){ return c.id === r.cid; })[0] || {}).name || ''; r.baleOn = i % 2 === 0; r.via = i % 4 === 0 ? 't' : 'b'; });
+    ROWS.forEach(function(r, i){ r.cid = i % 3 === 2 ? '' : (r.track === 'تجربی' ? 'k1' : 'k2'); r.cname = (CS.filter(function(c){ return c.id === r.cid; })[0] || {}).name || ''; r.baleOn = i % 2 === 0; r.via = i % 4 === 0 ? 't' : 'b'; r.member = i % 3 !== 1; r.streak = (i * 7) % 12; });
     show(); };
   $('refresh').onclick = function(){ if (SAMPLE){ ROWS = sample(); render(); } else { $('app').hidden = true; $('login').hidden = false; load(); } };
   $('logout').onclick = function(){ ls.set('pw', null); $('pw').value = ''; ROWS = []; $('app').hidden = true; $('login').hidden = false; };
@@ -269,7 +280,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     $('mybale').hidden = !ME.link && !ME.tlink && !(SAMPLE);
     $('mybale').textContent = ME.bale ? '📲 به ' + (PN[ME.via] || 'ربات') + ' وصل هستید' : '📲 اتصال من به ربات';
     $('mybale').onclick = function(){ showLink(ME.link || (SAMPLE ? 'https://ble.ir/konkur_bot?start=cdemo' : ''), ME.code || 'cdemo', 'اتصال حساب پیام‌رسان شما به پنل', ME.tlink || (SAMPLE ? 'https://t.me/konkur_tg_bot?start=cdemo' : '')); };
-    $('cs-card').hidden = !isAdmin(); $('f-cid').hidden = !isAdmin() || !CS.length;
+    $('cs-card').hidden = !isAdmin(); $('f-cid').hidden = !isAdmin() || !CS.length; $('heat-card').hidden = !isAdmin(); $('f-mem').hidden = !isAdmin();
     $('f-cid').innerHTML = '<option value="">همه‌ی مشاورها</option><option value="_none">بدون مشاور</option>' + CS.map(function(c){ return '<option value="' + esc(c.id) + '">' + esc(c.name) + '</option>'; }).join('');
     renderCS(); $('samplebadge').hidden = !SAMPLE; var sl = $('sheetlink'); sl.hidden = !SHEET || SAMPLE; if (SHEET) sl.href = SHEET; render(); }
   function act(params, done){
@@ -288,7 +299,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
   /* ---------- voice note ---------- */
   var AU = null, REC = null;
   function audioUI(){
-    return '<div class="au"><span class="lab2">پیام صوتی برای دانش‌آموز (اختیاری، تا ۲ دقیقه)</span><div class="au-row"><button type="button" class="btn ghost" id="au-rec">● ضبط</button>'
+    return '<div class="au"><span class="lab2">پیام صوتی برای دانش‌آموز (اختیاری، تا ۳ دقیقه)</span><div class="au-row"><button type="button" class="btn ghost" id="au-rec">● ضبط</button>'
       + '<label class="btn ghost" style="cursor:pointer">بارگذاری فایل<input type="file" id="au-file" accept="audio/*" hidden></label><span class="muted" id="au-st"></span></div><div id="au-prev"></div></div>';
   }
   function setAudio(blob){
@@ -311,7 +322,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
         REC.ondataavailable = function(e){ if (e.data.size) ch.push(e.data); };
         REC.onstop = function(){ clearInterval(tm); st.getTracks().forEach(function(t){ t.stop(); }); REC = null; b.textContent = '● ضبط دوباره'; setAudio(new Blob(ch, { type: ch[0] ? ch[0].type : 'audio/webm' })); };
         REC.start(); b.textContent = '■ توقف';
-        tm = setInterval(function(){ var sec = Math.round((Date.now() - t0) / 1000); $('au-st').textContent = 'در حال ضبط… ' + fa(sec) + ' ثانیه'; if (sec >= 120 && REC) REC.stop(); }, 500);
+        tm = setInterval(function(){ var sec = Math.round((Date.now() - t0) / 1000); $('au-st').textContent = 'در حال ضبط… ' + fa(Math.floor(sec / 60)) + ':' + fa(('0' + sec % 60).slice(-2)) + ' از ۳:۰۰'; if (sec >= 180 && REC) REC.stop(); }, 500);
       }).catch(function(){ $('au-st').textContent = 'اجازه‌ی میکروفون داده نشد.'; });
     };
   }
@@ -393,6 +404,36 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     };
   }
 
+  /* ---------- heat map (admin, members only) ---------- */
+  function heatColor(v, good){   // v 0..1; good=true → high is good (green), else high is bad (red)
+    var x = good ? 1 - v : v; return 'color-mix(in srgb,' + (x > 0.5 ? 'var(--weak)' : 'var(--strong)') + ' ' + Math.round(Math.abs(x - 0.5) * 2 * 70 + 8) + '%,var(--sheet))';
+  }
+  function heatSample(){
+    var g = ['تجربی • یازدهم', 'تجربی • دوازدهم', 'ریاضی • دوازدهم', 'انسانی • دهم'], wk = [1, 2, 3, 4, 5, 6].map(function(i){ return { wk: i, label: 'هفته‌ی ' + fa(i) }; }), A = {}, B = {}, S = {}, size = {};
+    var bk = ['فیزیک ۲', 'شیمی ۲', 'زیست‌شناسی ۲', 'ریاضی ۲', 'عربی ۲', 'ادبیات ۲'];
+    g.forEach(function(x, gi){ size[x] = 8 + gi * 3; S[x] = [(gi + 2) * 9, 3]; A[x] = {}; wk.forEach(function(w, wi){ A[x][w.wk] = [(40 + ((gi * 17 + wi * 11) % 55)) * 3, 3]; }); });
+    bk.forEach(function(b, bi){ B[b] = {}; g.forEach(function(x, gi){ if (bi < 3 && gi === 2) return; B[b][x] = [(bi * 3 + gi * 5) % 7, 7, 1]; }); });
+    return { ok: true, members: 35, groups: g, size: size, weeks: wk, A: A, books: bk, B: B, S: S };
+  }
+  function renderHeat(H){
+    if (!H.members){ $('heat').innerHTML = '<p class="muted" style="margin-top:8px">هنوز هیچ دانش‌آموزی را «عضو کانون» نزده‌اید. در جزئیات هر دانش‌آموز، تیک «عضو کانون» را بزنید.</p>'; return; }
+    var g = H.groups, th = '<th></th>' + g.map(function(x){ return '<th>' + esc(x) + '<small>' + fa(H.size[x] || 0) + ' نفر</small></th>'; }).join('');
+    var t1 = H.weeks.map(function(w){ return '<tr><th>' + esc(w.label || '') + '</th>' + g.map(function(x){ var c = (H.A[x] || {})[w.wk]; if (!c || !c[1]) return '<td class="na">—</td>'; var v = Math.round(c[0] / c[1]);
+      return '<td style="background:' + heatColor(v / 100, true) + '" title="' + fa(c[1]) + ' نفر">' + fa(v) + '٪</td>'; }).join('') + '</tr>'; }).join('');
+    var t2 = H.books.map(function(b){ return '<tr><th>' + esc(fa(b)) + '</th>' + g.map(function(x){ var c = (H.B[b] || {})[x]; if (!c || !c[1]) return '<td class="na">—</td>'; var v = c[0] / c[1];
+      return '<td style="background:' + heatColor(v, false) + '" title="' + fa(c[0]) + ' نفر از ' + fa(c[1]) + ' عقب' + (c[2] ? ' • ' + fa(c[2]) + ' نفر گزارش نداده' : '') + '">' + fa(Math.round(v * 100)) + '٪</td>'; }).join('') + '</tr>'; }).join('');
+    var t3 = '<tr><th>🔥 میانگین زنجیره</th>' + g.map(function(x){ var c = H.S[x]; return c && c[1] ? '<td>' + fa(Math.round(c[0] / c[1] * 10) / 10) + ' روز</td>' : '<td class="na">—</td>'; }).join('') + '</tr>';
+    $('heat').innerHTML = '<p class="muted" style="margin:8px 0">' + fa(H.members) + ' عضو کانون. رنگ سبز یعنی خوب، قرمز یعنی نیاز به توجه. موس را روی هر خانه نگه دارید تا تعداد را ببینید.</p>'
+      + '<h3 class="hh">درصد انجام برنامه در هر هفته</h3><div class="tablewrap"><table class="heat"><thead><tr>' + th + '</tr></thead><tbody>' + (t1 || '<tr><td colspan="9" class="na">هنوز هفته‌ای بایگانی نشده</td></tr>') + t3 + '</tbody></table></div>'
+      + '<h3 class="hh">چند درصد از ددلاین هر درس عقب‌اند (آخرین وضعیت)</h3><div class="tablewrap"><table class="heat"><thead><tr>' + th + '</tr></thead><tbody>' + (t2 || '<tr><td colspan="9" class="na">هنوز گزارشی نیست</td></tr>') + '</tbody></table></div>';
+  }
+  $('heat-go').onclick = function(){
+    if (SAMPLE){ renderHeat(heatSample()); return; }
+    $('heat-msg').textContent = 'در حال ساختن…';
+    fetch(EP + '?key=' + encodeURIComponent(PW) + '&action=heat&t=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.json(); })
+      .then(function(j){ if (!j.ok) throw new Error(j.err); $('heat-msg').textContent = ''; renderHeat(j); })
+      .catch(function(e){ $('heat-msg').textContent = 'نشد: ' + (e.message || e) + ' (اگر Code.gs را تازه عوض کرده‌اید، New version را Deploy کنید)'; });
+  };
   /* ---------- counselors (admin) ---------- */
   var TR = ['ریاضی','تجربی','انسانی'], GR = [['10','دهم'],['11','یازدهم'],['12','دوازدهم']], CED = null;
   function showLink(link, code, title, tlink){
@@ -430,7 +471,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
       postJ({ action: 'csave', c: o }, function(j){
         var key = SAMPLE ? Math.random().toString(36).slice(2, 12) : j.key, ex = CS.filter(function(x){ return x.id === (o.id || j.id); })[0];
         if (ex) Object.assign(ex, o, { key: key }); else CS.push(Object.assign(o, { id: j.id || ('k' + Date.now()), key: key, bale: false, link: '', tlink: '', code: '' }));
-        CED = null; $('cs-msg').textContent = 'ذخیره شد. رمز پنل ' + o.name + ': ' + key + ' — این رمز را خصوصی به خودش بدهید.' + (!SAMPLE && !ex ? ' برای دیدن لینک اتصال بله، «تازه‌سازی» را بزنید.' : '');
+        CED = null; $('cs-msg').textContent = 'ذخیره شد. رمز پنل ' + o.name + ': ' + key + ' — این رمز را خصوصی به خودش بدهید.' + (!SAMPLE && !ex ? ' برای دیدن لینک اتصال ربات، «تازه‌سازی» را بزنید.' : '');
         renderCS(); show();
       }, function(m){ $('cs-msg').textContent = m; });
     }
@@ -485,12 +526,14 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
   function rvSt(r){ var v = r.review || {}; if (!v.st) return ''; if (v.st === 'pending' && v.sig && r.sig && v.sig !== r.sig) return 'pending'; return v.st; }
   var RVN = { pending: 'منتظر بررسی برنامه', ok: 'برنامه تأیید شد', fix: 'برگشت برای اصلاح' };
   $('f-cid').onchange = function(){ F.cid = this.value; render(); };
+  $('f-mem').onchange = function(){ F.mem = this.value; render(); };
   $('f-rv').onclick = function(){ F.rv = !F.rv; this.setAttribute('aria-pressed', String(!!F.rv)); render(); };
   $('f-alert').onclick = function(){ F.alert = !F.alert; this.setAttribute('aria-pressed', String(!!F.alert)); render(); };
   function filtered(){
     return ROWS.filter(function(r){
       if (F.alert && !alerts(r).length) return false;
       if (F.cid && (F.cid === '_none' ? r.cid : r.cid !== F.cid)) return false;
+      if (F.mem && (F.mem === '1') !== !!r.member) return false;
       if (F.rv && rvSt(r) !== 'pending') return false;
       if (F.track && r.track !== F.track) return false;
       if (F.grade && String(r.grade) !== F.grade) return false;
@@ -529,7 +572,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     $('stamp').textContent = 'به‌روزرسانی: ' + new Date().toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' });
     $('rows').innerHTML = rows.length ? rows.map(function(r){
       var i = ROWS.indexOf(r);
-      return '<tr tabindex="0" data-i="' + i + '"' + (alerts(r).length ? ' class="al"' : '') + '><td class="nm"><b>' + esc(r.full || r.name || 'بی‌نام') + '</b><small>' + (rvSt(r) ? '<span class="tag ' + { pending: 'rvp', ok: 'rvo', fix: 'rvf' }[rvSt(r)] + '">' + RVN[rvSt(r)] + '</span>' : '') + alerts(r).map(function(a){ return '<span class="tag w">' + esc(a) + '</span>'; }).join('') + (r.prints ? '<span class="tag p">چاپ ×' + fa(r.prints) + '</span>' : '') + (r.edited ? 'برنامه را دستی تغییر داده' : '') + '</small></td>'
+      return '<tr tabindex="0" data-i="' + i + '"' + (alerts(r).length ? ' class="al"' : '') + '><td class="nm"><b>' + esc(r.full || r.name || 'بی‌نام') + (r.streak ? ' <span class="fire" title="روزهای پشت‌سرهم با همه‌ی پارت‌ها">🔥' + fa(r.streak) + '</span>' : '') + '</b><small>' + (r.member ? '<span class="tag mem">عضو کانون</span>' : '') + (rvSt(r) ? '<span class="tag ' + { pending: 'rvp', ok: 'rvo', fix: 'rvf' }[rvSt(r)] + '">' + RVN[rvSt(r)] + '</span>' : '') + alerts(r).map(function(a){ return '<span class="tag w">' + esc(a) + '</span>'; }).join('') + (r.prints ? '<span class="tag p">چاپ ×' + fa(r.prints) + '</span>' : '') + (r.edited ? 'برنامه را دستی تغییر داده' : '') + '</small></td>'
         + '<td>' + esc(r.track || '') + ' • ' + esc(r.gradeName || r.grade || '') + '</td>'
         + '<td>' + esc(r.goal || '—') + (r.uni ? '<br><small class="muted">' + esc(r.uni) + '</small>' : '') + '</td>'
         + '<td class="num hide-sm">' + hours(r.hours) + '</td>'
@@ -576,6 +619,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
       ['آخرین تغییر', ago(r.updated) + (r.saves ? ' • ' + fa(r.saves) + ' بار ذخیره' : '')]
     ].map(function(f){ return '<dt>' + f[0] + '</dt><dd>' + f[1] + '</dd>'; }).join('');
     d.innerHTML = '<div class="dh"><div><h2 id="d-name">' + esc(r.full || r.name || 'بی‌نام') + '</h2><p>' + (r.edited ? 'برنامه را دستی ویرایش کرده' : 'برنامه‌ی خودکار') + (r.trimmed ? ' • برنامه‌ی کامل جا نشد' : '') + '</p></div><span class="sp"></span>'
+      + (isAdmin() ? '<label class="memchk noprint"><input type="checkbox" id="d-mem"' + (r.member ? ' checked' : '') + '> عضو کانون</label>' : '')
       + '<button class="btn ghost noprint" id="d-fam">گزارش ماهانه برای خانواده</button><button class="btn ghost noprint" id="d-print">چاپ</button><button class="btn noprint" id="d-close">بستن</button></div>'
       + rvBox(r)
       + (r.why ? '<p class="why">«' + esc(r.why) + '»</p>' : '')
@@ -603,7 +647,8 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     $('shade').classList.add('on'); d.classList.add('on'); d.scrollTop = 0;
     $('d-close').onclick = close; $('d-print').onclick = function(){ window.print(); };
     $('d-fam').onclick = function(){ familyReport(r); };
-    if ($('d-cid')) $('d-cid').onchange = function(){ var cid = this.value; act({ action: 'assign', id: r.id, cid: cid }, function(){ r.cid = cid; r.cname = (CS.filter(function(c){ return c.id === cid; })[0] || {}).name || ''; $('d-rvmsg').textContent = r.cname ? 'به ' + r.cname + ' سپرده شد' + (CS.filter(function(c){ return c.id === cid && c.bale; }).length ? ' و در بله خبرش کردیم.' : '.') : 'بدون مشاور شد.'; render(); }); };
+    if ($('d-mem')) $('d-mem').onchange = function(){ var v = this.checked, el = this; act({ action: 'member', id: r.id, v: v ? '1' : '0' }, function(){ r.member = v; render(); }); setTimeout(function(){ if (!SAMPLE && r.member !== v) el.checked = r.member; }, 8000); };
+    if ($('d-cid')) $('d-cid').onchange = function(){ var cid = this.value; act({ action: 'assign', id: r.id, cid: cid }, function(){ r.cid = cid; r.cname = (CS.filter(function(c){ return c.id === cid; })[0] || {}).name || ''; $('d-rvmsg').textContent = r.cname ? 'به ' + r.cname + ' سپرده شد' + (CS.filter(function(c){ return c.id === cid && c.bale; }).length ? ' و در ربات خبرش کردیم.' : '.') : 'بدون مشاور شد.'; render(); }); };
     if (!isAdmin()) $('d-del').hidden = true;
     [['d-ok','ok'],['d-fix','fix']].forEach(function(b){ var el = $(b[0]); if (!el) return; el.onclick = function(){
       var note = ($('d-rvnote').value || '').trim(), by = ME.name || '';
