@@ -71,6 +71,11 @@ label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:70
 .code{font-size:22px;font-weight:900;letter-spacing:1px;background:var(--chip);border-radius:8px;padding:6px 10px;text-align:center;user-select:all}
 .chk{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:13px}.chk label{flex-direction:row;align-items:center;gap:4px;color:var(--ink)}.chk input{width:auto}
 code{font-size:12px;background:var(--chip);padding:1px 6px;border-radius:5px}
+.tbox summary{cursor:pointer;font-weight:800;margin-top:8px}.nwl{flex-direction:row;align-items:center;gap:6px}.nwl input{width:120px}
+.tpl{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}.tpi{border:1px solid var(--line);border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:4px}
+.tpimg{min-height:90px;background:var(--chip);border-radius:10px;display:grid;place-items:center;cursor:pointer;font-size:12px;color:var(--ink2)}.tpimg img{width:100%;border-radius:10px;background:#fff}
+.tpi small{color:var(--ink2);font-size:11.5px}.nl{margin:0;padding-inline-start:18px;font-size:13px}.tplc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.tplc .btn{font-size:11.5px;padding:4px 8px}
+.mbox textarea{width:100%}
 table.heat{border-collapse:separate;border-spacing:3px;font-size:12.5px;min-width:100%}.heat th{font-size:11.5px;color:var(--ink2);font-weight:700;text-align:right;white-space:nowrap;padding:2px 6px}
 .heat thead th{text-align:center}.heat th small{display:block;font-weight:500;font-size:10.5px}.heat td{text-align:center;border-radius:6px;padding:6px 4px;font-weight:800;font-variant-numeric:tabular-nums;min-width:62px}
 .heat td.na{color:var(--ink2);font-weight:500;background:var(--chip)}.hh{font-size:13px;margin:12px 0 4px}
@@ -165,6 +170,10 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
   .week{grid-template-columns:repeat(7,minmax(0,1fr))}
   .be,.why{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+.pinchk{display:flex;gap:6px;align-items:center;margin-top:8px;font-size:13px;font-weight:700}
+table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
+.drp{margin-top:12px;padding:10px;border-radius:12px;background:var(--chip,#f6efe8);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px}
+.drp p{margin:0;width:100%}
 </style>
 </head>
 <body>
@@ -207,6 +216,27 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     <section class="card"><h2>عقب از ددلاین (آخرین گزارش)<small id="n-b"></small></h2><ul class="bars" id="b-behind"></ul></section>
     <section class="card"><h2>رشته‌های هدف<small id="n-g"></small></h2><ul class="bars" id="b-goal"></ul></section>
   </div>
+  <section class="card" id="tst-card">
+    <h2>🏆 تست‌های برتر<small id="tst-sub">عکس تست‌های خوب؛ بعد از تأیید مدیر برای دانش‌آموزهای همان رشته و پایه منتشر می‌شود</small></h2>
+    <div id="tst-pend"></div>
+    <details class="tbox"><summary>+ بارگذاری یک تست</summary><div class="edgrid" style="margin-top:8px">
+      <label>رشته<select id="ta-track"><option>تجربی</option><option>ریاضی</option><option>انسانی</option></select></label>
+      <label>پایه<select id="ta-grade"><option value="10">دهم</option><option value="11">یازدهم</option><option value="12" selected>دوازدهم</option></select></label>
+      <label>درس (همان اسم کتاب)<input id="ta-book" placeholder="مثلاً: فیزیک ۳"></label>
+      <label>مبحث<input id="ta-topic" placeholder="مثلاً: نوسان"></label>
+      <label>منبع<input id="ta-src" placeholder="مثلاً: خیلی‌سبز ص ۴۵ تست ۱۲"></label>
+      <label>توضیح (اختیاری)<input id="ta-note" placeholder="چرا خوب است؟"></label>
+      <label>عکس تست<input type="file" id="ta-file" accept="image/*"></label>
+    </div><div style="display:flex;gap:8px;align-items:center;margin-top:8px"><button class="btn acc" id="ta-go">بارگذاری</button><span class="muted" id="ta-msg" role="status"></span></div></details>
+  </section>
+  <section class="card" id="sea-card" hidden>
+    <h2>📅 فصل‌ها و امتحانات نهایی<small>برنامه‌ی دانش‌آموزها خودکار با این تاریخ‌ها تنظیم می‌شود</small></h2>
+    <p class="muted">دو هفته قبل از هر امتحان نهایی، همان درس بیشتر و تشریحی می‌شود و روز امتحان در برنامه علامت می‌خورد. اسم درس را دقیقاً مثل اسم کتاب بنویسید (مثلاً «فیزیک ۳»). بعد از آخرین نهایی، برنامه‌ی دوازدهمی‌ها تستی و جمع‌بندی می‌شود.</p>
+    <div class="tablewrap"><table class="rep"><thead><tr><th>پایه</th><th>درس</th><th>تاریخ (سال/ماه/روز)</th><th></th></tr></thead><tbody id="sea-rows"></tbody></table></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn ghost" id="sea-add">+ امتحان</button>
+      <label class="nwl">نوروز از<input id="sea-nw1" dir="ltr" placeholder="1405/12/25"></label><label class="nwl">تا<input id="sea-nw2" dir="ltr" placeholder="1406/01/13"></label>
+      <button class="btn acc" id="sea-save">ذخیره</button><span class="muted" id="sea-msg" role="status"></span></div>
+  </section>
   <section class="card" id="heat-card" hidden>
     <h2>🗺 نقشه‌ی حرارتی کانون<small>فقط دانش‌آموزهایی که «عضو کانون» زده‌اید؛ کدام پایه، کدام درس و کدام هفته عقب است</small></h2>
     <button class="btn ghost" id="heat-go">نمایش نقشه</button><span class="muted" id="heat-msg" style="margin-inline-start:8px"></span>
@@ -220,7 +250,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
   </section>
   <details class="card thbox"><summary>آستانه‌های هشدار «نیازمند حمایت»</summary><div class="edgrid" id="th"></div><p class="muted">این برچسب فقط در پنل دیده می‌شود، نه برای دانش‌آموز. تغییرها روی همین دستگاه ذخیره می‌شوند.</p></details>
   <section class="card">
-    <h2>دانش‌آموزها<small id="n-list"></small></h2>
+    <h2>دانش‌آموزها<small id="n-list"></small><button class="btn ghost" id="coach-go" style="margin-inline-start:auto">📞 ساخت برنامه‌ی تلفنی</button><button class="btn ghost" id="bulk-go">✉️ پیام گروهی به همین فهرست</button></h2>
     <div class="tablewrap"><table class="list"><thead><tr><th>نام</th><th>رشته و پایه</th><th>هدف</th><th class="hide-sm">ساعت در هفته</th><th>ضعیف / قوی</th><th>گزارش هفته</th><th>مشاور</th><th>آخرین تغییر</th></tr></thead><tbody id="rows"></tbody></table></div>
   </section>
 </div>
@@ -235,7 +265,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
   var ls = { get: function(k){ try { return localStorage.getItem('kpa:' + k); } catch(e){ return null; } }, set: function(k, v){ try { v == null ? localStorage.removeItem('kpa:' + k) : localStorage.setItem('kpa:' + k, v); } catch(e){} } };
   var $ = function(id){ return document.getElementById(id); };
   var DAYS = ['شنبه','یک‌شنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه'];
-  var ROWS = [], F = { track: '', grade: '', q: '', cid: '', mem: '' }, SAMPLE = false, EP = '', PW = '', SHEET = '', ME = { role: 'admin', name: 'مدیر' }, CS = [], BOT = '', TBOT = '', PN = { b: 'بله', t: 'تلگرام' };
+  var SEA = null, ROWS = [], F = { track: '', grade: '', q: '', cid: '', mem: '' }, SAMPLE = false, EP = '', PW = '', SHEET = '', ME = { role: 'admin', name: 'مدیر' }, CS = [], BOT = '', TBOT = '', PN = { b: 'بله', t: 'تلگرام' };
   function isAdmin(){ return ME.role === 'admin'; }
   var cfg = (window.KP_CONFIG && window.KP_CONFIG.endpoint) || '';
   $('ep').value = ls.get('ep') || cfg; $('pw').value = ls.get('pw') || ''; $('remember').checked = !!ls.get('pw');
@@ -251,7 +281,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     return new Date(t).toLocaleDateString('fa-IR');
   }
   function hm(min){ var H = Math.floor(min / 60), M = Math.round(min % 60); return fa(H) + (M ? ':' + fa(M < 10 ? '0' + M : M) : '') + ' ساعت'; }
-  function hours(x){ return x == null ? '—' : fa(Math.round(x * 10) / 10).replace('.', '/'); }
+  function hours(x){ if (x == null) return '—'; var m = Math.round(x * 60); return fa(Math.floor(m / 60)) + ':' + fa(('0' + m % 60).slice(-2)); }
 
   function load(){
     var ep = $('ep').value.trim(), pw = $('pw').value;
@@ -262,7 +292,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     fetch(ep + '?key=' + encodeURIComponent(pw) + '&t=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(j){
       if (!j.ok){ throw new Error(j.err === 'auth' ? 'رمز درست نیست.' : 'خطای سرور: ' + j.err); }
       ls.set('ep', ep); ls.set('pw', $('remember').checked ? pw : null);
-      SAMPLE = false; ROWS = j.rows || []; EP = ep; PW = pw; SHEET = j.sheet || ''; ME = j.me || { role: 'admin', name: 'مدیر' }; CS = j.counselors || []; BOT = j.bot || ''; TBOT = j.tbot || ''; show();
+      SAMPLE = false; ROWS = j.rows || []; EP = ep; PW = pw; SHEET = j.sheet || ''; ME = j.me || { role: 'admin', name: 'مدیر' }; CS = j.counselors || []; BOT = j.bot || ''; TBOT = j.tbot || ''; SEA = j.sea || null; show();
     }).catch(function(e){
       $('err').textContent = e && /رمز|خطای/.test(e.message) ? e.message : 'اتصال برقرار نشد. اینترنت، نشانی و دسترسی «Anyone» در Deploy را بررسی کنید.';
     }).then(function(){ $('go').disabled = false; $('go').textContent = 'ورود'; });
@@ -281,7 +311,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     $('mybale').hidden = !ME.link && !ME.tlink && !(SAMPLE);
     $('mybale').textContent = ME.bale ? '📲 به ' + (PN[ME.via] || 'ربات') + ' وصل هستید' : '📲 اتصال من به ربات';
     $('mybale').onclick = function(){ showLink(ME.link || (SAMPLE ? 'https://ble.ir/konkur_bot?start=cdemo' : ''), ME.code || 'cdemo', 'اتصال حساب پیام‌رسان شما به پنل', ME.tlink || (SAMPLE ? 'https://t.me/konkur_tg_bot?start=cdemo' : '')); };
-    $('cs-card').hidden = !isAdmin(); $('f-cid').hidden = !isAdmin() || !CS.length; $('heat-card').hidden = !isAdmin(); $('f-mem').hidden = !isAdmin();
+    $('cs-card').hidden = !isAdmin(); $('f-cid').hidden = !isAdmin() || !CS.length; $('heat-card').hidden = !isAdmin(); $('f-mem').hidden = !isAdmin(); $('sea-card').hidden = !isAdmin(); renderSea(); loadTests();
     $('f-cid').innerHTML = '<option value="">همه‌ی مشاورها</option><option value="_none">بدون مشاور</option>' + CS.map(function(c){ return '<option value="' + esc(c.id) + '">' + esc(c.name) + '</option>'; }).join('');
     renderCS(); $('samplebadge').hidden = !SAMPLE; var sl = $('sheetlink'); sl.hidden = !SHEET || SAMPLE; if (SHEET) sl.href = SHEET; render(); }
   function act(params, done){
@@ -297,6 +327,104 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
     fetch(EP, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }).then(function(r){ return r.json(); })
       .then(function(j){ if (!j.ok) throw new Error(j.err); done(j); }).catch(function(e){ (fail || alert)('انجام نشد: ' + (e.message || e) + ' — اگر Code.gs را تازه عوض کرده‌اید، New version را Deploy کنید.'); });
   }
+  /* ---------- v24: timer minutes, daily notes, exam analysis in the drawer ---------- */
+  function extrasHTML(r){
+    var parts = [].concat.apply([], (r.plan || []).map(function(d){ return (d || []).filter(function(e){ return e.k === 'part'; }); }));
+    var plan = parts.reduce(function(a, e){ var p = e.s.split(':'), q = e.e.split(':'); return a + (+q[0] * 60 + +q[1]) - (+p[0] * 60 + +p[1]); }, 0), fm = r.focusMin || 0;
+    var notes = Object.keys(r.notes || {}).sort().reverse().slice(0, 7), an = (r.ana || [])[0];
+    var h = '<section class="card"><h2>زمان‌سنج و یادداشت‌ها</h2><p class="muted" style="margin:0 0 6px">' + (fm ? 'این هفته ' + hours(fm / 60) + ' با زمان‌سنج خوانده (از ' + hours(plan / 60) + ' برنامه).' : 'این هفته هنوز با زمان‌سنج نخوانده.') + (r.phase && r.phase !== 'normal' ? ' • حالت: ' + ({ final: 'امتحانات نهایی', nowruz: 'نوروز', post: 'بعد از نهایی', summer: 'تابستان' }[r.phase] || r.phase) : '') + '</p>'
+      + (notes.length ? '<ul class="nl">' + notes.map(function(k){ return '<li><b>' + esc(jdate(+k)) + '</b> ' + esc(r.notes[k]) + '</li>'; }).join('') + '</ul>' : '<p class="muted" style="margin:0">یادداشت روزانه‌ای ننوشته.</p>') + '</section>';
+    if (an && an.b){ var T = { n: 0, c: 0, d: 0, v: 0 }; Object.keys(an.b).forEach(function(b){ ['n', 'c', 'd', 'v'].forEach(function(k){ T[k] += +an.b[b][k] || 0; }); });
+      h += '<section class="card"><h2>تحلیل آزمون<small>' + esc(an.ex || '') + '</small></h2><p class="muted" style="margin:0">نخوانده ' + fa(T.n) + ' • مفهومی ' + fa(T.c) + ' • بی‌دقتی ' + fa(T.d) + ' • کمبود وقت ' + fa(T.v) + '</p>'
+        + '<div class="tablewrap"><table class="rep"><thead><tr><th>درس</th><th>نخوانده</th><th>مفهومی</th><th>بی‌دقتی</th><th>وقت</th><th>زمان</th></tr></thead><tbody>' + Object.keys(an.b).map(function(b){ var e = an.b[b]; return '<tr><td>' + esc(fa(b)) + '</td>' + ['n', 'c', 'd', 'v', 't'].map(function(k){ return '<td class="num">' + (e[k] ? fa(e[k]) : '—') + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>'
+        + (an.note ? '<p class="muted" style="margin:6px 0 0">تصمیمش برای آزمون بعد: «' + esc(an.note) + '»</p>' : '') + '</section>'; }
+    return h;
+  }
+  /* ---------- v25: how to study + sources per book, nightly routines, pinned weekly message, the student's daily report ---------- */
+  function booksOf(r){ var o = {}; (r.plan || []).forEach(function(d){ (d || []).forEach(function(e){ if (e.k !== 'part' || /anki/i.test(e.t)) return; String(e.t).split(' + ').forEach(function(b){ b = b.replace(/^(مرور|ترمیم) /, '').trim(); if (b) o[b] = 1; }); }); }); Object.keys(r.src || {}).forEach(function(b){ o[b] = 1; }); return Object.keys(o); }
+  function adviceHTML(r){
+    var A = r.adv || {}, B = A.b || {}, src = r.src || {}, rts = A.rt || [], dr = r.dayrep, bs = booksOf(r);
+    var h = '<section class="card noprint" id="d-adv"><h2>نحوه‌ی خواندن، منابع و روتین‌ها<small>' + (A.by ? 'آخرین بار: ' + esc(A.by) : '') + '</small></h2>'
+      + '<p class="muted" style="margin:0 0 8px">منبعی که دانش‌آموز خودش نوشته کنار هر درس آمده. اگر نوشته «منبعی ندارم»، منبع پیشنهادی را شما بنویسید. «نحوه‌ی خواندن» روی صفحه‌ی امروز و برگه‌ی چاپی‌اش می‌آید.</p>'
+      + (bs.length ? '<div class="tablewrap"><table class="rep adv"><thead><tr><th>درس</th><th>منبع دانش‌آموز</th><th>منبع پیشنهادی شما</th><th>نحوه‌ی خواندن</th></tr></thead><tbody>' + bs.map(function(b){ var x = src[b] || {}, a = B[b] || {};
+          return '<tr><td>' + esc(fa(b)) + '</td><td>' + (x.s ? esc(x.s) : x.none ? '<span class="st st-late">منبعی ندارم</span>' : '<span class="muted">ننوشته</span>') + '</td><td><input data-ab="' + esc(b) + '" data-k="src" maxlength="100" value="' + esc(a.src || '') + '"></td><td><input data-ab="' + esc(b) + '" data-k="how" maxlength="160" value="' + esc(a.how || '') + '" placeholder="مثلاً: درسنامه، بعد ۳۰ تست زمان‌دار"></td></tr>'; }).join('') + '</tbody></table></div>' : '<p class="muted">برنامه‌ای نساخته.</p>')
+      + '<label class="wide" style="display:block;margin-top:10px">روتین‌های شبانه (هر خط یکی: چه چیزی | کدام مبحث | چند دقیقه)<textarea id="d-rt" rows="3" placeholder="لغت عربی | درس ۱ تا ۳ | ۱۰">' + esc(rts.map(function(x){ return [x.n, x.t || '', x.min || 15].join(' | ') + (x.alt ? ' | یک شب در میان' : ''); }).join('\n')) + '</textarea></label>'
+      + ((r.rts || []).length ? '<p class="muted" style="margin:4px 0 0">روتین‌هایی که خودش گذاشته: ' + r.rts.map(function(x){ return esc(x.n) + (x.t ? ' (' + esc(x.t) + ')' : ''); }).join('، ') + '</p>' : '')
+      + '<label class="wide" style="display:block;margin-top:10px">📌 پیام هفته (بالای صفحه‌ی «امروز» سایت می‌ماند؛ خالی = برداشتن)<textarea id="d-wmsg" rows="2" maxlength="600">' + esc(A.msg && A.msg.t || '') + '</textarea></label>'
+      + '<div style="display:flex;gap:8px;align-items:center;margin-top:8px"><button class="btn acc" id="d-advsave">ذخیره و فرستادن برای دانش‌آموز</button><span class="muted" id="d-advmsg" role="status"></span></div>';
+    if (dr && dr.q){ var st = dr.st || {};
+      h += '<div class="drp"><b>📋 آخرین گزارش روزانه' + (dr.j ? ' • ' + esc(jdate(dr.j)) : '') + '</b><span>کیفیت ' + fa(dr.q) + ' از ۱۰</span>' + (st.s ? '<span>مطالعه ' + esc(st.s) + ' تا ' + esc(st.e || '—') + '</span>' : '') + (st.tests != null ? '<span>تست امروز ' + fa(st.tests) + '</span>' : '') + (dr.ph != null ? '<span>گوشی ' + ({ 0: 'هیچ', 15: '۱۵ دقیقه', 30: '۳۰ دقیقه', 60: '۱ ساعت', 120: '+۱ ساعت' }[dr.ph] || '—') + '</span>' : '') + (dr.qs ? '<p>❓ «' + esc(dr.qs) + '»</p>' : '') + '</div>'; }
+    return h + '</section>';
+  }
+  function wireAdvice(r){
+    var b = $('d-advsave'); if (!b) return;
+    b.onclick = function(){
+      var adv = { b: {}, rt: [], msg: { t: $('d-wmsg').value.trim() } };
+      document.querySelectorAll('#d-adv [data-ab]').forEach(function(i){ var k = i.dataset.ab; adv.b[k] = adv.b[k] || {}; adv.b[k][i.dataset.k] = i.value.trim(); });
+      $('d-rt').value.split('\n').forEach(function(l){ var p = l.split('|').map(function(x){ return x.trim(); }); if (!p[0]) return; var m = +String(p[2] || '').replace(/[۰-۹]/g, function(c){ return '۰۱۲۳۴۵۶۷۸۹'.indexOf(c); }).replace(/\D/g, '') || 15; adv.rt.push({ n: p[0], t: p[1] || '', min: m, alt: /میان/.test(p[3] || '') ? 1 : 0 }); });
+      $('d-advmsg').textContent = 'در حال ذخیره…'; b.disabled = true;
+      postJ({ action: 'advice', id: r.id, adv: adv }, function(j){ r.adv = j.adv || adv; b.disabled = false; $('d-advmsg').textContent = SAMPLE ? 'در حالت نمونه ذخیره نمی‌شود.' : 'ذخیره شد؛ با باز کردن سایت روی گوشی دانش‌آموز می‌آید.'; },
+        function(e){ b.disabled = false; $('d-advmsg').textContent = e; });
+    };
+  }
+  /* ---------- v25: build a student's plan during a phone call (opens the planner in counselor mode) ---------- */
+  $('coach-go').onclick = function(){
+    if (SAMPLE){ alert('اول با رمز وارد شوید.'); return; }
+    var u = location.href.split('#')[0].split('?')[0].replace(/admin\.html$/, '') + 'index.html#coach=' + encodeURIComponent(PW);
+    window.open(u, '_blank', 'noopener');
+  };
+  function jdate(j){ try { var g = new Date((j - 2440588) * 864e5); return g.toLocaleDateString('fa-IR', { weekday: 'long', day: 'numeric', month: 'long' }); } catch(e){ return String(j); } }
+  /* ---------- v24: group message ---------- */
+  var TPL = ['برنامه‌ی این هفته را تا پنج‌شنبه برای من بفرستید تا بررسی کنم.', 'آزمون این هفته را فراموش نکنید؛ شب قبلش زود بخوابید و تحلیل آزمون را همان روز در سایت ثبت کنید.', 'گزارش پایان هفته را در سایت ثبت کنید.', 'پیام هفته: هر پارت را با ۱۰ دقیقه مرور پارت قبلِ همان درس شروع کنید.'];
+  $('bulk-go').onclick = function(){
+    var list = filtered(), d = document.createElement('div'); d.className = 'modal'; d.setAttribute('role', 'dialog');
+    d.innerHTML = '<div class="mbox"><h2>پیام گروهی به ' + fa(list.length) + ' نفر</h2><p class="muted">همان فهرستی که با فیلترهای بالا می‌بینید. به هر کس که به ربات یا اعلان سایت وصل باشد می‌رسد.</p>'
+      + '<div class="tplc">' + TPL.map(function(t, i){ return '<button type="button" class="btn ghost" data-tp="' + i + '">' + esc(t.slice(0, 34)) + '…</button>'; }).join('') + '</div>'
+      + '<textarea id="bk-t" rows="5" maxlength="1500" placeholder="متن پیام…"></textarea><label class="pinchk"><input type="checkbox" id="bk-pin"> 📌 سنجاق در صفحه‌ی «امروز» سایت هم بشود (پیام هفته)</label><div style="display:flex;gap:8px;margin-top:8px;align-items:center"><button class="btn acc" id="bk-s">فرستادن</button><button class="btn ghost" id="bk-x">بستن</button><span class="muted" id="bk-m" role="status"></span></div></div>';
+    document.body.appendChild(d);
+    d.querySelectorAll('[data-tp]').forEach(function(b){ b.onclick = function(){ $('bk-t').value = TPL[+b.dataset.tp]; }; });
+    $('bk-x').onclick = function(){ d.remove(); };
+    $('bk-s').onclick = function(){ var t = $('bk-t').value.trim(); if (!t){ $('bk-m').textContent = 'متن را بنویسید.'; return; } this.disabled = true; $('bk-m').textContent = 'در حال فرستادن…';
+      var pin = $('bk-pin').checked; postJ({ action: 'bulk', ids: list.map(function(r){ return r.id; }), text: t, pin: pin ? 1 : 0 }, function(j){ if (pin) list.forEach(function(r){ r.adv = r.adv || {}; r.adv.msg = { t: t, by: ME.name, at: Date.now() }; }); $('bk-m').textContent = SAMPLE ? 'در حالت نمونه فرستاده نمی‌شود.' : 'فرستاده شد به ' + fa(j.sent) + ' نفر' + (j.noBot ? '؛ ' + fa(j.noBot) + ' نفر به ربات وصل نیستند' : '') + '.'; },
+        function(e){ $('bk-m').textContent = e; $('bk-s').disabled = false; }); };
+  };
+  /* ---------- v24: seasons (admin) ---------- */
+  function renderSea(){
+    if (!isAdmin()) return; var L = (SEA && SEA.fin) || [];
+    $('sea-rows').innerHTML = L.map(function(x, i){ return '<tr><td><select data-g="' + i + '">' + [['11', 'یازدهم'], ['12', 'دوازدهم']].map(function(g){ return '<option value="' + g[0] + '"' + (String(x.g) === g[0] ? ' selected' : '') + '>' + g[1] + '</option>'; }).join('') + '</select></td>'
+      + '<td><input data-b="' + i + '" value="' + esc(x.b) + '"></td><td><input data-d="' + i + '" dir="ltr" value="' + (x.y ? x.y + '/' + x.m + '/' + x.d : '') + '" placeholder="1405/10/15"></td><td><button class="btn ghost danger" data-x="' + i + '">حذف</button></td></tr>'; }).join('') || '<tr><td colspan="4" class="empty">هنوز تاریخی وارد نشده؛ تا وقتی وارد نکنید، دی و خرداد به‌طور کلی «فصل نهایی» حساب می‌شوند.</td></tr>';
+    var nw = SEA && SEA.nw; $('sea-nw1').value = nw ? nw[0] + '/' + nw[1] + '/' + nw[2] : ''; $('sea-nw2').value = nw ? nw[3] + '/' + nw[4] + '/' + nw[5] : '';
+    $('sea-rows').querySelectorAll('[data-x]').forEach(function(b){ b.onclick = function(){ readSea(); SEA.fin.splice(+b.dataset.x, 1); renderSea(); }; });
+  }
+  function readSea(){
+    SEA = SEA || { fin: [] }; SEA.fin = SEA.fin || [];
+    $('sea-rows').querySelectorAll('[data-b]').forEach(function(el){ var i = +el.dataset.b, dd = $('sea-rows').querySelector('[data-d="' + i + '"]').value.replace(/[۰-۹]/g, function(c){ return '۰۱۲۳۴۵۶۷۸۹'.indexOf(c); }).split(/[\/\-.]/);
+      SEA.fin[i] = { g: $('sea-rows').querySelector('[data-g="' + i + '"]').value, b: el.value.trim(), y: +dd[0], m: +dd[1], d: +dd[2] }; });
+    var p = function(v){ var a = v.replace(/[۰-۹]/g, function(c){ return '۰۱۲۳۴۵۶۷۸۹'.indexOf(c); }).split(/[\/\-.]/).map(Number); return a.length === 3 && a.every(Boolean) ? a : null; };
+    var a1 = p($('sea-nw1').value), a2 = p($('sea-nw2').value); if (a1 && a2) SEA.nw = a1.concat(a2); else delete SEA.nw;
+  }
+  $('sea-add').onclick = function(){ readSea(); SEA.fin.push({ g: '12', b: '', y: 1405, m: 10, d: 1 }); renderSea(); };
+  $('sea-save').onclick = function(){ readSea(); var bad = SEA.fin.filter(function(x){ return !x.b || !x.y || !x.m || !x.d; }).length; if (bad){ $('sea-msg').textContent = 'اسم درس و تاریخ همه‌ی ردیف‌ها را کامل کنید.'; return; }
+    postJ({ action: 'seasons', sea: SEA }, function(j){ if (j.sea) SEA = j.sea; renderSea(); $('sea-msg').textContent = 'ذخیره شد؛ برنامه‌ی دانش‌آموزها دفعه‌ی بعد که سایت را باز کنند تنظیم می‌شود.'; }); };
+  /* ---------- v24: top tests (moderation + upload) ---------- */
+  function loadTests(){
+    if (SAMPLE){ renderTP({ pending: isAdmin() ? [{ id: 's1', book: 'فیزیک ۲', topic: 'الکتریسیته‌ی ساکن', src: 'خیلی‌سبز ص ۴۵', name: 'سارا', role: 'student', track: 'تجربی', grade: '11' }] : [], recent: [] }); return; }
+    fetch(EP + '?key=' + encodeURIComponent(PW) + '&action=tpend&t=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(j){ if (j.ok) renderTP(j); }).catch(function(){});
+  }
+  function renderTP(j){
+    var P = j.pending || [];
+    $('tst-pend').innerHTML = isAdmin() ? (P.length ? '<p class="muted" style="margin:0 0 6px">' + fa(P.length) + ' تست منتظر تأیید شما (از ربات هم می‌توانید تأیید کنید):</p><div class="tpl">' + P.map(function(t){ return '<div class="tpi" data-t="' + esc(t.id) + '"><div class="tpimg" data-img="' + esc(t.id) + '">نمایش عکس</div><b>' + esc(fa(t.book)) + ' • ' + esc(t.topic) + '</b><small>' + esc(t.src || '') + (t.note ? ' • ' + esc(t.note) : '') + '<br>' + esc(t.name) + ' ' + (t.role === 'student' ? '(' + esc(t.track) + ' ' + esc({ '10': 'دهم', '11': 'یازدهم', '12': 'دوازدهم' }[t.grade] || '') + ')' : '(مشاور)') + '</small><div><button class="btn acc" data-ok="' + esc(t.id) + '">انتشار</button> <button class="btn ghost danger" data-no="' + esc(t.id) + '">رد</button></div></div>'; }).join('') + '</div>' : '<p class="muted" style="margin:0">تستی منتظر تأیید نیست.</p>') : '<p class="muted" style="margin:0">تست‌هایی که بارگذاری می‌کنید بعد از تأیید مدیر منتشر می‌شوند.</p>';
+    $('tst-pend').querySelectorAll('[data-img]').forEach(function(el){ el.onclick = function(){ if (SAMPLE) return; el.textContent = 'در حال دریافت…'; fetch(EP + '?key=' + encodeURIComponent(PW) + '&action=timg&tid=' + encodeURIComponent(el.dataset.img)).then(function(r){ return r.json(); }).then(function(x){ if (x.ok) el.innerHTML = '<img src="data:image/jpeg;base64,' + x.b64 + '" alt="تست">'; }); }; });
+    $('tst-pend').querySelectorAll('[data-ok],[data-no]').forEach(function(b){ b.onclick = function(){ var id = b.dataset.ok || b.dataset.no; postJ({ action: 'tmod', tid: id, st: b.dataset.ok ? 'ok' : 'no' }, function(){ var el = $('tst-pend').querySelector('[data-t="' + id + '"]'); if (el) el.remove(); }); }; });
+  }
+  $('ta-go').onclick = function(){
+    var f = $('ta-file').files[0], m = $('ta-msg'), bk = $('ta-book').value.trim(), tp = $('ta-topic').value.trim();
+    if (!f || !bk || !tp){ m.textContent = 'درس، مبحث و عکس را کامل کنید.'; return; }
+    var fr = new FileReader(); fr.onload = function(){ var im = new Image(); im.onload = function(){ var s2 = Math.min(1, 1300 / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.round(im.width * s2); c.height = Math.round(im.height * s2); var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(im, 0, 0, c.width, c.height);
+      m.textContent = 'در حال بارگذاری…';
+      postJ({ action: 'tadd', b64: c.toDataURL('image/jpeg', .78).split(',')[1], book: bk, topic: tp, src: $('ta-src').value.trim(), note: $('ta-note').value.trim(), track: $('ta-track').value, grade: $('ta-grade').value },
+        function(j){ m.textContent = j.st === 'ok' ? 'منتشر شد.' : 'فرستاده شد؛ بعد از تأیید مدیر منتشر می‌شود.'; $('ta-file').value = ''; }, function(e){ m.textContent = e; }); }; im.src = fr.result; }; fr.readAsDataURL(f);
+  };
   /* ---------- voice note ---------- */
   var AU = null, REC = null;
   function audioUI(){
@@ -632,6 +760,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
           if (x.maz) return '<tr><td>' + esc(fa(x.b)) + '</td><td class="num">' + fa(x.pct) + '٪ بودجه</td><td class="num">' + fa(x.expPct) + '٪</td><td>ماز ' + esc(x.ex) + '</td><td><span class="st st-' + x.s + '">' + st + '</span></td></tr>';
           return '<tr><td>' + esc(fa(x.b)) + '</td><td class="num">' + (x.now ? 'فصل ' + fa(x.now) + ' از ' + fa(x.n) : '—') + '</td><td class="num">فصل ' + fa(x.exp) + '</td><td class="num">فصل ' + fa(x.T) + '</td><td><span class="st st-' + x.s + '">' + st + '</span></td></tr>'; }).join('') || '<tr><td colspan="5" class="empty">—</td></tr>')
       + '</tbody></table></div></section>'
+      + extrasHTML(r) + adviceHTML(r)
       + '<section class="card"><h2>گزارش‌های هفتگی<small>' + (r.donePct != null ? 'این هفته تا الان ' + fa(r.donePct) + '٪ تیک خورده' : '') + '</small></h2>'
       + ((r.reports || []).map(function(x){ return '<div style="border-bottom:1px solid var(--line);padding:6px 0"><b>' + esc(x.label) + '</b> <span class="num">' + fa(x.pct) + '٪</span><div class="meter"><i style="width:' + x.pct + '%"></i></div><small class="muted">' + (x.behind.length ? 'عقب: ' + x.behind.map(function(b){ return esc(fa(b)); }).join('، ') : 'درس عقب‌مانده نداشت') + ((x.unk || []).length ? ' • ' + fa(x.unk.length) + ' درس گزارش نشده' : '') + '</small></div>'; }).join('') || '<p class="empty">هنوز گزارشی نداده.</p>')
       + '</section></div>'
@@ -657,7 +786,7 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
       $('d-rvmsg').textContent = 'در حال ثبت…';
       withAudio(r.id, function(aid){ act({ action: 'review', id: r.id, st: b[1], note: note, by: by, aid: aid }, function(){ r.review = { st: b[1], note: note, by: by, at: Date.now(), sig: r.sig, aid: aid }; open(r); render(); }); });
     }; });
-    wireAudio();
+    wireAudio(); wireAdvice(r);
     $('d-edit').onclick = function(){ startEditor(r); $('d-edbar').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
     $('d-edit2').onclick = $('d-edit').onclick;
     var ARC = [];

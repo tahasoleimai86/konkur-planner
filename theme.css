@@ -75,7 +75,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
 .gf-act input{position:absolute;opacity:0;width:1px;height:1px}
 .gf-act label:focus-within,.gf-act button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .gf-share{border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);font:inherit;font-size:12px;font-weight:700;border-radius:999px;padding:4px 12px;cursor:pointer;align-self:flex-start;margin-top:4px}
-@media (max-width:480px){.gf{grid-template-columns:1fr}.gf-ph{min-height:170px;order:-1}}
+@media (max-width:480px){.gf{grid-template-columns:1fr}.gf-ph{min-height:130px;order:-1}.gf-t{padding:12px 14px}.gf-name{font-size:28px}}
 
 /* ---------- streak & celebrations ---------- */
 .fire{background:color-mix(in srgb,var(--accent) 14%,var(--sheet));border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
