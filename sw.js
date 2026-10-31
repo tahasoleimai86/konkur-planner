@@ -1,4 +1,4 @@
-const C='konkur-planner-v22';const F=['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png','./config.js'];
+const C='konkur-planner-v23';const F=['./','./index.html','./theme.css','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./config.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(F)).catch(()=>{}));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C&&x!=='kp-meta').map(x=>caches.delete(x)))));self.clients.claim()});
 self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url);

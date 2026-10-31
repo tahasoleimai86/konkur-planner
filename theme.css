@@ -1,0 +1,91 @@
+/* =====================================================================
+   theme.css — the visual layer of «برنامه‌ساز کنکور» (طلوع)
+   Only colors, type sizes, radii, shadows and decoration live here.
+   Safe to edit (by hand or with another AI) as long as you:
+     • keep every token NAME below (values can change),
+     • don't rename or hide ids / classes used by the page,
+     • keep everything inside the  @media screen  block (print/PDF has its own styles).
+   See DESIGN-GUIDE.md.
+   ===================================================================== */
+@media screen{
+/* ---------- tokens: dawn (light) ---------- */
+:root{
+  --bg:#fff7ef; --sheet:#fffdfa; --grid:rgba(244,95,39,.035); --ink:#2a1f1a; --ink2:#7a6458; --line:#f0dccb;
+  --accent:#f45f27; --accent-ink:#ffffff; --weak:#c2362f; --strong:#2f8f6b; --mark:#f49f28; --chip:#fbeee2;
+  --gold:#f49f28; --leaf:#f7b955; --sky1:#ffeedd; --sky2:#ffe1c4; --scene:#3a2a22; --glyph:42,31,26; --glow:244,95,39;
+  --shadow:0 18px 40px -28px rgba(160,70,20,.45); --r:18px;
+}
+/* ---------- tokens: night sky (dark) ---------- */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1022; --sheet:#151a33; --grid:rgba(255,179,71,.03); --ink:#f4ece4; --ink2:#b3a7b8; --line:#2b3157;
+  --accent:#ff7a3d; --accent-ink:#1a0d05; --weak:#ff6b6b; --strong:#5fd3a5; --mark:#ffb347; --chip:#20264a;
+  --gold:#ffb347; --leaf:#ffc66b; --sky1:#151a3d; --sky2:#2a2350; --scene:#080a18; --glyph:244,236,228; --glow:255,140,70;
+  --shadow:0 18px 44px -26px rgba(0,0,0,.7); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1022; --sheet:#151a33; --grid:rgba(255,179,71,.03); --ink:#f4ece4; --ink2:#b3a7b8; --line:#2b3157;
+  --accent:#ff7a3d; --accent-ink:#1a0d05; --weak:#ff6b6b; --strong:#5fd3a5; --mark:#ffb347; --chip:#20264a;
+  --gold:#ffb347; --leaf:#ffc66b; --sky1:#151a3d; --sky2:#2a2350; --scene:#080a18; --glyph:244,236,228; --glow:255,140,70;
+  --shadow:0 18px 44px -26px rgba(0,0,0,.7); color-scheme:dark}
+
+/* ---------- page: a sky that is dawn by day and stars by night ---------- */
+body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) no-repeat}
+#kpbg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#kpfx{position:fixed;inset:0;width:100%;height:100%;z-index:60;pointer-events:none}
+.wrap{position:relative;z-index:1}
+
+/* ---------- header ---------- */
+.logo{background:transparent;border:0;border-radius:0;width:46px;height:46px}
+.logo img{width:46px;height:46px;object-fit:contain;padding:0}
+.brand h1{font-size:23px}
+.brand p{color:var(--ink2)}
+.iconbtn{border-radius:999px;border-color:var(--line)}
+
+/* ---------- cards («برگه»): warmer, softer, the answer-sheet marks become sunrise dots ---------- */
+.sheet{border-radius:var(--r);border-color:var(--line);box-shadow:var(--shadow)}
+.sheet::after{background:repeating-linear-gradient(to bottom,var(--mark) 0 5px,transparent 5px 22px);opacity:.55}
+.sh h2{font-size:18px}
+.chip[aria-pressed="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--sheet))}
+.chip[aria-pressed="true"]::before{background:var(--accent);border-color:var(--accent)}
+.btn.acc,.btn.acc:hover{box-shadow:0 8px 18px -10px rgba(var(--glow),.9)}
+.day{border-radius:16px;border-color:var(--line)}
+.dh{background:color-mix(in srgb,var(--gold) 12%,var(--sheet))}
+.ss li.done{background:color-mix(in srgb,var(--strong) 10%,transparent)}
+.t1{background:var(--ink)} .t2{background:var(--accent)}
+
+/* ---------- goal frame ---------- */
+.gf{display:grid;grid-template-columns:minmax(0,1fr) 168px;background:var(--sheet);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.gf-t{padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.gf-eb{font-size:12px;font-weight:900;color:var(--accent);letter-spacing:.2px}
+.gf-name{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(26px,7vw,36px);line-height:1.2;text-wrap:balance}
+.gf-sub{margin:0;font-weight:700;font-size:14px}
+.gf-why{margin:2px 0 0;color:var(--ink2);font-size:13.5px;border-right:3px solid var(--gold);padding-right:9px}
+.gf-cheer{margin:2px 0 0;font-weight:900;font-size:13.5px;color:var(--accent);min-height:1.5em}
+.gf-stats{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.gf-stat{background:var(--chip);border-radius:12px;padding:4px 10px;display:flex;flex-direction:column;line-height:1.35;min-width:74px}
+.gf-stat b{font-family:var(--display);font-weight:900;font-size:18px;font-variant-numeric:tabular-nums}
+.gf-stat span{font-size:11px;color:var(--ink2);font-weight:700}
+.gf-stat.fire b{color:var(--accent)}
+.gf-ph{position:relative;min-height:200px;background:linear-gradient(180deg,var(--sky2),var(--sky1));overflow:hidden}
+.gf-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gf-ph svg{position:absolute;inset:0;width:100%;height:100%}
+.gf-ph.has svg .scene{opacity:0}
+.gf-ph.has svg .sky{opacity:.35}
+.gf-act{position:absolute;bottom:8px;inset-inline:8px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.gf-act label,.gf-act button{background:rgba(20,12,8,.62);color:#fff;border:0;font:inherit;font-size:11.5px;font-weight:700;border-radius:999px;padding:4px 10px;cursor:pointer}
+.gf-act input{position:absolute;opacity:0;width:1px;height:1px}
+.gf-act label:focus-within,.gf-act button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.gf-share{border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);font:inherit;font-size:12px;font-weight:700;border-radius:999px;padding:4px 12px;cursor:pointer;align-self:flex-start;margin-top:4px}
+@media (max-width:480px){.gf{grid-template-columns:1fr}.gf-ph{min-height:170px;order:-1}}
+
+/* ---------- streak & celebrations ---------- */
+.fire{background:color-mix(in srgb,var(--accent) 14%,var(--sheet));border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+.kp-cele{position:fixed;inset:0;z-index:50;display:grid;place-items:center;pointer-events:none;padding:24px}
+.kp-cele div{background:var(--sheet);border:1.5px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:18px 24px;text-align:center;max-width:340px;animation:celeIn .5s cubic-bezier(.3,1.5,.5,1) both}
+.kp-cele b{display:block;font-family:var(--display);font-weight:900;font-size:22px;color:var(--accent)}
+.kp-cele span{font-size:14px;color:var(--ink)}
+.kp-cele.out div{animation:celeOut .45s ease both}
+@keyframes celeIn{from{transform:scale(.7) translateY(20px);opacity:0}to{transform:none;opacity:1}}
+@keyframes celeOut{to{transform:translateY(-14px);opacity:0}}
+.calmbtn{border:1px solid var(--line);background:var(--sheet);color:var(--ink2);border-radius:999px;height:40px;padding:0 12px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+.calmbtn[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}
+}
