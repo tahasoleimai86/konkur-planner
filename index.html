@@ -619,6 +619,34 @@ body.has-tabs{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .chips.dq{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px}
 .chips.dq .chip.sm{min-width:0;padding:0;justify-content:center}
 .chip.sm[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+/* ===== v26: goals & feedback ===== */
+.dgl{font-size:11px;font-weight:800;color:var(--accent);margin-inline-start:auto;white-space:nowrap}
+.fbrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;padding:8px;border-radius:14px;background:var(--chip);width:100%}
+.fbrow>span{font-size:12.5px;font-weight:800;width:100%}
+.fbrow button{border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);font:inherit;font-size:13px;font-weight:700;border-radius:999px;padding:6px 12px;cursor:pointer;min-height:40px}
+.fbrow button[data-f="3"]{border-color:var(--strong)}
+.fbrow button[data-f="1"]{border-color:var(--weak)}
+.fbrow .fbx{margin-inline-start:auto;border:0;background:transparent;min-height:0;padding:4px 8px;color:var(--ink2)}
+.fbl{display:block;font-size:11.5px;font-weight:800;margin-top:2px}
+.fbl.fb3{color:var(--strong)} .fbl.fb2{color:var(--ink2)} .fbl.fb1{color:var(--weak)}
+.tgoal .sh{margin-bottom:8px}
+.tg-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px}
+.tg-sum div{position:relative;background:var(--chip);border-radius:14px;padding:8px 12px 12px;display:flex;flex-direction:column;overflow:hidden}
+.tg-sum b{font-size:22px;font-variant-numeric:tabular-nums;line-height:1.2}
+.tg-sum b small{font-size:13px;color:var(--ink2);font-weight:700}
+.tg-sum span{font-size:11.5px;color:var(--ink2);font-weight:700}
+.tg-sum i{position:absolute;inset-inline-start:0;bottom:0;height:4px;width:var(--w);background:var(--accent);border-radius:4px}
+.tg-list{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.tg-list li{display:grid;grid-template-columns:minmax(0,1fr) auto 26px;gap:8px;align-items:center;padding:6px 10px;border-radius:10px;border:1px solid var(--line);font-size:13px}
+.tg-list li span{font-weight:800;min-width:0}
+.tg-list li small{display:block;font-size:11px;color:var(--ink2);font-weight:700}
+.tg-list li b{font-size:12.5px;color:var(--accent);text-align:left}
+.tg-list li.ok{opacity:.7}
+.tg-list li em{font-style:normal;text-align:center}
+.tg-up{margin:8px 0 0;padding:8px 10px;border-radius:12px;background:color-mix(in srgb,var(--strong) 12%,var(--sheet));font-size:12.5px;font-weight:700}
+#pgseg{margin-top:6px}
+.p2t td,.p2t th{font-size:10px}
+.p2t td small{display:block;color:#777;font-size:8.5px}
 
 /* pdf */
 #pdfbox .ph{display:flex;align-items:center;gap:12px;border-bottom:2px solid #1b2540;padding-bottom:6px;margin-bottom:8px}
@@ -811,6 +839,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     <div class="card2 coachbox" id="coachbox" hidden></div>
     <div class="wmsg" id="wmsg" hidden></div>
     <div id="rvslot"></div>
+    <div class="card2 tgoal" id="tgoal" hidden></div>
     <div class="card2 tday"><div class="sh"><h2 id="tday-h">امروز</h2><a href="#" class="lnk" id="to-week">همه‌ی هفته ←</a></div><div id="tday"></div></div>
     <div class="card2" id="drep" hidden></div>
     <div class="card2" id="wgoals"></div>
@@ -888,7 +917,6 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     <div class="field" style="margin-top:6px"><span class="lab">روتین‌های شبانه</span>
       <p class="note" style="margin:0 0 6px">کارهای کوتاه هر شب، با مبحث مشخص؛ مثلاً «لغت فارسی • درس ۳ تا ۵ • ۱۵ دقیقه». آخر برنامه‌ی هر شب می‌آیند.</p>
       <div id="rts"></div><button type="button" class="btn ghost" id="rt-add">+ افزودن روتین</button></div>
-    <div class="field" style="margin-top:6px"><span class="lab" id="l-anki">۱۵ دقیقه مرور Anki آخر هر شب</span><div class="chips" id="anki" role="group" aria-labelledby="l-anki"></div></div>
     <div class="total"><span class="big" id="hbig"></span><small>ساعت:دقیقه در هفته</small>
       <div class="perday"><b id="pparts"></b>پارت درسی</div></div>
   </section>
@@ -948,6 +976,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     <div class="weekbar">
       <button type="button" class="btn acc" id="print">چاپ یا ذخیره‌ی PDF</button>
       <div class="pvseg" id="pvseg" role="group" aria-label="نمای برگه‌ی چاپی"><button type="button" data-v="full">برگه‌ی کامل</button><button type="button" data-v="simple">برگه‌ی ساده</button></div>
+      <div class="pvseg" id="pgseg" role="group" aria-label="تعداد صفحه‌ی چاپ"><button type="button" data-v="1">تک‌صفحه</button><button type="button" data-v="2">دوصفحه</button></div>
       <button type="button" class="btn ghost" id="reset" hidden>برگرداندن برنامه‌ی خودکار</button>
     </div>
     <div class="rv" id="rv" role="status"></div>
@@ -1018,7 +1047,8 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
       <li>شبِ قبل از کلاس هر درس، پارت تشریحی یا عمومیِ همان درس در اولویت است.</li>
       <li>مدل تست‌ها: آموزشی (حین درسنامه، پاسخنامه بلافاصله)، تمرینی (بدون فشار زمان)، زمان‌دار (آخر فصل، مثلاً ۳۰ تست در ۶۰ دقیقه با روش ضربدر-منها)، نشان‌دار (تست‌های غلط و ایده‌دار برای مرور). کتاب ضعیف آموزشی، متوسط تمرینی، قوی و مرورها زمان‌دار می‌گیرند. روزِ قبل از آزمون تست‌ها زمان‌دار می‌شوند و فردای آزمون اولین پارت تستی، مرورِ نشان‌دارهاست.</li>
       <li>سهم تشریحی با فصل عوض می‌شود: پاییز کمتر (تسلط مفهومی و تستی)، از بهمن بیشتر، و در فصل نهایی‌ها بیشترین.</li>
-      <li>آخر هر شب ۱۵ دقیقه مرور Anki برای منحنی فراموشی. اگر روزی دیرتر از ۲۳:۳۰ تمام شود، هشدار می‌دهیم.</li>
+      <li>مرور Anki یکی از روتین‌های شبانه است (در «اطلاعات من › زمان‌ها › روتین‌ها»)؛ با بقیه‌ی روتین‌ها آخر برنامه‌ی هر شب می‌آید.</li>
+      <li>هدف هر پارت: درس‌های اختصاصی با ۱۵ تست در هر ۱.۵ ساعت شروع می‌شوند؛ هر هفته اگر بیشتر «راحت رسیدم» زده باشی ۵ تا بیشتر و اگر بیشتر «نرسیدم» ۵ تا کمتر می‌شود (حداکثر ۴۰). درس‌های عمومی تست ندارند: صفحه‌ی درسنامه + نمونه‌سؤال.</li>
       <li>روز آزمون آزمایشی، زمانِ آزمون و پارت‌های تحلیل عصرش از ساعت مطالعه‌ی همان روز کم می‌شود. اگر موسسه‌ی آزمونت را انتخاب کنی، آزمون‌ها خودکار در هفته‌ی خودشان قرار می‌گیرند.</li>
       <li>برنامه‌ی مبحثی: برای هر کتاب، فصل‌هایی که تا آزمون بعد باید برسی، به نسبت سهم تست هر فصل بین هفته‌های باقی‌مانده تقسیم می‌شود و هر پارت می‌گوید کدام فصل و چند تست. مباحث آزمون‌ها تخمینِ ما بر اساس روند معمول مدرسه است و قابل ویرایش است.</li>
       <li>گزارش هفته: پارت‌ها را تیک بزن و بگو هر درس تا کجا رسیده؛ درسی که از ددلاین عقب باشد، هفته‌ی بعد ۱۵٪ وقت بیشتر می‌گیرد.</li>
@@ -1067,8 +1097,8 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     get: function(k, d){ try { var v = localStorage.getItem(NS + k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
     set: function(k, v){ try { localStorage.setItem(NS + k, JSON.stringify(v)); } catch(e){} }
   };
-  var KEYS = ['introSeen','res','dayrep','tlog','src','rts','trm','pview','adv','coachDone','coachNote','sea','setup','tab','hist','notes','focus','ana','timer','sigMap','vapid','bed','wake','streak','mvDone','pushOn','bot','tbot','via','msgr','baleOn','cpApplied','rv','scores','reg','step','maxStep','phone','sName','off','pp','inst','exFirst','exEvery','exSkip','anaN','blocks','brk','strat','norev','pg','wkPg','done','reports','boost','cov','wkOff','pgWk','anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
-  var DEF = { introSeen:0, res:{}, dayrep:{}, tlog:{}, src:{}, rts:[], trm:{}, pview:'full', adv:null, coachDone:null, coachNote:'', sea:null, setup:0, tab:'today', hist:{}, notes:{}, focus:{}, ana:{}, timer:null, sigMap:{}, vapid:'', streak:null, mvDone:{}, pushOn:0, bot:'', tbot:'', via:'', msgr:'b', baleOn:false, cpApplied:0, rv:null, scores:{}, reg:0, step:0, maxStep:0, phone:'', sName:'', off:{}, pp:{}, inst:'', exFirst:0, exEvery:14, exSkip:{}, anaN:1, blocks:[], brk:15, strat:'bal', norev:{}, pg:{}, wkPg:{}, done:{}, reports:[], boost:null, cov:{}, wkOff:0, pgWk:{}, anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
+  var KEYS = ['lvl','fb','lvlDone','lvlMsg','pages','introSeen','res','dayrep','tlog','src','rts','trm','pview','adv','coachDone','coachNote','sea','setup','tab','hist','notes','focus','ana','timer','sigMap','vapid','bed','wake','streak','mvDone','pushOn','bot','tbot','via','msgr','baleOn','cpApplied','rv','scores','reg','step','maxStep','phone','sName','off','pp','inst','exFirst','exEvery','exSkip','anaN','blocks','brk','strat','norev','pg','wkPg','done','reports','boost','cov','wkOff','pgWk','anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
+  var DEF = { lvl:{}, fb:{}, lvlDone:{}, lvlMsg:null, pages:2, introSeen:0, res:{}, dayrep:{}, tlog:{}, src:{}, rts:[], trm:{}, pview:'full', adv:null, coachDone:null, coachNote:'', sea:null, setup:0, tab:'today', hist:{}, notes:{}, focus:{}, ana:{}, timer:null, sigMap:{}, vapid:'', streak:null, mvDone:{}, pushOn:0, bot:'', tbot:'', via:'', msgr:'b', baleOn:false, cpApplied:0, rv:null, scores:{}, reg:0, step:0, maxStep:0, phone:'', sName:'', off:{}, pp:{}, inst:'', exFirst:0, exEvery:14, exSkip:{}, anaN:1, blocks:[], brk:15, strat:'bal', norev:{}, pg:{}, wkPg:{}, done:{}, reports:[], boost:null, cov:{}, wkOff:0, pgWk:{}, anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
     tss:'15:15', tso:'08:00', bed:'23:00', wake:'06:30', l1:'13:00', l2:'14:00', d1:'20:30', d2:'21:15', plan:null, planKey:'' };
   var S = {}; KEYS.forEach(function(k){ S[k] = store.get(k, DEF[k]); });
   function save(){ KEYS.forEach(function(k){ store.set(k, S[k]); }); }
@@ -1391,7 +1421,6 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     }
     [['t-ss','tss'],['t-so','tso'],['t-l1','l1'],['t-l2','l2'],['t-d1','d1'],['t-d2','d2']].forEach(function(p){ document.getElementById(p[0]).value = S[p[1]]; });
     renderExam(); renderBlocks();
-    chips(document.getElementById('anki'), [[true,'بله'],[false,'نه']], S.anki, function(v){ S.anki = v; renderTime(); save(); renderWeek(); });
     renderSleep();
   }
   function renderTotal(){
@@ -1606,7 +1635,6 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     blocks.forEach(function(b, bi){ if (b.fx && !used[bi]) out.push(b); });
     out.sort(function(a, b){ return a.s - b.s; });
     var last = 0; out.forEach(function(e){ if (!e.meal && e.fx !== 'blk' && e.e > last) last = e.e; });
-    if (S.anki && last) { out.push({ fx: 'anki', label: 'مرور Anki', s: last + 15, e: last + 30 }); last += 30; }
     if (last) routinesOn(d).forEach(function(r){ var m = r.min || 15; out.push({ fx: 'rt', label: 'روتین: ' + r.n + (r.t ? ' • ' + r.t : ''), sub: (r.by ? 'پیشنهاد مشاور • ' : '') + fa(m) + ' دقیقه' + (r.alt ? ' • یک شب در میان' : ''), s: last + 5, e: last + 5 + m }); last += 5 + m; });
     return out;
   }
@@ -1732,7 +1760,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     return mode === 'ترکیبی' ? fa(tl) + ' دقیقه درسنامه + ' + t : t;
   }
   function buildTopics(){
-    TM = {}; EXP = {};
+    TM = {}; EXP = {}; adjLevels();
     var ws = weekStart(), nx = nextExamJ(), dl = nx != null ? nx : ws + 6, W = Math.max(1, Math.ceil((dl - ws + 1) / 7)), byBook = {};
     S.plan.forEach(function(list, d){ timeline(d, list).forEach(function(e){ if (!e.p) return;
       e.p.items.forEach(function(x, xi){ (byBook[x.b] = byBook[x.b] || []).push({ k: e.p.id + ':' + xi, x: x, len: e.p.items.length > 1 ? HALF : e.p.len, mode: e.p.items.length > 1 ? x.mode : e.p.mode }); });
@@ -1766,10 +1794,10 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
           var k = done[cyc++ % done.length];
           label = (rev ? 'مرور ' : 'تمرین و مرور ') + chName(ch, k);
         }
-        TM[s.k] = { t: label, bg: budget(s.len, s.mode, s.x.tk, src, fresh, !!info.gen), n: s.mode === 'تشریحی' ? 0 : testsN(s.mode === 'ترکیبی' ? s.len / 2 : s.len, s.x.tk || 'تمرینی', src) };
+        var G = goalFor(s.len, s.mode, s.x.tk, src, fresh, !!info.gen, b); TM[s.k] = { t: label, bg: G.bg, n: G.n, pg: G.pg, q: G.q };
       });
     });
-    (S.plan || []).forEach(function(l){ l.forEach(function(p){ p.items.forEach(function(x, xi){ if (x.tpo){ var k = p.id + ':' + xi; TM[k] = { t: x.tpo, bg: TM[k] ? TM[k].bg : '' }; } }); }); });
+    (S.plan || []).forEach(function(l){ l.forEach(function(p){ p.items.forEach(function(x, xi){ if (x.tpo){ var k = p.id + ':' + xi; TM[k] = Object.assign({}, TM[k] || { bg: '' }, { t: x.tpo }); } }); }); });
     return TM;
   }
 
@@ -1801,7 +1829,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
       } else {
         share = Math.round(100 / Math.max(1, W * cons.length)); label = mz.t;
       }
-      TM[s.k] = { t: label, bg: budget(s.len, s.mode, s.x.tk, src, fresh, !!info.gen), sh: share, n: s.mode === 'تشریحی' ? 0 : testsN(s.mode === 'ترکیبی' ? s.len / 2 : s.len, s.x.tk || 'تمرینی', src) };
+      var G = goalFor(s.len, s.mode, s.x.tk, src, fresh, !!info.gen, b); TM[s.k] = { t: label, bg: G.bg, sh: share, n: G.n, pg: G.pg, q: G.q };
     });
   }
 
@@ -2057,7 +2085,8 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
       var el = document.createElement('div'); el.className = 'day'; el.style.setProperty('--d', d);
       var tl = timeline(d, list), tot = list.reduce(function(a, p){ return a + p.len; }, 0) + fixedMin(d);
       var tag = isSchool(d) ? '<span class="tag">مدرسه</span>' : '<span class="tag off">' + (!S.school && d === 6 && S.fri ? 'نیم‌روز' : 'تعطیل') + '</span>';
-      el.innerHTML = '<div class="dh"><b>' + (big ? 'امروز، ' : '') + DAYS[d] + '</b>' + tag + '<span class="dt">' + clock(tot) + '</span></div>';
+      var dg = goalText(dayGoal(d));
+      el.innerHTML = '<div class="dh"><b>' + (big ? 'امروز، ' : '') + DAYS[d] + '</b>' + tag + '<span class="dt">' + clock(tot) + '</span>' + (dg && !big ? '<span class="dgl">🎯 ' + dg + '</span>' : '') + '</div>';
       if (big) el.classList.add('dbig');
       var isToday = !S.wkOff && d === satIdx(todayJ()) && d < 6, allDone = list.length && list.every(function(p){ return dm[p.id]; }), nxp = (S.plan[d + 1] || []).filter(function(p){ return !dm[p.id]; })[0], hasNext = !!nxp && capLeft()[d] >= nxp.len;
       if (isToday && allDone && hasNext){ var fb = document.createElement('button'); fb.type = 'button'; fb.className = 'btn ghost fwd'; fb.textContent = '⚡ وقت اضافه آوردم: یک پارت از فردا'; fb.onclick = function(){ pullForward(d); }; el.appendChild(fb); }
@@ -2080,8 +2109,10 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
         if (dm[p.id] && isTestPart(p)){ var rr = resMap()[p.id];
           if (rr) li.querySelector('span').insertAdjacentHTML('beforeend', '<span class="resl">📊 ' + resText(rr) + '</span>');
           else if (resOpen !== p.id){ var rb = document.createElement('button'); rb.type = 'button'; rb.className = 'resb'; rb.textContent = '+ نتیجه‌ی تست‌ها (درست/غلط/نزده)'; rb.onclick = function(ev){ ev.stopPropagation(); resOpen = p.id; renderWeek(); }; li.querySelector('span').appendChild(rb); } }
+        var fbx = fbMap()[p.id]; if (dm[p.id] && fbx && FB[fbx.f]) li.querySelector('span').insertAdjacentHTML('beforeend', '<span class="fbl fb' + fbx.f + '">' + FB[fbx.f][0] + ' ' + FB[fbx.f][1] + '</span>');
+        if (fbOpen === p.id && !dm[p.id]) li.appendChild(fbRow(p, function(rc){ dm[p.id] = 1; if (isTestPart(p) && !binfo(p.items[0].b).gen && !resMap()[p.id]) resOpen = p.id; save(); renderWeek(); onTick(rc, false); }));
         if (resOpen === p.id) li.appendChild(resEditor(p));
-        li.querySelector('.ck').addEventListener('click', function(ev){ ev.stopPropagation(); var was = !!dm[p.id], rc = this.getBoundingClientRect(); if (was) delete dm[p.id]; else { dm[p.id] = 1; if (isTestPart(p) && !resMap()[p.id]) resOpen = p.id; } save(); renderWeek(); onTick(rc, was); });
+        li.querySelector('.ck').addEventListener('click', function(ev){ ev.stopPropagation(); var was = !!dm[p.id], rc = this.getBoundingClientRect(); if (was){ delete dm[p.id]; delete fbMap()[p.id]; save(); renderWeek(); onTick(rc, true); } else { fbOpen = fbOpen === p.id ? null : p.id; renderWeek(); } });
         li.querySelector('.tmb').addEventListener('click', function(ev){ ev.stopPropagation(); openTimer(p.id); });
         li.tabIndex = 0; li.setAttribute('role', 'button');
         if (sel === p.id || swapFrom === p.id) li.classList.add('sel');
@@ -2164,13 +2195,11 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
       td += '<td>' + (cell || 'استراحت') + '</td>';
     });
     var gl = goalLine(), anchor = (gl || S.gWhy) ? '<div class="pa">' + (typeof gimg === 'string' && gimg ? '<img class="pimg" src="' + gimg + '" alt="">' : '') + (S.gWhy ? '<div class="pq"><small>لنگرِ من</small>«' + esc(S.gWhy) + '»</div>' : '') + (gl ? '<div class="pg"><small>هدفِ من</small><b>' + esc(gl) + '</b></div>' : '') + '</div>' : '';
-    var bt = budgetTable(true), sub = subjectSheet();
+    var two = S.pages !== 1, sub = two ? page2Sheet() : '', B1 = two ? budgetData(1) : null;
     ps.innerHTML = '<div class="ppage">' + head + anchor + '<table class="pt"><thead><tr>' + th + '</tr></thead><tbody><tr>' + td + '</tr></tbody></table>'
       + '<div class="pf"><span>خط سرمه‌ای: تشریحی • خط نارنجی: تستی • 🎯 = هدف هر پارت • بین پارت‌ها ' + fa(BRK()) + ' دقیقه استراحت</span><span>یادداشت همایش: ' + tip + '</span></div></div>'
-      + (bt ? '<div class="ppage p2"><div class="ph"><img src="' + logo + '" alt=""><div><h1>بودجه‌ی آزمون‌ها، درس به درس</h1><p>' + esc(fullName() || '') + ' • ' + NAME[S.grade] + ' ' + S.track + ' • پارت‌های برنامه‌ی هفتگی از روی همین جدول ساخته شده‌اند</p></div></div>' + bt
-        + '<div class="pf"><span>ستون اول (پررنگ): آزمون بعدی تو. هر هفته پیشرفتت را در بخش «گزارش» سایت ثبت کن.</span><span>کانون طلوع نخبگان</span></div></div>' : '')
-      + (sub ? '<div class="ppage p3"><div class="ph"><img src="' + logo + '" alt=""><div><h1>برگه‌ی درس‌ها</h1><p>مباحث این هفته، نحوه‌ی خواندن و منبع هر درس' + (S.coachNote ? ' • پیام مشاور: ' + esc(S.coachNote) : (S.adv && S.adv.msg && S.adv.msg.t ? ' • پیام هفته: ' + esc(S.adv.msg.t) : '')) + '</p></div></div>' + sub
-        + '<div class="pf"><span>یادت نره: هر شب گزارش کار روزانه را در سایت یا ربات برای مشاورت بفرست • ساعت خواب را رعایت کن.</span><span>کانون طلوع نخبگان</span></div></div>' : '');
+      + (sub ? '<div class="ppage p2"><div class="ph"><img src="' + logo + '" alt=""><div><h1>' + (B1 ? 'بودجه‌ی ' + esc(B1.cols[0]) + ' و ' : '') + 'شیوه‌ی مطالعه و منابع</h1><p>' + esc(fullName() || '') + ' • ' + NAME[S.grade] + ' ' + S.track + (S.coachNote ? ' • پیام مشاور: ' + esc(S.coachNote) : (S.adv && S.adv.msg && S.adv.msg.t ? ' • پیام هفته: ' + esc(S.adv.msg.t) : '')) + '</p></div></div>' + sub
+        + '<div class="pf"><span>بعد از هر پارت بگو به هدف رسیدی یا نه (سایت یا ربات) • هر شب گزارش کار روزانه را بفرست • ساعت خواب را رعایت کن.</span><span>کانون طلوع نخبگان</span></div></div>' : '');
   }
 
   /* ---------- orchestration ---------- */
@@ -2276,7 +2305,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
         if (e.meal) return { k: 'meal', t: e.meal, s: tstr(e.s), e: tstr(e.e) };
         if (e.fx) return { k: e.fx === 'blk' ? 'blk' : e.fx, t: e.label, s: tstr(e.s), e: tstr(e.e) };
         var tp = e.p.items.map(function(x, xi){ var t = TM[e.p.id + ':' + xi]; return t ? t.t : ''; }).filter(Boolean).join(' | ');
-        return { k: 'part', id: e.p.id, imp: impOf(e.p), mv: e.p.mv ? 1 : 0, fm: (S.focus[wkKey()] || {})[e.p.id] || 0, t: e.p.items.map(function(x){ return x.b; }).join(' + '), m: e.p.mode, tk: e.p.items.length === 1 ? (e.p.items[0].tk || '') : '', s: tstr(e.s), e: tstr(e.e), tp: tp, bg: e.p.items.length === 1 && TM[e.p.id + ':0'] ? TM[e.p.id + ':0'].bg : '', ok: doneMap()[e.p.id] ? 1 : 0 };
+        return { k: 'part', id: e.p.id, gl: goalText(partGoal(e.p)), g: e.p.items.some(function(x){ return binfo(x.b).gen; }) ? 1 : 0, imp: impOf(e.p), mv: e.p.mv ? 1 : 0, fm: (S.focus[wkKey()] || {})[e.p.id] || 0, t: e.p.items.map(function(x){ return x.b; }).join(' + '), m: e.p.mode, tk: e.p.items.length === 1 ? (e.p.items[0].tk || '') : '', s: tstr(e.s), e: tstr(e.e), tp: tp, bg: e.p.items.length === 1 && TM[e.p.id + ':0'] ? TM[e.p.id + ':0'].bg : '', ok: doneMap()[e.p.id] ? 1 : 0 };
       });
     });
     return { id: devId, v: 9, event: ev || 'save', name: (S.name || '').trim(), full: fullName(), track: S.track, grade: S.grade, gradeName: NAME[S.grade],
@@ -2299,7 +2328,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
       notes: (function(){ var o = {}, t = todayJ(); Object.keys(S.notes || {}).forEach(function(k){ if (t - k <= 14) o[k] = S.notes[k]; }); return o; })(),
       ana: (function(){ var a = (S.ana || {})[scKey()] || {}, ks = Object.keys(a).map(Number).sort(function(x, y){ return y - x; }).slice(0, 3); return ks.map(function(j){ return Object.assign({ j: j, ex: (S.inst === 'maz' ? 'ماز ' : '') + jlabel(j) }, a[j]); }); })(),
       exams: liveExams().filter(function(j){ return Math.abs(j - todayJ()) <= 35; }), today: todayJ(), focusMin: (function(){ var f = S.focus[wkKey()] || {}, n = 0; Object.keys(f).forEach(function(k){ n += f[k]; }); return n; })(),
-      phase: phase().k, cby: COACH || undefined,
+      phase: phase().k, cby: COACH || undefined, lvl: S.lvl, fb: (function(){ var o = {}, m = fbMap(); Object.keys(m).forEach(function(id){ o[id] = m[id].f; }); return o; })(),
       res: resMap(), dayrep: (function(){ var r = S.dayrep[todayJ()]; return r && r.sent ? Object.assign({ j: todayJ() }, r) : null; })(), tlog: S.tlog[todayJ()] || null,
       src: (function(){ var o = {}; Object.keys(S.src || {}).forEach(function(k){ o[k.split('|')[2]] = S.src[k]; }); return o; })(), trm: Object.keys(S.trm || {}).map(function(k){ return k.split('|')[2]; }), rts: S.rts || [],
       reports: (S.reports || []).slice(0, 8).map(function(r){ return { label: r.label, pct: r.pct, behind: r.behind, reached: r.reached, unk: r.unk || [], ex: r.ex, at: r.at }; }), ua: (navigator.userAgent || '').slice(0, 120) };
@@ -2506,6 +2535,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     }
     if (j.streak && JSON.stringify(j.streak) !== JSON.stringify(S.streak)){ S.streak = j.streak; ch = true; }
     if (j.adv !== undefined && JSON.stringify(j.adv || null) !== JSON.stringify(S.adv || null)){ S.adv = j.adv || null; ch = true; }
+    if (t && t.wk === weekStart() && t.fb){ var fmx = fbMap(); Object.keys(t.fb).forEach(function(id){ if (fmx[id]) return; var f = findS(id); if (!f) return; setFb(S.plan[f[0]][f[1]], +t.fb[id]); ch = true; }); }
     if (t && t.wk === weekStart() && t.res){ var rm = resMap(); Object.keys(t.res).forEach(function(id){ if (!rm[id]){ rm[id] = t.res[id]; ch = true; } }); }
     if (j.sea !== undefined && JSON.stringify(j.sea || null) !== JSON.stringify(S.sea || null)){ S.sea = j.sea || null; PH = null; _save2(); renderAll(true); return; }
     if (j.vapid !== undefined && (j.vapid || '') !== (S.vapid || '')){ S.vapid = j.vapid || ''; }
@@ -2685,7 +2715,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     var box = $id('tday'); if (!box || !S.plan) return;
     var ph = phase(), sea = $id('sea'); sea.hidden = !ph.label; sea.textContent = ph.label;
     var rv = $id('rv'), slot = $id('rvslot'); if (rv && slot && rv.parentNode !== slot) slot.appendChild(rv);
-    renderWGoals(); renderDayRep(); renderCoach();
+    renderWGoals(); renderDayRep(); renderCoach(); renderTGoal();
     var wm = $id('wmsg'), M = S.adv && S.adv.msg; wm.hidden = !(M && M.t); if (M && M.t) wm.innerHTML = '<b>📌 پیام هفته' + (M.by ? ' از ' + esc(M.by) : '') + '</b><p>' + esc(M.t) + '</p>';
     if (S.wkOff){ box.innerHTML = '<p class="note">برای دیدن امروز، هفته‌ی جاری را انتخاب کن.</p>'; return; }
     var d = satIdx(todayJ()), dm = doneMap(); box.innerHTML = '';
@@ -2756,15 +2786,15 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
   $id('cal-next').onclick = function(){ calM++; if (calM > 12){ calM = 1; calY++; } renderCal(); };
 
   /* ---------- budget chart: exam by exam, book by book (screen + page 2 of the print) ---------- */
-  function budgetData(){
+  function budgetData(lim){ lim = lim || 4;
     var t = todayJ(), books = bookList();
     if (S.inst === 'maz'){
-      var ex = mazList().filter(function(e){ return e.j >= t - 1 && !S.exSkip[e.j]; }).slice(0, 4); if (!ex.length) return null;
+      var ex = mazList().filter(function(e){ return e.j >= t - 1 && !S.exSkip[e.j]; }).slice(0, lim); if (!ex.length) return null;
       var rows = books.map(function(d){ var src = d.src || d.b; return { b: d.b, cells: ex.map(function(e){ var x = e.b[src]; return x ? { t: x.t, p: x.p && x.p.length ? 'صفحه‌ی ' + fa(x.p[0][0]) + ' تا ' + fa(x.p[x.p.length - 1][1]) : '' } : null; }) }; })
         .filter(function(r){ return r.cells.some(Boolean); });
       return { cols: ex.map(function(e){ return 'ماز ' + jlabel(e.j) + (e.est ? ' (تخمینی)' : ''); }), rows: rows, maz: 1 };
     }
-    var js = liveExams().filter(function(j){ return j >= t - 1; }).slice(0, 4); if (!js.length) return null;
+    var js = liveExams().filter(function(j){ return j >= t - 1; }).slice(0, lim); if (!js.length) return null;
     return { cols: js.map(function(j){ return (INST[S.inst] ? INST[S.inst].s : 'آزمون') + ' ' + jlabel(j); }),
       rows: books.map(function(d){ var src = d.src || d.b, ch = chOf(src); return { b: d.b, cells: js.map(function(j){ var n = targetFor(d.b, src, !!d.rev, j); return n ? { t: 'تا آخر ' + chName(ch, Math.min(ch.length, n) - 1), p: '' } : null; }) }; }) };
   }
@@ -2967,6 +2997,98 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
 
   var resOpen = null;
   /* =====================================================================
+     v26: goals per part (tests / pages / sample questions), three-way
+          feedback instead of a plain tick, weekly growth of the goal,
+          «هدف امروز», and the two-page print
+     ===================================================================== */
+  var GL = { start: 15, cap: 40, step: 5, r0: 0.4, rMin: 0.3, rMax: 0.7 };   // tests per 90 minutes; share of time for sample questions
+  var FB = { 3: ['😌', 'راحت رسیدم'], 2: ['🙂', 'رسیدم ولی سخت بود'], 1: ['😓', 'به هدف نرسیدم'] };
+  var fbOpen = null;
+  function lvlOf(b){ var x = S.lvl[b]; return x && x.L ? x.L : GL.start; }
+  function ratioOf(b, fresh){ var x = S.lvl[b]; return x && x.r != null ? x.r : (fresh ? GL.r0 : GL.r0 + 0.2); }
+  var Q_GEN = 2, Q_SPEC = 4;   // minutes per sample question: general / specialized subjects
+  function qMin(b){ return /فیزیک|ریاضی|حسابان|هندسه|گسسته|آمار/.test(b || '') ? 3 : 2; }   // minutes per sample question: math & physics 3, everything else 2
+  function pgMin(b){ return /زیست/.test(b || '') ? 15 : 8; }   // minutes per textbook page (biology is denser)
+  function r5(x){ return Math.round(x / 5) * 5; }
+  /* what one part (or half of a part) should reach */
+  function goalFor(len, mode, tk, src, fresh, gen, b){
+    var g = { n: 0, pg: 0, q: 0, bg: '' };
+    if (gen){   // عمومی: no tests — textbook pages + sample questions, in a ratio that follows the feedback
+      var r = ratioOf(b, fresh), qm = Math.max(10, r5(len * r)), rm = Math.max(10, len - qm);
+      g.pg = Math.max(1, Math.round(rm / pgMin(b))); g.q = Math.max(2, Math.round(qm / Q_GEN));
+      g.bg = fa(g.pg) + ' صفحه ' + (fresh ? 'متن و درسنامه' : 'مرور درسنامه') + ' + ' + fa(g.q) + ' نمونه‌سؤال';
+      return g;
+    }
+    if (mode === 'تشریحی'){
+      var rd = fresh ? r5(len * 2 / 3) : r5(len / 2), ex = len - rd;
+      g.pg = Math.max(1, Math.round(rd / pgMin(b))); g.q = Math.max(2, Math.round(ex / qMin(b)));
+      g.bg = fa(g.pg) + ' صفحه ' + (fresh ? 'درسنامه و مثال' : 'مرور درسنامه') + ' + ' + fa(g.q) + ' ' + (fresh ? 'تمرین کتاب و نمونه‌سؤال' : 'نمونه‌سؤال تشریحی');
+      return g;
+    }
+    var tl = mode === 'ترکیبی' ? len / 2 : len, L = Math.min(GL.cap, lvlOf(b));
+    g.n = Math.max(5, Math.round(L * tl / 90));
+    var t = fa(g.n) + ' تست' + (tk ? ' ' + tk : '');
+    if (tk === 'زمان‌دار' || tk === 'آزمونی'){ var w = r5(tl * 0.65); t += ' (' + fa(w) + ' دقیقه حل + ' + fa(tl - w) + ' دقیقه تحلیل)'; }
+    if (mode === 'ترکیبی'){ g.pg = Math.max(1, Math.round(tl / pgMin(b))); g.bg = fa(g.pg) + ' صفحه درسنامه + ' + t; return g; }
+    g.bg = t; return g;
+  }
+  function partGoal(p){   // sum over the halves of a part
+    var o = { n: 0, pg: 0, q: 0 }; p.items.forEach(function(x, xi){ var t = TM[p.id + ':' + xi]; if (t){ o.n += t.n || 0; o.pg += t.pg || 0; o.q += t.q || 0; } }); return o;
+  }
+  function goalText(o){ var a = []; if (o.n) a.push(fa(o.n) + ' تست'); if (o.pg) a.push(fa(o.pg) + ' صفحه'); if (o.q) a.push(fa(o.q) + ' نمونه‌سؤال'); return a.join('، '); }
+  function dayGoal(d){ var o = { n: 0, pg: 0, q: 0 }; ((S.plan || [])[d] || []).forEach(function(p){ var g = partGoal(p); o.n += g.n; o.pg += g.pg; o.q += g.q; }); return o; }
+  /* feedback: S.fb[week][part id] = { f: 3|2|1, b: [books], g: gen? } */
+  function fbMap(w){ w = w || wkKey(); S.fb[w] = S.fb[w] || {}; return S.fb[w]; }
+  function setFb(p, f){ fbMap()[p.id] = { f: f, b: p.items.map(function(x){ return x.b; }), g: p.items.map(function(x){ return binfo(x.b).gen ? 1 : 0; }), m: p.mode }; }
+  function fbRow(p, done){
+    var box = document.createElement('div'); box.className = 'fbrow'; box.setAttribute('role', 'group'); box.setAttribute('aria-label', 'به هدف این پارت رسیدی؟');
+    box.innerHTML = '<span>به هدف این پارت رسیدی؟</span>' + [3, 2, 1].map(function(f){ return '<button type="button" data-f="' + f + '">' + FB[f][0] + ' ' + FB[f][1] + '</button>'; }).join('') + '<button type="button" class="fbx" aria-label="بستن">✕</button>';
+    box.addEventListener('click', function(ev){ ev.stopPropagation(); });
+    box.querySelectorAll('[data-f]').forEach(function(b){ b.onclick = function(){ var rc = b.getBoundingClientRect(); setFb(p, +b.dataset.f); fbOpen = null; done(rc); }; });
+    box.querySelector('.fbx').onclick = function(){ fbOpen = null; renderWeek(); };
+    return box;
+  }
+  /* once a week: goals grow (or shrink) per book from last week's feedback */
+  function adjLevels(){
+    var cur = wkKey(), msgs = [];
+    Object.keys(S.fb).filter(function(w){ return +w < +cur && !S.lvlDone[w]; }).sort().forEach(function(w){
+      var T = {}; Object.keys(S.fb[w]).forEach(function(id){ var x = S.fb[w][id]; (x.b || []).forEach(function(b, i){ if (x.m === 'تشریحی' && !(x.g || [])[i]) return; var t = T[b] = T[b] || { e: 0, n: 0, all: 0, g: (x.g || [])[i] }; t.all++; if (x.f === 3) t.e++; if (x.f === 1) t.n++; }); });
+      Object.keys(T).forEach(function(b){ var t = T[b], up = t.e * 2 > t.all, dn = t.n * 2 > t.all; if (!up && !dn) return;
+        var L = S.lvl[b] = S.lvl[b] || {};
+        if (t.g){ var r0 = L.r != null ? L.r : GL.r0, r1 = Math.max(GL.rMin, Math.min(GL.rMax, Math.round((r0 + (up ? 0.1 : -0.1)) * 10) / 10)); if (r1 !== r0){ L.r = r1; msgs.push({ b: b, g: 1, up: up }); } }
+        else { var l0 = L.L || GL.start, l1 = Math.max(GL.start, Math.min(GL.cap, l0 + (up ? GL.step : -GL.step))); if (l1 !== l0){ L.L = l1; msgs.push({ b: b, up: up, L: l1 }); } } });
+      S.lvlDone[w] = 1;
+    });
+    var ks = Object.keys(S.fb).sort(); while (ks.length > 6) delete S.fb[ks.shift()];
+    if (msgs.length){ S.lvlMsg = { w: cur, m: msgs }; _save2(); }
+  }
+  /* «هدف امروز» */
+  function renderTGoal(){
+    var box = $id('tgoal'); if (!box) return;
+    if (S.wkOff || !S.plan){ box.hidden = true; return; }
+    var d = satIdx(todayJ()), L = (S.plan[d] || []), dm = doneMap(), fm = fbMap(); box.hidden = !L.length; if (!L.length) return;
+    var g = dayGoal(d), got = { n: 0, pg: 0, q: 0 }; L.forEach(function(p){ if (!dm[p.id]) return; var x = partGoal(p), f = fm[p.id]; if (f && f.f === 1) return; got.n += x.n; got.pg += x.pg; got.q += x.q; });
+    var cell = function(k, lbl){ return g[k] ? '<div><b>' + fa(got[k]) + '<small>/' + fa(g[k]) + '</small></b><span>' + lbl + '</span><i style="--w:' + Math.min(100, Math.round(got[k] / g[k] * 100)) + '%"></i></div>' : ''; };
+    var lm = S.lvlMsg && S.lvlMsg.w === wkKey() ? S.lvlMsg.m : [];
+    box.innerHTML = '<div class="sh"><h2>🎯 هدف امروز</h2><span class="note" style="margin:0">' + fa(L.filter(function(p){ return dm[p.id]; }).length) + ' از ' + fa(L.length) + ' پارت</span></div>'
+      + '<div class="tg-sum">' + cell('n', 'تست') + cell('pg', 'صفحه درسنامه') + cell('q', 'نمونه‌سؤال') + '</div>'
+      + '<ol class="tg-list">' + L.map(function(p){ var x = partGoal(p), f = fm[p.id], t = timeline(d, L).filter(function(e){ return e.p === p; })[0];
+          return '<li class="' + (dm[p.id] ? 'ok' : '') + '"><span>' + fa(p.items.map(function(i){ return i.b; }).join(' + ')) + (t ? '<small>' + fa(tstr(t.s)) + '</small>' : '') + '</span><b>' + (goalText(x) || '—') + '</b><em>' + (dm[p.id] ? (f ? FB[f.f][0] : '✅') : '') + '</em></li>'; }).join('') + '</ol>'
+      + (lm.length ? '<p class="tg-up">' + lm.map(function(m){ return m.g ? (m.up ? '📈 ' + esc(fa(m.b)) + ': سهم نمونه‌سؤال بیشتر شد' : '📉 ' + esc(fa(m.b)) + ': سهم درسنامه بیشتر شد') : (m.up ? '📈 هفته‌ی پیش ' + esc(fa(m.b)) + ' را راحت رسیدی؛ هدف تستش شد ' + fa(m.L) + ' تست در هر ۱.۵ ساعت' : '📉 ' + esc(fa(m.b)) + ' سخت بود؛ هدف تستش شد ' + fa(m.L) + ' تست در هر ۱.۵ ساعت'); }).join('<br>') + '</p>' : '')
+      + '<p class="note" style="margin:6px 0 0">بعد از هر پارت، روی دایره‌ی تیک بزن و بگو به هدف رسیدی یا نه؛ هدف هفته‌ی بعد از روی همین جواب‌ها تنظیم می‌شود (تست درس‌های اختصاصی حداکثر ' + fa(GL.cap) + ' تا در هر ۱.۵ ساعت).</p>';
+  }
+  /* page 2 of the print: the nearest exam's budget + how to study and sources, per book */
+  function page2Sheet(){
+    var by = {}; S.plan.forEach(function(l){ l.forEach(function(p){ p.items.forEach(function(x, xi){ var b = x.b, t = TM[p.id + ':' + xi]; by[b] = by[b] || { n: 0, g: { n: 0, pg: 0, q: 0 }, tp: [], modes: {} }; by[b].n++; by[b].modes[x.mode || p.mode] = 1; if (t){ by[b].g.n += t.n || 0; by[b].g.pg += t.pg || 0; by[b].g.q += t.q || 0; if (t.t && by[b].tp.indexOf(t.t) < 0) by[b].tp.push(t.t); } }); }); });
+    var bs = Object.keys(by); if (!bs.length) return '';
+    var B = budgetData(1), bud = {}, col = B ? B.cols[0] : '';
+    if (B) B.rows.forEach(function(r){ var c = r.cells[0]; if (c) bud[r.b] = c.t + (c.p ? ' (' + c.p + ')' : ''); });
+    var defHow = function(m, gen){ return gen ? 'متن درس و نکته‌ها، بعد نمونه‌سؤال امتحانی' : m['تشریحی'] && !m['تستی'] ? 'درسنامه‌ی تشریحی + کتاب درسی با همه‌ی جزئیات + نمونه‌سؤال' : m['تستی'] && !m['تشریحی'] ? 'مرور ۱۰ دقیقه‌ای درسنامه، بعد تست؛ تست‌های غلط و ایده‌دار را علامت بزن' : 'اول درسنامه و کتاب درسی، بعد تست همان مبحث'; };
+    return '<table class="pbt sub p2t"><thead><tr><th>درس</th>' + (B ? '<th class="nx">بودجه‌ی ' + esc(col) + '</th>' : '') + '<th>مباحث این هفته</th><th>هدف هفته</th><th>شیوه‌ی مطالعه</th><th>منبع</th></tr></thead><tbody>'
+      + bs.map(function(b){ var x = by[b], a = advOf(b), gen = !!binfo(b).gen; return '<tr><th>' + esc(fa(b)) + '</th>' + (B ? '<td class="nx">' + esc(bud[b] || '—') + '</td>' : '') + '<td>' + x.tp.slice(0, 3).map(esc).join('<br>') + '</td><td>' + (goalText(x.g) || '—') + '<small>' + fa(x.n) + ' پارت</small></td><td>' + esc(a.how || defHow(x.modes, gen)) + (a.how ? '<small>پیشنهاد مشاور</small>' : '') + '</td><td>' + esc(srcOf(b) || '—') + '</td></tr>'; }).join('') + '</tbody></table>'
+      + (allRoutines().length ? '<p class="prt"><b>روتین‌های شبانه:</b> ' + allRoutines().map(function(r){ return esc(r.n) + (r.t ? ' (' + esc(r.t) + ')' : '') + ' • ' + fa(r.min || 15) + ' دقیقه' + (r.alt ? ' • یک شب در میان' : ''); }).join(' | ') + '</p>' : '');
+  }
+  /* =====================================================================
      v25: test results (ص/غ/ن), daily report, sources & how to study,
           nightly routines, grade repair (ترمیم), simple print, coach mode
      ===================================================================== */
@@ -3031,7 +3153,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
     return w;
   }
   /* ---------- nightly routines (student's own + counselor's) ---------- */
-  var RT_NAMES = ['لغت و معنی فارسی', 'آرایه‌های ادبی', 'قواعد عربی', 'لغت عربی', 'لغت زبان انگلیسی', 'گرامر زبان', 'آیات و مفاهیم دینی', 'فرمول‌های فیزیک', 'واکنش‌های شیمی', 'نکته‌های زیست'];
+  var RT_NAMES = ['مرور Anki', 'لغت و معنی فارسی', 'آرایه‌های ادبی', 'قواعد عربی', 'لغت عربی', 'لغت زبان انگلیسی', 'گرامر زبان', 'آیات و مفاهیم دینی', 'فرمول‌های فیزیک', 'واکنش‌های شیمی', 'نکته‌های زیست'];
   function allRoutines(){ return (S.rts || []).concat(((S.adv && S.adv.rt) || []).map(function(r){ return Object.assign({ by: 1 }, r); })); }
   function routinesOn(d){ var j = weekStart() + d; return allRoutines().filter(function(r){ return r.n && (!r.alt || j % 2 === 0); }); }
   function renderRoutines(){
@@ -3345,6 +3467,7 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
   }
 
   if (!S.setup && S.reg && S.plan && (S.maxStep || 0) >= 4){ S.setup = 1; S.tab = 'today'; }   // students from before v24 go straight to the app
+  if (S.anki){ S.rts = S.rts || []; if (!S.rts.some(function(r){ return /anki/i.test(r.n || ''); })) S.rts.unshift({ n: 'مرور Anki', t: 'کارت‌های امروز', min: 15, alt: 0 }); S.anki = false; _save2(); }
   renderAll(false);
   coachSetup();
   if (COACH && !S.introSeen) S.introSeen = 1;
@@ -3353,13 +3476,15 @@ body{background:linear-gradient(180deg,var(--sky1) 0,var(--bg) 520px) var(--bg) 
   else onboardStep(S.step || 'me');
   if (S.timer) drawTimer(false);
   claimFlow();
+  (function(){ var pg = $id('pgseg'); if (!pg) return; var show = function(){ pg.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', String(+b.dataset.v === (S.pages === 1 ? 1 : 2))); }); };
+    show(); pg.querySelectorAll('button').forEach(function(b){ b.onclick = function(){ S.pages = +b.dataset.v; save(); show(); renderPrint(); }; }); })();
   (function(){ var pv = $id('pvseg'); if (!pv) return; var show = function(){ pv.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.v === (S.pview || 'full'))); }); };
     show(); pv.querySelectorAll('button').forEach(function(b){ b.onclick = function(){ S.pview = b.dataset.v; save(); show(); renderPrint(); }; }); })();
   bgInit();
   ready = true;
   renderReview(); renderMsgr(); renderFire(); setTimeout(function(){ pullReview(false); }, S.reg ? 1500 : 300);
   if (syncOn && S.reg && (store.get('pending', '') || !store.get('synced', 0) || Date.now() - store.get('synced', 0) > 864e5)) setTimeout(function(){ push(store.get('pending', '') || 'open'); }, 3000);
-  window.__kp = { pullReview: pullReview, renderPrint: renderPrint, finishSetup: finishSetup, showTab: showTab, renderGF: renderGF, celebrate: celebrate, planSig: planSig, weekStart: weekStart, S: S, compute: compute, buildPlan: buildPlan, timeline: timeline, dayHalves: dayHalves, renderAll: renderAll, sampleTT: sampleTT, snapshot: snapshot, push: push, makePdf: makePdf };
+  window.__kp = { getTM: function(){ return TM; }, pullReview: pullReview, renderPrint: renderPrint, finishSetup: finishSetup, showTab: showTab, renderGF: renderGF, celebrate: celebrate, planSig: planSig, weekStart: weekStart, S: S, compute: compute, buildPlan: buildPlan, timeline: timeline, dayHalves: dayHalves, renderAll: renderAll, sampleTT: sampleTT, snapshot: snapshot, push: push, makePdf: makePdf };
 })();
 </script>
 

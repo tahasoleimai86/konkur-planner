@@ -174,6 +174,9 @@ tr.al td:first-child{box-shadow:inset -3px 0 0 var(--weak)}
 table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
 .drp{margin-top:12px;padding:10px;border-radius:12px;background:var(--chip,#f6efe8);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px}
 .drp p{margin:0;width:100%}
+.msgr{white-space:nowrap}
+.mg{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:2px 9px;margin:1px 0 1px 4px}
+.mg-b{background:#e6f4ea;color:#1d6b3a}.mg-t{background:#e3f0fb;color:#1c5d93}.mg-p{background:#fdf0e3;color:#9a4b10}
 </style>
 </head>
 <body>
@@ -251,7 +254,7 @@ table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
   <details class="card thbox"><summary>آستانه‌های هشدار «نیازمند حمایت»</summary><div class="edgrid" id="th"></div><p class="muted">این برچسب فقط در پنل دیده می‌شود، نه برای دانش‌آموز. تغییرها روی همین دستگاه ذخیره می‌شوند.</p></details>
   <section class="card">
     <h2>دانش‌آموزها<small id="n-list"></small><button class="btn ghost" id="coach-go" style="margin-inline-start:auto">📞 ساخت برنامه‌ی تلفنی</button><button class="btn ghost" id="bulk-go">✉️ پیام گروهی به همین فهرست</button></h2>
-    <div class="tablewrap"><table class="list"><thead><tr><th>نام</th><th>رشته و پایه</th><th>هدف</th><th class="hide-sm">ساعت در هفته</th><th>ضعیف / قوی</th><th>گزارش هفته</th><th>مشاور</th><th>آخرین تغییر</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <div class="tablewrap"><table class="list"><thead><tr><th>نام</th><th>رشته و پایه</th><th>هدف</th><th class="hide-sm">ساعت در هفته</th><th>ضعیف / قوی</th><th>گزارش هفته</th><th>مشاور</th><th>پیام‌رسان</th><th>آخرین تغییر</th></tr></thead><tbody id="rows"></tbody></table></div>
   </section>
 </div>
 
@@ -334,6 +337,9 @@ table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
     var notes = Object.keys(r.notes || {}).sort().reverse().slice(0, 7), an = (r.ana || [])[0];
     var h = '<section class="card"><h2>زمان‌سنج و یادداشت‌ها</h2><p class="muted" style="margin:0 0 6px">' + (fm ? 'این هفته ' + hours(fm / 60) + ' با زمان‌سنج خوانده (از ' + hours(plan / 60) + ' برنامه).' : 'این هفته هنوز با زمان‌سنج نخوانده.') + (r.phase && r.phase !== 'normal' ? ' • حالت: ' + ({ final: 'امتحانات نهایی', nowruz: 'نوروز', post: 'بعد از نهایی', summer: 'تابستان' }[r.phase] || r.phase) : '') + '</p>'
       + (notes.length ? '<ul class="nl">' + notes.map(function(k){ return '<li><b>' + esc(jdate(+k)) + '</b> ' + esc(r.notes[k]) + '</li>'; }).join('') + '</ul>' : '<p class="muted" style="margin:0">یادداشت روزانه‌ای ننوشته.</p>') + '</section>';
+    var LV = r.lvl || {}, lk = Object.keys(LV).filter(function(b){ return LV[b] && (LV[b].L || LV[b].r != null); }), fbw = r.fb || {}, fbn = { 3: 0, 2: 0, 1: 0 }; Object.keys(fbw).forEach(function(k){ fbn[fbw[k]] = (fbn[fbw[k]] || 0) + 1; });
+    h += '<section class="card"><h2>هدف‌ها و بازخورد<small>اختصاصی: از ۱۵ تست در هر ۱.۵ ساعت تا سقف ۴۰</small></h2><p class="muted" style="margin:0 0 6px">بازخورد این هفته: 😌 راحت ' + fa(fbn[3]) + ' • 🙂 سخت ' + fa(fbn[2]) + ' • 😓 نرسیده ' + fa(fbn[1]) + '</p>'
+      + (lk.length ? '<p style="margin:0">' + lk.map(function(b){ var x = LV[b]; return '<span class="tag s">' + esc(fa(b)) + ': ' + (x.L ? fa(x.L) + ' تست' : 'نمونه‌سؤال ' + fa(Math.round(x.r * 100)) + '٪ وقت') + '</span>'; }).join(' ') + '</p>' : '<p class="muted" style="margin:0">همه‌ی درس‌ها هنوز روی هدف شروع (۱۵ تست در هر ۱.۵ ساعت) هستند.</p>') + '</section>';
     if (an && an.b){ var T = { n: 0, c: 0, d: 0, v: 0 }; Object.keys(an.b).forEach(function(b){ ['n', 'c', 'd', 'v'].forEach(function(k){ T[k] += +an.b[b][k] || 0; }); });
       h += '<section class="card"><h2>تحلیل آزمون<small>' + esc(an.ex || '') + '</small></h2><p class="muted" style="margin:0">نخوانده ' + fa(T.n) + ' • مفهومی ' + fa(T.c) + ' • بی‌دقتی ' + fa(T.d) + ' • کمبود وقت ' + fa(T.v) + '</p>'
         + '<div class="tablewrap"><table class="rep"><thead><tr><th>درس</th><th>نخوانده</th><th>مفهومی</th><th>بی‌دقتی</th><th>وقت</th><th>زمان</th></tr></thead><tbody>' + Object.keys(an.b).map(function(b){ var e = an.b[b]; return '<tr><td>' + esc(fa(b)) + '</td>' + ['n', 'c', 'd', 'v', 't'].map(function(k){ return '<td class="num">' + (e[k] ? fa(e[k]) : '—') + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>'
@@ -708,9 +714,10 @@ table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
         + '<td>' + (r.weak || []).slice(0, 3).map(function(b){ return '<span class="tag w">' + esc(fa(b)) + '</span>'; }).join('') + ((r.weak || []).length > 3 ? '<span class="tag w">+' + fa(r.weak.length - 3) + '</span>' : '')
         + (r.strong || []).slice(0, 2).map(function(b){ return '<span class="tag s">' + esc(fa(b)) + '</span>'; }).join('') + '</td>'
         + '<td>' + (r.reports && r.reports.length ? '<b class="num">' + fa(r.reports[0].pct) + '٪</b><div class="meter"><i style="width:' + r.reports[0].pct + '%"></i></div>' + (r.reports[0].behind.length ? '<small class="muted">عقب در ' + fa(r.reports[0].behind.length) + ' درس</small>' : '') : '<small class="muted">نداده</small>') + '</td>'
-        + '<td>' + (r.cname ? esc(r.cname) : '<span class="tag w">بدون مشاور</span>') + (r.baleOn ? ' <span title="به ربات ' + (PN[r.via] || 'بله') + ' وصل است">' + (r.via === 't' ? '✈️' : '📲') + '</span>' : '') + '</td>'
+        + '<td>' + (r.cname ? esc(r.cname) : '<span class="tag w">بدون مشاور</span>') + '</td>'
+        + '<td class="msgr">' + (r.baleOn ? '<span class="mg mg-' + (r.via === 't' ? 't' : 'b') + '">' + (r.via === 't' ? '✈️ تلگرام' : '📲 بله') + '</span>' : '<span class="tag w">وصل نیست</span>') + (r.pushOn ? '<span class="mg mg-p" title="اعلان‌های سایت روی گوشی‌اش روشن است">🔔 اعلان سایت</span>' : '') + '</td>'
         + '<td class="num">' + ago(r.updated) + '</td></tr>';
-    }).join('') : '<tr><td colspan="8" class="empty">هنوز کسی برنامه نساخته یا با این فیلتر کسی پیدا نشد.</td></tr>';
+    }).join('') : '<tr><td colspan="9" class="empty">هنوز کسی برنامه نساخته یا با این فیلتر کسی پیدا نشد.</td></tr>';
   }
   $('rows').addEventListener('click', function(e){ var tr = e.target.closest('tr[data-i]'); if (tr) open(ROWS[+tr.dataset.i]); });
   $('rows').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ var tr = e.target.closest('tr[data-i]'); if (tr) open(ROWS[+tr.dataset.i]); } });
