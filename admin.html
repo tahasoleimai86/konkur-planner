@@ -177,6 +177,16 @@ table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
 .msgr{white-space:nowrap}
 .mg{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:2px 9px;margin:1px 0 1px 4px}
 .mg-b{background:#e6f4ea;color:#1d6b3a}.mg-t{background:#e3f0fb;color:#1c5d93}.mg-p{background:#fdf0e3;color:#9a4b10}
+.paysw{display:flex;gap:8px;align-items:center;font-weight:800;margin:4px 0 10px;flex-wrap:wrap}
+.paygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.paygrid label,.paygrid .wide{display:flex;flex-direction:column;font-size:12.5px;font-weight:700;gap:3px}
+.paygrid .wide{grid-column:1/-1}
+.locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 12px;font-size:13px}
+#pay-card .locks label,#pay-card label.paysw{display:flex;flex-direction:row;justify-content:flex-start;gap:6px;align-items:center;text-align:right}
+#pay-card .locks input,#pay-card .paysw input{width:auto;margin:0;flex:none}
+#pc-phones{width:100%;font-family:monospace}
+.payimg{max-width:160px;max-height:200px;border-radius:8px;border:1px solid var(--line)}
+.tag.sub{background:#e3f0fb;color:#1c5d93;border-color:#bcd7ef}
 </style>
 </head>
 <body>
@@ -231,6 +241,25 @@ table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
       <label>توضیح (اختیاری)<input id="ta-note" placeholder="چرا خوب است؟"></label>
       <label>عکس تست<input type="file" id="ta-file" accept="image/*"></label>
     </div><div style="display:flex;gap:8px;align-items:center;margin-top:8px"><button class="btn acc" id="ta-go">بارگذاری</button><span class="muted" id="ta-msg" role="status"></span></div></details>
+  </section>
+  <section class="card" id="pay-card" hidden>
+    <h2>🎓 عضویت کانون و اشتراک<small>اعضا همه‌چیز رایگان؛ بقیه ماه اول برنامه‌ساز رایگان، بعد با اشتراک ماهانه</small></h2>
+    <label class="paysw"><input type="checkbox" id="pc-on"> فعال کردن عضویت و اشتراک <small class="muted">(تا این تیک روشن نشود، همه‌چیز برای همه باز است)</small></label>
+    <div class="paygrid">
+      <label>مبلغ اشتراک (تومان)<input id="pc-price" inputmode="numeric" dir="ltr" placeholder="250000"></label>
+      <label>مدت هر اشتراک (روز)<input id="pc-days" inputmode="numeric" dir="ltr" placeholder="30"></label>
+      <label>ماه رایگان برنامه‌ساز (روز؛ ۰ = ندارد)<input id="pc-trial" inputmode="numeric" dir="ltr" placeholder="30"></label>
+      <label>شماره کارت<input id="pc-card" dir="ltr" placeholder="6037-xxxx-xxxx-xxxx"></label>
+      <label>به نام<input id="pc-owner" placeholder="مثلاً: کانون طلوع نخبگان"></label>
+      <label class="wide">توضیح برای دانش‌آموز (اختیاری)<input id="pc-note" maxlength="300" placeholder="مثلاً: سؤال داشتی به دفتر کانون پیام بده"></label>
+    </div>
+    <p class="muted" style="margin:10px 0 4px">در ماه رایگانِ غیرعضوها این‌ها بسته باشد (بعد از ماه رایگان، بدون اشتراک همه‌چیز بسته است):</p>
+    <div class="locks" id="pc-locks"></div>
+    <label class="wide" style="display:block;margin-top:10px">شماره موبایل اعضای کانون (هر خط یک شماره)؛ هر کس با این شماره‌ها ثبت‌نام کند خودکار عضو حساب می‌شود
+      <textarea id="pc-phones" rows="4" dir="ltr" placeholder="09121234567"></textarea></label>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:8px"><button class="btn acc" id="pc-save">ذخیره</button><span class="muted" id="pc-msg" role="status"></span></div>
+    <h3 class="hh" style="margin-top:16px">رسیدهای پرداخت</h3>
+    <div id="pay-list"><p class="muted">در حال دریافت…</p></div>
   </section>
   <section class="card" id="sea-card" hidden>
     <h2>📅 فصل‌ها و امتحانات نهایی<small>برنامه‌ی دانش‌آموزها خودکار با این تاریخ‌ها تنظیم می‌شود</small></h2>
@@ -314,7 +343,7 @@ table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
     $('mybale').hidden = !ME.link && !ME.tlink && !(SAMPLE);
     $('mybale').textContent = ME.bale ? '📲 به ' + (PN[ME.via] || 'ربات') + ' وصل هستید' : '📲 اتصال من به ربات';
     $('mybale').onclick = function(){ showLink(ME.link || (SAMPLE ? 'https://ble.ir/konkur_bot?start=cdemo' : ''), ME.code || 'cdemo', 'اتصال حساب پیام‌رسان شما به پنل', ME.tlink || (SAMPLE ? 'https://t.me/konkur_tg_bot?start=cdemo' : '')); };
-    $('cs-card').hidden = !isAdmin(); $('f-cid').hidden = !isAdmin() || !CS.length; $('heat-card').hidden = !isAdmin(); $('f-mem').hidden = !isAdmin(); $('sea-card').hidden = !isAdmin(); renderSea(); loadTests();
+    $('cs-card').hidden = !isAdmin(); $('f-cid').hidden = !isAdmin() || !CS.length; $('heat-card').hidden = !isAdmin(); $('f-mem').hidden = !isAdmin(); $('sea-card').hidden = !isAdmin(); renderSea(); loadTests(); $('pay-card').hidden = !isAdmin(); if (isAdmin()) loadPays();
     $('f-cid').innerHTML = '<option value="">همه‌ی مشاورها</option><option value="_none">بدون مشاور</option>' + CS.map(function(c){ return '<option value="' + esc(c.id) + '">' + esc(c.name) + '</option>'; }).join('');
     renderCS(); $('samplebadge').hidden = !SAMPLE; var sl = $('sheetlink'); sl.hidden = !SHEET || SAMPLE; if (SHEET) sl.href = SHEET; render(); }
   function act(params, done){
@@ -395,6 +424,37 @@ table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
         function(e){ $('bk-m').textContent = e; $('bk-s').disabled = false; }); };
   };
   /* ---------- v24: seasons (admin) ---------- */
+  /* ---------- v31: membership & paid counselling ---------- */
+  var LOCKS = [['review', 'بررسی و تأیید برنامه، منبع و شیوه‌ی مطالعه، پیام هفته'], ['msg', 'پیام به مشاور در ربات'], ['report', 'گزارش کار روزانه، گزارش هفتگی و کارنامه برای مشاور'], ['coach', 'برنامه‌ی تلفنی و گزارش هفتگی به اولیا'], ['voice', 'پیام صوتی مشاور'], ['tests', 'فرستادن «تست برتر»'], ['pdf', 'دکمه‌ی PDF برنامه در ربات']];
+  var PAYS = [];
+  function fillPay(cfg, phones){ cfg = cfg || {}; $('pc-on').checked = !!cfg.on; $('pc-price').value = cfg.price || ''; $('pc-days').value = cfg.days || 30; $('pc-trial').value = cfg.trial == null ? 30 : cfg.trial; $('pc-card').value = cfg.card || ''; $('pc-owner').value = cfg.owner || ''; $('pc-note').value = cfg.note || '';
+    var L = cfg.locks || (cfg.on == null ? { review: 1, msg: 1, report: 1, coach: 1, voice: 1 } : {});
+    $('pc-locks').innerHTML = LOCKS.map(function(x){ return '<label><input type="checkbox" data-lk="' + x[0] + '"' + (L[x[0]] ? ' checked' : '') + '> ' + x[1] + '</label>'; }).join('');
+    if (phones != null) $('pc-phones').value = phones; }
+  function loadPays(){
+    if (SAMPLE){ fillPay({ on: 1, price: 250000, days: 30, trial: 30, card: '6037-9911-1234-5678', owner: 'کانون طلوع نخبگان', locks: { review: 1, msg: 1, report: 1, coach: 1, voice: 1 } }, '09121111111\n09122222222');
+      renderPays([{ pid: 'p1', at: Date.now() - 36e5, name: 'دانش‌آموز نمونه ۳', phone: '09125551234', amount: 250000, ref: '845123', st: 'pending' }, { pid: 'p2', at: Date.now() - 4 * 864e5, name: 'دانش‌آموز نمونه ۷', phone: '09124443322', amount: 250000, ref: '', st: 'ok', until: new Date(Date.now() + 26 * 864e5) }]); return; }
+    fetch(EP + '?key=' + encodeURIComponent(PW) + '&action=pays&t=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(j){ if (!j.ok) throw 0; fillPay(j.cfg, j.phones); renderPays(j.items || []); })
+      .catch(function(){ fillPay({}, null); $('pay-list').innerHTML = '<p class="muted">دریافت نشد. اگر Code.gs را تازه عوض کرده‌اید، New version را Deploy کنید.</p>'; });
+  }
+  function renderPays(list){ PAYS = list;
+    $('pay-list').innerHTML = list.length ? '<div class="tablewrap"><table class="rep"><thead><tr><th>زمان</th><th>دانش‌آموز</th><th>مبلغ</th><th>کد پیگیری</th><th>رسید</th><th>وضعیت</th></tr></thead><tbody>' + list.map(function(x){
+      return '<tr><td>' + new Date(x.at).toLocaleDateString('fa-IR') + '</td><td>' + esc(x.name || '') + '<br><small class="muted" dir="ltr">' + esc(fa(x.phone || '')) + '</small></td><td class="num">' + fa(Number(x.amount || 0).toLocaleString('en-US')) + '</td><td dir="ltr">' + esc(fa(x.ref || '—')) + '</td>'
+        + '<td><button class="btn ghost" data-pimg="' + esc(x.pid) + '">دیدن عکس</button></td><td>' + (x.st === 'pending' ? '<button class="btn acc" data-pok="' + esc(x.pid) + '">تأیید</button> <button class="btn ghost danger" data-pno="' + esc(x.pid) + '">رد</button>' : x.st === 'ok' ? '<span class="tag s">تأیید' + (x.until ? ' تا ' + new Date(x.until).toLocaleDateString('fa-IR') : '') + '</span>' : '<span class="tag w">رد شد</span>') + '</td></tr>'; }).join('') + '</tbody></table></div>'
+      : '<p class="muted">هنوز رسیدی نیامده. رسیدها هم در ربات (برای مدیر) با دکمه‌ی تأیید می‌آیند.</p>';
+    $('pay-list').querySelectorAll('[data-pimg]').forEach(function(b){ b.onclick = function(){ if (SAMPLE){ b.textContent = '(در نمونه عکسی نیست)'; return; } b.textContent = 'در حال دریافت…';
+      fetch(EP + '?key=' + encodeURIComponent(PW) + '&action=payimg&pid=' + encodeURIComponent(b.dataset.pimg)).then(function(r){ return r.json(); }).then(function(j){ if (!j.ok) throw 0; b.outerHTML = '<a href="data:image/jpeg;base64,' + j.b64 + '" target="_blank" rel="noopener"><img class="payimg" src="data:image/jpeg;base64,' + j.b64 + '" alt="رسید"></a>'; }).catch(function(){ b.textContent = 'نشد'; }); }; });
+    $('pay-list').querySelectorAll('[data-pok],[data-pno]').forEach(function(b){ b.onclick = function(){ var ok = !!b.dataset.pok, pid = b.dataset.pok || b.dataset.pno; b.disabled = true;
+      postJ({ action: 'paymod', pid: pid, ok: ok ? 1 : 0 }, function(j){ PAYS.forEach(function(x){ if (x.pid === pid){ x.st = ok ? 'ok' : 'no'; x.until = j.until || ''; } }); renderPays(PAYS); }, function(e){ b.disabled = false; alert(e); }); }; });
+  }
+  $('pc-save').onclick = function(){
+    var L = {}; $('pc-locks').querySelectorAll('[data-lk]').forEach(function(c){ if (c.checked) L[c.dataset.lk] = 1; });
+    var cfg = { on: $('pc-on').checked ? 1 : 0, price: +String($('pc-price').value).replace(/[^\d۰-۹]/g, '').replace(/[۰-۹]/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); }) || 0, days: +$('pc-days').value || 30, trial: $('pc-trial').value === '' ? 30 : +$('pc-trial').value, card: $('pc-card').value.trim(), owner: $('pc-owner').value.trim(), note: $('pc-note').value.trim(), locks: L };
+    if (cfg.on && (!cfg.price || !cfg.card)){ $('pc-msg').textContent = 'مبلغ و شماره کارت را بنویسید.'; return; }
+    $('pc-msg').textContent = 'در حال ذخیره…';
+    postJ({ action: 'paycfg', cfg: cfg, phones: $('pc-phones').value }, function(j){ if (j.phones != null) $('pc-phones').value = j.phones; $('pc-msg').textContent = SAMPLE ? 'در حالت نمونه ذخیره نمی‌شود.' : 'ذخیره شد. ' + (cfg.on ? 'از همین حالا عضویت و اشتراک فعال است.' : 'محدودیت خاموش است.'); },
+      function(e){ $('pc-msg').textContent = e; });
+  };
   function renderSea(){
     if (!isAdmin()) return; var L = (SEA && SEA.fin) || [];
     $('sea-rows').innerHTML = L.map(function(x, i){ return '<tr><td><select data-g="' + i + '">' + [['11', 'یازدهم'], ['12', 'دوازدهم']].map(function(g){ return '<option value="' + g[0] + '"' + (String(x.g) === g[0] ? ' selected' : '') + '>' + g[1] + '</option>'; }).join('') + '</select></td>'
@@ -707,7 +767,7 @@ table.adv input{width:100%;min-width:120px;font:inherit;padding:4px 6px}
     $('stamp').textContent = 'به‌روزرسانی: ' + new Date().toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' });
     $('rows').innerHTML = rows.length ? rows.map(function(r){
       var i = ROWS.indexOf(r);
-      return '<tr tabindex="0" data-i="' + i + '"' + (alerts(r).length ? ' class="al"' : '') + '><td class="nm"><b>' + esc(r.full || r.name || 'بی‌نام') + (r.streak ? ' <span class="fire" title="روزهای پشت‌سرهم با همه‌ی پارت‌ها">🔥' + fa(r.streak) + '</span>' : '') + '</b><small>' + (r.member ? '<span class="tag mem">عضو کانون</span>' : '') + (rvSt(r) ? '<span class="tag ' + { pending: 'rvp', ok: 'rvo', fix: 'rvf' }[rvSt(r)] + '">' + RVN[rvSt(r)] + '</span>' : '') + alerts(r).map(function(a){ return '<span class="tag w">' + esc(a) + '</span>'; }).join('') + (r.prints ? '<span class="tag p">چاپ ×' + fa(r.prints) + '</span>' : '') + (r.edited ? 'برنامه را دستی تغییر داده' : '') + '</small></td>'
+      return '<tr tabindex="0" data-i="' + i + '"' + (alerts(r).length ? ' class="al"' : '') + '><td class="nm"><b>' + esc(r.full || r.name || 'بی‌نام') + (r.streak ? ' <span class="fire" title="روزهای پشت‌سرهم با همه‌ی پارت‌ها">🔥' + fa(r.streak) + '</span>' : '') + '</b><small>' + (r.member ? '<span class="tag mem">عضو کانون</span>' : r.subU > Date.now() ? '<span class="tag sub">مشترک تا ' + new Date(r.subU).toLocaleDateString('fa-IR', { day: 'numeric', month: 'long' }) + '</span>' : r.trU > Date.now() ? '<span class="tag sub">ماه رایگان تا ' + new Date(r.trU).toLocaleDateString('fa-IR', { day: 'numeric', month: 'long' }) + '</span>' : '') + (rvSt(r) ? '<span class="tag ' + { pending: 'rvp', ok: 'rvo', fix: 'rvf' }[rvSt(r)] + '">' + RVN[rvSt(r)] + '</span>' : '') + alerts(r).map(function(a){ return '<span class="tag w">' + esc(a) + '</span>'; }).join('') + (r.prints ? '<span class="tag p">چاپ ×' + fa(r.prints) + '</span>' : '') + (r.edited ? 'برنامه را دستی تغییر داده' : '') + '</small></td>'
         + '<td>' + esc(r.track || '') + ' • ' + esc(r.gradeName || r.grade || '') + '</td>'
         + '<td>' + esc(r.goal || '—') + (r.uni ? '<br><small class="muted">' + esc(r.uni) + '</small>' : '') + '</td>'
         + '<td class="num hide-sm">' + hours(r.hours) + '</td>'

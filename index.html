@@ -665,6 +665,33 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
 .inapp b{display:block;font-size:14.5px}
 .inapp p{margin:4px 0 8px;font-size:13px}
 .inapp input{width:100%;margin-top:8px;font:inherit;font-size:12px}
+/* ===== v31: membership & subscription ===== */
+.rv.rv-lock{border:1.5px solid var(--gold);background:color-mix(in srgb,var(--gold) 9%,var(--sheet))}
+.rv.rv-lock p{margin:6px 0 10px}
+.lockl{display:block;font-size:12.5px;font-weight:700;color:var(--ink2);margin-top:4px}
+.lockl a{color:var(--accent);font-weight:800}
+.subst{border-radius:16px;padding:12px 14px;background:var(--chip);display:flex;flex-direction:column;gap:2px;margin-bottom:12px}
+.subst.on{background:color-mix(in srgb,var(--strong) 12%,var(--sheet));border:1px solid color-mix(in srgb,var(--strong) 40%,transparent)}
+.subst b{font-size:15px}.subst span{font-size:13px;color:var(--ink2)}
+.paysteps{margin:8px 0;padding-inline-start:20px;display:flex;flex-direction:column;gap:10px;font-size:13.5px}
+.paysteps small{display:block;color:var(--ink2)}
+.paysteps input[type=text]{width:100%;margin-top:4px}
+.cardno{display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
+.cardno b{font-size:19px;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.pfile{position:relative;display:inline-flex;margin-top:6px;cursor:pointer}
+.pfile input{position:absolute;opacity:0;width:1px;height:1px}
+#pay-prev{display:block;max-width:180px;max-height:220px;border-radius:10px;margin-top:8px;border:1px solid var(--line)}
+.memq{margin-top:12px}
+.memq input{width:100%;margin:4px 0 6px}
+.rv-print{display:flex;width:100%;justify-content:center;margin-top:10px;min-height:44px;font-weight:800}
+/* ===== v33: after the free month ===== */
+.paywall{position:fixed;inset:0;z-index:90;overflow-y:auto;background:color-mix(in srgb,var(--bg) 94%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding-block:calc(24px + env(safe-area-inset-top,0px)) 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.pw-in{max-width:560px;margin:0 auto;background:var(--sheet);border:1px solid var(--line);border-radius:22px;padding:20px 18px;box-shadow:var(--shadow)}
+.pw-logo{width:54px;height:54px;object-fit:contain;display:block;margin:0 auto 6px}
+.pw-in h2{text-align:center;margin:0 0 14px;font-size:19px}
+body.pw-on{overflow:hidden}
+body.pw-on .tabs{display:none}
+@media print{.paywall{display:none!important}}
 
 /* pdf */
 #pdfbox .ph{display:flex;align-items:center;gap:12px;border-bottom:2px solid #1b2540;padding-bottom:6px;margin-bottom:8px}
@@ -716,7 +743,8 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
 #pdfbox .pslot{display:none!important}
 #pdfbox .fire,#pdfbox .btn.fwd{display:none!important}
 #pdfbox .tabs,#pdfbox .tmr,#pdfbox .zoom{display:none!important}
-#pdfbox #kp3d{display:none}</style>
+#pdfbox #kp3d{display:none}
+#pdfbox .paywall{display:none!important}</style>
 <style id="theme">/* =====================================================================
    theme.css — visual layer of «برنامه‌ساز کنکور» | طلوع
    نسخه‌ی بازطراحی بصری: مینیمال، گرم، خوانا و واکنش‌گرا
@@ -1444,6 +1472,7 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
 
 
 <canvas id="kpbg" aria-hidden="true"></canvas><canvas id="kpfx" aria-hidden="true"></canvas>
+<div class="paywall" id="paywall" role="dialog" aria-modal="true" aria-labelledby="pw-h" hidden><div class="pw-in"><img class="pw-logo" id="pw-logo" alt=""><h2 id="pw-h">ادامه با اشتراک یا عضویت کانون</h2><div id="pw-sub"></div></div></div>
 <div class="wrap">
   <div class="inapp" id="inapp" role="region" aria-label="باز کردن در مرورگر اصلی" hidden></div>
   <header class="top">
@@ -1504,7 +1533,7 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
 
   <section class="sheet fade" aria-labelledby="h-me" data-step="me" data-tab="info">
     <div class="sh"><h2 id="h-me">مشخصات تو</h2><span>پاسخ‌برگ شماره‌ی ۱</span></div>
-    <div class="field"><label class="lab" for="name">نام (برای چاپ برنامه)</label><input type="text" id="name" placeholder="مثلاً: علی رضایی" autocomplete="name"></div>
+    <div class="field"><label class="lab" for="name">نام و نام خانوادگی</label><input type="text" id="name" placeholder="مثلاً: علی رضایی" autocomplete="name"></div>
     <div class="field"><span class="lab" id="l-track">رشته</span><div class="chips" id="track" role="group" aria-labelledby="l-track"></div></div>
     <div class="field"><span class="lab" id="l-grade">پایه</span><div class="chips" id="grade" role="group" aria-labelledby="l-grade"></div></div>
     <div class="field"><label class="lab" for="goal">رشته‌ی هدفت در دانشگاه</label><select id="goal"></select>
@@ -1672,6 +1701,10 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
     <div class="sh"><h2 id="h-info">اطلاعات من</h2><span>هر کدام را عوض کنی، برنامه دوباره ساخته می‌شود</span></div>
     <div class="imenu" id="imenu"></div>
   </section>
+  <section class="sheet" id="v-sub" data-tab="info" hidden aria-labelledby="h-sub">
+    <div class="sh"><h2 id="h-sub">اشتراک</h2></div>
+    <div id="sub"></div>
+  </section>
   <section class="sheet" id="v-links" data-tab="info" hidden aria-labelledby="h-links">
     <div class="sh"><h2 id="h-links">ربات، اعلان و اولیا</h2></div>
     <div id="links"></div>
@@ -1746,8 +1779,8 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
     get: function(k, d){ try { var v = localStorage.getItem(NS + k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
     set: function(k, v){ try { localStorage.setItem(NS + k, JSON.stringify(v)); } catch(e){} }
   };
-  var KEYS = ['lvl','fb','lvlDone','lvlMsg','pages','introSeen','res','dayrep','tlog','src','rts','trm','pview','adv','coachDone','coachNote','sea','setup','tab','hist','notes','focus','ana','timer','sigMap','vapid','bed','wake','streak','mvDone','pushOn','bot','tbot','via','msgr','baleOn','cpApplied','rv','scores','reg','step','maxStep','phone','sName','off','pp','inst','exFirst','exEvery','exSkip','anaN','blocks','brk','strat','norev','pg','wkPg','done','reports','boost','cov','wkOff','pgWk','anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
-  var DEF = { lvl:{}, fb:{}, lvlDone:{}, lvlMsg:null, pages:2, introSeen:0, res:{}, dayrep:{}, tlog:{}, src:{}, rts:[], trm:{}, pview:'full', adv:null, coachDone:null, coachNote:'', sea:null, setup:0, tab:'today', hist:{}, notes:{}, focus:{}, ana:{}, timer:null, sigMap:{}, vapid:'', streak:null, mvDone:{}, pushOn:0, bot:'', tbot:'', via:'', msgr:'b', baleOn:false, cpApplied:0, rv:null, scores:{}, reg:0, step:0, maxStep:0, phone:'', sName:'', off:{}, pp:{}, inst:'', exFirst:0, exEvery:14, exSkip:{}, anaN:1, blocks:[], brk:15, strat:'bal', norev:{}, pg:{}, wkPg:{}, done:{}, reports:[], boost:null, cov:{}, wkOff:0, pgWk:{}, anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
+  var KEYS = ['acc','lvl','fb','lvlDone','lvlMsg','pages','introSeen','res','dayrep','tlog','src','rts','trm','pview','adv','coachDone','coachNote','sea','setup','tab','hist','notes','focus','ana','timer','sigMap','vapid','bed','wake','streak','mvDone','pushOn','bot','tbot','via','msgr','baleOn','cpApplied','rv','scores','reg','step','maxStep','phone','sName','off','pp','inst','exFirst','exEvery','exSkip','anaN','blocks','brk','strat','norev','pg','wkPg','done','reports','boost','cov','wkOff','pgWk','anki','ex','exDay','exStart','exDur','exAna','name','goal','goalName','goalPrefix','gUni','gRank','gWhy','track','grade','school','sd','hs','ho','hd','fri','rev','lv','fav','tt','tss','tso','l1','l2','d1','d2','plan','planKey'];
+  var DEF = { acc:null, lvl:{}, fb:{}, lvlDone:{}, lvlMsg:null, pages:2, introSeen:0, res:{}, dayrep:{}, tlog:{}, src:{}, rts:[], trm:{}, pview:'full', adv:null, coachDone:null, coachNote:'', sea:null, setup:0, tab:'today', hist:{}, notes:{}, focus:{}, ana:{}, timer:null, sigMap:{}, vapid:'', streak:null, mvDone:{}, pushOn:0, bot:'', tbot:'', via:'', msgr:'b', baleOn:false, cpApplied:0, rv:null, scores:{}, reg:0, step:0, maxStep:0, phone:'', sName:'', off:{}, pp:{}, inst:'', exFirst:0, exEvery:14, exSkip:{}, anaN:1, blocks:[], brk:15, strat:'bal', norev:{}, pg:{}, wkPg:{}, done:{}, reports:[], boost:null, cov:{}, wkOff:0, pgWk:{}, anki:true, ex:true, exDay:6, exStart:'08:00', exDur:0, exAna:true, name:'', goal:'', goalName:'', goalPrefix:'دکتر', gUni:'', gRank:'', gWhy:'', track:'تجربی', grade:'11', school:true, sd:[1,1,1,1,1,0,0], hs:4, ho:10, hd:10, fri:true, rev:true, lv:{}, fav:{}, tt:null,
     tss:'15:15', tso:'08:00', bed:'23:00', wake:'06:30', l1:'13:00', l2:'14:00', d1:'20:30', d2:'21:15', plan:null, planKey:'' };
   var S = {}; KEYS.forEach(function(k){ S[k] = store.get(k, DEF[k]); });
   function save(){ KEYS.forEach(function(k){ store.set(k, S[k]); }); }
@@ -3073,17 +3106,23 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
     var box = document.getElementById('rv'); if (!box) return;
     var st = rvState(), r = S.rv || {}, t = RV_TXT[st === 'ok' && r.ed ? 'edited' : st], keep = document.getElementById('rv-msg'), kept = keep ? keep.value : '';
     var canSend = syncOn && (st === 'draft' || st === 'fix' || st === 'changed');
+    var prt = S.plan ? '<button type="button" class="btn ghost rv-print" id="rv-print">🖨 چاپ یا PDF برنامه‌ی هفته</button>' : '';
+    var wirePrt = function(){ var b = document.getElementById('rv-print'); if (b) b.onclick = function(){ var pb0 = document.getElementById('print'); if (pb0) pb0.click(); }; };
+    if (canSend && !hasAcc('review')){ box.className = 'rv rv-lock'; box.innerHTML = lockHTML('review') + prt; wireLock(box); wirePrt(); return; }
     var via = S.baleOn ? (S.via === 't' ? 'تلگرام' : 'بله') : '';
     box.className = 'rv rv-' + st + (canSend ? ' rv-big' : '');
     box.innerHTML = '<div class="rv-h"><b>' + t[0] + '</b>' + (r.at && st !== 'draft' ? '<small>' + new Date(r.at).toLocaleDateString('fa-IR') + '</small>' : '') + '</div>'
       + (t[1] ? '<p>' + t[1].replace('همین‌جا', via ? 'همین‌جا و در ' + via : 'همین‌جا') + '</p>' : '')
       + ((st === 'fix' || st === 'ok') && r.note ? '<blockquote>' + esc(r.note) + (r.by ? '<cite>' + esc(r.by) + '</cite>' : '') + '</blockquote>' : '')
-      + ((st === 'fix' || st === 'ok') && r.aid ? '<div class="rv-au" id="rv-au"><button type="button" class="btn ghost" id="rv-play">🎧 پخش پیام صوتی مشاور</button>' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? '<p class="note au-help">' + voiceHelp() + '</p>' : '') + '</div>' : '')
+      + ((st === 'fix' || st === 'ok') && r.aid && !hasAcc('voice') ? '<p class="note">' + lockLine('voice') + '</p>' : '')
+      + ((st === 'fix' || st === 'ok') && r.aid && hasAcc('voice') ? '<div class="rv-au" id="rv-au"><button type="button" class="btn ghost" id="rv-play">🎧 پخش پیام صوتی مشاور</button>' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? '<p class="note au-help">' + voiceHelp() + '</p>' : '') + '</div>' : '')
       + (canSend ? '<button type="button" class="btn acc rv-send" id="rv-send">📨 ' + (st === 'draft' ? 'ارسال برنامه برای مشاور کانون' : 'ارسال دوباره برای مشاور') + '</button>'
         + '<details class="rv-md"' + (kept ? ' open' : '') + '><summary>پیامی هم برای مشاور داری؟</summary><input type="text" id="rv-msg" maxlength="200" placeholder="مثلاً: سه‌شنبه‌ها کلاس زبان دارم" aria-label="پیام برای مشاور"></details>' : '')
       + (st === 'pending' ? '<button type="button" class="btn ghost" id="rv-check">بررسی دوباره</button>' : '')
       + (!syncOn ? '<p class="note" style="margin:6px 0 0">ارسال برای مشاور در نسخه‌ی روی سایت کانون فعال است.</p>' : '')
+      + prt
       + (syncOn && !S.baleOn && (st === 'pending' || st === 'draft') ? '<p class="note rv-link">📲 جواب مشاور را در بله یا تلگرام هم بگیر: <a href="#" id="rv-golinks">اتصال به ربات</a></p>' : '');
+    wirePrt();
     var gl = document.getElementById('rv-golinks'); if (gl) gl.onclick = function(ev){ ev.preventDefault(); showTab('info', 'links', true); };
     var mi = document.getElementById('rv-msg'); if (mi && kept) mi.value = kept;
     var sb = document.getElementById('rv-send');
@@ -3184,6 +3223,7 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
     }
     if (j.streak && JSON.stringify(j.streak) !== JSON.stringify(S.streak)){ S.streak = j.streak; ch = true; }
     if (j.adv !== undefined && JSON.stringify(j.adv || null) !== JSON.stringify(S.adv || null)){ S.adv = j.adv || null; ch = true; }
+    if (j.acc !== undefined && JSON.stringify(j.acc || null) !== JSON.stringify(S.acc || null)){ S.acc = j.acc || null; _save2(); try { paywall(); renderReview(); renderDayRep(); if (S.tab === 'info') renderInfo(); if (infoSub === 'sub') renderSub(); if (infoSub === 'links') renderLinks(); } catch(e){} }
     if (t && t.wk === weekStart() && t.fb){ var fmx = fbMap(); Object.keys(t.fb).forEach(function(id){ if (fmx[id]) return; var f = findS(id); if (!f) return; setFb(S.plan[f[0]][f[1]], +t.fb[id]); ch = true; }); }
     if (t && t.wk === weekStart() && t.res){ var rm = resMap(); Object.keys(t.res).forEach(function(id){ if (!rm[id]){ rm[id] = t.res[id]; ch = true; } }); }
     if (j.sea !== undefined && JSON.stringify(j.sea || null) !== JSON.stringify(S.sea || null)){ S.sea = j.sea || null; PH = null; _save2(); renderAll(true); return; }
@@ -3290,7 +3330,8 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
   [['phone','phone'],['s-name','sName']].forEach(function(p){ var el = document.getElementById(p[0]); el.value = S[p[1]] || ''; el.addEventListener('input', function(){ S[p[1]] = el.value; save(); }); });
   document.getElementById('reg-go').addEventListener('click', function(){
     var n = (S.name || '').trim(), er = document.getElementById('reg-err');
-    if (n.length < 2){ er.textContent = 'اسمت را بنویس تا برنامه به اسم خودت ساخته شود.'; document.getElementById('name').focus(); return; }
+    if (n.length < 2){ er.textContent = 'نام و نام خانوادگی‌ات را بنویس تا برنامه به اسم خودت ساخته شود.'; document.getElementById('name').focus(); return; }
+    if (!/\S\s+\S/.test(n)){ er.textContent = 'نام خانوادگی‌ات را هم بنویس (مثلاً: علی رضایی).'; document.getElementById('name').focus(); return; }
     var ph = String(S.phone || '').replace(/[۰-۹]/g, function(c){ return '۰۱۲۳۴۵۶۷۸۹'.indexOf(c); }).replace(/[٠-٩]/g, function(c){ return '٠١٢٣٤٥٦٧٨٩'.indexOf(c); }).replace(/[\s\-]/g, '').replace(/^\+98/, '0').replace(/^0098/, '0');
     if (!/^09\d{9}$/.test(ph)){ er.textContent = 'شماره موبایل را درست بنویس (۱۱ رقم، با ۰۹ شروع می‌شود).'; document.getElementById('phone').focus(); return; }
     S.phone = ph;
@@ -3325,6 +3366,7 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
       if (on && t === 'info'){
         if (el.dataset.step) on = el.dataset.step === infoSub && !(el.id === 's-tt' && !S.school);
         else if (el.id === 'v-links') on = infoSub === 'links';
+        else if (el.id === 'v-sub') on = infoSub === 'sub';
         else on = !infoSub;
       }
       el.hidden = !on;
@@ -3337,7 +3379,7 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
       if (t === 'today') renderToday();
       if (t === 'plan'){ renderCal(); renderBudget(); }
       if (t === 'tests') renderTests();
-      if (t === 'info'){ renderInfo(); if (infoSub === 'links') renderLinks(); }
+      if (t === 'info'){ renderInfo(); if (infoSub === 'links') renderLinks(); if (infoSub === 'sub') renderSub(); }
       renderGF();
     } catch(e){ if (window.console) console.error(e); }
     _save2();
@@ -3530,6 +3572,7 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
     ];
     if (S.school) it.push(['school', '🏫', 'برنامه‌ی کلاسی مدرسه', fa(S.sd.reduce(function(a, b){ return a + b; }, 0)) + ' روز مدرسه']);
     it.push(['books', '📚', 'وضعیت هر کتاب', 'ضعیف، متوسط، قوی و علاقه']);
+    if (S.acc && S.acc.on) it.unshift(['sub', '🎓', 'اشتراک', S.acc.m ? 'عضو کانون • همه‌چیز باز است' : S.acc.u > Date.now() ? 'فعال تا ' + jdateMs(S.acc.u) : S.acc.pend ? 'رسید در حال بررسی' : S.acc.tr > Date.now() ? 'ماه رایگان تا ' + jdateMs(S.acc.tr) : 'تمام شده']);
     it.push(['links', '📲', 'ربات، اعلان و اولیا', S.baleOn ? 'وصل به ' + (S.via === 't' ? 'تلگرام' : 'بله') : 'هنوز وصل نیست']);
     m.innerHTML = it.map(function(x){ return '<button type="button" class="im" data-s="' + x[0] + '"><i>' + x[1] + '</i><span><b>' + x[2] + '</b><small>' + x[3] + '</small></span><em>‹</em></button>'; }).join('');
     m.querySelectorAll('[data-s]').forEach(function(b){ b.onclick = function(){ showTab('info', b.dataset.s, true); }; });
@@ -3540,9 +3583,10 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
     var box = $id('links'); if (!box) return;
     var h = syncOn ? botCard() : '<p class="note">اتصال به ربات در نسخه‌ی روی سایت کانون فعال است.</p>';
     if (pushOk()) h += S.pushOn ? '<p class="note">🔔 اعلان‌های سایت روی این گوشی روشن است.</p>' : '<div class="bale pushc"><b>🔔 اعلان روی همین گوشی</b><p>بدون پیام‌رسان هم یادآورها و جواب مشاور را به‌صورت اعلان بگیر.' + (/iPhone|iPad/.test(navigator.userAgent) && !navigator.standalone ? ' در آیفون اول سایت را با «Add to Home Screen» به صفحه‌ی اصلی اضافه کن و از همان‌جا باز کن.' : '') + '</p><button type="button" class="btn ghost" id="push-on">روشن کردن اعلان‌ها</button></div>';
-    if (syncOn) h += '<div class="bale par"><b>👪 اتصال پدر یا مادر</b><p>هر جمعه شب یک گزارش کوتاه برایشان می‌آید: درصد انجام برنامه، زنجیره و روند آزمون‌ها. یادداشت‌ها و پیام‌هایت با مشاور برایشان فرستاده نمی‌شود.</p>'
+    if (syncOn && !hasAcc('coach')) h += '<div class="bale par"><b>👪 اتصال پدر یا مادر</b>' + lockLine('coach') + '</div>';
+    else if (syncOn) h += '<div class="bale par"><b>👪 اتصال پدر یا مادر</b><p>هر جمعه شب یک گزارش کوتاه برایشان می‌آید: درصد انجام برنامه، زنجیره و روند آزمون‌ها. یادداشت‌ها و پیام‌هایت با مشاور برایشان فرستاده نمی‌شود.</p>'
       + '<div id="par-box">' + (pcode ? parentHTML() : '<button type="button" class="btn ghost" id="par-go">ساختن لینک برای اولیا</button>') + '</div></div>';
-    box.innerHTML = h;
+    box.innerHTML = h; wireLock(box);
     var po = $id('push-on'); if (po) po.onclick = function(){ enablePush(po); };
     var pg = $id('par-go'); if (pg) pg.onclick = function(){ pg.textContent = 'در حال ساختن…';
       fetch(SYNC + '?action=pcode&id=' + encodeURIComponent(devId) + '&t=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(j){ if (!j.ok || !j.code) throw 0; pcode = j.code; store.set('pcode', pcode); $id('par-box').innerHTML = parentHTML(); wireParent(); })
@@ -3627,6 +3671,7 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
   function shrinkImg(file, max){ return new Promise(function(res, rej){ var fr = new FileReader(); fr.onerror = rej; fr.onload = function(){ var im = new Image(); im.onerror = rej; im.onload = function(){ var s = Math.min(1, max / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.round(im.width * s); c.height = Math.round(im.height * s); var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(im, 0, 0, c.width, c.height); res(c.toDataURL('image/jpeg', .78)); }; im.src = fr.result; }; fr.readAsDataURL(file); }); }
   function testForm(){
     var f = $id('tst-form'); if (!f) return; if (!TST.form){ f.innerHTML = ''; return; }
+    if (!hasAcc('tests')){ f.innerHTML = '<div class="tst-new">' + lockLine('tests') + '</div>'; wireLock(f); return; }
     f.innerHTML = '<div class="tst-new"><p class="note" style="margin:0">یک تست واقعاً خوب (ایده‌دار یا تله‌دار) را پیشنهاد بده. بعد از تأیید مدیر، برای همه‌ی بچه‌های ' + esc(S.track) + ' ' + NAME[S.grade] + ' منتشر می‌شود. اسمت فقط به‌صورت اسم کوچک نشان داده می‌شود.</p>'
       + '<div class="times"><label>درس<select id="tn-b">' + myBooks().map(function(b){ return '<option value="' + esc(b) + '">' + fa(b) + '</option>'; }).join('') + '</select></label>'
       + '<label>مبحث<input id="tn-t" maxlength="60" placeholder="مثلاً: تابع، دامنه و برد"></label>'
@@ -4042,6 +4087,7 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
     $id('dr-send').onclick = function(){
       if (!syncOn){ $id('dr-msg').textContent = 'ارسال در نسخه‌ی روی سایت کانون فعال است.'; return; }
       if (!R.q){ $id('dr-msg').textContent = 'کیفیت مطالعه‌ی امروز را از ۱ تا ۱۰ بزن.'; return; }
+      if (!hasAcc('report')){ $id('dr-msg').innerHTML = lockLine('report'); wireLock($id('dr-msg')); return; }
       R.sent = Date.now(); R.st = { s: lg.s ? fa(tstr(lg.s)) : '', e: lg.e ? fa(tstr(lg.e)) : '', ps: fa(st.ps), pe: fa(st.pe), tests: st.tests, wk: st.wkTests, min: st.min }; R.wake = $id('dr-wake').value || R.wake; _save2(); clearTimeout(syncT); syncT = null; push('day'); renderDayRep();
       $id('dr-msg') && ($id('dr-msg').textContent = 'فرستاده شد. شب خوش 🌙');
     };
@@ -4157,6 +4203,63 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
       }).catch(function(){ $id('cl-m').textContent = mv ? 'این لینک کار نکرد یا قدیمی است. در مرورگر قبلی دوباره «انتقال به مرورگر دیگر» را بزن.' : 'این لینک کار نکرد یا قدیمی است. از مشاورت لینک تازه بخواه.'; });
     };
     return true;
+  }
+
+  /* ---------- v31: counselling is for kanoon members; others subscribe monthly (card to card + receipt) ---------- */
+  var LOCKNAME = { review: 'بررسی برنامه توسط مشاور', msg: 'پیام به مشاور', report: 'فرستادن گزارش برای مشاور', coach: 'گزارش هفتگی برای اولیا', voice: 'پیام صوتی مشاور', tests: 'فرستادن تست برتر', pdf: 'PDF برنامه در ربات' };
+  function hasAcc(k){ var a = S.acc; if (!syncOn || !a || !a.on) return true; if (a.m || a.u > Date.now()) return true; return a.tr > Date.now() && !(a.lk || {})[k]; }
+  function hasApp(){ var a = S.acc; if (!syncOn || !a || !a.on) return true; return !!(a.m || a.u > Date.now() || a.tr > Date.now()); }
+  function jdateMs(ms){ try { return new Date(ms).toLocaleDateString('fa-IR', { day: 'numeric', month: 'long' }); } catch(e){ return ''; } }
+  function money(n){ return fa(Number(n || 0).toLocaleString('en-US')); }
+  function lockLine(k){ var a = S.acc || {}; return '<span class="lockl">🔒 ' + LOCKNAME[k] + ' مخصوص اعضای کانون و مشترکین است. <a href="#" data-gosub="1">' + (a.pend ? 'رسیدت در حال بررسی است' : 'فعال کردن') + '</a></span>'; }
+  function lockHTML(k){ var a = S.acc || {};
+    return '<div class="rv-h"><b>🎓 مشاوره‌ی برنامه با مشاور کانون</b></div><p>برنامه‌ات آماده است و می‌توانی همین حالا طبقش جلو بروی' + (a.tr > Date.now() && !a.u ? ' (ماه اول رایگان تا ' + jdateMs(a.tr) + ')' : '') + '. ' + LOCKNAME[k] + '، پیام به مشاور و گزارش‌ها مخصوص <b>اعضای کانون طلوع نخبگان</b> و <b>مشترکین</b> است.</p>'
+      + '<div class="weekbar"><button type="button" class="btn acc" data-gosub="1">' + (a.pend ? '⏳ رسیدت در حال بررسی است' : 'گرفتن اشتراک' + (a.price ? ' (ماهانه ' + money(a.price) + ' تومان)' : '')) + '</button><button type="button" class="btn ghost" data-gosub="m">عضو کانون هستم</button></div>'; }
+  function wireLock(el){ if (!el) return; el.querySelectorAll('[data-gosub]').forEach(function(b){ b.onclick = function(ev){ ev.preventDefault(); subFocus = b.dataset.gosub; showTab('info', 'sub', true); }; }); }
+  var subFocus = '';
+  function renderSub(target){
+    var box = target || ($id('paywall') && !$id('paywall').hidden ? $id('pw-sub') : $id('sub')); if (!box) return; var a = S.acc || {};
+    if (!syncOn || !a.on){ box.innerHTML = '<p class="note">همه‌ی امکانات برنامه‌ساز برایت باز است.</p>'; return; }
+    var sub = a.u > Date.now(), trial = !a.m && !sub && a.tr > Date.now(), act = a.m || sub, h = '';
+    h += '<div class="subst ' + (act || trial ? 'on' : '') + '"><b>' + (a.m ? '✅ عضو کانون طلوع نخبگان هستی' : sub ? '✅ اشتراکت فعال است' : trial ? '🎁 ماه اول رایگان' : a.u ? '⏳ اشتراکت تمام شده' : '⏳ ماه رایگانت تمام شده') + '</b><span>'
+      + (a.m ? 'برنامه‌ساز، ربات و مشاوره همه برایت باز است.' : sub ? 'برنامه‌ساز، ربات و مشاوره تا ' + jdateMs(a.u) + ' (' + fa(Math.ceil((a.u - Date.now()) / 864e5)) + ' روز دیگر) باز است.'
+        : trial ? 'تا ' + jdateMs(a.tr) + ' (' + fa(Math.ceil((a.tr - Date.now()) / 864e5)) + ' روز دیگر) برنامه‌ساز و ربات رایگان است. بعد از آن فقط اعضای کانون و مشترکین می‌توانند استفاده کنند؛ مشاوره‌ی برنامه هم با اشتراک باز می‌شود.'
+        : 'برنامه و اطلاعاتت محفوظ است. برای ادامه، اشتراک بگیر یا اگر عضو کانونی، عضویتت را تأیید کن.') + '</span></div>';
+    if (!a.m){
+      var L = Object.keys(LOCKNAME).filter(function(k){ return (a.lk || {})[k]; });
+      if (!act && L.length) h += '<p class="note">' + 'اشتراک همه‌چیز را باز می‌کند؛ از جمله: ' + '' + L.map(function(k){ return LOCKNAME[k]; }).join('، ') + '.</p>';
+      h += '<div class="bale paybox"><b>💳 ' + (a.u ? 'تمدید' : 'خرید') + ' اشتراک ماهانه‌ی برنامه‌ساز و مشاوره' + (a.price ? ': ' + money(a.price) + ' تومان' : '') + '</b>'
+        + (a.pend ? '<p>✅ رسیدت رسید و در حال بررسی است. بعد از تأیید، در ربات و همین‌جا خبرت می‌کنیم.</p>' :
+          '<ol class="paysteps"><li>مبلغ را به این کارت واریز کن:<div class="cardno"><b dir="ltr" id="cardno">' + esc(fa(a.card || '—')) + '</b><button type="button" class="btn ghost" id="card-copy">کپی</button></div>' + (a.owner ? '<small>به نام ' + esc(a.owner) + '</small>' : '') + '</li>'
+          + '<li>عکس رسید (اسکرین‌شات صفحه‌ی موفق) را این‌جا بگذار:<label class="btn ghost pfile">📷 انتخاب عکس رسید<input type="file" id="pay-img" accept="image/*"></label><img id="pay-prev" alt="" hidden></li>'
+          + '<li><label>کد پیگیری یا ۴ رقم آخر کارتت (اختیاری)<input type="text" id="pay-ref" maxlength="40" inputmode="numeric"></label></li></ol>'
+          + (a.note ? '<p class="note">' + esc(a.note) + '</p>' : '')
+          + '<div class="weekbar"><button type="button" class="btn acc" id="pay-send" disabled>فرستادن رسید برای مدیر</button></div>')
+        + '<p class="note" id="pay-msg" role="status" style="margin:0"></p></div>'
+        + '<div class="bale memq" id="memq"><b>🪪 عضو کانون هستی؟</b><p>اگر عضو کانون طلوع نخبگان هستی، برنامه‌ساز و مشاوره برایت رایگان است. اگر با همان شماره‌ای که در کانون داری ثبت‌نام کرده باشی، خودکار شناخته می‌شوی؛ وگرنه درخواست بده تا مدیر تأیید کند.</p>'
+        + '<input type="text" id="mem-note" maxlength="150" placeholder="مثلاً: دوره‌ی ۳، کلاس آقای …"><div class="weekbar"><button type="button" class="btn ghost" id="mem-go">درخواست تأیید عضویت</button></div><p class="note" id="mem-msg" role="status" style="margin:0"></p></div>';
+    }
+    box.innerHTML = h;
+    if (subFocus === 'm' && $id('memq')) setTimeout(function(){ $id('memq').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 120); subFocus = '';
+    var cc = $id('card-copy'); if (cc) cc.onclick = function(){ var v = String(a.card || '').replace(/[۰-۹]/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); }).replace(/[^\d]/g, ''); try { navigator.clipboard.writeText(v).then(function(){ cc.textContent = 'کپی شد'; }, function(){}); } catch(e){} };
+    var fi = $id('pay-img'), img = null; if (fi) fi.onchange = function(){ var f = fi.files && fi.files[0]; if (!f) return; $id('pay-msg').textContent = 'در حال آماده کردن عکس…';
+      shrinkImg(f, 1280).then(function(u){ img = u; var pv = $id('pay-prev'); pv.src = u; pv.hidden = false; $id('pay-send').disabled = false; $id('pay-msg').textContent = ''; }, function(){ $id('pay-msg').textContent = 'این عکس باز نشد؛ عکس دیگری انتخاب کن.'; }); };
+    var ps = $id('pay-send'); if (ps) ps.onclick = function(){ if (!img) return; ps.disabled = true; $id('pay-msg').textContent = 'در حال فرستادن…';
+      fetch(SYNC, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ id: devId, event: 'pay', b64: img.split(',')[1], ref: ($id('pay-ref').value || '').trim(), amount: a.price || 0 }) })
+        .then(function(r){ return r.json(); }).then(function(j){ if (!j.ok) throw new Error(j.err || 'نشد'); S.acc.pend = 1; _save2(); renderSub(); renderInfo(); })
+        .catch(function(e){ ps.disabled = false; $id('pay-msg').textContent = 'نرسید: ' + (e.message || e) + ' — دوباره بزن.'; }); };
+    var mg = $id('mem-go'); if (mg) mg.onclick = function(){ mg.disabled = true;
+      fetch(SYNC, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ id: devId, event: 'memreq', note: ($id('mem-note').value || '').trim() }) })
+        .then(function(r){ return r.json(); }).then(function(j){ $id('mem-msg').textContent = j.again ? 'درخواستت قبلاً رسیده؛ منتظر تأیید مدیر باش.' : 'درخواستت برای مدیر کانون رفت. بعد از تأیید، در ربات و همین‌جا خبرت می‌کنیم.'; })
+        .catch(function(){ mg.disabled = false; $id('mem-msg').textContent = 'نرسید؛ دوباره بزن.'; }); };
+  }
+
+  /* after the free month, non-members without a subscription see only this (their data stays) */
+  function paywall(){
+    var pw = $id('paywall'); if (!pw) return; var on = !!(S.reg && S.setup && !COACH && !hasApp());
+    pw.hidden = !on; document.body.classList.toggle('pw-on', on); if (!on) return;
+    var lg = $id('pw-logo'), l0 = $id('logo'); if (lg && l0 && !lg.src) lg.src = l0.src;
+    renderSub($id('pw-sub'));
   }
 
   /* ---------- v30: leave an in-app browser (Eitaa, Instagram, …) for Chrome / Safari without losing anything ---------- */
@@ -4728,6 +4831,7 @@ html.kp3d-on .sheet,html.kp3d-on .card2{background:color-mix(in srgb,var(--sheet
   else onboardStep(S.step || 'me');
   if (S.timer) drawTimer(false);
   if (!claimFlow()) moveBox(false);
+  paywall();
   (function(){ var b = $id('mv-open'); if (b) b.onclick = function(){ moveBox(true); window.scrollTo({ top: 0, behavior: 'smooth' }); }; })();
   (function(){ var pg = $id('pgseg'); if (!pg) return; var show = function(){ pg.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', String(+b.dataset.v === (S.pages === 1 ? 1 : 2))); }); };
     show(); pg.querySelectorAll('button').forEach(function(b){ b.onclick = function(){ S.pages = +b.dataset.v; save(); show(); renderPrint(); }; }); })();
